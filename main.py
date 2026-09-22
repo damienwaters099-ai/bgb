@@ -61,22 +61,6 @@ def read_html(*parts) -> str:
         return f.read()
 
 
-# TEMPORARY — checks if this container can create a VPN tunnel device.
-# Remove once the Render-vs-VPN question is answered either way.
-@app.get("/debug/vpn-check")
-async def vpn_check(username: str = Depends(verify_password)):
-    import os as _os
-    result = {"dev_net_tun_exists": _os.path.exists("/dev/net/tun")}
-    try:
-        fd = _os.open("/dev/net/tun", _os.O_RDWR)
-        _os.close(fd)
-        result["can_open_tun"] = True
-    except Exception as e:
-        result["can_open_tun"] = False
-        result["error"] = str(e)
-    return JSONResponse(result)
-
-
 # =====================================================================
 # HOME
 # =====================================================================
