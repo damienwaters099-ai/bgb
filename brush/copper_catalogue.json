@@ -1,0 +1,1034 @@
+[
+  {
+    "bgb_ref": "NAL0048",
+    "gerken_ref": "EX5880888",
+    "option": "Example Option",
+    "grade": "Grade B",
+    "description": "Illustrative brush component — example NAL0048",
+    "oem_ref": "OEM-528869",
+    "material": "Copper",
+    "currency": "EUR",
+    "drawing_image": "image_coming_soon.png",
+    "price_breaks": [
+      {
+        "qty": 12,
+        "price_eur": 62.57
+      },
+      {
+        "qty": 24,
+        "price_eur": 57.56
+      },
+      {
+        "qty": 50,
+        "price_eur": 52.96
+      },
+      {
+        "qty": 100,
+        "price_eur": 48.72
+      },
+      {
+        "qty": 500,
+        "price_eur": 44.82
+      },
+      {
+        "qty": 1000,
+        "price_eur": 41.24
+      },
+      {
+        "qty": 5000,
+        "price_eur": 37.94
+      }
+    ],
+    "status": "Sellable",
+    "aftermarket_ref": "AMNAL0048"
+  },
+  {
+    "bgb_ref": "DFQ9539",
+    "gerken_ref": "EX3057279",
+    "option": "Example Option",
+    "grade": "Grade B",
+    "description": "Illustrative brush component — example DFQ9539",
+    "oem_ref": "OEM-266422",
+    "material": "Copper",
+    "currency": "EUR",
+    "drawing_image": "image_coming_soon.png",
+    "price_breaks": [
+      {
+        "qty": 12,
+        "price_eur": 58.6
+      },
+      {
+        "qty": 24,
+        "price_eur": 53.91
+      },
+      {
+        "qty": 50,
+        "price_eur": 49.6
+      },
+      {
+        "qty": 100,
+        "price_eur": 45.63
+      },
+      {
+        "qty": 500,
+        "price_eur": 41.98
+      },
+      {
+        "qty": 1000,
+        "price_eur": 38.62
+      },
+      {
+        "qty": 5000,
+        "price_eur": 35.53
+      }
+    ],
+    "status": "Sellable",
+    "aftermarket_ref": "AMDFQ9539"
+  },
+  {
+    "bgb_ref": "BWH1138",
+    "gerken_ref": "EX7740872",
+    "option": "Example Option",
+    "grade": "Grade C",
+    "description": "Illustrative brush component — example BWH1138",
+    "oem_ref": "OEM-588545",
+    "material": "Copper",
+    "currency": "EUR",
+    "drawing_image": "image_coming_soon.png",
+    "price_breaks": [
+      {
+        "qty": 12,
+        "price_eur": 16.23
+      },
+      {
+        "qty": 24,
+        "price_eur": 14.93
+      },
+      {
+        "qty": 50,
+        "price_eur": 13.74
+      },
+      {
+        "qty": 100,
+        "price_eur": 12.64
+      },
+      {
+        "qty": 500,
+        "price_eur": 11.63
+      },
+      {
+        "qty": 1000,
+        "price_eur": 10.7
+      },
+      {
+        "qty": 5000,
+        "price_eur": 9.84
+      }
+    ],
+    "status": "Sellable",
+    "aftermarket_ref": "AMBWH1138"
+  },
+  {
+    "bgb_ref": "EPQ3500",
+    "gerken_ref": "EX1117354",
+    "option": "Example Option",
+    "grade": "Grade C",
+    "description": "Illustrative brush component — example EPQ3500",
+    "oem_ref": "OEM-510931",
+    "material": "Copper",
+    "currency": "EUR",
+    "drawing_image": "image_coming_soon.png",
+    "price_breaks": [
+      {
+        "qty": 12,
+        "price_eur": 63.63
+      },
+      {
+        "qty": 24,
+        "price_eur": 58.54
+      },
+      {
+        "qty": 50,
+        "price_eur": 53.86
+      },
+      {
+        "qty": 100,
+        "price_eur": 49.55
+      },
+      {
+        "qty": 500,
+        "price_eur": 45.58
+      },
+      {
+        "qty": 1000,
+        "price_eur": 41.94
+      },
+      {
+        "qty": 5000,
+        "price_eur": 38.58
+      }
+    ],
+    "status": "Sellable",
+    "aftermarket_ref": "AMEPQ3500"
+  },
+  {
+    "bgb_ref": "FRL3542",
+    "gerken_ref": "EX6715350",
+    "option": "Example Option",
+    "grade": "Grade C",
+    "description": "Illustrative brush component — example FRL3542",
+    "oem_ref": "OEM-098452",
+    "material": "Copper",
+    "currency": "EUR",
+    "drawing_image": "image_coming_soon.png",
+    "price_breaks": [
+      {
+        "qty": 12,
+        "price_eur": 18.12
+      },
+      {
+        "qty": 24,
+        "price_eur": 16.67
+      },
+      {
+        "qty": 50,
+        "price_eur": 15.34
+      },
+      {
+        "qty": 100,
+        "price_eur": 14.11
+      },
+      {
+        "qty": 500,
+        "price_eur": 12.98
+      },
+      {
+        "qty": 1000,
+        "price_eur": 11.94
+      },
+      {
+        "qty": 5000,
+        "price_eur": 10.99
+      }
+    ],
+    "status": "Sellable",
+    "aftermarket_ref": "AMFRL3542"
+  },
+  {
+    "bgb_ref": "USG5587",
+    "gerken_ref": "EX7497892",
+    "option": "Example Option",
+    "grade": "Grade C",
+    "description": "Illustrative brush component — example USG5587",
+    "oem_ref": "OEM-021005",
+    "material": "Copper",
+    "currency": "EUR",
+    "drawing_image": "image_coming_soon.png",
+    "price_breaks": [
+      {
+        "qty": 12,
+        "price_eur": 53.16
+      },
+      {
+        "qty": 24,
+        "price_eur": 48.91
+      },
+      {
+        "qty": 50,
+        "price_eur": 44.99
+      },
+      {
+        "qty": 100,
+        "price_eur": 41.4
+      },
+      {
+        "qty": 500,
+        "price_eur": 38.08
+      },
+      {
+        "qty": 1000,
+        "price_eur": 35.04
+      },
+      {
+        "qty": 5000,
+        "price_eur": 32.23
+      }
+    ],
+    "status": "Sellable",
+    "aftermarket_ref": "AMUSG5587"
+  },
+  {
+    "bgb_ref": "HZD4714",
+    "gerken_ref": "EX8499053",
+    "option": "Example Option",
+    "grade": "Grade C",
+    "description": "Illustrative brush component — example HZD4714",
+    "oem_ref": "OEM-192569",
+    "material": "Copper",
+    "currency": "EUR",
+    "drawing_image": "image_coming_soon.png",
+    "price_breaks": [
+      {
+        "qty": 12,
+        "price_eur": 70.98
+      },
+      {
+        "qty": 24,
+        "price_eur": 65.3
+      },
+      {
+        "qty": 50,
+        "price_eur": 60.08
+      },
+      {
+        "qty": 100,
+        "price_eur": 55.27
+      },
+      {
+        "qty": 500,
+        "price_eur": 50.85
+      },
+      {
+        "qty": 1000,
+        "price_eur": 46.78
+      },
+      {
+        "qty": 5000,
+        "price_eur": 43.04
+      }
+    ],
+    "status": "Sellable",
+    "aftermarket_ref": "AMHZD4714"
+  },
+  {
+    "bgb_ref": "PPL8946",
+    "gerken_ref": "EX6341992",
+    "option": "Example Option",
+    "grade": "Grade B",
+    "description": "Illustrative brush component — example PPL8946",
+    "oem_ref": "OEM-023998",
+    "material": "Copper",
+    "currency": "EUR",
+    "drawing_image": "image_coming_soon.png",
+    "price_breaks": [
+      {
+        "qty": 12,
+        "price_eur": 81.25
+      },
+      {
+        "qty": 24,
+        "price_eur": 74.75
+      },
+      {
+        "qty": 50,
+        "price_eur": 68.77
+      },
+      {
+        "qty": 100,
+        "price_eur": 63.27
+      },
+      {
+        "qty": 500,
+        "price_eur": 58.21
+      },
+      {
+        "qty": 1000,
+        "price_eur": 53.55
+      },
+      {
+        "qty": 5000,
+        "price_eur": 49.27
+      }
+    ],
+    "status": "Sellable",
+    "aftermarket_ref": "AMPPL8946"
+  },
+  {
+    "bgb_ref": "BSQ9823",
+    "gerken_ref": "EX0776901",
+    "option": "Example Option",
+    "grade": "Grade A",
+    "description": "Illustrative brush component — example BSQ9823",
+    "oem_ref": "OEM-796257",
+    "material": "Copper",
+    "currency": "EUR",
+    "drawing_image": "image_coming_soon.png",
+    "price_breaks": [
+      {
+        "qty": 12,
+        "price_eur": 86.24
+      },
+      {
+        "qty": 24,
+        "price_eur": 79.34
+      },
+      {
+        "qty": 50,
+        "price_eur": 72.99
+      },
+      {
+        "qty": 100,
+        "price_eur": 67.15
+      },
+      {
+        "qty": 500,
+        "price_eur": 61.78
+      },
+      {
+        "qty": 1000,
+        "price_eur": 56.84
+      },
+      {
+        "qty": 5000,
+        "price_eur": 52.29
+      }
+    ],
+    "status": "Prototype",
+    "aftermarket_ref": "AMBSQ9823"
+  },
+  {
+    "bgb_ref": "RAM1107",
+    "gerken_ref": "EX1321412",
+    "option": "Example Option",
+    "grade": "Grade E",
+    "description": "Illustrative brush component — example RAM1107",
+    "oem_ref": "OEM-160710",
+    "material": "Copper",
+    "currency": "EUR",
+    "drawing_image": "image_coming_soon.png",
+    "price_breaks": [
+      {
+        "qty": 12,
+        "price_eur": 50.8
+      },
+      {
+        "qty": 24,
+        "price_eur": 46.74
+      },
+      {
+        "qty": 50,
+        "price_eur": 43.0
+      },
+      {
+        "qty": 100,
+        "price_eur": 39.56
+      },
+      {
+        "qty": 500,
+        "price_eur": 36.39
+      },
+      {
+        "qty": 1000,
+        "price_eur": 33.48
+      },
+      {
+        "qty": 5000,
+        "price_eur": 30.8
+      }
+    ],
+    "status": "Prototype",
+    "aftermarket_ref": "AMRAM1107"
+  },
+  {
+    "bgb_ref": "DGK8045",
+    "gerken_ref": "EX9298814",
+    "option": "Example Option",
+    "grade": "Grade A",
+    "description": "Illustrative brush component — example DGK8045",
+    "oem_ref": "OEM-098643",
+    "material": "Copper",
+    "currency": "EUR",
+    "drawing_image": "image_coming_soon.png",
+    "price_breaks": [
+      {
+        "qty": 12,
+        "price_eur": 37.38
+      },
+      {
+        "qty": 24,
+        "price_eur": 34.39
+      },
+      {
+        "qty": 50,
+        "price_eur": 31.64
+      },
+      {
+        "qty": 100,
+        "price_eur": 29.11
+      },
+      {
+        "qty": 500,
+        "price_eur": 26.78
+      },
+      {
+        "qty": 1000,
+        "price_eur": 24.64
+      },
+      {
+        "qty": 5000,
+        "price_eur": 22.67
+      }
+    ],
+    "status": "Sellable",
+    "aftermarket_ref": "AMDGK8045"
+  },
+  {
+    "bgb_ref": "WVW2438",
+    "gerken_ref": "EX8461207",
+    "option": "Example Option",
+    "grade": "Grade C",
+    "description": "Illustrative brush component — example WVW2438",
+    "oem_ref": "OEM-518241",
+    "material": "Copper",
+    "currency": "EUR",
+    "drawing_image": "image_coming_soon.png",
+    "price_breaks": [
+      {
+        "qty": 12,
+        "price_eur": 78.04
+      },
+      {
+        "qty": 24,
+        "price_eur": 71.8
+      },
+      {
+        "qty": 50,
+        "price_eur": 66.05
+      },
+      {
+        "qty": 100,
+        "price_eur": 60.77
+      },
+      {
+        "qty": 500,
+        "price_eur": 55.91
+      },
+      {
+        "qty": 1000,
+        "price_eur": 51.43
+      },
+      {
+        "qty": 5000,
+        "price_eur": 47.32
+      }
+    ],
+    "status": "Sellable",
+    "aftermarket_ref": "AMWVW2438"
+  },
+  {
+    "bgb_ref": "YDE2245",
+    "gerken_ref": "EX2831439",
+    "option": "Example Option",
+    "grade": "Grade B",
+    "description": "Illustrative brush component — example YDE2245",
+    "oem_ref": "OEM-190862",
+    "material": "Copper",
+    "currency": "EUR",
+    "drawing_image": "image_coming_soon.png",
+    "price_breaks": [
+      {
+        "qty": 12,
+        "price_eur": 23.23
+      },
+      {
+        "qty": 24,
+        "price_eur": 21.37
+      },
+      {
+        "qty": 50,
+        "price_eur": 19.66
+      },
+      {
+        "qty": 100,
+        "price_eur": 18.09
+      },
+      {
+        "qty": 500,
+        "price_eur": 16.64
+      },
+      {
+        "qty": 1000,
+        "price_eur": 15.31
+      },
+      {
+        "qty": 5000,
+        "price_eur": 14.09
+      }
+    ],
+    "status": "Sellable",
+    "aftermarket_ref": "AMYDE2245"
+  },
+  {
+    "bgb_ref": "GAK3596",
+    "gerken_ref": "EX4222399",
+    "option": "Example Option",
+    "grade": "Grade C",
+    "description": "Illustrative brush component — example GAK3596",
+    "oem_ref": "OEM-902807",
+    "material": "Copper",
+    "currency": "EUR",
+    "drawing_image": "image_coming_soon.png",
+    "price_breaks": [
+      {
+        "qty": 12,
+        "price_eur": 75.31
+      },
+      {
+        "qty": 24,
+        "price_eur": 69.29
+      },
+      {
+        "qty": 50,
+        "price_eur": 63.74
+      },
+      {
+        "qty": 100,
+        "price_eur": 58.64
+      },
+      {
+        "qty": 500,
+        "price_eur": 53.95
+      },
+      {
+        "qty": 1000,
+        "price_eur": 49.64
+      },
+      {
+        "qty": 5000,
+        "price_eur": 45.66
+      }
+    ],
+    "status": "Prototype",
+    "aftermarket_ref": "AMGAK3596"
+  },
+  {
+    "bgb_ref": "NQR0878",
+    "gerken_ref": "EX2908310",
+    "option": "Example Option",
+    "grade": "Grade E",
+    "description": "Illustrative brush component — example NQR0878",
+    "oem_ref": "OEM-851492",
+    "material": "Copper",
+    "currency": "EUR",
+    "drawing_image": "image_coming_soon.png",
+    "price_breaks": [
+      {
+        "qty": 12,
+        "price_eur": 85.59
+      },
+      {
+        "qty": 24,
+        "price_eur": 78.74
+      },
+      {
+        "qty": 50,
+        "price_eur": 72.44
+      },
+      {
+        "qty": 100,
+        "price_eur": 66.65
+      },
+      {
+        "qty": 500,
+        "price_eur": 61.32
+      },
+      {
+        "qty": 1000,
+        "price_eur": 56.41
+      },
+      {
+        "qty": 5000,
+        "price_eur": 51.9
+      }
+    ],
+    "status": "Prototype",
+    "aftermarket_ref": "AMNQR0878"
+  },
+  {
+    "bgb_ref": "UKK1600",
+    "gerken_ref": "EX5117710",
+    "option": "Example Option",
+    "grade": "Grade E",
+    "description": "Illustrative brush component — example UKK1600",
+    "oem_ref": "OEM-064226",
+    "material": "Copper",
+    "currency": "EUR",
+    "drawing_image": "image_coming_soon.png",
+    "price_breaks": [
+      {
+        "qty": 12,
+        "price_eur": 88.82
+      },
+      {
+        "qty": 24,
+        "price_eur": 81.71
+      },
+      {
+        "qty": 50,
+        "price_eur": 75.18
+      },
+      {
+        "qty": 100,
+        "price_eur": 69.16
+      },
+      {
+        "qty": 500,
+        "price_eur": 63.63
+      },
+      {
+        "qty": 1000,
+        "price_eur": 58.54
+      },
+      {
+        "qty": 5000,
+        "price_eur": 53.86
+      }
+    ],
+    "status": "Prototype",
+    "aftermarket_ref": "AMUKK1600"
+  },
+  {
+    "bgb_ref": "FEI0011",
+    "gerken_ref": "EX7852074",
+    "option": "Example Option",
+    "grade": "Grade E",
+    "description": "Illustrative brush component — example FEI0011",
+    "oem_ref": "OEM-708388",
+    "material": "Copper",
+    "currency": "EUR",
+    "drawing_image": "image_coming_soon.png",
+    "price_breaks": [
+      {
+        "qty": 12,
+        "price_eur": 46.27
+      },
+      {
+        "qty": 24,
+        "price_eur": 42.57
+      },
+      {
+        "qty": 50,
+        "price_eur": 39.16
+      },
+      {
+        "qty": 100,
+        "price_eur": 36.03
+      },
+      {
+        "qty": 500,
+        "price_eur": 33.15
+      },
+      {
+        "qty": 1000,
+        "price_eur": 30.5
+      },
+      {
+        "qty": 5000,
+        "price_eur": 28.06
+      }
+    ],
+    "status": "Prototype",
+    "aftermarket_ref": "AMFEI0011"
+  },
+  {
+    "bgb_ref": "JAW6123",
+    "gerken_ref": "EX4094821",
+    "option": "Example Option",
+    "grade": "Grade C",
+    "description": "Illustrative brush component — example JAW6123",
+    "oem_ref": "OEM-831350",
+    "material": "Copper",
+    "currency": "EUR",
+    "drawing_image": "image_coming_soon.png",
+    "price_breaks": [
+      {
+        "qty": 12,
+        "price_eur": 30.54
+      },
+      {
+        "qty": 24,
+        "price_eur": 28.1
+      },
+      {
+        "qty": 50,
+        "price_eur": 25.85
+      },
+      {
+        "qty": 100,
+        "price_eur": 23.78
+      },
+      {
+        "qty": 500,
+        "price_eur": 21.88
+      },
+      {
+        "qty": 1000,
+        "price_eur": 20.13
+      },
+      {
+        "qty": 5000,
+        "price_eur": 18.52
+      }
+    ],
+    "status": "Sellable",
+    "aftermarket_ref": "AMJAW6123"
+  },
+  {
+    "bgb_ref": "JDW9440",
+    "gerken_ref": "EX5451788",
+    "option": "Example Option",
+    "grade": "Grade A",
+    "description": "Illustrative brush component — example JDW9440",
+    "oem_ref": "OEM-373708",
+    "material": "Copper",
+    "currency": "EUR",
+    "drawing_image": "image_coming_soon.png",
+    "price_breaks": [
+      {
+        "qty": 12,
+        "price_eur": 19.81
+      },
+      {
+        "qty": 24,
+        "price_eur": 18.23
+      },
+      {
+        "qty": 50,
+        "price_eur": 16.77
+      },
+      {
+        "qty": 100,
+        "price_eur": 15.43
+      },
+      {
+        "qty": 500,
+        "price_eur": 14.19
+      },
+      {
+        "qty": 1000,
+        "price_eur": 13.06
+      },
+      {
+        "qty": 5000,
+        "price_eur": 12.01
+      }
+    ],
+    "status": "Sellable",
+    "aftermarket_ref": "AMJDW9440"
+  },
+  {
+    "bgb_ref": "CIG8109",
+    "gerken_ref": "EX9455509",
+    "option": "Example Option",
+    "grade": "Grade D",
+    "description": "Illustrative brush component — example CIG8109",
+    "oem_ref": "OEM-211280",
+    "material": "Copper",
+    "currency": "EUR",
+    "drawing_image": "image_coming_soon.png",
+    "price_breaks": [
+      {
+        "qty": 12,
+        "price_eur": 74.45
+      },
+      {
+        "qty": 24,
+        "price_eur": 68.49
+      },
+      {
+        "qty": 50,
+        "price_eur": 63.01
+      },
+      {
+        "qty": 100,
+        "price_eur": 57.97
+      },
+      {
+        "qty": 500,
+        "price_eur": 53.34
+      },
+      {
+        "qty": 1000,
+        "price_eur": 49.07
+      },
+      {
+        "qty": 5000,
+        "price_eur": 45.14
+      }
+    ],
+    "status": "Sellable",
+    "aftermarket_ref": "AMCIG8109"
+  },
+  {
+    "bgb_ref": "SGJ1757",
+    "gerken_ref": "EX0610555",
+    "option": "Example Option",
+    "grade": "Grade C",
+    "description": "Illustrative brush component — example SGJ1757",
+    "oem_ref": "OEM-718701",
+    "material": "Copper",
+    "currency": "EUR",
+    "drawing_image": "image_coming_soon.png",
+    "price_breaks": [
+      {
+        "qty": 12,
+        "price_eur": 51.56
+      },
+      {
+        "qty": 24,
+        "price_eur": 47.44
+      },
+      {
+        "qty": 50,
+        "price_eur": 43.64
+      },
+      {
+        "qty": 100,
+        "price_eur": 40.15
+      },
+      {
+        "qty": 500,
+        "price_eur": 36.94
+      },
+      {
+        "qty": 1000,
+        "price_eur": 33.98
+      },
+      {
+        "qty": 5000,
+        "price_eur": 31.26
+      }
+    ],
+    "status": "In development",
+    "aftermarket_ref": "AMSGJ1757"
+  },
+  {
+    "bgb_ref": "GSY4999",
+    "gerken_ref": "EX4521415",
+    "option": "Example Option",
+    "grade": "Grade C",
+    "description": "Illustrative brush component — example GSY4999",
+    "oem_ref": "OEM-815718",
+    "material": "Copper",
+    "currency": "EUR",
+    "drawing_image": "image_coming_soon.png",
+    "price_breaks": [
+      {
+        "qty": 12,
+        "price_eur": 43.52
+      },
+      {
+        "qty": 24,
+        "price_eur": 40.04
+      },
+      {
+        "qty": 50,
+        "price_eur": 36.84
+      },
+      {
+        "qty": 100,
+        "price_eur": 33.89
+      },
+      {
+        "qty": 500,
+        "price_eur": 31.18
+      },
+      {
+        "qty": 1000,
+        "price_eur": 28.68
+      },
+      {
+        "qty": 5000,
+        "price_eur": 26.39
+      }
+    ],
+    "status": "In development",
+    "aftermarket_ref": "AMGSY4999"
+  },
+  {
+    "bgb_ref": "UTM1738",
+    "gerken_ref": "EX9348539",
+    "option": "Example Option",
+    "grade": "Grade A",
+    "description": "Illustrative brush component — example UTM1738",
+    "oem_ref": "OEM-732349",
+    "material": "Copper",
+    "currency": "EUR",
+    "drawing_image": "image_coming_soon.png",
+    "price_breaks": [
+      {
+        "qty": 12,
+        "price_eur": 20.0
+      },
+      {
+        "qty": 24,
+        "price_eur": 18.4
+      },
+      {
+        "qty": 50,
+        "price_eur": 16.93
+      },
+      {
+        "qty": 100,
+        "price_eur": 15.57
+      },
+      {
+        "qty": 500,
+        "price_eur": 14.33
+      },
+      {
+        "qty": 1000,
+        "price_eur": 13.18
+      },
+      {
+        "qty": 5000,
+        "price_eur": 12.13
+      }
+    ],
+    "status": "In development",
+    "aftermarket_ref": "AMUTM1738"
+  },
+  {
+    "bgb_ref": "DXU1896",
+    "gerken_ref": "EX8988059",
+    "option": "Example Option",
+    "grade": "Grade C",
+    "description": "Illustrative brush component — example DXU1896",
+    "oem_ref": "OEM-924635",
+    "material": "Copper",
+    "currency": "EUR",
+    "drawing_image": "image_coming_soon.png",
+    "price_breaks": [
+      {
+        "qty": 12,
+        "price_eur": 53.09
+      },
+      {
+        "qty": 24,
+        "price_eur": 48.84
+      },
+      {
+        "qty": 50,
+        "price_eur": 44.94
+      },
+      {
+        "qty": 100,
+        "price_eur": 41.34
+      },
+      {
+        "qty": 500,
+        "price_eur": 38.03
+      },
+      {
+        "qty": 1000,
+        "price_eur": 34.99
+      },
+      {
+        "qty": 5000,
+        "price_eur": 32.19
+      }
+    ],
+    "status": "In development",
+    "aftermarket_ref": "AMDXU1896"
+  }
+]

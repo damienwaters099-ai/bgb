@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Slipring Total Cost of Ownership Calculator</title>
+<style>
+  :root { color-scheme: light; }
+
+  .viz-root {
+    color-scheme: light;
+    --surface-1:      #fcfcfb;
+    --page-plane:     #f9f9f7;
+    --text-primary:   #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted:     #898781;
+    --gridline:       #e1e0d9;
+    --baseline:       #c3c2b7;
+    --border:         rgba(11,11,11,0.10);
+    --border-strong:  rgba(11,11,11,0.20);
+    --input-border:   rgba(11,11,11,0.28);
+    --input-bg:       #f4f3f0;
+    --shadow-card:    0 1px 2px rgba(16,15,13,0.05), 0 4px 16px rgba(16,15,13,0.07);
+    --card-bg:        #ffffff;
+
+    --series-bgb:      #2a78d6; /* categorical slot 1 - blue */
+    --series-comp:     #eb6834; /* categorical slot 2 - orange */
+    --status-good:     #0ca30c;
+    --status-good-text:#006300;
+    --status-warning:  #fab219;
+
+    --premium-band:    rgba(137,135,129,0.16);
+    --savings-band:    rgba(12,163,12,0.14);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) .viz-root {
+      color-scheme: dark;
+      --surface-1:      #1a1a19;
+      --page-plane:     #0d0d0d;
+      --text-primary:   #ffffff;
+      --text-secondary: #c3c2b7;
+      --text-muted:     #898781;
+      --gridline:       #2c2c2a;
+      --baseline:       #383835;
+      --border:         rgba(255,255,255,0.10);
+      --border-strong:  rgba(255,255,255,0.22);
+      --input-border:   rgba(255,255,255,0.30);
+      --input-bg:       #232322;
+      --shadow-card:    0 1px 2px rgba(0,0,0,0.4), 0 4px 16px rgba(0,0,0,0.35);
+      --card-bg:        #232322;
+
+      --series-bgb:      #3987e5;
+      --series-comp:     #d95926;
+      --status-good:     #0ca30c;
+      --status-good-text:#0ca30c;
+      --status-warning:  #fab219;
+
+      --premium-band:    rgba(195,194,183,0.14);
+      --savings-band:    rgba(12,163,12,0.20);
+    }
+  }
+  :root[data-theme="dark"] .viz-root {
+    color-scheme: dark;
+    --surface-1:      #1a1a19;
+    --page-plane:     #0d0d0d;
+    --text-primary:   #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted:     #898781;
+    --gridline:       #2c2c2a;
+    --baseline:       #383835;
+    --border:         rgba(255,255,255,0.10);
+    --border-strong:  rgba(255,255,255,0.22);
+    --input-border:   rgba(255,255,255,0.30);
+    --input-bg:       #232322;
+    --shadow-card:    0 1px 2px rgba(0,0,0,0.4), 0 4px 16px rgba(0,0,0,0.35);
+    --card-bg:        #232322;
+
+    --series-bgb:      #3987e5;
+    --series-comp:     #d95926;
+    --status-good:     #0ca30c;
+    --status-good-text:#0ca30c;
+    --status-warning:  #fab219;
+
+    --premium-band:    rgba(195,194,183,0.14);
+    --savings-band:    rgba(12,163,12,0.20);
+  }
+
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    background: var(--page-plane);
+    color: var(--text-primary);
+  }
+  .viz-root { background: var(--page-plane); min-height: 100vh; padding-bottom: 64px; }
+
+  a { color: inherit; }
+
+  .app { max-width: 1180px; margin: 0 auto; padding: 28px 20px 0; }
+
+  /* ---------- Header ---------- */
+  header.top {
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 20px;
+    flex-wrap: wrap; margin-bottom: 18px;
+  }
+  .brand { display:flex; flex-direction:column; gap:4px; }
+  .brand .eyebrow {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--series-bgb);
+  }
+  h1 { font-size: 27px; margin: 0; font-weight: 800; letter-spacing: -0.015em; }
+  .brand p { margin: 2px 0 0; color: var(--text-secondary); font-size: 14.5px; max-width: 620px; }
+
+  .top-actions { display:flex; gap:8px; align-items:center; flex-wrap: wrap; }
+  button.chip-btn {
+    font: inherit; font-size: 13px; font-weight: 700; cursor: pointer;
+    padding: 8px 14px; border-radius: 8px; border: 1.5px solid var(--border-strong);
+    background: var(--card-bg); color: var(--text-primary);
+    box-shadow: var(--shadow-card);
+    transition: background 0.15s ease, transform 0.1s ease, border-color 0.15s ease;
+  }
+  button.chip-btn:hover { background: var(--gridline); border-color: var(--text-muted); }
+  button.chip-btn:active { transform: scale(0.97); }
+  button.chip-btn.primary { background: var(--series-bgb); color: #fff; border-color: var(--series-bgb); }
+  button.chip-btn.primary:hover { filter: brightness(1.08); }
+  button.chip-btn.ghost { background: var(--card-bg); }
+
+  /* ---------- Disclaimer ---------- */
+  .disclaimer {
+    display:flex; gap:10px; align-items:flex-start;
+    background: var(--card-bg); border: 1.5px solid var(--border-strong); border-left: 4px solid var(--status-warning);
+    border-radius: 10px; padding: 12px 14px; margin-bottom: 22px; font-size: 13px; color: var(--text-secondary);
+    box-shadow: var(--shadow-card);
+  }
+  .disclaimer strong { color: var(--text-primary); font-weight: 800; }
+
+  /* ---------- Controls row ---------- */
+  .controls-card {
+    background: var(--card-bg); border: 1.5px solid var(--border-strong); border-radius: 12px;
+    padding: 16px 18px; margin-bottom: 22px;
+    display: flex; flex-wrap: wrap; gap: 22px; align-items: center;
+    box-shadow: var(--shadow-card);
+  }
+  .control-item { display:flex; flex-direction: column; gap: 6px; }
+  .control-item label { font-size: 11.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); }
+  .control-item .row-inline { display:flex; align-items:center; gap:10px; }
+  input[type="range"] { width: 160px; accent-color: var(--series-bgb); }
+  .horizon-value { font-weight: 800; font-size: 15px; min-width: 54px; }
+  select, input[type="number"], input[type="text"] {
+    font: inherit; font-size: 14px; font-weight: 500; padding: 7px 9px; border-radius: 7px;
+    border: 1.5px solid var(--input-border); background: var(--input-bg); color: var(--text-primary);
+    width: 100%;
+  }
+  input[type="number"]:focus, input[type="text"]:focus, select:focus { outline: 2px solid var(--series-bgb); outline-offset: 1px; border-color: var(--series-bgb); }
+  input::placeholder { color: var(--text-muted); font-weight: 400; }
+  .toggle-wrap { display:flex; align-items:center; gap:8px; }
+  .switch { position: relative; width: 40px; height: 23px; flex: none; cursor: pointer; }
+  .switch input { opacity:0; width:0; height:0; }
+  .slider-toggle {
+    position:absolute; cursor:pointer; inset:0; background: var(--text-muted); border: 1.5px solid var(--border-strong); border-radius: 999px; transition: 0.15s;
+  }
+  .slider-toggle::before {
+    content:""; position:absolute; width:16px; height:16px; left:2.5px; top:2px; background:#fff; border-radius:50%; transition: 0.15s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  }
+  .switch input:checked + .slider-toggle { background: var(--series-bgb); border-color: var(--series-bgb); }
+  .switch input:checked + .slider-toggle::before { transform: translateX(17px); }
+  .downtime-rate-field { display:none; align-items:center; gap:8px; }
+  .downtime-rate-field.show { display:flex; }
+  .downtime-rate-field input { width: 110px; }
+  .downtime-rate-field span { font-weight: 600; color: var(--text-primary); }
+
+  .downtime-extra { display:none; }
+  .downtime-extra.show { display:flex; flex-direction: column; gap: 6px; }
+  .downtime-extra .mini-fields { display:flex; gap: 14px; flex-wrap: wrap; }
+  .mini-field { display:flex; flex-direction: column; gap: 3px; }
+  .mini-field span { font-size: 11.5px; color: var(--text-primary); font-weight: 600; }
+  .mini-field input { width: 88px; }
+  .mini-field.brush-dt-field { display:none; }
+  .mini-field.brush-dt-field.show { display:flex; }
+
+  .brush-section { display:none; }
+  .brush-section.show { display:block; }
+
+  /* ---------- Product panels ---------- */
+  .panels-grid { display:grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 22px; }
+  @media (max-width: 820px) { .panels-grid { grid-template-columns: 1fr; } }
+
+  .product-card {
+    background: var(--card-bg); border: 1.5px solid var(--border-strong); border-radius: 14px;
+    padding: 18px 18px 20px; border-top: 5px solid var(--accent);
+    box-shadow: var(--shadow-card);
+  }
+  .product-card.bgb { --accent: var(--series-bgb); }
+  .product-card.comp { --accent: var(--series-comp); }
+
+  .product-card .name-row { display:flex; align-items:center; gap:10px; margin-bottom: 14px; }
+  .swatch-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); flex: none; }
+  .product-card input.name-input {
+    font-size: 17px; font-weight: 800; border: none; background: transparent; padding: 4px 2px;
+    border-bottom: 1px dashed transparent;
+  }
+  .product-card input.name-input:hover, .product-card input.name-input:focus { border-bottom-color: var(--border-strong); outline: none; }
+
+  .field-section { margin-bottom: 14px; }
+  .field-section .section-label {
+    font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--text-secondary); margin-bottom: 8px; display:block;
+  }
+  .field-grid { display:grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .field { display:flex; flex-direction: column; gap: 4px; }
+  .field label { font-size: 12.5px; color: var(--text-primary); font-weight: 600; }
+  .field .hint { font-size: 10.5px; color: var(--text-muted); }
+  .field.full { grid-column: 1 / -1; }
+  .downtime-field { display:none; }
+  .downtime-field.show { display:flex; }
+
+  /* qualitative strip */
+  .qual-strip { display:grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+  @media (max-width: 820px) { .qual-strip { grid-template-columns: 1fr; } }
+  .qual-card { background: var(--card-bg); border: 1.5px solid var(--border-strong); border-radius: 12px; padding: 14px 16px; box-shadow: var(--shadow-card); }
+  .qual-card .qual-title { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin-bottom: 10px; }
+  .qual-row { display:flex; justify-content: space-between; gap: 10px; padding: 6px 0; border-top: 1px solid var(--gridline); }
+  .qual-row:first-of-type { border-top: none; }
+  .qual-row .who { display:flex; align-items:center; gap:6px; font-size: 12.5px; color: var(--text-secondary); flex: none; }
+  .qual-row .val { font-size: 12.5px; text-align: right; font-weight: 700; color: var(--text-primary); }
+
+  /* ---------- KPI row ---------- */
+  .kpi-row { display:grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
+  @media (max-width: 900px) { .kpi-row { grid-template-columns: repeat(2, 1fr); } }
+  .stat-tile {
+    background: var(--card-bg); border: 1.5px solid var(--border-strong); border-radius: 14px; padding: 16px 18px;
+    display:flex; flex-direction: column; gap: 6px; position: relative; overflow: hidden;
+    box-shadow: var(--shadow-card);
+  }
+  .stat-tile.hero::before {
+    content:""; position:absolute; inset:0; background: linear-gradient(135deg, var(--status-good) 0%, transparent 70%); opacity: 0.1;
+  }
+  .stat-tile.hero { border-color: var(--status-good); }
+  .stat-tile .label { font-size: 12px; color: var(--text-secondary); font-weight: 700; }
+  .stat-tile .value { font-size: 27px; font-weight: 800; letter-spacing: -0.01em; }
+  .stat-tile .value.good { color: var(--status-good-text); }
+  .stat-tile .sub { font-size: 12px; color: var(--text-secondary); }
+
+  /* ---------- Chart cards ---------- */
+  .chart-card {
+    background: var(--card-bg); border: 1.5px solid var(--border-strong); border-radius: 14px;
+    padding: 18px 20px 10px; margin-bottom: 20px;
+    box-shadow: var(--shadow-card);
+  }
+  .chart-card .chart-head { display:flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
+  .chart-card h2 { font-size: 15px; margin: 0 0 2px; font-weight: 800; }
+  .chart-card .chart-sub { font-size: 12.5px; color: var(--text-secondary); margin: 0; }
+
+  .legend { display:flex; gap: 16px; align-items:center; flex-wrap: wrap; }
+  .legend-item { display:flex; align-items:center; gap: 6px; font-size: 12.5px; color: var(--text-secondary); }
+  .legend-swatch { width: 12px; height: 3px; border-radius: 2px; }
+  .legend-swatch.band { width: 12px; height: 12px; border-radius: 3px; }
+
+  svg.chart-svg { width: 100%; height: auto; display:block; overflow: visible; }
+  .axis-label { font-size: 11px; fill: var(--text-muted); font-family: system-ui, sans-serif; }
+  .end-label { font-size: 12px; font-weight: 700; fill: var(--text-primary); font-family: system-ui, sans-serif; }
+  .band-label { font-size: 11.5px; font-weight: 600; font-family: system-ui, sans-serif; }
+  .band-label.premium { fill: var(--text-muted); }
+  .band-label.savings { fill: var(--status-good-text); }
+
+  .crosshair-line { stroke: var(--baseline); stroke-width: 1; }
+  .hover-dot { r: 5; stroke: var(--surface-1); stroke-width: 2; }
+
+  .tooltip-box {
+    position: absolute; pointer-events: none; background: var(--text-primary); color: var(--surface-1);
+    border-radius: 8px; padding: 8px 10px; font-size: 12.5px; line-height: 1.5; box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+    opacity: 0; transition: opacity 0.08s ease; z-index: 5; min-width: 150px;
+  }
+  .tooltip-box .t-year { font-weight: 700; margin-bottom: 3px; }
+  .tooltip-box .t-row { display:flex; justify-content: space-between; gap: 12px; }
+  .tooltip-box .t-row .k { display:flex; align-items:center; gap:5px; opacity: 0.85; }
+  .tooltip-box .t-key { width: 9px; height: 9px; border-radius: 2px; flex: none; }
+  .tooltip-box .t-val { font-weight: 700; }
+  .tooltip-box .t-savings { margin-top: 4px; padding-top: 4px; border-top: 1px solid rgba(255,255,255,0.2); }
+
+  .chart-wrap { position: relative; }
+
+  details.table-toggle { margin-top: 10px; }
+  details.table-toggle summary {
+    cursor: pointer; font-size: 12.5px; font-weight: 600; color: var(--series-bgb); padding: 6px 0; list-style: none;
+  }
+  details.table-toggle summary::-webkit-details-marker { display:none; }
+  details.table-toggle summary::before { content: "▸ "; }
+  details.table-toggle[open] summary::before { content: "▾ "; }
+  table.data-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 8px; }
+  table.data-table th, table.data-table td { text-align: right; padding: 6px 8px; border-bottom: 1px solid var(--gridline); font-variant-numeric: tabular-nums; }
+  table.data-table th:first-child, table.data-table td:first-child { text-align: left; }
+  table.data-table th { color: var(--text-secondary); font-weight: 700; }
+
+  footer.app-footer { max-width: 1180px; margin: 8px auto 0; padding: 0 20px 40px; font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+
+  .bar-rect { cursor: pointer; }
+  .bar-rect:hover { filter: brightness(1.08); }
+
+  @media (max-width: 600px) {
+    .field-grid { grid-template-columns: 1fr; }
+    .kpi-row { grid-template-columns: 1fr 1fr; }
+    h1 { font-size: 21px; }
+  }
+</style>
+</head>
+<body>
+<div class="viz-root">
+<div class="app">
+
+  <header class="top">
+    <div class="brand">
+      <span class="eyebrow">BGB Group &middot; Sliprings</span>
+      <h1>Total Cost of Ownership Calculator</h1>
+      <p>Compares BGB against a competitor slipring across purchase, servicing, brush replacement, full replacement and (optionally) downtime cost over the analysis horizon.</p>
+    </div>
+    <div class="top-actions">
+      <a class="chip-btn ghost" href="/tco" style="text-decoration:none;display:inline-flex;align-items:center">&larr; TCO hub</a>
+      <button class="chip-btn ghost" id="darkModeBtn" type="button">🌙 Dark mode</button>
+      <button class="chip-btn" id="resetBtn" type="button">Reset</button>
+      <button class="chip-btn primary" id="loadExampleBtn" type="button">Load example data</button>
+    </div>
+  </header>
+
+  <div class="disclaimer">
+    <span>⚠️</span>
+    <div><strong>For internal / sales-engineering use.</strong> Every figure here is user-entered — nothing is pulled from a live cost database. Validate inputs against current BOM, service-contract and warranty terms with Engineering or Product before this is shown to a customer or used in a quote.</div>
+  </div>
+
+  <div class="controls-card">
+    <div class="control-item">
+      <label for="horizonSlider">Analysis horizon</label>
+      <div class="row-inline">
+        <input type="range" id="horizonSlider" min="5" max="30" step="1" value="20" />
+        <span class="horizon-value" id="horizonValue">20 yrs</span>
+      </div>
+    </div>
+
+    <div class="control-item">
+      <label for="currencySelect">Currency</label>
+      <select id="currencySelect">
+        <option value="£" selected>£ GBP</option>
+        <option value="$">$ USD</option>
+        <option value="€">€ EUR</option>
+      </select>
+    </div>
+
+    <div class="control-item">
+      <label for="turbineCount">Number of turbines</label>
+      <input type="number" id="turbineCount" min="1" step="1" value="1" style="width:100px;padding:8px 10px;border:1.5px solid #d1d5db;border-radius:7px;font-size:0.875rem;font-family:inherit;" />
+      <span class="hint" style="font-size:10.5px;color:var(--text-muted);max-width:200px;">Every cost field below is per unit — totals and charts scale to the fleet automatically.</span>
+    </div>
+
+    <div class="control-item">
+      <label>Include brush replacement</label>
+      <div class="toggle-wrap">
+        <label class="switch">
+          <input type="checkbox" id="brushToggle" />
+          <span class="slider-toggle"></span>
+        </label>
+      </div>
+      <span class="hint" style="font-size:10.5px;color:var(--text-muted);max-width:200px;">Off by default to keep the form short &mdash; tick on when it's relevant.</span>
+    </div>
+
+    <div class="control-item">
+      <label>Include downtime cost</label>
+      <div class="toggle-wrap">
+        <label class="switch">
+          <input type="checkbox" id="downtimeToggle" />
+          <span class="slider-toggle"></span>
+        </label>
+        <div class="downtime-rate-field" id="downtimeRateField">
+          <span style="font-size:12.5px;color:var(--text-secondary);">Cost per downtime hour</span>
+          <input type="number" id="downtimeRate" placeholder="0" min="0" step="10" />
+        </div>
+      </div>
+      <span class="hint" style="font-size:10.5px;color:var(--text-muted);max-width:320px;">Lost generation + callout labour per hour of unplanned/scheduled outage. Leave off if you can't defend a number yet &mdash; the tool works without it.</span>
+    </div>
+
+    <div class="control-item downtime-extra" id="downtimeExtra">
+      <label>Downtime hours per event</label>
+      <div class="mini-fields">
+        <div class="mini-field"><span>Installation</span><input type="number" id="dtInstall" placeholder="0" min="0" step="0.5" /></div>
+        <div class="mini-field"><span>Each service</span><input type="number" id="dtService" placeholder="0" min="0" step="0.5" /></div>
+        <div class="mini-field brush-dt-field" id="dtBrushField"><span>Each brush swap</span><input type="number" id="dtBrush" placeholder="0" min="0" step="0.5" /></div>
+        <div class="mini-field"><span>Each replacement</span><input type="number" id="dtReplacement" placeholder="0" min="0" step="0.5" /></div>
+      </div>
+      <span class="hint" style="font-size:10.5px;color:var(--text-muted);max-width:340px;">Same duration assumed for both products &mdash; how often each happens is set per-product below, so the fewer-events side automatically banks fewer downtime hours.</span>
+    </div>
+  </div>
+
+  <div class="panels-grid">
+    <div class="product-card bgb" id="panel-bgb">
+      <div class="name-row">
+        <span class="swatch-dot"></span>
+        <input class="name-input" id="bgb-name" value="BGB Slipring" />
+      </div>
+
+      <div class="field-section">
+        <span class="section-label">Purchase</span>
+        <div class="field-grid">
+          <div class="field"><label>Initial unit cost</label><input type="number" data-p="bgb" data-k="initialCost" min="0" placeholder="0" /></div>
+          <div class="field"><label>Installation cost</label><input type="number" data-p="bgb" data-k="installCost" min="0" placeholder="0" /></div>
+        </div>
+      </div>
+
+      <div class="field-section">
+        <span class="section-label">Spring Clips</span>
+        <div class="field-grid">
+          <div class="field"><label>Spring Clips cycle (years)</label><input type="number" data-p="bgb" data-k="serviceCycle" min="0" step="0.1" placeholder="0" /></div>
+          <div class="field"><label>Cost per Spring Clips</label><input type="number" data-p="bgb" data-k="serviceCost" min="0" placeholder="0" /></div>
+        </div>
+      </div>
+
+      <div class="field-section brush-section" id="brush-bgb">
+        <span class="section-label">Brush replacement</span>
+        <div class="field-grid">
+          <div class="field"><label>Brush replacement cycle (years)</label><input type="number" data-p="bgb" data-k="brushCycle" min="0" step="0.1" placeholder="0" /></div>
+          <div class="field"><label>Cost per brush replacement</label><input type="number" data-p="bgb" data-k="brushCost" min="0" placeholder="0" /></div>
+        </div>
+      </div>
+
+      <div class="field-section">
+        <span class="section-label">Full replacement</span>
+        <div class="field-grid">
+          <div class="field"><label>Replacement period (years)</label><input type="number" data-p="bgb" data-k="replCycle" min="0" step="0.5" placeholder="0" /></div>
+          <div class="field"><label>Replacement cost</label><input type="number" data-p="bgb" data-k="replCost" min="0" placeholder="0" /></div>
+        </div>
+      </div>
+
+      <div class="field-section">
+        <span class="section-label">Warranty &amp; support (not costed &mdash; shown as comparison)</span>
+        <div class="field-grid">
+          <div class="field"><label>Years of warranty</label><input type="number" data-p="bgb" data-k="warranty" min="0" step="0.5" placeholder="0" /></div>
+          <div class="field"><label>Repair availability</label><input type="text" data-p="bgb" data-k="repairAvail" placeholder="e.g. 48hr dispatch" /></div>
+          <div class="field full"><label>Technical support</label><input type="text" data-p="bgb" data-k="techSupport" placeholder="e.g. 24/7 direct engineering line" /></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card comp" id="panel-comp">
+      <div class="name-row">
+        <span class="swatch-dot"></span>
+        <input class="name-input" id="comp-name" value="Competitor Slipring" />
+      </div>
+
+      <div class="field-section">
+        <span class="section-label">Purchase</span>
+        <div class="field-grid">
+          <div class="field"><label>Initial unit cost</label><input type="number" data-p="comp" data-k="initialCost" min="0" placeholder="0" /></div>
+          <div class="field"><label>Installation cost</label><input type="number" data-p="comp" data-k="installCost" min="0" placeholder="0" /></div>
+        </div>
+      </div>
+
+      <div class="field-section">
+        <span class="section-label">Spring Clips</span>
+        <div class="field-grid">
+          <div class="field"><label>Spring Clips cycle (years)</label><input type="number" data-p="comp" data-k="serviceCycle" min="0" step="0.1" placeholder="0" /></div>
+          <div class="field"><label>Cost per Spring Clips</label><input type="number" data-p="comp" data-k="serviceCost" min="0" placeholder="0" /></div>
+        </div>
+      </div>
+
+      <div class="field-section brush-section" id="brush-comp">
+        <span class="section-label">Brush replacement</span>
+        <div class="field-grid">
+          <div class="field"><label>Brush replacement cycle (years)</label><input type="number" data-p="comp" data-k="brushCycle" min="0" step="0.1" placeholder="0" /></div>
+          <div class="field"><label>Cost per brush replacement</label><input type="number" data-p="comp" data-k="brushCost" min="0" placeholder="0" /></div>
+        </div>
+      </div>
+
+      <div class="field-section">
+        <span class="section-label">Full replacement</span>
+        <div class="field-grid">
+          <div class="field"><label>Replacement period (years)</label><input type="number" data-p="comp" data-k="replCycle" min="0" step="0.5" placeholder="0" /></div>
+          <div class="field"><label>Replacement cost</label><input type="number" data-p="comp" data-k="replCost" min="0" placeholder="0" /></div>
+        </div>
+      </div>
+
+      <div class="field-section">
+        <span class="section-label">Warranty &amp; support (not costed &mdash; shown as comparison)</span>
+        <div class="field-grid">
+          <div class="field"><label>Years of warranty</label><input type="number" data-p="comp" data-k="warranty" min="0" step="0.5" placeholder="0" /></div>
+          <div class="field"><label>Repair availability</label><input type="text" data-p="comp" data-k="repairAvail" placeholder="e.g. 2-3 week lead time" /></div>
+          <div class="field full"><label>Technical support</label><input type="text" data-p="comp" data-k="techSupport" placeholder="e.g. distributor-mediated" /></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="qual-strip" id="qualStrip"></div>
+
+  <div class="kpi-row" id="kpiRow"></div>
+
+  <div class="chart-card">
+    <div class="chart-head">
+      <div>
+        <h2>Cumulative cost of ownership over time</h2>
+        <p class="chart-sub" id="chartSub">Enter figures on both sides to see the crossover point.</p>
+      </div>
+      <div class="legend" id="mainLegend"></div>
+    </div>
+    <div class="chart-wrap" id="mainChartWrap"></div>
+    <details class="table-toggle">
+      <summary>View underlying year-by-year data as a table</summary>
+      <div id="tableWrap" style="overflow-x:auto;"></div>
+    </details>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-head">
+      <div>
+        <h2>Cost breakdown over the full horizon</h2>
+        <p class="chart-sub">Where the total comes from, category by category.</p>
+      </div>
+      <div class="legend" id="breakdownLegend"></div>
+    </div>
+    <div class="chart-wrap" id="breakdownChartWrap"></div>
+  </div>
+
+  <footer class="app-footer">
+    Model notes: costs are gross of any warranty coverage &mdash; if a warranty period includes free Spring Clips coverage, zero out that field for the covered years manually. Full-replacement events are counted only if the replacement period falls within the analysis horizon. Downtime cost is excluded unless a &pound;/hour rate is set. Nothing in this tool is a substitute for a signed service contract or a real reliability dataset.
+  </footer>
+
+</div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var FIELD_KEYS = ["initialCost","installCost","serviceCycle","serviceCost",
+    "brushCycle","brushCost","replCycle","replCost",
+    "warranty","repairAvail","techSupport"];
+
+  var state = {
+    horizon: 20,
+    currency: "£",
+    turbineCount: 1,
+    downtimeEnabled: false,
+    downtimeRate: 0,
+    downtimeHrs: { install: 0, service: 0, brush: 0, replacement: 0 },
+    brushEnabled: false,
+    darkMode: false,
+    bgb: emptyProduct("BGB Slipring"),
+    comp: emptyProduct("Competitor Slipring")
+  };
+
+  function emptyProduct(name) {
+    var o = { name: name };
+    FIELD_KEYS.forEach(function (k) { o[k] = (k === "repairAvail" || k === "techSupport") ? "" : 0; });
+    return o;
+  }
+
+  var EXAMPLE = {
+    horizon: 20,
+    turbineCount: 25,
+    downtimeEnabled: true,
+    downtimeRate: 850,
+    downtimeHrs: { install: 8, service: 4, brush: 2, replacement: 24 },
+    brushEnabled: true,
+    bgb: {
+      name: "BGB Slipring", initialCost: 42000, installCost: 3000,
+      serviceCycle: 2, serviceCost: 1200,
+      brushCycle: 1, brushCost: 350,
+      replCycle: 25, replCost: 38000,
+      warranty: 5, repairAvail: "Same-day dispatch, UK stock", techSupport: "24/7 direct engineering line"
+    },
+    comp: {
+      name: "Competitor Slipring", initialCost: 27000, installCost: 3000,
+      serviceCycle: 1, serviceCost: 1400,
+      brushCycle: 0.5, brushCost: 300,
+      replCycle: 10, replCost: 24000,
+      warranty: 2, repairAvail: "2–3 week lead time, imported parts", techSupport: "Distributor-mediated, business hours"
+    }
+  };
+
+  // ---------- DOM refs ----------
+  var horizonSlider = document.getElementById("horizonSlider");
+  var horizonValue = document.getElementById("horizonValue");
+  var currencySelect = document.getElementById("currencySelect");
+  var turbineCountInput = document.getElementById("turbineCount");
+  var downtimeToggle = document.getElementById("downtimeToggle");
+  var downtimeRateField = document.getElementById("downtimeRateField");
+  var downtimeRateInput = document.getElementById("downtimeRate");
+  var downtimeExtra = document.getElementById("downtimeExtra");
+  var dtInstallInput = document.getElementById("dtInstall");
+  var dtServiceInput = document.getElementById("dtService");
+  var dtBrushInput = document.getElementById("dtBrush");
+  var dtBrushField = document.getElementById("dtBrushField");
+  var dtReplacementInput = document.getElementById("dtReplacement");
+  var brushToggle = document.getElementById("brushToggle");
+
+  function updateBrushDtVisibility() {
+    dtBrushField.classList.toggle("show", state.brushEnabled && state.downtimeEnabled);
+  }
+  var darkModeBtn = document.getElementById("darkModeBtn");
+  var resetBtn = document.getElementById("resetBtn");
+  var loadExampleBtn = document.getElementById("loadExampleBtn");
+  var bgbNameInput = document.getElementById("bgb-name");
+  var compNameInput = document.getElementById("comp-name");
+
+  // ---------- wiring ----------
+  horizonSlider.addEventListener("input", function () {
+    state.horizon = parseInt(horizonSlider.value, 10);
+    horizonValue.textContent = state.horizon + " yrs";
+    render();
+  });
+  currencySelect.addEventListener("change", function () {
+    state.currency = currencySelect.value;
+    render();
+  });
+  turbineCountInput.addEventListener("input", function () {
+    var v = parseInt(turbineCountInput.value, 10);
+    state.turbineCount = (v && v > 0) ? v : 1;
+    render();
+  });
+  downtimeToggle.addEventListener("change", function () {
+    state.downtimeEnabled = downtimeToggle.checked;
+    downtimeRateField.classList.toggle("show", state.downtimeEnabled);
+    downtimeExtra.classList.toggle("show", state.downtimeEnabled);
+    updateBrushDtVisibility();
+    render();
+  });
+  downtimeRateInput.addEventListener("input", function () {
+    state.downtimeRate = parseFloat(downtimeRateInput.value) || 0;
+    render();
+  });
+  dtInstallInput.addEventListener("input", function () {
+    state.downtimeHrs.install = parseFloat(dtInstallInput.value) || 0;
+    render();
+  });
+  dtServiceInput.addEventListener("input", function () {
+    state.downtimeHrs.service = parseFloat(dtServiceInput.value) || 0;
+    render();
+  });
+  dtBrushInput.addEventListener("input", function () {
+    state.downtimeHrs.brush = parseFloat(dtBrushInput.value) || 0;
+    render();
+  });
+  dtReplacementInput.addEventListener("input", function () {
+    state.downtimeHrs.replacement = parseFloat(dtReplacementInput.value) || 0;
+    render();
+  });
+  brushToggle.addEventListener("change", function () {
+    state.brushEnabled = brushToggle.checked;
+    document.querySelectorAll(".brush-section").forEach(function (el) {
+      el.classList.toggle("show", state.brushEnabled);
+    });
+    updateBrushDtVisibility();
+    render();
+  });
+  bgbNameInput.addEventListener("input", function () { state.bgb.name = bgbNameInput.value || "BGB Slipring"; render(); });
+  compNameInput.addEventListener("input", function () { state.comp.name = compNameInput.value || "Competitor Slipring"; render(); });
+
+  document.querySelectorAll("input[data-p]").forEach(function (input) {
+    input.addEventListener("input", function () {
+      var p = input.getAttribute("data-p");
+      var k = input.getAttribute("data-k");
+      if (input.type === "number") {
+        state[p][k] = input.value === "" ? 0 : parseFloat(input.value);
+      } else {
+        state[p][k] = input.value;
+      }
+      render();
+    });
+  });
+
+  darkModeBtn.addEventListener("click", function () {
+    state.darkMode = !state.darkMode;
+    document.documentElement.setAttribute("data-theme", state.darkMode ? "dark" : "light");
+    darkModeBtn.textContent = state.darkMode ? "☀️ Light mode" : "🌙 Dark mode";
+    render();
+  });
+
+  resetBtn.addEventListener("click", function () {
+    if (!confirm("Clear all entered figures?")) return;
+    state.horizon = 20; horizonSlider.value = 20; horizonValue.textContent = "20 yrs";
+    state.turbineCount = 1; turbineCountInput.value = 1;
+    state.downtimeEnabled = false; downtimeToggle.checked = false; downtimeRateField.classList.remove("show"); downtimeExtra.classList.remove("show");
+    state.downtimeRate = 0; downtimeRateInput.value = "";
+    state.downtimeHrs = { install: 0, service: 0, brush: 0, replacement: 0 };
+    dtInstallInput.value = ""; dtServiceInput.value = ""; dtBrushInput.value = ""; dtReplacementInput.value = "";
+    state.brushEnabled = false; brushToggle.checked = false;
+    document.querySelectorAll(".brush-section").forEach(function (el) { el.classList.remove("show"); });
+    updateBrushDtVisibility();
+    state.bgb = emptyProduct(); state.comp = emptyProduct();
+    state.bgb.name = "BGB Slipring"; state.comp.name = "Competitor Slipring";
+    bgbNameInput.value = state.bgb.name; compNameInput.value = state.comp.name;
+    document.querySelectorAll("input[data-p]").forEach(function (input) {
+      var p = input.getAttribute("data-p"), k = input.getAttribute("data-k");
+      input.value = (k === "repairAvail" || k === "techSupport") ? "" : "";
+    });
+    render();
+  });
+
+  loadExampleBtn.addEventListener("click", function () {
+    state.horizon = EXAMPLE.horizon; horizonSlider.value = EXAMPLE.horizon; horizonValue.textContent = EXAMPLE.horizon + " yrs";
+    state.turbineCount = EXAMPLE.turbineCount; turbineCountInput.value = EXAMPLE.turbineCount;
+    state.downtimeEnabled = EXAMPLE.downtimeEnabled; downtimeToggle.checked = EXAMPLE.downtimeEnabled;
+    downtimeRateField.classList.toggle("show", EXAMPLE.downtimeEnabled);
+    downtimeExtra.classList.toggle("show", EXAMPLE.downtimeEnabled);
+    state.downtimeRate = EXAMPLE.downtimeRate; downtimeRateInput.value = EXAMPLE.downtimeRate;
+    state.downtimeHrs = Object.assign({}, EXAMPLE.downtimeHrs);
+    dtInstallInput.value = EXAMPLE.downtimeHrs.install;
+    dtServiceInput.value = EXAMPLE.downtimeHrs.service;
+    dtBrushInput.value = EXAMPLE.downtimeHrs.brush;
+    dtReplacementInput.value = EXAMPLE.downtimeHrs.replacement;
+    state.brushEnabled = EXAMPLE.brushEnabled; brushToggle.checked = EXAMPLE.brushEnabled;
+    document.querySelectorAll(".brush-section").forEach(function (el) { el.classList.toggle("show", EXAMPLE.brushEnabled); });
+    updateBrushDtVisibility();
+    state.bgb = Object.assign({}, EXAMPLE.bgb);
+    state.comp = Object.assign({}, EXAMPLE.comp);
+    bgbNameInput.value = state.bgb.name; compNameInput.value = state.comp.name;
+    document.querySelectorAll("input[data-p]").forEach(function (input) {
+      var p = input.getAttribute("data-p"), k = input.getAttribute("data-k");
+      input.value = state[p][k];
+    });
+    render();
+  });
+
+  // ---------- math ----------
+  function eventCount(cycle, horizon) {
+    if (!cycle || cycle <= 0) return 0;
+    return Math.floor(horizon / cycle + 1e-9);
+  }
+
+  function seriesFor(p) {
+    var prod = state[p];
+    var fleet = state.turbineCount || 1;
+    var years = [];
+    var cum = [];
+    for (var t = 0; t <= state.horizon; t++) {
+      var total = (prod.initialCost || 0) + (prod.installCost || 0);
+      var sEvents = eventCount(prod.serviceCycle, t);
+      var bEvents = state.brushEnabled ? eventCount(prod.brushCycle, t) : 0;
+      var rEvents = eventCount(prod.replCycle, t);
+      total += sEvents * (prod.serviceCost || 0);
+      if (state.brushEnabled) total += bEvents * (prod.brushCost || 0);
+      total += rEvents * (prod.replCost || 0);
+      if (state.downtimeEnabled) {
+        var hrs = (state.downtimeHrs.install || 0)
+          + sEvents * (state.downtimeHrs.service || 0)
+          + rEvents * (state.downtimeHrs.replacement || 0);
+        if (state.brushEnabled) hrs += bEvents * (state.downtimeHrs.brush || 0);
+        total += hrs * (state.downtimeRate || 0);
+      }
+      years.push(t);
+      cum.push(total * fleet);
+    }
+    return { years: years, cum: cum };
+  }
+
+  function breakdownFor(p) {
+    var prod = state[p];
+    var fleet = state.turbineCount || 1;
+    var H = state.horizon;
+    var sEvents = eventCount(prod.serviceCycle, H);
+    var bEvents = state.brushEnabled ? eventCount(prod.brushCycle, H) : 0;
+    var rEvents = eventCount(prod.replCycle, H);
+    var purchase = ((prod.initialCost || 0) + (prod.installCost || 0)) * fleet;
+    var service = sEvents * (prod.serviceCost || 0) * fleet;
+    var brush = state.brushEnabled ? bEvents * (prod.brushCost || 0) * fleet : 0;
+    var repl = rEvents * (prod.replCost || 0) * fleet;
+    var downtime = 0;
+    if (state.downtimeEnabled) {
+      var hrs = (state.downtimeHrs.install || 0)
+        + sEvents * (state.downtimeHrs.service || 0)
+        + rEvents * (state.downtimeHrs.replacement || 0);
+      if (state.brushEnabled) hrs += bEvents * (state.downtimeHrs.brush || 0);
+      downtime = hrs * (state.downtimeRate || 0) * fleet;
+    }
+    return { purchase: purchase, service: service, brush: brush, repl: repl, downtime: downtime,
+      total: purchase + service + brush + repl + downtime };
+  }
+
+  function findCrossing(years, a, b) {
+    // a expected to start >= b (bgb pricier upfront). Returns {x,y} in data coords, or null.
+    if (a[0] <= b[0]) return { x: years[0], y: a[0], immediate: true };
+    for (var k = 1; k < years.length; k++) {
+      if (a[k] <= b[k]) {
+        var x0 = years[k - 1], x1 = years[k];
+        var a0 = a[k - 1], a1 = a[k], b0 = b[k - 1], b1 = b[k];
+        var denom = (a1 - a0) - (b1 - b0);
+        var t = denom !== 0 ? (b0 - a0) / denom : 0;
+        t = Math.max(0, Math.min(1, t));
+        return { x: x0 + t * (x1 - x0), y: a0 + t * (a1 - a0), immediate: false };
+      }
+    }
+    return null;
+  }
+
+  // ---------- formatting ----------
+  function fmtCompact(v) {
+    var sign = v < 0 ? "-" : "";
+    v = Math.abs(v);
+    if (v >= 1e6) return sign + state.currency + (v / 1e6).toFixed(v >= 10e6 ? 0 : 1) + "M";
+    if (v >= 1e3) return sign + state.currency + (v / 1e3).toFixed(v >= 10e3 ? 0 : 1) + "K";
+    return sign + state.currency + Math.round(v);
+  }
+  function fmtFull(v) {
+    var sign = v < 0 ? "-" : "";
+    v = Math.round(Math.abs(v));
+    return sign + state.currency + v.toLocaleString("en-GB");
+  }
+  function niceCeil(v) {
+    if (v <= 0) return 100;
+    var mag = Math.pow(10, Math.floor(Math.log10(v)));
+    var norm = v / mag;
+    var step = norm <= 1 ? 1 : norm <= 2 ? 2 : norm <= 5 ? 5 : 10;
+    return step * mag;
+  }
+
+  // ---------- KPI + qual render ----------
+  function renderKPIs(bgbSeries, compSeries, bgbBreak, compBreak) {
+    var H = state.horizon;
+    var finalBgb = bgbSeries.cum[H];
+    var finalComp = compSeries.cum[H];
+    var savings = finalComp - finalBgb;
+    var pct = finalComp > 0 ? (savings / finalComp) * 100 : 0;
+    var crossing = findCrossing(bgbSeries.years, bgbSeries.cum, compSeries.cum);
+    var breakevenText;
+    if (crossing === null) breakevenText = "Beyond " + H + "yr horizon";
+    else if (crossing.immediate) breakevenText = "Immediate";
+    else breakevenText = "Year " + crossing.x.toFixed(1);
+
+    var downtimeHoursSaved = null;
+    if (state.downtimeEnabled) {
+      var bH = (eventCount(state.bgb.serviceCycle, H) * (state.downtimeHrs.service || 0)) +
+               (eventCount(state.bgb.replCycle, H) * (state.downtimeHrs.replacement || 0)) +
+               (state.brushEnabled ? eventCount(state.bgb.brushCycle, H) * (state.downtimeHrs.brush || 0) : 0);
+      var cH = (eventCount(state.comp.serviceCycle, H) * (state.downtimeHrs.service || 0)) +
+               (eventCount(state.comp.replCycle, H) * (state.downtimeHrs.replacement || 0)) +
+               (state.brushEnabled ? eventCount(state.comp.brushCycle, H) * (state.downtimeHrs.brush || 0) : 0);
+      downtimeHoursSaved = cH - bH;
+    }
+
+    var tiles = [
+      { label: "Lifetime savings with " + esc(state.bgb.name), value: fmtFull(savings), good: savings >= 0, sub: "over " + H + " years", hero: true },
+      { label: "Breakeven point", value: breakevenText, good: null, sub: crossing && !crossing.immediate ? "cost lines cross here" : "" },
+      { label: "Lower lifetime cost", value: (isFinite(pct) ? pct.toFixed(0) : "0") + "%", good: pct >= 0, sub: "vs " + esc(state.comp.name) }
+    ];
+    if (downtimeHoursSaved !== null) {
+      tiles.push({ label: "Downtime hours avoided", value: (downtimeHoursSaved >= 0 ? "" : "−") + Math.abs(downtimeHoursSaved).toFixed(0) + " hrs", good: downtimeHoursSaved >= 0, sub: "over " + H + " years" });
+    } else {
+      tiles.push({ label: "Total " + esc(state.bgb.name) + " TCO", value: fmtFull(finalBgb), good: null, sub: "over " + H + " years" });
+    }
+
+    var row = document.getElementById("kpiRow");
+    row.innerHTML = tiles.map(function (t) {
+      return '<div class="stat-tile' + (t.hero ? ' hero' : '') + '">' +
+        '<span class="label">' + t.label + '</span>' +
+        '<span class="value' + (t.good === true ? ' good' : '') + '">' + t.value + '</span>' +
+        (t.sub ? '<span class="sub">' + t.sub + '</span>' : '') +
+        '</div>';
+    }).join("");
+  }
+
+  function esc(s) {
+    var d = document.createElement("div");
+    d.textContent = s == null ? "" : String(s);
+    return d.innerHTML;
+  }
+
+  function renderQual() {
+    var rows = [
+      { title: "Warranty", key: "warranty", fmt: function (v) { return (v || 0) + " yr" + ((v || 0) === 1 ? "" : "s"); } },
+      { title: "Repair availability", key: "repairAvail", fmt: function (v) { return v || "—"; } },
+      { title: "Technical support", key: "techSupport", fmt: function (v) { return v || "—"; } }
+    ];
+    var html = rows.map(function (r) {
+      return '<div class="qual-card">' +
+        '<div class="qual-title">' + r.title + '</div>' +
+        '<div class="qual-row"><span class="who"><span class="swatch-dot" style="background:var(--series-bgb);width:8px;height:8px;"></span>' + esc(state.bgb.name) + '</span><span class="val">' + esc(r.fmt(state.bgb[r.key])) + '</span></div>' +
+        '<div class="qual-row"><span class="who"><span class="swatch-dot" style="background:var(--series-comp);width:8px;height:8px;"></span>' + esc(state.comp.name) + '</span><span class="val">' + esc(r.fmt(state.comp[r.key])) + '</span></div>' +
+        '</div>';
+    }).join("");
+    document.getElementById("qualStrip").innerHTML = html;
+  }
+
+  // ---------- main line/area chart ----------
+  function renderMainChart(bgbSeries, compSeries) {
+    var W = 1000, H = 340;
+    var padL = 56, padR = 24, padT = 20, padB = 34;
+    var innerW = W - padL - padR, innerH = H - padT - padB;
+    var maxVal = niceCeil(Math.max(bgbSeries.cum[bgbSeries.cum.length - 1], compSeries.cum[compSeries.cum.length - 1]) * 1.08);
+    var years = bgbSeries.years;
+    var Hh = state.horizon;
+
+    function X(t) { return padL + (t / Hh) * innerW; }
+    function Y(v) { return padT + innerH - (v / maxVal) * innerH; }
+
+    // gridlines (5 steps)
+    var steps = 5;
+    var gridlines = "";
+    var axisLabels = "";
+    for (var i = 0; i <= steps; i++) {
+      var v = (maxVal / steps) * i;
+      var y = Y(v);
+      gridlines += '<line x1="' + padL + '" y1="' + y + '" x2="' + (W - padR) + '" y2="' + y + '" class="crosshair-line" stroke="var(--gridline)" />';
+      axisLabels += '<text x="' + (padL - 8) + '" y="' + (y + 4) + '" text-anchor="end" class="axis-label">' + fmtCompact(v) + '</text>';
+    }
+    // x axis labels (every ~4 years)
+    var xTickEvery = Hh <= 10 ? 1 : Hh <= 20 ? 2 : 5;
+    var xLabels = "";
+    for (var t = 0; t <= Hh; t += xTickEvery) {
+      xLabels += '<text x="' + X(t) + '" y="' + (H - padB + 18) + '" text-anchor="middle" class="axis-label">Yr ' + t + '</text>';
+    }
+
+    function pathFor(cum) {
+      return cum.map(function (v, idx) { return (idx === 0 ? "M" : "L") + X(years[idx]).toFixed(2) + "," + Y(v).toFixed(2); }).join(" ");
+    }
+    var bgbPath = pathFor(bgbSeries.cum);
+    var compPath = pathFor(compSeries.cum);
+
+    // premium + savings bands via crossing point
+    var crossing = findCrossing(years, bgbSeries.cum, compSeries.cum);
+    var bandsSvg = "";
+    if (crossing) {
+      var crossIdx = crossing.immediate ? 0 : years.findIndex(function (yy, ii) { return ii > 0 && bgbSeries.cum[ii] <= compSeries.cum[ii]; });
+      if (!crossing.immediate && crossIdx > 0) {
+        // premium band: 0..crossIdx-1 fully, plus crossing point
+        var top = [], bot = [];
+        for (var pi = 0; pi < crossIdx; pi++) { top.push([X(years[pi]), Y(bgbSeries.cum[pi])]); bot.push([X(years[pi]), Y(compSeries.cum[pi])]); }
+        top.push([X(crossing.x), Y(crossing.y)]);
+        var premiumPts = top.concat(bot.reverse()).map(function (p) { return p[0].toFixed(2) + "," + p[1].toFixed(2); }).join(" ");
+        bandsSvg += '<polygon points="' + premiumPts + '" fill="var(--premium-band)" />';
+      }
+      // savings band: crossIdx..end
+      var startIdx = crossing.immediate ? 0 : crossIdx;
+      var stop = [], sbot = [];
+      if (!crossing.immediate) { stop.push([X(crossing.x), Y(crossing.y)]); sbot.push([X(crossing.x), Y(crossing.y)]); }
+      for (var si = startIdx; si < years.length; si++) { stop.push([X(years[si]), Y(compSeries.cum[si])]); sbot.push([X(years[si]), Y(bgbSeries.cum[si])]); }
+      var savingsPts = stop.concat(sbot.reverse()).map(function (p) { return p[0].toFixed(2) + "," + p[1].toFixed(2); }).join(" ");
+      bandsSvg += '<polygon points="' + savingsPts + '" fill="var(--savings-band)" />';
+    }
+
+    var finalBgbY = Y(bgbSeries.cum[bgbSeries.cum.length - 1]);
+    var finalCompY = Y(compSeries.cum[compSeries.cum.length - 1]);
+
+    var crossMarker = "";
+    if (crossing && !crossing.immediate) {
+      crossMarker = '<circle cx="' + X(crossing.x).toFixed(2) + '" cy="' + Y(crossing.y).toFixed(2) + '" r="5" fill="var(--status-good)" stroke="var(--surface-1)" stroke-width="2" />' +
+        '<text x="' + X(crossing.x).toFixed(2) + '" y="' + (Y(crossing.y) - 12).toFixed(2) + '" text-anchor="middle" class="band-label savings">Breakeven • Yr ' + crossing.x.toFixed(1) + '</text>';
+    }
+
+    var svg = '' +
+      '<svg class="chart-svg" viewBox="0 0 ' + W + ' ' + H + '" id="mainSvg" preserveAspectRatio="xMidYMid meet">' +
+      gridlines + axisLabels + xLabels +
+      '<line x1="' + padL + '" y1="' + (H - padB) + '" x2="' + (W - padR) + '" y2="' + (H - padB) + '" stroke="var(--baseline)" stroke-width="1" />' +
+      bandsSvg +
+      '<path d="' + compPath + '" fill="none" stroke="var(--series-comp)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />' +
+      '<path d="' + bgbPath + '" fill="none" stroke="var(--series-bgb)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />' +
+      crossMarker +
+      '<circle cx="' + X(Hh).toFixed(2) + '" cy="' + finalCompY.toFixed(2) + '" r="5" fill="var(--series-comp)" stroke="var(--surface-1)" stroke-width="2" />' +
+      '<circle cx="' + X(Hh).toFixed(2) + '" cy="' + finalBgbY.toFixed(2) + '" r="5" fill="var(--series-bgb)" stroke="var(--surface-1)" stroke-width="2" />' +
+      '<text x="' + (X(Hh) + 8).toFixed(2) + '" y="' + (finalCompY + 4).toFixed(2) + '" class="end-label">' + fmtCompact(compSeries.cum[compSeries.cum.length - 1]) + '</text>' +
+      '<text x="' + (X(Hh) + 8).toFixed(2) + '" y="' + (finalBgbY + 4).toFixed(2) + '" class="end-label">' + fmtCompact(bgbSeries.cum[bgbSeries.cum.length - 1]) + '</text>' +
+      '<line class="crosshair-line" id="crosshairLine" x1="0" y1="' + padT + '" x2="0" y2="' + (H - padB) + '" opacity="0" />' +
+      '<circle class="hover-dot" id="hoverDotBgb" fill="var(--series-bgb)" opacity="0" />' +
+      '<circle class="hover-dot" id="hoverDotComp" fill="var(--series-comp)" opacity="0" />' +
+      '<rect id="hoverCatcher" x="' + padL + '" y="' + padT + '" width="' + innerW + '" height="' + innerH + '" fill="transparent" />' +
+      '</svg>';
+
+    var wrap = document.getElementById("mainChartWrap");
+    wrap.innerHTML = svg + '<div class="tooltip-box" id="mainTooltip"></div>';
+
+    // legend
+    document.getElementById("mainLegend").innerHTML =
+      '<span class="legend-item"><span class="legend-swatch" style="background:var(--series-bgb);"></span>' + esc(state.bgb.name) + '</span>' +
+      '<span class="legend-item"><span class="legend-swatch" style="background:var(--series-comp);"></span>' + esc(state.comp.name) + '</span>' +
+      (crossing && !crossing.immediate ? '<span class="legend-item"><span class="legend-swatch band" style="background:var(--savings-band);"></span>Cumulative savings</span>' : '');
+
+    document.getElementById("chartSub").textContent = crossing
+      ? (crossing.immediate ? esc(state.bgb.name) + " is cheaper from day one at these figures." : esc(state.bgb.name) + " overtakes on cost around year " + crossing.x.toFixed(1) + ", then stays ahead.")
+      : "Enter figures on both sides to see the crossover point.";
+
+    // interactivity
+    var svgEl = wrap.querySelector("#mainSvg");
+    var catcher = wrap.querySelector("#hoverCatcher");
+    var crosshairLine = wrap.querySelector("#crosshairLine");
+    var dotBgb = wrap.querySelector("#hoverDotBgb");
+    var dotComp = wrap.querySelector("#hoverDotComp");
+    var tooltip = document.getElementById("mainTooltip");
+
+    function onMove(evt) {
+      var rect = svgEl.getBoundingClientRect();
+      var clientX = evt.touches ? evt.touches[0].clientX : evt.clientX;
+      var px = (clientX - rect.left) / rect.width * W;
+      var t = Math.round(((px - padL) / innerW) * Hh);
+      t = Math.max(0, Math.min(Hh, t));
+      var idx = t;
+      var xPix = X(t);
+      crosshairLine.setAttribute("x1", xPix); crosshairLine.setAttribute("x2", xPix); crosshairLine.setAttribute("opacity", 1);
+      var yB = Y(bgbSeries.cum[idx]), yC = Y(compSeries.cum[idx]);
+      dotBgb.setAttribute("cx", xPix); dotBgb.setAttribute("cy", yB); dotBgb.setAttribute("opacity", 1);
+      dotComp.setAttribute("cx", xPix); dotComp.setAttribute("cy", yC); dotComp.setAttribute("opacity", 1);
+
+      var sav = compSeries.cum[idx] - bgbSeries.cum[idx];
+      tooltip.innerHTML =
+        '<div class="t-year">Year ' + t + '</div>' +
+        '<div class="t-row"><span class="k"><span class="t-key" style="background:var(--series-bgb);"></span>' + esc(state.bgb.name) + '</span><span class="t-val">' + fmtFull(bgbSeries.cum[idx]) + '</span></div>' +
+        '<div class="t-row"><span class="k"><span class="t-key" style="background:var(--series-comp);"></span>' + esc(state.comp.name) + '</span><span class="t-val">' + fmtFull(compSeries.cum[idx]) + '</span></div>' +
+        '<div class="t-row t-savings"><span class="k">Cumulative savings</span><span class="t-val">' + (sav >= 0 ? "" : "−") + fmtFull(Math.abs(sav)) + '</span></div>';
+      tooltip.style.opacity = 1;
+      var wrapRect = wrap.getBoundingClientRect();
+      var leftPix = (xPix / W) * wrapRect.width;
+      var tooltipLeft = leftPix + 14;
+      if (tooltipLeft + 170 > wrapRect.width) tooltipLeft = leftPix - 170;
+      tooltip.style.left = tooltipLeft + "px";
+      tooltip.style.top = "8px";
+    }
+    function onLeave() {
+      crosshairLine.setAttribute("opacity", 0);
+      dotBgb.setAttribute("opacity", 0);
+      dotComp.setAttribute("opacity", 0);
+      tooltip.style.opacity = 0;
+    }
+    catcher.addEventListener("mousemove", onMove);
+    catcher.addEventListener("mouseleave", onLeave);
+    catcher.addEventListener("touchmove", function (e) { onMove(e); e.preventDefault(); }, { passive: false });
+    catcher.addEventListener("touchend", onLeave);
+
+    // table view
+    var tblRows = years.map(function (t) {
+      return '<tr><td>Year ' + t + '</td><td>' + fmtFull(bgbSeries.cum[t]) + '</td><td>' + fmtFull(compSeries.cum[t]) + '</td><td>' + fmtFull(compSeries.cum[t] - bgbSeries.cum[t]) + '</td></tr>';
+    }).join("");
+    document.getElementById("tableWrap").innerHTML =
+      '<table class="data-table"><thead><tr><th>Year</th><th>' + esc(state.bgb.name) + '</th><th>' + esc(state.comp.name) + '</th><th>Cumulative savings</th></tr></thead><tbody>' + tblRows + '</tbody></table>';
+  }
+
+  // ---------- breakdown grouped bar chart ----------
+  function renderBreakdownChart(bgbBreak, compBreak) {
+    var cats = [
+      { key: "purchase", label: "Purchase" },
+      { key: "service", label: "Spring Clips" }
+    ];
+    if (state.brushEnabled) cats.push({ key: "brush", label: "Brush replacement" });
+    cats.push({ key: "repl", label: "Full replacement" });
+    if (state.downtimeEnabled) cats.push({ key: "downtime", label: "Downtime" });
+
+    var W = 1000, H = 300;
+    var padL = 56, padR = 24, padT = 16, padB = 46;
+    var innerW = W - padL - padR, innerH = H - padT - padB;
+    var maxVal = niceCeil(Math.max.apply(null, cats.map(function (c) { return Math.max(bgbBreak[c.key], compBreak[c.key]); })) * 1.15 || 100);
+
+    var groupW = innerW / cats.length;
+    var barW = Math.min(24, groupW * 0.32);
+    var gap = 6;
+
+    function Y(v) { return padT + innerH - (v / maxVal) * innerH; }
+
+    var steps = 4, gridlines = "", axisLabels = "";
+    for (var i = 0; i <= steps; i++) {
+      var v = (maxVal / steps) * i;
+      var y = Y(v);
+      gridlines += '<line x1="' + padL + '" y1="' + y + '" x2="' + (W - padR) + '" y2="' + y + '" stroke="var(--gridline)" />';
+      axisLabels += '<text x="' + (padL - 8) + '" y="' + (y + 4) + '" text-anchor="end" class="axis-label">' + fmtCompact(v) + '</text>';
+    }
+
+    var bars = "", catLabels = "";
+    cats.forEach(function (c, ci) {
+      var groupCenter = padL + groupW * ci + groupW / 2;
+      var xBgb = groupCenter - gap / 2 - barW;
+      var xComp = groupCenter + gap / 2;
+      var vBgb = bgbBreak[c.key], vComp = compBreak[c.key];
+      var yBgb = Y(vBgb), yComp = Y(vComp);
+      var baseline = Y(0);
+      bars += '<rect class="bar-rect" data-label="' + esc(state.bgb.name) + '" data-cat="' + esc(c.label) + '" data-val="' + vBgb.toFixed(2) + '" x="' + xBgb.toFixed(2) + '" y="' + yBgb.toFixed(2) + '" width="' + barW + '" height="' + Math.max(0, baseline - yBgb).toFixed(2) + '" rx="4" fill="var(--series-bgb)" />';
+      bars += '<rect class="bar-rect" data-label="' + esc(state.comp.name) + '" data-cat="' + esc(c.label) + '" data-val="' + vComp.toFixed(2) + '" x="' + xComp.toFixed(2) + '" y="' + yComp.toFixed(2) + '" width="' + barW + '" height="' + Math.max(0, baseline - yComp).toFixed(2) + '" rx="4" fill="var(--series-comp)" />';
+      catLabels += '<text x="' + groupCenter.toFixed(2) + '" y="' + (H - padB + 20) + '" text-anchor="middle" class="axis-label">' + esc(c.label) + '</text>';
+    });
+
+    var svg = '<svg class="chart-svg" viewBox="0 0 ' + W + ' ' + H + '" id="breakdownSvg" preserveAspectRatio="xMidYMid meet">' +
+      gridlines + axisLabels + catLabels +
+      '<line x1="' + padL + '" y1="' + Y(0) + '" x2="' + (W - padR) + '" y2="' + Y(0) + '" stroke="var(--baseline)" />' +
+      bars +
+      '</svg>';
+
+    var wrap = document.getElementById("breakdownChartWrap");
+    wrap.innerHTML = svg + '<div class="tooltip-box" id="breakdownTooltip"></div>';
+
+    document.getElementById("breakdownLegend").innerHTML =
+      '<span class="legend-item"><span class="legend-swatch" style="background:var(--series-bgb);height:8px;border-radius:2px;"></span>' + esc(state.bgb.name) + '</span>' +
+      '<span class="legend-item"><span class="legend-swatch" style="background:var(--series-comp);height:8px;border-radius:2px;"></span>' + esc(state.comp.name) + '</span>';
+
+    var tooltip = document.getElementById("breakdownTooltip");
+    var svgEl = wrap.querySelector("#breakdownSvg");
+    wrap.querySelectorAll(".bar-rect").forEach(function (rect) {
+      rect.addEventListener("mousemove", function (evt) {
+        var rectBB = svgEl.getBoundingClientRect();
+        var wrapRect = wrap.getBoundingClientRect();
+        var clientX = evt.touches ? evt.touches[0].clientX : evt.clientX;
+        var px = (clientX - rectBB.left) / rectBB.width * wrapRect.width;
+        tooltip.innerHTML = '<div class="t-year">' + rect.getAttribute("data-cat") + '</div>' +
+          '<div class="t-row"><span class="k">' + rect.getAttribute("data-label") + '</span><span class="t-val">' + fmtFull(parseFloat(rect.getAttribute("data-val"))) + '</span></div>';
+        tooltip.style.opacity = 1;
+        tooltip.style.left = Math.max(0, px - 60) + "px";
+        tooltip.style.top = "6px";
+      });
+      rect.addEventListener("mouseleave", function () { tooltip.style.opacity = 0; });
+    });
+  }
+
+  // ---------- master render ----------
+  function render() {
+    var bgbSeries = seriesFor("bgb");
+    var compSeries = seriesFor("comp");
+    var bgbBreak = breakdownFor("bgb");
+    var compBreak = breakdownFor("comp");
+    renderQual();
+    renderKPIs(bgbSeries, compSeries, bgbBreak, compBreak);
+    renderMainChart(bgbSeries, compSeries);
+    renderBreakdownChart(bgbBreak, compBreak);
+  }
+
+  render();
+})();
+</script>
+</body>
+</html>

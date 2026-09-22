@@ -1,0 +1,18 @@
+[
+  {
+    "label": "Probably Not",
+    "pct": 25
+  },
+  {
+    "label": "Maybe",
+    "pct": 50
+  },
+  {
+    "label": "More Than Likely",
+    "pct": 75
+  },
+  {
+    "label": "Definite",
+    "pct": 100
+  }
+]

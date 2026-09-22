@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Log Opportunity — BGB Group</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; background: #f0f2f5; min-height: 100vh; color: #1a1a2e; font-size: 14px; }
+header { background: #1F3864; padding: 0.875rem 2rem; display: flex; align-items: center; gap: 1rem; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.25); }
+header .logo { color: #fff; font-size: 1rem; font-weight: 600; }
+header .logo span { color: #8ba3c7; font-size: 0.75rem; display: block; font-weight: 400; }
+header .vr { width: 1px; height: 30px; background: #3a5480; }
+header .tool-title { color: #a8c4e8; font-size: 0.82rem; }
+header .nav { margin-left: auto; display: flex; gap: 6px; }
+header .nav a, header .nav button { background: transparent; border: 1px solid #3a5480; color: #a8c4e8; border-radius: 6px; padding: 5px 14px; font-size: 0.8rem; cursor: pointer; text-decoration: none; transition: all 0.15s; }
+header .nav a:hover, header .nav button:hover, header .nav button.active { background: #2a4a7f; color: #fff; border-color: #4a6a9f; }
+.page { display: none; }
+.page.active { display: block; }
+.container { max-width: 1000px; margin: 0 auto; padding: 2rem 1.5rem; }
+.card { background: #fff; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); margin-bottom: 1.25rem; overflow: visible; }
+.card-header { padding: 1rem 1.5rem; border-bottom: 1px solid #e5e7eb; display: flex; align-items: center; gap: 10px; }
+.card-header h2 { font-size: 0.95rem; font-weight: 600; color: #1F3864; }
+.step-num { width: 24px; height: 24px; border-radius: 50%; background: #1F3864; color: #fff; font-size: 0.75rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.card-body { padding: 1.25rem 1.5rem; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-grid .full { grid-column: 1 / -1; }
+.field { position: relative; }
+.field label { display: block; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #6b7280; margin-bottom: 5px; }
+.field label .req { color: #dc2626; margin-left: 2px; }
+.field .hint { font-size: 10.5px; color: #9ca3af; display: block; margin-top: 3px; }
+.field input[type=text], .field input[type=number], .field input[type=date], .field select, .field textarea {
+  width: 100%; padding: 8px 10px; border: 1.5px solid #d1d5db; border-radius: 7px;
+  font-size: 0.875rem; color: #1a1a2e; background: #fff; outline: none; transition: border-color 0.15s; font-family: inherit;
+}
+.field input:focus, .field select:focus, .field textarea:focus { border-color: #1F3864; }
+.field textarea { resize: vertical; min-height: 60px; }
+.search-dropdown { position: absolute; top: 62px; left: 0; right: 0; background: #fff; border: 1px solid #d1d5db; border-radius: 8px; box-shadow: 0 6px 18px rgba(0,0,0,0.12); z-index: 50; overflow: hidden; max-height: 260px; overflow-y: auto; }
+.search-result-row { padding: 8px 12px; font-size: 0.85rem; cursor: pointer; border-bottom: 0.5px solid #e5e7eb; }
+.search-result-row:hover { background: #f0f4fa; }
+.search-result-row:last-child { border-bottom: none; }
+.existing-tag-row { margin-top: 6px; }
+.tag { display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+.tag-green { background: #c6efce; color: #276221; }
+.tag-amber { background: #ffeb9c; color: #7d5a00; }
+.margin-box { margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e7eb; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.margin-tile { background: #f0f7ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 10px 12px; }
+.margin-tile .ml { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: #3b82f6; margin-bottom: 3px; }
+.margin-tile .mv { font-size: 1.15rem; font-weight: 700; color: #1F3864; }
+.margin-tile.warn { background: #fef2f2; border-color: #fecaca; }
+.margin-tile.warn .ml { color: #dc2626; }
+.margin-tile.warn .mv { color: #991b1b; }
+.btn { height: 38px; padding: 0 1.25rem; border-radius: 7px; border: none; font-size: 0.875rem; font-weight: 500; cursor: pointer; transition: all 0.15s; display: inline-flex; align-items: center; gap: 6px; }
+.btn-primary { background: #1F3864; color: #fff; }
+.btn-primary:hover { background: #162a4e; }
+.btn-primary:disabled { background: #9ca3af; cursor: not-allowed; }
+.btn-secondary { background: #f3f4f6; color: #374151; border: 1px solid #d1d5db; }
+.btn-secondary:hover { background: #e5e7eb; }
+.spinner { width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.35); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; display: none; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.status-msg { font-size: 0.82rem; color: #6b7280; min-height: 18px; margin-top: 0.5rem; }
+.status-msg.error { color: #dc2626; }
+.result-card { background: #fff; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); padding: 1.5rem; margin-bottom: 1.25rem; display: none; }
+.log-controls { display: flex; gap: 10px; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; }
+.log-controls input { flex: 1; min-width: 200px; height: 36px; padding: 0 10px; border: 1.5px solid #d1d5db; border-radius: 7px; font-size: 0.875rem; outline: none; }
+.log-table { width: 100%; border-collapse: collapse; }
+.log-table th { background: #1F3864; color: #fff; padding: 9px 12px; font-size: 0.75rem; font-weight: 600; text-align: left; white-space: nowrap; }
+.log-table td { padding: 9px 12px; font-size: 0.82rem; border-bottom: 0.5px solid #f3f4f6; vertical-align: top; color: #374151; }
+.log-table tr:hover td { background: #f9fafb; cursor: pointer; }
+.empty-state { text-align: center; padding: 3rem 1rem; color: #9ca3af; font-size: 0.875rem; }
+.overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.45); display: none; z-index: 200; align-items: flex-start; justify-content: flex-end; }
+.overlay.open { display: flex; }
+.drawer { background: #fff; width: 480px; max-width: 95vw; height: 100vh; overflow-y: auto; box-shadow: -4px 0 24px rgba(0,0,0,0.15); padding: 1.5rem; }
+.drawer-close { background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #6b7280; }
+.dl { display: grid; grid-template-columns: 140px 1fr; gap: 6px 12px; margin-top: 1rem; }
+.dl dt { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: #9ca3af; padding-top: 2px; }
+.dl dd { font-size: 0.85rem; color: #374151; line-height: 1.4; }
+.section-divider { border: none; border-top: 1px solid #e5e7eb; margin: 1rem 0; }
+.internal-note { font-size: 0.72rem; color: #9ca3af; margin-top: 4px; }
+@media (max-width: 640px) { .form-grid, .margin-box { grid-template-columns: 1fr; } .drawer { width: 100vw; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">BGB Group <span>bgbinnovation.com</span></div>
+  <div class="vr"></div>
+  <div class="tool-title">Log Opportunity</div>
+  <nav class="nav">
+    <button class="active" onclick="showPage('new',this)">New opportunity</button>
+    <button onclick="showPage('pipeline',this)">Pipeline</button>
+    <a href="/opportunities">&larr; Opportunities</a>
+    <a href="/opportunities/check">Customer check</a>
+    <a href="/">Home</a>
+  </nav>
+</header>
+
+<div id="page-new" class="page active">
+<div class="container">
+
+  <div class="card">
+    <div class="card-header"><div class="step-num">1</div><h2>Opportunity details</h2></div>
+    <div class="card-body">
+      <div class="form-grid">
+        <div class="field full">
+          <label>Opportunity name <span class="req">*</span></label>
+          <input type="text" id="f-opp-name" placeholder="e.g. Vestas V150 slip ring — replacement programme" />
+        </div>
+        <div class="field full">
+          <label>Customer name <span class="req">*</span></label>
+          <input type="text" id="f-customer" placeholder="Start typing a customer name…" autocomplete="off" />
+          <div id="customer-dropdown"></div>
+          <div class="existing-tag-row" id="customer-tag-row" style="display:none"></div>
+        </div>
+        <div class="field">
+          <label>Assigned to</label>
+          <select id="f-assigned-to"><option value="">— loading —</option></select>
+        </div>
+        <div class="field">
+          <label>Prospect stage</label>
+          <select id="f-stage" onchange="updateStageHint()"><option value="">— loading —</option></select>
+          <span class="hint" id="stage-hint"></span>
+        </div>
+        <div class="field">
+          <label>Target close date</label>
+          <input type="date" id="f-close-date" />
+        </div>
+        <div class="field">
+          <label>Probability</label>
+          <select id="f-probability"><option value="">— loading —</option></select>
+        </div>
+        <div class="field">
+          <label>Currency</label>
+          <select id="f-currency"><option value="">— loading —</option></select>
+        </div>
+        <div class="field full">
+          <label>Details <span class="req">*</span></label>
+          <textarea id="f-details" placeholder="What's being pursued and roughly how many, if known…"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="step-num">2</div><h2>Total opportunity value</h2></div>
+    <div class="card-body">
+      <div class="form-grid">
+        <div class="field"><label>Total opportunity value</label><input type="number" id="tv-value" min="0" step="1" oninput="recalcAll()" /></div>
+        <div class="field"><label>Cost of materials <span class="req">*</span></label><input type="number" id="tv-cost" min="0" step="1" oninput="recalcAll()" />
+          <span class="internal-note">Internal only — not included in the EFACS export.</span></div>
+        <div class="field"><label>NRE hours cost</label><input type="number" id="tv-nre" min="0" step="1" oninput="recalcAll()" />
+          <span class="internal-note">Internal only.</span></div>
+        <div class="field"><label>Prototype hours cost</label><input type="number" id="tv-proto" min="0" step="1" oninput="recalcAll()" />
+          <span class="internal-note">Internal only.</span></div>
+      </div>
+      <div class="margin-box">
+        <div class="margin-tile" id="tv-net-tile"><div class="ml">Net margin %</div><div class="mv" id="tv-net">—</div></div>
+        <div class="margin-tile" id="tv-mat-tile"><div class="ml">Margin on material %</div><div class="mv" id="tv-mat">—</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="step-num">3</div><h2>In-year figures</h2></div>
+    <div class="card-body">
+      <div class="form-grid">
+        <div class="field"><label>In year revenue</label><input type="number" id="iy-value" min="0" step="1" oninput="recalcAll()" /></div>
+        <div class="field"><label>In year cost of materials</label><input type="number" id="iy-cost" min="0" step="1" oninput="recalcAll()" />
+          <span class="internal-note">Internal only.</span></div>
+        <div class="field"><label>In year NRE hours cost</label><input type="number" id="iy-nre" min="0" step="1" oninput="recalcAll()" />
+          <span class="internal-note">Internal only.</span></div>
+        <div class="field"><label>In year prototype hours cost</label><input type="number" id="iy-proto" min="0" step="1" oninput="recalcAll()" />
+          <span class="internal-note">Internal only.</span></div>
+      </div>
+      <div class="margin-box">
+        <div class="margin-tile" id="iy-net-tile"><div class="ml">Net margin %</div><div class="mv" id="iy-net">—</div></div>
+        <div class="margin-tile" id="iy-mat-tile"><div class="ml">Margin on material %</div><div class="mv" id="iy-mat">—</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="step-num">4</div><h2>On-going (recurring) figures</h2></div>
+    <div class="card-body">
+      <div class="form-grid">
+        <div class="field"><label>On-going revenue</label><input type="number" id="og-value" min="0" step="1" oninput="recalcAll()" /></div>
+        <div class="field"><label>On-going cost of materials</label><input type="number" id="og-cost" min="0" step="1" oninput="recalcAll()" />
+          <span class="internal-note">Internal only.</span></div>
+        <div class="field"><label>On-going NRE hours cost</label><input type="number" id="og-nre" min="0" step="1" oninput="recalcAll()" />
+          <span class="internal-note">Internal only.</span></div>
+        <div class="field"><label>On-going prototype hours cost</label><input type="number" id="og-proto" min="0" step="1" oninput="recalcAll()" />
+          <span class="internal-note">Internal only.</span></div>
+      </div>
+      <div class="margin-box">
+        <div class="margin-tile" id="og-net-tile"><div class="ml">Net margin %</div><div class="mv" id="og-net">—</div></div>
+        <div class="margin-tile" id="og-mat-tile"><div class="ml">Margin on material %</div><div class="mv" id="og-mat">—</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <button class="btn btn-primary" id="logBtn" onclick="logOpportunity()">
+          Log opportunity <span class="spinner" id="logSpinner"></span>
+        </button>
+        <button class="btn btn-secondary" onclick="resetForm()">Clear form</button>
+        <div class="status-msg" id="logStatus" style="margin:0"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-card" id="resultCard">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px">
+      <div>
+        <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;color:#9ca3af">Logged to opportunity pipeline</div>
+        <div id="resultSummary" style="font-size:0.95rem;color:#1F3864;font-weight:600;margin-top:4px"></div>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-secondary" onclick="resetForm()">Log another</button>
+        <button class="btn btn-primary" onclick="showPage('pipeline', document.querySelectorAll('.nav button')[1])">View pipeline</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<div id="page-pipeline" class="page">
+<div class="container">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:10px">
+    <div>
+      <h1 style="font-size:1.1rem;font-weight:600;color:#1F3864">Opportunity pipeline</h1>
+      <p style="font-size:0.8rem;color:#6b7280;margin-top:2px">Manually logged opportunities this session.</p>
+    </div>
+    <div style="display:flex;gap:8px">
+      <input type="text" id="logSearch" placeholder="Search opportunity, customer…" oninput="filterLog()" style="height:36px;padding:0 10px;border:1.5px solid #d1d5db;border-radius:7px;font-size:0.875rem;width:220px;outline:none" />
+      <button class="btn btn-secondary" onclick="loadLog()">↻ Refresh</button>
+      <button class="btn btn-primary" onclick="exportCsv()">Export EFACS CSV</button>
+    </div>
+  </div>
+  <div class="card" style="overflow:auto">
+    <table class="log-table">
+      <thead><tr>
+        <th>Logged</th><th>Opportunity</th><th>Customer</th><th>Assigned to</th><th>Stage</th>
+        <th>Probability</th><th>Value</th><th>Net margin %</th><th>Close date</th>
+      </tr></thead>
+      <tbody id="logBody"><tr><td colspan="9" class="empty-state">No opportunities logged yet this session.</td></tr></tbody>
+    </table>
+  </div>
+</div>
+</div>
+
+<div class="overlay" id="overlay" onclick="closeDrawer(event)">
+  <div class="drawer">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.25rem">
+      <div>
+        <div style="font-size:1rem;font-weight:600;color:#1F3864" id="d-name"></div>
+        <div style="font-size:0.8rem;color:#6b7280;margin-top:2px" id="d-timestamp"></div>
+      </div>
+      <button class="drawer-close" onclick="closeDrawer()">✕</button>
+    </div>
+    <dl class="dl" id="d-details"></dl>
+    <hr class="section-divider">
+    <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;color:#9ca3af;margin-bottom:8px">Value &amp; margin</div>
+    <dl class="dl" id="d-margins"></dl>
+    <hr class="section-divider">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+      <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;color:#9ca3af">Activity</div>
+      <button class="btn btn-secondary" style="height:30px;padding:0 0.8rem;font-size:0.78rem" onclick="openActivityModal()">+ Add activity</button>
+    </div>
+    <div id="d-activity" style="font-size:0.85rem;color:#374151;line-height:1.5"></div>
+  </div>
+</div>
+
+<div class="overlay" id="activityOverlay" onclick="closeActivityModal(event)">
+  <div class="drawer" style="width:420px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.25rem">
+      <div style="font-size:1rem;font-weight:600;color:#1F3864">Add activity</div>
+      <button class="drawer-close" onclick="closeActivityModal()">✕</button>
+    </div>
+    <div class="field" style="margin-bottom:1rem">
+      <label>Activity type <span class="req">*</span></label>
+      <select id="a-type">
+        <option value="">— select —</option>
+        <option value="Meeting">Meeting</option>
+        <option value="Email">Email</option>
+        <option value="Phone call">Phone call</option>
+      </select>
+    </div>
+    <div class="field" style="margin-bottom:1rem">
+      <label>Activity date</label>
+      <input type="date" id="a-date" />
+    </div>
+    <div class="field" style="margin-bottom:1rem">
+      <label>Detail <span class="req">*</span></label>
+      <textarea id="a-detail" placeholder="What happened, and what's the outcome…"></textarea>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <button class="btn btn-primary" id="activitySaveBtn" onclick="submitActivity()">
+        Save activity <span class="spinner" id="activitySpinner"></span>
+      </button>
+      <button class="btn btn-secondary" onclick="closeActivityModal()">Cancel</button>
+      <div class="status-msg" id="activityStatus" style="margin:0"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+let dropdowns = { activity_types: [], prospect_stages: [] };
+let allLogEntries = [];
+
+async function loadDropdowns() {
+  try {
+    const resp = await fetch('/opportunities/dropdowns', { credentials: 'include' });
+    dropdowns = await resp.json();
+    document.getElementById('f-assigned-to').innerHTML = '<option value="">— select —</option>' +
+      dropdowns.assigned_to.map(a => `<option value="${a.name}">${a.name}</option>`).join('');
+    document.getElementById('f-stage').innerHTML = '<option value="">— select —</option>' +
+      dropdowns.prospect_stages.map(s => `<option value="${s.stage}">${s.stage}</option>`).join('');
+    document.getElementById('f-probability').innerHTML = '<option value="">— select —</option>' +
+      dropdowns.probability.map(p => `<option value="${p.label}">${p.label} (${p.pct}%)</option>`).join('');
+    document.getElementById('f-currency').innerHTML = '<option value="">— select —</option>' +
+      dropdowns.currencies.map(c => `<option value="${c.code}">${c.code} — ${c.description}</option>`).join('');
+  } catch(e) {}
+}
+loadDropdowns();
+
+// Pre-fill customer name if arriving from a company check (?customer=...)
+(function prefillFromQuery() {
+  const params = new URLSearchParams(window.location.search);
+  const customer = params.get('customer');
+  if (customer) {
+    const input = document.getElementById('f-customer');
+    input.value = customer;
+    if (customer.trim().length >= 2) lookupCustomer(customer.trim());
+  }
+})();
+
+function updateStageHint() {
+  const val = document.getElementById('f-stage').value;
+  const s = dropdowns.prospect_stages.find(x => x.stage === val);
+  document.getElementById('stage-hint').textContent = s ? s.description : '';
+}
+// ===== Customer autocomplete =====
+let custDebounce;
+document.getElementById('f-customer').addEventListener('input', e => {
+  clearTimeout(custDebounce);
+  const val = e.target.value.trim();
+  if (val.length < 2) {
+    document.getElementById('customer-tag-row').style.display = 'none';
+    document.getElementById('customer-dropdown').innerHTML = '';
+    return;
+  }
+  custDebounce = setTimeout(() => lookupCustomer(val), 300);
+});
+
+async function lookupCustomer(name) {
+  try {
+    const resp = await fetch('/opportunities/customer-lookup?name=' + encodeURIComponent(name), { credentials: 'include' });
+    const data = await resp.json();
+    const tagRow = document.getElementById('customer-tag-row');
+    tagRow.style.display = 'block';
+    tagRow.innerHTML = data.is_existing
+      ? `<span class="tag tag-green">✓ Existing customer — ${data.code}</span>`
+      : `<span class="tag tag-amber">New / not in customer master</span>`;
+    const dd = document.getElementById('customer-dropdown');
+    if (!data.is_existing && data.suggestions && data.suggestions.length) {
+      dd.innerHTML = '<div class="search-dropdown">' + data.suggestions.map(s =>
+        `<div class="search-result-row" onclick="selectCustomer('${s.replace(/'/g, "\\'")}')">${s}</div>`).join('') + '</div>';
+    } else {
+      dd.innerHTML = '';
+    }
+  } catch(e) {}
+}
+function selectCustomer(name) {
+  document.getElementById('f-customer').value = name;
+  document.getElementById('customer-dropdown').innerHTML = '';
+  lookupCustomer(name);
+}
+
+// ===== Margin calculations (client-side preview — server recomputes authoritatively) =====
+function marginsFor(value, cost, nre, proto) {
+  if (!value) return [null, null];
+  const netVal = value - (cost || 0) - (nre || 0) - (proto || 0);
+  const matVal = value - (cost || 0);
+  return [Math.round(netVal / value * 1000) / 10, Math.round(matVal / value * 1000) / 10];
+}
+function paintMargin(prefix, net, mat) {
+  document.getElementById(prefix + '-net').textContent = net === null ? '—' : net + '%';
+  document.getElementById(prefix + '-mat').textContent = mat === null ? '—' : mat + '%';
+  document.getElementById(prefix + '-net-tile').className = 'margin-tile' + (net !== null && net < 0 ? ' warn' : '');
+  document.getElementById(prefix + '-mat-tile').className = 'margin-tile' + (mat !== null && mat < 0 ? ' warn' : '');
+}
+function num(id) { return parseFloat(document.getElementById(id).value) || 0; }
+function recalcAll() {
+  let [n, m] = marginsFor(num('tv-value'), num('tv-cost'), num('tv-nre'), num('tv-proto'));
+  paintMargin('tv', n, m);
+  [n, m] = marginsFor(num('iy-value'), num('iy-cost'), num('iy-nre'), num('iy-proto'));
+  paintMargin('iy', n, m);
+  [n, m] = marginsFor(num('og-value'), num('og-cost'), num('og-nre'), num('og-proto'));
+  paintMargin('og', n, m);
+}
+
+function showPage(name, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  if (btn) btn.classList.add('active');
+  if (name === 'pipeline') loadLog();
+}
+
+async function logOpportunity() {
+  const oppName = document.getElementById('f-opp-name').value.trim();
+  const customer = document.getElementById('f-customer').value.trim();
+  const details = document.getElementById('f-details').value.trim();
+  const status = document.getElementById('logStatus');
+  if (!oppName || !customer || !details) {
+    status.textContent = 'Opportunity name, customer name and details are required';
+    status.className = 'status-msg error';
+    return;
+  }
+
+  const btn = document.getElementById('logBtn');
+  const spinner = document.getElementById('logSpinner');
+  btn.disabled = true; spinner.style.display = 'inline-block';
+  status.textContent = 'Logging…'; status.className = 'status-msg';
+
+  const payload = {
+    opportunity_name: oppName,
+    customer_name: customer,
+    assigned_to: document.getElementById('f-assigned-to').value,
+    prospect_stage: document.getElementById('f-stage').value,
+    target_close_date: document.getElementById('f-close-date').value,
+    probability_label: document.getElementById('f-probability').value,
+    currency: document.getElementById('f-currency').value,
+    details,
+    total_value: num('tv-value'), cost_materials: num('tv-cost'), nre_hours_cost: num('tv-nre'), prototype_hours_cost: num('tv-proto'),
+    in_year_revenue: num('iy-value'), in_year_cost_materials: num('iy-cost'), in_year_nre_hours_cost: num('iy-nre'), in_year_prototype_hours_cost: num('iy-proto'),
+    ongoing_revenue: num('og-value'), ongoing_cost_materials: num('og-cost'), ongoing_nre_hours_cost: num('og-nre'), ongoing_prototype_hours_cost: num('og-proto'),
+  };
+
+  try {
+    const resp = await fetch('/opportunities/log-opportunity', {
+      method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload)
+    });
+    if (!resp.ok) throw new Error((await resp.json()).detail);
+    const data = await resp.json();
+    document.getElementById('resultSummary').textContent =
+      `#${data.entry.id} — ${data.entry.opportunity_name} for ${data.entry.customer_name} (${data.entry.currency || ''} ${data.entry.total_value.toLocaleString()})`;
+    document.getElementById('resultCard').style.display = 'block';
+    document.getElementById('resultCard').scrollIntoView({behavior:'smooth', block:'start'});
+    status.textContent = '';
+  } catch(e) {
+    status.textContent = '⚠ ' + e.message;
+    status.className = 'status-msg error';
+  } finally {
+    btn.disabled = false; spinner.style.display = 'none';
+  }
+}
+
+function resetForm() {
+  ['f-opp-name','f-customer','f-close-date','f-details'].forEach(id => document.getElementById(id).value = '');
+  ['f-assigned-to','f-stage','f-probability','f-currency'].forEach(id => document.getElementById(id).value = '');
+  ['tv-value','tv-cost','tv-nre','tv-proto','iy-value','iy-cost','iy-nre','iy-proto','og-value','og-cost','og-nre','og-proto'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('customer-tag-row').style.display = 'none';
+  document.getElementById('customer-dropdown').innerHTML = '';
+  document.getElementById('stage-hint').textContent = '';
+  document.getElementById('resultCard').style.display = 'none';
+  document.getElementById('logStatus').textContent = '';
+  recalcAll();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// ===== Pipeline =====
+async function loadLog() {
+  try {
+    const resp = await fetch('/opportunities/manual-log', { credentials: 'include' });
+    allLogEntries = await resp.json();
+    renderLog(allLogEntries);
+  } catch(e) {}
+}
+function filterLog() {
+  const q = document.getElementById('logSearch').value.toLowerCase();
+  renderLog(allLogEntries.filter(e =>
+    (e.opportunity_name||'').toLowerCase().includes(q) || (e.customer_name||'').toLowerCase().includes(q)));
+}
+function renderLog(entries) {
+  const tbody = document.getElementById('logBody');
+  if (!entries.length) {
+    tbody.innerHTML = '<tr><td colspan="9" class="empty-state">No opportunities logged yet this session.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = entries.map(e => `
+    <tr onclick="openDrawer('${e.id}')">
+      <td style="white-space:nowrap;color:#6b7280">${e.timestamp}</td>
+      <td style="font-weight:500;color:#1F3864">${e.opportunity_name}</td>
+      <td>${e.customer_name}</td>
+      <td style="color:#6b7280">${e.assigned_to || '—'}</td>
+      <td style="color:#6b7280">${e.prospect_stage || '—'}</td>
+      <td>${e.probability_pct !== null && e.probability_pct !== undefined ? e.probability_pct + '%' : '—'}</td>
+      <td style="font-weight:600">${e.currency || ''} ${e.total_value ? e.total_value.toLocaleString() : '0'}</td>
+      <td>${e.total_net_margin_pct !== null ? e.total_net_margin_pct + '%' : '—'}</td>
+      <td style="color:#6b7280">${e.target_close_date || '—'}</td>
+    </tr>`).join('');
+}
+let currentDrawerId = null;
+function openDrawer(id) {
+  const e = allLogEntries.find(x => x.id === id);
+  if (!e) return;
+  currentDrawerId = id;
+  document.getElementById('d-name').textContent = e.opportunity_name;
+  document.getElementById('d-timestamp').textContent = e.timestamp + (e.logged_by ? ' · ' + e.logged_by : '');
+  const details = [['Customer', e.customer_name + (e.customer_code ? ' (' + e.customer_code + ')' : ' — not in customer master')],
+    ['Assigned to', e.assigned_to], ['Stage', e.prospect_stage], ['Close date', e.target_close_date],
+    ['Probability', e.probability_pct !== null ? e.probability_label + ' (' + e.probability_pct + '%)' : null],
+    ['Details', e.details]].filter(([,v]) => v);
+  document.getElementById('d-details').innerHTML = details.map(([k,v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('');
+  const margins = [
+    ['Total value', (e.currency||'') + ' ' + (e.total_value||0).toLocaleString()],
+    ['Net margin %', e.total_net_margin_pct !== null ? e.total_net_margin_pct + '%' : '—'],
+    ['Margin on material %', e.total_margin_on_material_pct !== null ? e.total_margin_on_material_pct + '%' : '—'],
+    ['In year revenue', (e.currency||'') + ' ' + (e.in_year_revenue||0).toLocaleString()],
+    ['In year net margin %', e.in_year_net_margin_pct !== null ? e.in_year_net_margin_pct + '%' : '—'],
+    ['On-going revenue', (e.currency||'') + ' ' + (e.ongoing_revenue||0).toLocaleString()],
+    ['On-going net margin %', e.ongoing_net_margin_pct !== null ? e.ongoing_net_margin_pct + '%' : '—'],
+  ];
+  document.getElementById('d-margins').innerHTML = margins.map(([k,v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('');
+  renderActivities(e);
+  document.getElementById('overlay').classList.add('open');
+}
+function renderActivities(e) {
+  const activities = e.activities || [];
+  document.getElementById('d-activity').innerHTML = activities.length
+    ? activities.map(a => `<div style="margin-bottom:10px;padding-bottom:10px;border-bottom:0.5px solid #f3f4f6">
+        <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap">
+          <strong>${a.activity_type}</strong>
+          <span style="color:#9ca3af;font-size:0.78rem">${a.activity_date || a.timestamp || ''}</span>
+        </div>
+        <div>${a.detail || ''}</div>
+      </div>`).join('')
+    : '<span style="color:#9ca3af">No activity logged yet.</span>';
+}
+function closeDrawer(e) {
+  if (!e || e.target === document.getElementById('overlay')) {
+    document.getElementById('overlay').classList.remove('open');
+    currentDrawerId = null;
+  }
+}
+
+// ===== Add activity modal =====
+function openActivityModal() {
+  document.getElementById('a-type').value = '';
+  document.getElementById('a-date').value = '';
+  document.getElementById('a-detail').value = '';
+  document.getElementById('activityStatus').textContent = '';
+  document.getElementById('activityOverlay').classList.add('open');
+}
+function closeActivityModal(e) {
+  if (!e || e.target === document.getElementById('activityOverlay')) {
+    document.getElementById('activityOverlay').classList.remove('open');
+  }
+}
+async function submitActivity() {
+  const activityType = document.getElementById('a-type').value;
+  const activityDate = document.getElementById('a-date').value;
+  const detail = document.getElementById('a-detail').value.trim();
+  const status = document.getElementById('activityStatus');
+  if (!activityType || !detail) {
+    status.textContent = 'Activity type and detail are required';
+    status.className = 'status-msg error';
+    return;
+  }
+  if (!currentDrawerId) { status.textContent = 'No opportunity selected'; status.className = 'status-msg error'; return; }
+
+  const btn = document.getElementById('activitySaveBtn');
+  const spinner = document.getElementById('activitySpinner');
+  btn.disabled = true; spinner.style.display = 'inline-block';
+  status.textContent = 'Saving…'; status.className = 'status-msg';
+
+  try {
+    const resp = await fetch('/opportunities/log-activity', {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ opportunity_id: currentDrawerId, activity_type: activityType, activity_date: activityDate, detail })
+    });
+    if (!resp.ok) throw new Error((await resp.json()).detail);
+    const data = await resp.json();
+    const idx = allLogEntries.findIndex(x => x.id === currentDrawerId);
+    if (idx !== -1) allLogEntries[idx] = data.entry;
+    renderActivities(data.entry);
+    document.getElementById('activityOverlay').classList.remove('open');
+  } catch(e) {
+    status.textContent = '⚠ ' + e.message;
+    status.className = 'status-msg error';
+  } finally {
+    btn.disabled = false; spinner.style.display = 'none';
+  }
+}
+function exportCsv() {
+  window.open('/opportunities/export-opportunities-csv', '_blank');
+}
+
+recalcAll();
+</script>
+</body>
+</html>

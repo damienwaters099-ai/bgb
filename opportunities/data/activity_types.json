@@ -1,0 +1,62 @@
+[
+  {
+    "activity_type": "Costing prepared",
+    "description": "(Commerical, with Engineering input) Costing completed and validated"
+  },
+  {
+    "activity_type": "Cust tech discussion",
+    "description": "(Design with BD support) Technical conversation or clarification with the customer."
+  },
+  {
+    "activity_type": "Customer discussion",
+    "description": "(BD) Capture key outcomes from a conversation or meeting with the customer."
+  },
+  {
+    "activity_type": "Customer feedback",
+    "description": "(BD) Log feedback on feasibility, budget, or direction from the customer."
+  },
+  {
+    "activity_type": "Customer follow-up",
+    "description": "(BD) Record the outcome of chasing the quotation or proposal"
+  },
+  {
+    "activity_type": "Engineering sign-off",
+    "description": "(Design) Confirmation that the solution is technically feasible and approved."
+  },
+  {
+    "activity_type": "Estimating review",
+    "description": "(Commercial) Notes from the estimating sesion, including capability and intent."
+  },
+  {
+    "activity_type": "Lost (reason)",
+    "description": "(BD) Opportunity closed as lost - select and record the appropriate reason."
+  },
+  {
+    "activity_type": "Order won",
+    "description": "(BD) Customer confirmed the order - proceed to close and handover."
+  },
+  {
+    "activity_type": "Proposal Submission",
+    "description": "Proposal with design & costing/price estimates submitted to the customer"
+  },
+  {
+    "activity_type": "Qualified (Progress)",
+    "description": "(BD) Confirmed suitable to move forward as a live opportunity"
+  },
+  {
+    "activity_type": "Quotation issued",
+    "description": "(Commercial / BD) Quotation prepared and formally sent to the customer"
+  },
+  {
+    "activity_type": "Rejected/Parked",
+    "description": "(BD) Decision not to process, or pause pending customer action."
+  },
+  {
+    "activity_type": "Reqs clarified",
+    "description": "(BD) Record details received that clarify scope, drawings or application"
+  },
+  {
+    "activity_type": "Technical review",
+    "description": "(Design) Summary of engineering assessment, risks, or constraints."
+  }
+]

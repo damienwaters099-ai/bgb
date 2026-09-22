@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wind Farm Detail</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; background: #f0f2f5; min-height: 100vh; color: #1a1a2e; font-size: 14px; }
+header { background: #0b5d0b; padding: 0.875rem 2rem; display: flex; align-items: center; gap: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.25); }
+header .logo { color: #fff; font-size: 1rem; font-weight: 600; }
+header .logo span { color: #b6e3b6; font-size: 0.75rem; display: block; font-weight: 400; }
+header .crumb { color: #b6e3b6; font-size: 0.82rem; margin-left: 8px; }
+header .nav { margin-left: auto; display: flex; gap: 6px; }
+header .nav a { color: #b6e3b6; text-decoration: none; border: 1px solid #1c7a1c; border-radius: 6px; padding: 5px 14px; font-size: 0.8rem; }
+header .nav a:hover { background: #146814; color: #fff; }
+.container { max-width: 1080px; margin: 0 auto; padding: 2rem 1.5rem; }
+.card { background: #fff; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); margin-bottom: 1.25rem; overflow: hidden; }
+.card-header { padding: 1rem 1.5rem; border-bottom: 1px solid #e5e7eb; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.card-header h2 { font-size: 0.95rem; font-weight: 600; color: #0b5d0b; }
+.card-body { padding: 1.25rem 1.5rem; }
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; }
+.stat { background: #f9fafb; border-radius: 10px; padding: 12px 14px; }
+.stat .l { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.04em; color: #9ca3af; font-weight: 700; margin-bottom: 4px; }
+.stat .v { font-size: 1.1rem; font-weight: 700; color: #0b5d0b; }
+.tag { display: inline-block; padding: 2px 9px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; margin-right: 4px; margin-bottom: 4px; }
+.tag-offshore { background: #dbeafe; color: #1d4ed8; }
+.tag-onshore { background: #dcfce7; color: #166534; }
+.tag-status { background: #eef7ee; color: #0b5d0b; }
+.table-scroll { overflow: auto; max-height: 55vh; border: 1px solid #e5e7eb; border-radius: 8px; }
+.table-scroll table.results th { position: sticky; top: 0; z-index: 1; }
+table.results { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+table.results th { background: #eef7ee; color: #0b5d0b; padding: 8px 10px; text-align: left; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; border-bottom: 1px solid #d1d5db; white-space: nowrap; }
+table.results td { padding: 8px 10px; border-bottom: 0.5px solid #e5e7eb; vertical-align: top; white-space: nowrap; }
+table.results tr:hover td { background: #f9fafb; }
+.btn { height: 38px; padding: 0 1.1rem; border-radius: 7px; border: none; font-size: 0.875rem; font-weight: 500; cursor: pointer; background: #0b5d0b; color: #fff; }
+.btn:hover { background: #094d09; }
+.empty-state { text-align: center; padding: 2.5rem 1rem; color: #9ca3af; font-size: 0.875rem; }
+.note { font-size: 0.78rem; color: #6b7280; margin-top: 10px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">BGB Group <span>bgbinnovation.com</span></div>
+  <div class="crumb">Home / TCO / Wind farm lookup / Farm detail</div>
+  <nav class="nav">
+    <a href="/tco/windfarm" id="backLink">&larr; Wind farm lookup</a>
+    <a href="/tco">TCO hub</a>
+    <a href="/">Home</a>
+  </nav>
+</header>
+
+<div class="container" id="container">
+  <div class="empty-state">Loading…</div>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const country = params.get('country') || '';
+const name = params.get('name') || '';
+const area = params.get('area') || '';
+const back = params.get('back') || '';
+const backHref = '/tco/windfarm' + (back ? '?' + back : '');
+if (back) {
+  const backLink = document.getElementById('backLink');
+  backLink.href = backHref;
+  backLink.textContent = '← Back to search results';
+}
+
+async function load() {
+  const container = document.getElementById('container');
+  if (!country || !name) {
+    container.innerHTML = '<div class="card"><div class="card-body"><div class="empty-state">Missing farm reference — go back to the lookup and click View on a result.</div></div></div>';
+    return;
+  }
+  const qp = new URLSearchParams({ country, name });
+  if (area) qp.set('area', area);
+  try {
+    const resp = await fetch('/tco/windfarm-view?' + qp.toString());
+    if (!resp.ok) {
+      container.innerHTML = '<div class="card"><div class="card-body"><div class="empty-state">Farm not found.</div></div></div>';
+      return;
+    }
+    const data = await resp.json();
+    render(data.summary, data.entries);
+  } catch (e) {
+    container.innerHTML = '<div class="card"><div class="card-body"><div class="empty-state">Failed to load — try again.</div></div></div>';
+  }
+}
+
+function render(s, entries) {
+  const container = document.getElementById('container');
+  const locationLine = [s.area, s.city].filter(Boolean).join(', ') || '—';
+  container.innerHTML = `
+    <div class="card">
+      <div class="card-header">
+        <h2>${s.name}${s.name2 ? ' <span style="color:#9ca3af;font-weight:400">(' + s.name2 + ')</span>' : ''}</h2>
+        <div style="display:flex;gap:8px">
+          ${back ? `<a class="btn" style="background:#f3f4f6;color:#374151;text-decoration:none" href="${backHref}">&larr; Back to search results</a>` : ''}
+          <button class="btn" onclick="useInDowntime()">Use in Downtime Calculator &rarr;</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div style="margin-bottom:14px">
+          <span class="tag ${s.offshore === 'Yes' ? 'tag-offshore' : 'tag-onshore'}">${s.offshore === 'Yes' ? 'Offshore' : 'Onshore'}</span>
+          ${(s.statuses || []).map(st => `<span class="tag tag-status">${st}</span>`).join('')}
+        </div>
+        <div class="stat-grid">
+          <div class="stat"><div class="l">Country</div><div class="v" style="font-size:0.95rem">${s.country || '—'}</div></div>
+          <div class="stat"><div class="l">Area / City</div><div class="v" style="font-size:0.95rem">${locationLine}</div></div>
+          <div class="stat"><div class="l">Continent</div><div class="v" style="font-size:0.95rem">${s.continent || '—'}</div></div>
+          <div class="stat"><div class="l">Total turbines</div><div class="v">${s.total_turbines ? Math.round(s.total_turbines).toLocaleString() : '—'}</div></div>
+          <div class="stat"><div class="l">Total capacity</div><div class="v">${s.total_power_kw ? Math.round(s.total_power_kw).toLocaleString() + ' kW' : '—'}</div></div>
+          <div class="stat"><div class="l">Manufacturers</div><div class="v" style="font-size:0.95rem">${(s.manufacturers || []).join(', ') || '—'}</div></div>
+          <div class="stat"><div class="l">Shore distance</div><div class="v" style="font-size:0.95rem">${s.shore_distance || '—'}</div></div>
+          <div class="stat"><div class="l">Coordinates</div><div class="v" style="font-size:0.85rem">${s.lat && s.lon ? s.lat + ', ' + s.lon : '—'}</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><h2>Turbine / phase breakdown (${entries.length} record${entries.length===1?'':'s'})</h2></div>
+      <div class="card-body">
+        <div class="table-scroll"><table class="results">
+          <thead><tr>
+            <th>Manufacturer</th><th>Model</th><th>Hub height</th><th>Turbines</th><th>Total power</th>
+            <th>Commissioning date</th><th>Status</th><th>Developer</th><th>Operator</th><th>Owner</th>
+          </tr></thead>
+          <tbody>${entries.map(e => `
+            <tr>
+              <td>${e.manufacturer || '—'}</td>
+              <td>${e.turbine_model || '—'}</td>
+              <td>${e.hub_height || '—'}</td>
+              <td>${e.num_turbines || '—'}</td>
+              <td>${e.total_power_kw ? parseFloat(e.total_power_kw).toLocaleString() + ' kW' : '—'}</td>
+              <td>${e.commissioning_date || '—'}</td>
+              <td>${e.status || '—'}</td>
+              <td>${e.developer || '—'}</td>
+              <td>${e.operator || '—'}</td>
+              <td>${e.owner || '—'}</td>
+            </tr>`).join('')}
+          </tbody>
+        </table></div>
+        <p class="note">Source: Windfarms World Master. Each row is one turbine batch / development phase as recorded in the master file — a farm built in stages, or with more than one turbine model, shows one row per phase. Fields marked "#ND" in the underlying data are not disclosed.</p>
+      </div>
+    </div>
+  `;
+  window._farmSummary = s;
+}
+
+function useInDowntime() {
+  const s = window._farmSummary;
+  if (!s) return;
+  const p = new URLSearchParams();
+  if (s.country) p.set('country', s.country);
+  p.set('offshore', s.offshore === 'Yes' ? 'Yes' : 'No');
+  if (s.total_turbines) p.set('turbines', Math.round(s.total_turbines));
+  if (s.total_power_kw) p.set('capacity_kw', Math.round(s.total_power_kw));
+  if (s.name) p.set('farm_name', s.name);
+  window.location.href = '/tco/downtime?' + p.toString();
+}
+
+load();
+</script>
+</body>
+</html>

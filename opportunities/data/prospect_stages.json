@@ -1,0 +1,26 @@
+[
+  {
+    "stage": "1. Initial Enquiry",
+    "description": "(BD) First record of the enquiry. Minimal information captured while we learn more."
+  },
+  {
+    "stage": "2. Awaiting Requirements",
+    "description": "(BD) Waiting for drawings, specs, or clarity before anthing meaningful can happen"
+  },
+  {
+    "stage": "3. Ready to Estimate",
+    "description": "(BD) Information is sufficient - add to the estimating queue for review."
+  },
+  {
+    "stage": "4. With Estim team",
+    "description": "(Estimating - management by BD/Commerical). Currently under review in the twice-weekly estimating session."
+  },
+  {
+    "stage": "5. Progressed (Q)",
+    "description": "(BD / Commercial - based on Estimating decision). Confirmed capable and worth pursuing. From here, activities drive the journey."
+  },
+  {
+    "stage": "6. Closed",
+    "description": "Opportunity closed (Reason recorded on completion)"
+  }
+]

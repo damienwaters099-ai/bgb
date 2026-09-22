@@ -1,0 +1,98 @@
+{
+  "prices": [
+    {
+      "carbex_pn": "EXNAL1071",
+      "vestas_ref": "OEM-912453",
+      "bgb_part": "NAL1071",
+      "q2_eur": 336.57,
+      "q3_eur": 224.05
+    },
+    {
+      "carbex_pn": "EXMSO3557",
+      "vestas_ref": "OEM-996806",
+      "bgb_part": "MSO3557",
+      "q2_eur": 132.16,
+      "q3_eur": 314.04
+    },
+    {
+      "carbex_pn": "EXYLW8222",
+      "vestas_ref": "OEM-380164",
+      "bgb_part": "YLW8222",
+      "q2_eur": 232.05,
+      "q3_eur": 399.57
+    },
+    {
+      "carbex_pn": "EXGPG4193",
+      "vestas_ref": "OEM-311851",
+      "bgb_part": "GPG4193",
+      "q2_eur": 252.61,
+      "q3_eur": 87.77
+    },
+    {
+      "carbex_pn": "EXTXL6556",
+      "vestas_ref": "OEM-251550",
+      "bgb_part": "TXL6556",
+      "q2_eur": 48.21,
+      "q3_eur": 135.12
+    },
+    {
+      "carbex_pn": "EXKBL8577",
+      "vestas_ref": null,
+      "bgb_part": null,
+      "q2_eur": 320.16,
+      "q3_eur": 135.84
+    },
+    {
+      "carbex_pn": "EXLNM9689",
+      "vestas_ref": "OEM-957170",
+      "bgb_part": "LNM9689",
+      "q2_eur": 136.5,
+      "q3_eur": 48.91
+    }
+  ],
+  "by_bgb_part": {
+    "NAL1071": {
+      "carbex_pn": "EXNAL1071",
+      "vestas_ref": "OEM-912453",
+      "bgb_part": "NAL1071",
+      "q2_eur": 336.57,
+      "q3_eur": 224.05
+    },
+    "MSO3557": {
+      "carbex_pn": "EXMSO3557",
+      "vestas_ref": "OEM-996806",
+      "bgb_part": "MSO3557",
+      "q2_eur": 132.16,
+      "q3_eur": 314.04
+    },
+    "YLW8222": {
+      "carbex_pn": "EXYLW8222",
+      "vestas_ref": "OEM-380164",
+      "bgb_part": "YLW8222",
+      "q2_eur": 232.05,
+      "q3_eur": 399.57
+    },
+    "GPG4193": {
+      "carbex_pn": "EXGPG4193",
+      "vestas_ref": "OEM-311851",
+      "bgb_part": "GPG4193",
+      "q2_eur": 252.61,
+      "q3_eur": 87.77
+    },
+    "TXL6556": {
+      "carbex_pn": "EXTXL6556",
+      "vestas_ref": "OEM-251550",
+      "bgb_part": "TXL6556",
+      "q2_eur": 48.21,
+      "q3_eur": 135.12
+    },
+    "LNM9689": {
+      "carbex_pn": "EXLNM9689",
+      "vestas_ref": "OEM-957170",
+      "bgb_part": "LNM9689",
+      "q2_eur": 136.5,
+      "q3_eur": 48.91
+    }
+  },
+  "source": "Example third-party price reference (illustrative)"
+}

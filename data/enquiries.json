@@ -1,0 +1,35 @@
+[
+  {
+    "id": "60c3bfa7",
+    "timestamp": "21 Sep 2026 19:30",
+    "logged_by": "demo",
+    "sales_rep": "Alex Bennett",
+    "bgb_company": "BGB Engineering Ltd",
+    "customer_name": "Clearwater Rotor Works GmbH",
+    "trader_id": "EX0042",
+    "customer_order_reference": "",
+    "is_existing_customer": true,
+    "customer_type": "OEM",
+    "wind_farm_ownership": "",
+    "lines": [
+      {
+        "matched_part_no": "NAL0048",
+        "qty": 24
+      }
+    ],
+    "total_qty": 24,
+    "current_supplier": "",
+    "timeline": "",
+    "score": 65,
+    "band": "Warm",
+    "key_positives": [
+      "Existing BGB customer",
+      "OEM-level customer"
+    ],
+    "key_risks": [],
+    "routing": "Purchasing",
+    "routing_reason": "All requested parts exist in the BGB brush catalogue — standard purchasing workflow",
+    "notes": "Example enquiry seeded for demo purposes.",
+    "pipeline_value_usd": 1747.52
+  }
+]

@@ -1,0 +1,3194 @@
+[
+  {
+    "bgb_ref": "YLW8222",
+    "gerken_ref": "EX2547526",
+    "option": "Example Option",
+    "grade": "Grade A",
+    "description": "Illustrative brush component — example YLW8222",
+    "oem_ref": "OEM-928022",
+    "turbine": "Example Platform 4",
+    "material": "Silver",
+    "currency": "USD",
+    "drawing_image": "image_coming_soon.png",
+    "price_list_date": "2026-01-01",
+    "gerken_locked_eur_kg": 1500.0,
+    "gerken_locked_usd_kg": 1725.0,
+    "price_breaks_usd": [
+      {
+        "qty": 12,
+        "j_slope": 0.1444,
+        "k_intercept": 0.3308,
+        "list_price": 219.74
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.2812,
+        "k_intercept": 0.2955,
+        "list_price": 202.16
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.1523,
+        "k_intercept": 0.3696,
+        "list_price": 185.99
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.2599,
+        "k_intercept": 0.3888,
+        "list_price": 171.11
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.2029,
+        "k_intercept": 0.1757,
+        "list_price": 157.42
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.384,
+        "k_intercept": 0.1878,
+        "list_price": 144.83
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.2001,
+        "k_intercept": 0.2303,
+        "list_price": 133.24
+      }
+    ],
+    "price_breaks_eur": [
+      {
+        "qty": 12,
+        "j_slope": 0.2711,
+        "k_intercept": 0.2127,
+        "list_price": 206.3
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.2877,
+        "k_intercept": 0.1486,
+        "list_price": 189.8
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.3995,
+        "k_intercept": 0.1663,
+        "list_price": 174.61
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.2,
+        "k_intercept": 0.2555,
+        "list_price": 160.64
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.1485,
+        "k_intercept": 0.1855,
+        "list_price": 147.79
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.1753,
+        "k_intercept": 0.2516,
+        "list_price": 135.97
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.2727,
+        "k_intercept": 0.1488,
+        "list_price": 125.09
+      }
+    ],
+    "status": "Sellable",
+    "aftermarket_ref": "AMYLW8222",
+    "carbex": {
+      "carbex_pn": "EXYLW8222",
+      "vestas_ref": "OEM-797383",
+      "bgb_part": "YLW8222",
+      "q2_eur": 51.86,
+      "q3_eur": 31.86
+    },
+    "j_slope_ref": 0.1073,
+    "units_from_gerken_50kg": null
+  },
+  {
+    "bgb_ref": "GPG4193",
+    "gerken_ref": "EX2966694",
+    "option": "Example Option",
+    "grade": "Grade D",
+    "description": "Illustrative brush component — example GPG4193",
+    "oem_ref": "OEM-868475",
+    "turbine": "Example Platform 1",
+    "material": "Silver",
+    "currency": "USD",
+    "drawing_image": "image_coming_soon.png",
+    "price_list_date": "2026-01-01",
+    "gerken_locked_eur_kg": 1500.0,
+    "gerken_locked_usd_kg": 1725.0,
+    "price_breaks_usd": [
+      {
+        "qty": 12,
+        "j_slope": 0.21,
+        "k_intercept": 0.2686,
+        "list_price": 113.58
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.2391,
+        "k_intercept": 0.1981,
+        "list_price": 104.49
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.3512,
+        "k_intercept": 0.2035,
+        "list_price": 96.13
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.3107,
+        "k_intercept": 0.2514,
+        "list_price": 88.44
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.1635,
+        "k_intercept": 0.1598,
+        "list_price": 81.37
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.2385,
+        "k_intercept": 0.3844,
+        "list_price": 74.86
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.3412,
+        "k_intercept": 0.2031,
+        "list_price": 68.87
+      }
+    ],
+    "price_breaks_eur": [
+      {
+        "qty": 12,
+        "j_slope": 0.3353,
+        "k_intercept": 0.2963,
+        "list_price": 159.22
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.2823,
+        "k_intercept": 0.1897,
+        "list_price": 146.48
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.1435,
+        "k_intercept": 0.201,
+        "list_price": 134.76
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.201,
+        "k_intercept": 0.3926,
+        "list_price": 123.98
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.3236,
+        "k_intercept": 0.3019,
+        "list_price": 114.06
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.2521,
+        "k_intercept": 0.1226,
+        "list_price": 104.94
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.1129,
+        "k_intercept": 0.2836,
+        "list_price": 96.54
+      }
+    ],
+    "status": "Sellable",
+    "aftermarket_ref": "AMGPG4193",
+    "carbex": {
+      "carbex_pn": "EXGPG4193",
+      "vestas_ref": "OEM-326091",
+      "bgb_part": "GPG4193",
+      "q2_eur": 280.98,
+      "q3_eur": 70.67
+    },
+    "j_slope_ref": 0.1295,
+    "units_from_gerken_50kg": null
+  },
+  {
+    "bgb_ref": "LPX4955",
+    "gerken_ref": "EX0193100",
+    "option": "Example Option",
+    "grade": "Grade B",
+    "description": "Illustrative brush component — example LPX4955",
+    "oem_ref": "OEM-666705",
+    "turbine": "Example Platform 4",
+    "material": "Silver",
+    "currency": "USD",
+    "drawing_image": "image_coming_soon.png",
+    "price_list_date": "2026-01-01",
+    "gerken_locked_eur_kg": 1500.0,
+    "gerken_locked_usd_kg": 1725.0,
+    "price_breaks_usd": [
+      {
+        "qty": 12,
+        "j_slope": 0.1222,
+        "k_intercept": 0.2197,
+        "list_price": 251.68
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.1559,
+        "k_intercept": 0.3632,
+        "list_price": 231.55
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.1285,
+        "k_intercept": 0.2596,
+        "list_price": 213.02
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.2523,
+        "k_intercept": 0.274,
+        "list_price": 195.98
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.2965,
+        "k_intercept": 0.2315,
+        "list_price": 180.3
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.3,
+        "k_intercept": 0.2846,
+        "list_price": 165.88
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.1402,
+        "k_intercept": 0.2207,
+        "list_price": 152.61
+      }
+    ],
+    "price_breaks_eur": [
+      {
+        "qty": 12,
+        "j_slope": 0.2253,
+        "k_intercept": 0.2584,
+        "list_price": 279.2
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.3437,
+        "k_intercept": 0.1622,
+        "list_price": 256.86
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.3703,
+        "k_intercept": 0.3663,
+        "list_price": 236.31
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.1179,
+        "k_intercept": 0.1744,
+        "list_price": 217.41
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.2046,
+        "k_intercept": 0.25,
+        "list_price": 200.02
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.3865,
+        "k_intercept": 0.1529,
+        "list_price": 184.02
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.1526,
+        "k_intercept": 0.3542,
+        "list_price": 169.29
+      }
+    ],
+    "status": "Sellable",
+    "aftermarket_ref": "AMLPX4955",
+    "carbex": {
+      "carbex_pn": "EXLPX4955",
+      "vestas_ref": "OEM-388808",
+      "bgb_part": "LPX4955",
+      "q2_eur": 21.88,
+      "q3_eur": 235.62
+    },
+    "j_slope_ref": 0.1798,
+    "units_from_gerken_50kg": null
+  },
+  {
+    "bgb_ref": "NAL1071",
+    "gerken_ref": "EX9912108",
+    "option": "Example Option",
+    "grade": "Grade E",
+    "description": "Illustrative brush component — example NAL1071",
+    "oem_ref": "OEM-868620",
+    "turbine": "Example Platform 4",
+    "material": "Silver",
+    "currency": "USD",
+    "drawing_image": "image_coming_soon.png",
+    "price_list_date": "2026-01-01",
+    "gerken_locked_eur_kg": 1500.0,
+    "gerken_locked_usd_kg": 1725.0,
+    "price_breaks_usd": [
+      {
+        "qty": 12,
+        "j_slope": 0.102,
+        "k_intercept": 0.3305,
+        "list_price": 296.6
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.3766,
+        "k_intercept": 0.2908,
+        "list_price": 272.87
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.211,
+        "k_intercept": 0.1464,
+        "list_price": 251.04
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.2948,
+        "k_intercept": 0.2575,
+        "list_price": 230.96
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.25,
+        "k_intercept": 0.2316,
+        "list_price": 212.48
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.2958,
+        "k_intercept": 0.1396,
+        "list_price": 195.48
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.3211,
+        "k_intercept": 0.3469,
+        "list_price": 179.84
+      }
+    ],
+    "price_breaks_eur": [
+      {
+        "qty": 12,
+        "j_slope": 0.2471,
+        "k_intercept": 0.1989,
+        "list_price": 144.84
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.1188,
+        "k_intercept": 0.3461,
+        "list_price": 133.25
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.3558,
+        "k_intercept": 0.2338,
+        "list_price": 122.59
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.2228,
+        "k_intercept": 0.3605,
+        "list_price": 112.79
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.1982,
+        "k_intercept": 0.3444,
+        "list_price": 103.76
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.3012,
+        "k_intercept": 0.2889,
+        "list_price": 95.46
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.3024,
+        "k_intercept": 0.2474,
+        "list_price": 87.82
+      }
+    ],
+    "status": "Sellable",
+    "aftermarket_ref": "AMNAL1071",
+    "carbex": {
+      "carbex_pn": "EXNAL1071",
+      "vestas_ref": "OEM-072340",
+      "bgb_part": "NAL1071",
+      "q2_eur": 259.11,
+      "q3_eur": 43.82
+    },
+    "j_slope_ref": 0.3516,
+    "units_from_gerken_50kg": null
+  },
+  {
+    "bgb_ref": "MSO3557",
+    "gerken_ref": "EX2273395",
+    "option": "Example Option",
+    "grade": "Grade E",
+    "description": "Illustrative brush component — example MSO3557",
+    "oem_ref": "OEM-860447",
+    "turbine": "Example Platform 4",
+    "material": "Silver",
+    "currency": "USD",
+    "drawing_image": "image_coming_soon.png",
+    "price_list_date": "2026-01-01",
+    "gerken_locked_eur_kg": 1500.0,
+    "gerken_locked_usd_kg": 1725.0,
+    "price_breaks_usd": [
+      {
+        "qty": 12,
+        "j_slope": 0.3805,
+        "k_intercept": 0.1137,
+        "list_price": 261.06
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.2006,
+        "k_intercept": 0.3111,
+        "list_price": 240.18
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.2452,
+        "k_intercept": 0.1308,
+        "list_price": 220.96
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.2564,
+        "k_intercept": 0.3218,
+        "list_price": 203.28
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.1965,
+        "k_intercept": 0.145,
+        "list_price": 187.02
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.2829,
+        "k_intercept": 0.2744,
+        "list_price": 172.06
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.244,
+        "k_intercept": 0.3755,
+        "list_price": 158.3
+      }
+    ],
+    "price_breaks_eur": [
+      {
+        "qty": 12,
+        "j_slope": 0.1648,
+        "k_intercept": 0.117,
+        "list_price": 250.82
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.2072,
+        "k_intercept": 0.3403,
+        "list_price": 230.75
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.3617,
+        "k_intercept": 0.3466,
+        "list_price": 212.29
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.1215,
+        "k_intercept": 0.2285,
+        "list_price": 195.31
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.1622,
+        "k_intercept": 0.3087,
+        "list_price": 179.69
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.3362,
+        "k_intercept": 0.1441,
+        "list_price": 165.31
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.2901,
+        "k_intercept": 0.1488,
+        "list_price": 152.09
+      }
+    ],
+    "status": "Sellable",
+    "aftermarket_ref": "AMMSO3557",
+    "carbex": {
+      "carbex_pn": "EXMSO3557",
+      "vestas_ref": "OEM-375280",
+      "bgb_part": "MSO3557",
+      "q2_eur": 340.71,
+      "q3_eur": 266.87
+    },
+    "j_slope_ref": 0.1936,
+    "units_from_gerken_50kg": null
+  },
+  {
+    "bgb_ref": "COG2755",
+    "gerken_ref": "EX8102790",
+    "option": "Example Option",
+    "grade": "Grade A",
+    "description": "Illustrative brush component — example COG2755",
+    "oem_ref": "OEM-447143",
+    "turbine": "Example Platform 2",
+    "material": "Silver",
+    "currency": "USD",
+    "drawing_image": "image_coming_soon.png",
+    "price_list_date": "2026-01-01",
+    "gerken_locked_eur_kg": 1500.0,
+    "gerken_locked_usd_kg": 1725.0,
+    "price_breaks_usd": [
+      {
+        "qty": 12,
+        "j_slope": 0.2613,
+        "k_intercept": 0.1281,
+        "list_price": 116.94
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.2639,
+        "k_intercept": 0.2792,
+        "list_price": 107.58
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.3086,
+        "k_intercept": 0.1409,
+        "list_price": 98.98
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.3582,
+        "k_intercept": 0.3356,
+        "list_price": 91.06
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.2146,
+        "k_intercept": 0.2981,
+        "list_price": 83.77
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.3775,
+        "k_intercept": 0.2959,
+        "list_price": 77.07
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.3582,
+        "k_intercept": 0.3145,
+        "list_price": 70.91
+      }
+    ],
+    "price_breaks_eur": [
+      {
+        "qty": 12,
+        "j_slope": 0.3516,
+        "k_intercept": 0.3453,
+        "list_price": 133.14
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.2816,
+        "k_intercept": 0.3649,
+        "list_price": 122.49
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.1408,
+        "k_intercept": 0.299,
+        "list_price": 112.69
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.3657,
+        "k_intercept": 0.3569,
+        "list_price": 103.67
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.3313,
+        "k_intercept": 0.1693,
+        "list_price": 95.38
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.1739,
+        "k_intercept": 0.1982,
+        "list_price": 87.75
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.3682,
+        "k_intercept": 0.2043,
+        "list_price": 80.73
+      }
+    ],
+    "status": "Sellable",
+    "aftermarket_ref": "AMCOG2755",
+    "carbex": {
+      "carbex_pn": "EXCOG2755",
+      "vestas_ref": "OEM-829226",
+      "bgb_part": "COG2755",
+      "q2_eur": 249.33,
+      "q3_eur": 33.88
+    },
+    "j_slope_ref": 0.1693,
+    "units_from_gerken_50kg": null
+  },
+  {
+    "bgb_ref": "TXL6556",
+    "gerken_ref": "EX4160767",
+    "option": "Example Option",
+    "grade": "Grade E",
+    "description": "Illustrative brush component — example TXL6556",
+    "oem_ref": "OEM-634380",
+    "turbine": "Example Platform 4",
+    "material": "Silver",
+    "currency": "USD",
+    "drawing_image": "image_coming_soon.png",
+    "price_list_date": "2026-01-01",
+    "gerken_locked_eur_kg": 1500.0,
+    "gerken_locked_usd_kg": 1725.0,
+    "price_breaks_usd": [
+      {
+        "qty": 12,
+        "j_slope": 0.3462,
+        "k_intercept": 0.2925,
+        "list_price": 327.46
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.1109,
+        "k_intercept": 0.2507,
+        "list_price": 301.26
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.3589,
+        "k_intercept": 0.3566,
+        "list_price": 277.16
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.3269,
+        "k_intercept": 0.2564,
+        "list_price": 254.99
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.2986,
+        "k_intercept": 0.3831,
+        "list_price": 234.59
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.22,
+        "k_intercept": 0.3628,
+        "list_price": 215.82
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.1864,
+        "k_intercept": 0.1016,
+        "list_price": 198.56
+      }
+    ],
+    "price_breaks_eur": [
+      {
+        "qty": 12,
+        "j_slope": 0.388,
+        "k_intercept": 0.1209,
+        "list_price": 219.06
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.194,
+        "k_intercept": 0.1364,
+        "list_price": 201.54
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.1031,
+        "k_intercept": 0.2023,
+        "list_price": 185.41
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.2489,
+        "k_intercept": 0.3222,
+        "list_price": 170.58
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.1475,
+        "k_intercept": 0.2674,
+        "list_price": 156.93
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.3052,
+        "k_intercept": 0.1336,
+        "list_price": 144.38
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.3294,
+        "k_intercept": 0.1459,
+        "list_price": 132.83
+      }
+    ],
+    "status": "Sellable",
+    "aftermarket_ref": "AMTXL6556",
+    "carbex": {
+      "carbex_pn": "EXTXL6556",
+      "vestas_ref": "OEM-802295",
+      "bgb_part": "TXL6556",
+      "q2_eur": 144.06,
+      "q3_eur": 24.06
+    },
+    "j_slope_ref": 0.1842,
+    "units_from_gerken_50kg": null
+  },
+  {
+    "bgb_ref": "LNM9689",
+    "gerken_ref": "EX3824577",
+    "option": "Example Option",
+    "grade": "Grade E",
+    "description": "Illustrative brush component — example LNM9689",
+    "oem_ref": "OEM-633186",
+    "turbine": "Example Platform 2",
+    "material": "Silver",
+    "currency": "USD",
+    "drawing_image": "image_coming_soon.png",
+    "price_list_date": "2026-01-01",
+    "gerken_locked_eur_kg": 1500.0,
+    "gerken_locked_usd_kg": 1725.0,
+    "price_breaks_usd": [
+      {
+        "qty": 12,
+        "j_slope": 0.2359,
+        "k_intercept": 0.166,
+        "list_price": 109.8
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.3418,
+        "k_intercept": 0.309,
+        "list_price": 101.02
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.3432,
+        "k_intercept": 0.2402,
+        "list_price": 92.93
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.1589,
+        "k_intercept": 0.3986,
+        "list_price": 85.5
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.1704,
+        "k_intercept": 0.3379,
+        "list_price": 78.66
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.2185,
+        "k_intercept": 0.2909,
+        "list_price": 72.37
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.1453,
+        "k_intercept": 0.3578,
+        "list_price": 66.58
+      }
+    ],
+    "price_breaks_eur": [
+      {
+        "qty": 12,
+        "j_slope": 0.2668,
+        "k_intercept": 0.2469,
+        "list_price": 331.33
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.3013,
+        "k_intercept": 0.1124,
+        "list_price": 304.82
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.2993,
+        "k_intercept": 0.2228,
+        "list_price": 280.44
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.3759,
+        "k_intercept": 0.3527,
+        "list_price": 258.0
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.3622,
+        "k_intercept": 0.3088,
+        "list_price": 237.36
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.2103,
+        "k_intercept": 0.2697,
+        "list_price": 218.37
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.3994,
+        "k_intercept": 0.3194,
+        "list_price": 200.9
+      }
+    ],
+    "status": "Sellable",
+    "aftermarket_ref": "AMLNM9689",
+    "carbex": {
+      "carbex_pn": "EXLNM9689",
+      "vestas_ref": "OEM-714751",
+      "bgb_part": "LNM9689",
+      "q2_eur": 228.05,
+      "q3_eur": 183.79
+    },
+    "j_slope_ref": 0.3749,
+    "units_from_gerken_50kg": null
+  },
+  {
+    "bgb_ref": "GOY8114",
+    "gerken_ref": "EX4821378",
+    "option": "Example Option",
+    "grade": "Grade C",
+    "description": "Illustrative brush component — example GOY8114",
+    "oem_ref": "OEM-112351",
+    "turbine": "Example Platform 3",
+    "material": "Silver",
+    "currency": "USD",
+    "drawing_image": "image_coming_soon.png",
+    "price_list_date": "2026-01-01",
+    "gerken_locked_eur_kg": 1500.0,
+    "gerken_locked_usd_kg": 1725.0,
+    "price_breaks_usd": [
+      {
+        "qty": 12,
+        "j_slope": 0.2567,
+        "k_intercept": 0.2926,
+        "list_price": 211.15
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.3948,
+        "k_intercept": 0.2263,
+        "list_price": 194.26
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.2702,
+        "k_intercept": 0.3395,
+        "list_price": 178.72
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.1524,
+        "k_intercept": 0.1327,
+        "list_price": 164.42
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.2211,
+        "k_intercept": 0.1117,
+        "list_price": 151.27
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.1076,
+        "k_intercept": 0.2537,
+        "list_price": 139.17
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.2308,
+        "k_intercept": 0.1157,
+        "list_price": 128.03
+      }
+    ],
+    "price_breaks_eur": [
+      {
+        "qty": 12,
+        "j_slope": 0.2042,
+        "k_intercept": 0.2756,
+        "list_price": 137.19
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.2397,
+        "k_intercept": 0.1986,
+        "list_price": 126.21
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.2302,
+        "k_intercept": 0.3993,
+        "list_price": 116.12
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.139,
+        "k_intercept": 0.3666,
+        "list_price": 106.83
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.3183,
+        "k_intercept": 0.3528,
+        "list_price": 98.28
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.1504,
+        "k_intercept": 0.2647,
+        "list_price": 90.42
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.1024,
+        "k_intercept": 0.2191,
+        "list_price": 83.19
+      }
+    ],
+    "status": "Prototype",
+    "aftermarket_ref": "AMGOY8114",
+    "carbex": {
+      "carbex_pn": "EXGOY8114",
+      "vestas_ref": "OEM-319719",
+      "bgb_part": "GOY8114",
+      "q2_eur": 330.6,
+      "q3_eur": 163.3
+    },
+    "j_slope_ref": 0.1166,
+    "units_from_gerken_50kg": null
+  },
+  {
+    "bgb_ref": "BGB6781",
+    "gerken_ref": "EX1397741",
+    "option": "Example Option",
+    "grade": "Grade D",
+    "description": "Illustrative brush component — example BGB6781",
+    "oem_ref": "OEM-612303",
+    "turbine": "Example Platform 3",
+    "material": "Silver",
+    "currency": "USD",
+    "drawing_image": "image_coming_soon.png",
+    "price_list_date": "2026-01-01",
+    "gerken_locked_eur_kg": 1500.0,
+    "gerken_locked_usd_kg": 1725.0,
+    "price_breaks_usd": [
+      {
+        "qty": 12,
+        "j_slope": 0.3381,
+        "k_intercept": 0.3841,
+        "list_price": 142.24
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.3594,
+        "k_intercept": 0.3235,
+        "list_price": 130.86
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.1301,
+        "k_intercept": 0.2244,
+        "list_price": 120.39
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.1213,
+        "k_intercept": 0.2913,
+        "list_price": 110.76
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.395,
+        "k_intercept": 0.3767,
+        "list_price": 101.9
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.2989,
+        "k_intercept": 0.3617,
+        "list_price": 93.75
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.2976,
+        "k_intercept": 0.3994,
+        "list_price": 86.25
+      }
+    ],
+    "price_breaks_eur": [
+      {
+        "qty": 12,
+        "j_slope": 0.1586,
+        "k_intercept": 0.3199,
+        "list_price": 307.66
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.2578,
+        "k_intercept": 0.2596,
+        "list_price": 283.05
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.2936,
+        "k_intercept": 0.2035,
+        "list_price": 260.4
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.1459,
+        "k_intercept": 0.3676,
+        "list_price": 239.57
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.3842,
+        "k_intercept": 0.2653,
+        "list_price": 220.41
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.1468,
+        "k_intercept": 0.1597,
+        "list_price": 202.77
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.2533,
+        "k_intercept": 0.3209,
+        "list_price": 186.55
+      }
+    ],
+    "status": "Prototype",
+    "aftermarket_ref": "AMBGB6781",
+    "carbex": {
+      "carbex_pn": "EXBGB6781",
+      "vestas_ref": "OEM-765641",
+      "bgb_part": "BGB6781",
+      "q2_eur": 372.23,
+      "q3_eur": 43.36
+    },
+    "j_slope_ref": 0.2665,
+    "units_from_gerken_50kg": null
+  },
+  {
+    "bgb_ref": "SRD8929",
+    "gerken_ref": "EX6479457",
+    "option": "Example Option",
+    "grade": "Grade D",
+    "description": "Illustrative brush component — example SRD8929",
+    "oem_ref": "OEM-427877",
+    "turbine": "Example Platform 3",
+    "material": "Silver",
+    "currency": "USD",
+    "drawing_image": "image_coming_soon.png",
+    "price_list_date": "2026-01-01",
+    "gerken_locked_eur_kg": 1500.0,
+    "gerken_locked_usd_kg": 1725.0,
+    "price_breaks_usd": [
+      {
+        "qty": 12,
+        "j_slope": 0.3306,
+        "k_intercept": 0.356,
+        "list_price": 211.22
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.1567,
+        "k_intercept": 0.2883,
+        "list_price": 194.32
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.1183,
+        "k_intercept": 0.1834,
+        "list_price": 178.78
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.1254,
+        "k_intercept": 0.2644,
+        "list_price": 164.47
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.2007,
+        "k_intercept": 0.3013,
+        "list_price": 151.32
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.1779,
+        "k_intercept": 0.3189,
+        "list_price": 139.21
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.3882,
+        "k_intercept": 0.1066,
+        "list_price": 128.07
+      }
+    ],
+    "price_breaks_eur": [
+      {
+        "qty": 12,
+        "j_slope": 0.2455,
+        "k_intercept": 0.1024,
+        "list_price": 278.07
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.3759,
+        "k_intercept": 0.1456,
+        "list_price": 255.82
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.1462,
+        "k_intercept": 0.2151,
+        "list_price": 235.36
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.1919,
+        "k_intercept": 0.1639,
+        "list_price": 216.53
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.2251,
+        "k_intercept": 0.1075,
+        "list_price": 199.21
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.1964,
+        "k_intercept": 0.2626,
+        "list_price": 183.27
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.2869,
+        "k_intercept": 0.3718,
+        "list_price": 168.61
+      }
+    ],
+    "status": "Prototype",
+    "aftermarket_ref": "AMSRD8929",
+    "carbex": {
+      "carbex_pn": "EXSRD8929",
+      "vestas_ref": "OEM-866436",
+      "bgb_part": "SRD8929",
+      "q2_eur": 200.89,
+      "q3_eur": 325.16
+    },
+    "j_slope_ref": 0.2137,
+    "units_from_gerken_50kg": null
+  },
+  {
+    "bgb_ref": "KMZ8145",
+    "gerken_ref": "EX0477624",
+    "option": "Example Option",
+    "grade": "Grade D",
+    "description": "Illustrative brush component — example KMZ8145",
+    "oem_ref": "OEM-464691",
+    "turbine": "Example Platform 4",
+    "material": "Silver",
+    "currency": "USD",
+    "drawing_image": "image_coming_soon.png",
+    "price_list_date": "2026-01-01",
+    "gerken_locked_eur_kg": 1500.0,
+    "gerken_locked_usd_kg": 1725.0,
+    "price_breaks_usd": [
+      {
+        "qty": 12,
+        "j_slope": 0.38,
+        "k_intercept": 0.1841,
+        "list_price": 131.15
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.3833,
+        "k_intercept": 0.289,
+        "list_price": 120.66
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.1681,
+        "k_intercept": 0.1734,
+        "list_price": 111.01
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.2962,
+        "k_intercept": 0.1678,
+        "list_price": 102.12
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.2996,
+        "k_intercept": 0.1766,
+        "list_price": 93.95
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.24,
+        "k_intercept": 0.3913,
+        "list_price": 86.44
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.1359,
+        "k_intercept": 0.3798,
+        "list_price": 79.52
+      }
+    ],
+    "price_breaks_eur": [
+      {
+        "qty": 12,
+        "j_slope": 0.2707,
+        "k_intercept": 0.1245,
+        "list_price": 306.5
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.2524,
+        "k_intercept": 0.3385,
+        "list_price": 281.98
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.1441,
+        "k_intercept": 0.2817,
+        "list_price": 259.42
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.2555,
+        "k_intercept": 0.2912,
+        "list_price": 238.67
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.2516,
+        "k_intercept": 0.1593,
+        "list_price": 219.57
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.1317,
+        "k_intercept": 0.1876,
+        "list_price": 202.01
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.3425,
+        "k_intercept": 0.1111,
+        "list_price": 185.85
+      }
+    ],
+    "status": "Prototype",
+    "aftermarket_ref": "AMKMZ8145",
+    "carbex": {
+      "carbex_pn": "EXKMZ8145",
+      "vestas_ref": "OEM-673490",
+      "bgb_part": "KMZ8145",
+      "q2_eur": 301.06,
+      "q3_eur": 279.01
+    },
+    "j_slope_ref": 0.2393,
+    "units_from_gerken_50kg": null
+  },
+  {
+    "bgb_ref": "IFI7054",
+    "gerken_ref": "EX5179515",
+    "option": "Example Option",
+    "grade": "Grade D",
+    "description": "Illustrative brush component — example IFI7054",
+    "oem_ref": "OEM-575685",
+    "turbine": "Example Platform 3",
+    "material": "Silver",
+    "currency": "USD",
+    "drawing_image": "image_coming_soon.png",
+    "price_list_date": "2026-01-01",
+    "gerken_locked_eur_kg": 1500.0,
+    "gerken_locked_usd_kg": 1725.0,
+    "price_breaks_usd": [
+      {
+        "qty": 12,
+        "j_slope": 0.3905,
+        "k_intercept": 0.3552,
+        "list_price": 189.54
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.2498,
+        "k_intercept": 0.3477,
+        "list_price": 174.38
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.1226,
+        "k_intercept": 0.1836,
+        "list_price": 160.43
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.2975,
+        "k_intercept": 0.3559,
+        "list_price": 147.59
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.1326,
+        "k_intercept": 0.2906,
+        "list_price": 135.79
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.3586,
+        "k_intercept": 0.1848,
+        "list_price": 124.92
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.3089,
+        "k_intercept": 0.1544,
+        "list_price": 114.93
+      }
+    ],
+    "price_breaks_eur": [
+      {
+        "qty": 12,
+        "j_slope": 0.1219,
+        "k_intercept": 0.3321,
+        "list_price": 85.76
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.3657,
+        "k_intercept": 0.3207,
+        "list_price": 78.9
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.1642,
+        "k_intercept": 0.1214,
+        "list_price": 72.59
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.2378,
+        "k_intercept": 0.3106,
+        "list_price": 66.78
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.1529,
+        "k_intercept": 0.1012,
+        "list_price": 61.44
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.1451,
+        "k_intercept": 0.3709,
+        "list_price": 56.52
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.1559,
+        "k_intercept": 0.1586,
+        "list_price": 52.0
+      }
+    ],
+    "status": "Sellable",
+    "aftermarket_ref": "AMIFI7054",
+    "carbex": {
+      "carbex_pn": "EXIFI7054",
+      "vestas_ref": "OEM-492637",
+      "bgb_part": "IFI7054",
+      "q2_eur": 370.02,
+      "q3_eur": 166.82
+    },
+    "j_slope_ref": 0.2304,
+    "units_from_gerken_50kg": null
+  },
+  {
+    "bgb_ref": "AIQ5097",
+    "gerken_ref": "EX1930230",
+    "option": "Example Option",
+    "grade": "Grade A",
+    "description": "Illustrative brush component — example AIQ5097",
+    "oem_ref": "OEM-446322",
+    "turbine": "Example Platform 2",
+    "material": "Silver",
+    "currency": "USD",
+    "drawing_image": "image_coming_soon.png",
+    "price_list_date": "2026-01-01",
+    "gerken_locked_eur_kg": 1500.0,
+    "gerken_locked_usd_kg": 1725.0,
+    "price_breaks_usd": [
+      {
+        "qty": 12,
+        "j_slope": 0.2765,
+        "k_intercept": 0.3461,
+        "list_price": 183.91
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.2118,
+        "k_intercept": 0.291,
+        "list_price": 169.2
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.1025,
+        "k_intercept": 0.1757,
+        "list_price": 155.66
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.1461,
+        "k_intercept": 0.3666,
+        "list_price": 143.21
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.2206,
+        "k_intercept": 0.1698,
+        "list_price": 131.75
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.2004,
+        "k_intercept": 0.1213,
+        "list_price": 121.21
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.1826,
+        "k_intercept": 0.2558,
+        "list_price": 111.51
+      }
+    ],
+    "price_breaks_eur": [
+      {
+        "qty": 12,
+        "j_slope": 0.3099,
+        "k_intercept": 0.3404,
+        "list_price": 309.6
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.2738,
+        "k_intercept": 0.2261,
+        "list_price": 284.83
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.2656,
+        "k_intercept": 0.1422,
+        "list_price": 262.05
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.1701,
+        "k_intercept": 0.1489,
+        "list_price": 241.08
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.1072,
+        "k_intercept": 0.1954,
+        "list_price": 221.8
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.251,
+        "k_intercept": 0.1949,
+        "list_price": 204.05
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.3426,
+        "k_intercept": 0.1848,
+        "list_price": 187.73
+      }
+    ],
+    "status": "Prototype",
+    "aftermarket_ref": "AMAIQ5097",
+    "carbex": {
+      "carbex_pn": "EXAIQ5097",
+      "vestas_ref": "OEM-795283",
+      "bgb_part": "AIQ5097",
+      "q2_eur": 168.72,
+      "q3_eur": 92.49
+    },
+    "j_slope_ref": 0.3976,
+    "units_from_gerken_50kg": null
+  },
+  {
+    "bgb_ref": "ZCG0721",
+    "gerken_ref": "EX2178645",
+    "option": "Example Option",
+    "grade": "Grade A",
+    "description": "Illustrative brush component — example ZCG0721",
+    "oem_ref": "OEM-293688",
+    "turbine": "Example Platform 1",
+    "material": "Silver",
+    "currency": "USD",
+    "drawing_image": "image_coming_soon.png",
+    "price_list_date": "2026-01-01",
+    "gerken_locked_eur_kg": 1500.0,
+    "gerken_locked_usd_kg": 1725.0,
+    "price_breaks_usd": [
+      {
+        "qty": 12,
+        "j_slope": 0.1796,
+        "k_intercept": 0.3704,
+        "list_price": 162.08
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.2644,
+        "k_intercept": 0.2339,
+        "list_price": 149.11
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.3269,
+        "k_intercept": 0.1053,
+        "list_price": 137.18
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.2805,
+        "k_intercept": 0.3027,
+        "list_price": 126.21
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.1487,
+        "k_intercept": 0.3279,
+        "list_price": 116.11
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.1305,
+        "k_intercept": 0.1513,
+        "list_price": 106.82
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.105,
+        "k_intercept": 0.2353,
+        "list_price": 98.28
+      }
+    ],
+    "price_breaks_eur": [
+      {
+        "qty": 12,
+        "j_slope": 0.3995,
+        "k_intercept": 0.3334,
+        "list_price": 247.26
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.261,
+        "k_intercept": 0.1297,
+        "list_price": 227.48
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.3817,
+        "k_intercept": 0.3315,
+        "list_price": 209.28
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.3782,
+        "k_intercept": 0.262,
+        "list_price": 192.54
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.2166,
+        "k_intercept": 0.1777,
+        "list_price": 177.14
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.329,
+        "k_intercept": 0.1039,
+        "list_price": 162.96
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.2294,
+        "k_intercept": 0.1693,
+        "list_price": 149.93
+      }
+    ],
+    "status": "Sellable",
+    "aftermarket_ref": "AMZCG0721",
+    "carbex": {
+      "carbex_pn": "EXZCG0721",
+      "vestas_ref": "OEM-425183",
+      "bgb_part": "ZCG0721",
+      "q2_eur": 64.05,
+      "q3_eur": 319.41
+    },
+    "j_slope_ref": 0.2349,
+    "units_from_gerken_50kg": null
+  },
+  {
+    "bgb_ref": "KXV2195",
+    "gerken_ref": "EX8232410",
+    "option": "Example Option",
+    "grade": "Grade E",
+    "description": "Illustrative brush component — example KXV2195",
+    "oem_ref": "OEM-722344",
+    "turbine": "Example Platform 2",
+    "material": "Silver",
+    "currency": "USD",
+    "drawing_image": "image_coming_soon.png",
+    "price_list_date": "2026-01-01",
+    "gerken_locked_eur_kg": 1500.0,
+    "gerken_locked_usd_kg": 1725.0,
+    "price_breaks_usd": [
+      {
+        "qty": 12,
+        "j_slope": 0.3989,
+        "k_intercept": 0.287,
+        "list_price": 331.01
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.3077,
+        "k_intercept": 0.1987,
+        "list_price": 304.53
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.2558,
+        "k_intercept": 0.2223,
+        "list_price": 280.17
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.2716,
+        "k_intercept": 0.2861,
+        "list_price": 257.75
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.2202,
+        "k_intercept": 0.1357,
+        "list_price": 237.13
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.2045,
+        "k_intercept": 0.1218,
+        "list_price": 218.16
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.3671,
+        "k_intercept": 0.2799,
+        "list_price": 200.71
+      }
+    ],
+    "price_breaks_eur": [
+      {
+        "qty": 12,
+        "j_slope": 0.1107,
+        "k_intercept": 0.3937,
+        "list_price": 116.11
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.2814,
+        "k_intercept": 0.2596,
+        "list_price": 106.82
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.3034,
+        "k_intercept": 0.2643,
+        "list_price": 98.28
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.1097,
+        "k_intercept": 0.1594,
+        "list_price": 90.41
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.3257,
+        "k_intercept": 0.1812,
+        "list_price": 83.18
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.2593,
+        "k_intercept": 0.3629,
+        "list_price": 76.53
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.356,
+        "k_intercept": 0.3503,
+        "list_price": 70.4
+      }
+    ],
+    "status": "Prototype",
+    "aftermarket_ref": "AMKXV2195",
+    "carbex": {
+      "carbex_pn": "EXKXV2195",
+      "vestas_ref": "OEM-663980",
+      "bgb_part": "KXV2195",
+      "q2_eur": 21.6,
+      "q3_eur": 258.87
+    },
+    "j_slope_ref": 0.2863,
+    "units_from_gerken_50kg": null
+  },
+  {
+    "bgb_ref": "SCB6409",
+    "gerken_ref": "EX8971860",
+    "option": "Example Option",
+    "grade": "Grade A",
+    "description": "Illustrative brush component — example SCB6409",
+    "oem_ref": "OEM-096211",
+    "turbine": "Example Platform 1",
+    "material": "Silver",
+    "currency": "USD",
+    "drawing_image": "image_coming_soon.png",
+    "price_list_date": "2026-01-01",
+    "gerken_locked_eur_kg": 1500.0,
+    "gerken_locked_usd_kg": 1725.0,
+    "price_breaks_usd": [
+      {
+        "qty": 12,
+        "j_slope": 0.1911,
+        "k_intercept": 0.2288,
+        "list_price": 179.13
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.1637,
+        "k_intercept": 0.2786,
+        "list_price": 164.8
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.3564,
+        "k_intercept": 0.2231,
+        "list_price": 151.62
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.137,
+        "k_intercept": 0.2522,
+        "list_price": 139.49
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.1754,
+        "k_intercept": 0.3656,
+        "list_price": 128.33
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.2284,
+        "k_intercept": 0.122,
+        "list_price": 118.06
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.165,
+        "k_intercept": 0.195,
+        "list_price": 108.62
+      }
+    ],
+    "price_breaks_eur": [
+      {
+        "qty": 12,
+        "j_slope": 0.3479,
+        "k_intercept": 0.1788,
+        "list_price": 161.87
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.2874,
+        "k_intercept": 0.1826,
+        "list_price": 148.92
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.3063,
+        "k_intercept": 0.1457,
+        "list_price": 137.01
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.3396,
+        "k_intercept": 0.3317,
+        "list_price": 126.05
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.3421,
+        "k_intercept": 0.2317,
+        "list_price": 115.96
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.2012,
+        "k_intercept": 0.2288,
+        "list_price": 106.69
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.1329,
+        "k_intercept": 0.3848,
+        "list_price": 98.15
+      }
+    ],
+    "status": "Prototype",
+    "aftermarket_ref": "AMSCB6409",
+    "carbex": {
+      "carbex_pn": "EXSCB6409",
+      "vestas_ref": "OEM-273197",
+      "bgb_part": "SCB6409",
+      "q2_eur": 34.44,
+      "q3_eur": 369.41
+    },
+    "j_slope_ref": 0.3998,
+    "units_from_gerken_50kg": null
+  },
+  {
+    "bgb_ref": "QUC8084",
+    "gerken_ref": "EX1867687",
+    "option": "Example Option",
+    "grade": "Grade A",
+    "description": "Illustrative brush component — example QUC8084",
+    "oem_ref": "OEM-816574",
+    "turbine": "Example Platform 4",
+    "material": "Silver",
+    "currency": "USD",
+    "drawing_image": "image_coming_soon.png",
+    "price_list_date": "2026-01-01",
+    "gerken_locked_eur_kg": 1500.0,
+    "gerken_locked_usd_kg": 1725.0,
+    "price_breaks_usd": [
+      {
+        "qty": 12,
+        "j_slope": 0.1768,
+        "k_intercept": 0.1156,
+        "list_price": 341.78
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.23,
+        "k_intercept": 0.1415,
+        "list_price": 314.44
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.2058,
+        "k_intercept": 0.2232,
+        "list_price": 289.28
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.3391,
+        "k_intercept": 0.2337,
+        "list_price": 266.14
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.2334,
+        "k_intercept": 0.1643,
+        "list_price": 244.85
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.3849,
+        "k_intercept": 0.1089,
+        "list_price": 225.26
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.1127,
+        "k_intercept": 0.38,
+        "list_price": 207.24
+      }
+    ],
+    "price_breaks_eur": [
+      {
+        "qty": 12,
+        "j_slope": 0.1553,
+        "k_intercept": 0.2414,
+        "list_price": 151.67
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.3163,
+        "k_intercept": 0.135,
+        "list_price": 139.54
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.1963,
+        "k_intercept": 0.3827,
+        "list_price": 128.37
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.2486,
+        "k_intercept": 0.2363,
+        "list_price": 118.1
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.2107,
+        "k_intercept": 0.1425,
+        "list_price": 108.66
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.1888,
+        "k_intercept": 0.3663,
+        "list_price": 99.96
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.1976,
+        "k_intercept": 0.1965,
+        "list_price": 91.97
+      }
+    ],
+    "status": "Prototype",
+    "aftermarket_ref": "AMQUC8084",
+    "carbex": {
+      "carbex_pn": "EXQUC8084",
+      "vestas_ref": "OEM-852214",
+      "bgb_part": "QUC8084",
+      "q2_eur": 364.83,
+      "q3_eur": 244.86
+    },
+    "j_slope_ref": 0.1202,
+    "units_from_gerken_50kg": null
+  },
+  {
+    "bgb_ref": "IOY2152",
+    "gerken_ref": "EX0414458",
+    "option": "Example Option",
+    "grade": "Grade A",
+    "description": "Illustrative brush component — example IOY2152",
+    "oem_ref": "OEM-084568",
+    "turbine": "Example Platform 4",
+    "material": "Silver",
+    "currency": "USD",
+    "drawing_image": "image_coming_soon.png",
+    "price_list_date": "2026-01-01",
+    "gerken_locked_eur_kg": 1500.0,
+    "gerken_locked_usd_kg": 1725.0,
+    "price_breaks_usd": [
+      {
+        "qty": 12,
+        "j_slope": 0.2236,
+        "k_intercept": 0.2111,
+        "list_price": 190.28
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.262,
+        "k_intercept": 0.1432,
+        "list_price": 175.06
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.1974,
+        "k_intercept": 0.207,
+        "list_price": 161.05
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.2005,
+        "k_intercept": 0.1622,
+        "list_price": 148.17
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.3321,
+        "k_intercept": 0.2684,
+        "list_price": 136.32
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.3652,
+        "k_intercept": 0.1813,
+        "list_price": 125.41
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.1161,
+        "k_intercept": 0.1919,
+        "list_price": 115.38
+      }
+    ],
+    "price_breaks_eur": [
+      {
+        "qty": 12,
+        "j_slope": 0.2677,
+        "k_intercept": 0.2979,
+        "list_price": 300.49
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.2009,
+        "k_intercept": 0.3051,
+        "list_price": 276.45
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.1297,
+        "k_intercept": 0.2409,
+        "list_price": 254.33
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.1438,
+        "k_intercept": 0.3924,
+        "list_price": 233.99
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.3593,
+        "k_intercept": 0.2481,
+        "list_price": 215.27
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.207,
+        "k_intercept": 0.2132,
+        "list_price": 198.05
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.3356,
+        "k_intercept": 0.2434,
+        "list_price": 182.2
+      }
+    ],
+    "status": "Prototype",
+    "aftermarket_ref": "AMIOY2152",
+    "carbex": {
+      "carbex_pn": "EXIOY2152",
+      "vestas_ref": "OEM-349066",
+      "bgb_part": "IOY2152",
+      "q2_eur": 274.58,
+      "q3_eur": 101.06
+    },
+    "j_slope_ref": 0.1457,
+    "units_from_gerken_50kg": null
+  },
+  {
+    "bgb_ref": "CEB2337",
+    "gerken_ref": "EX0669395",
+    "option": "Example Option",
+    "grade": "Grade C",
+    "description": "Illustrative brush component — example CEB2337",
+    "oem_ref": "OEM-480763",
+    "turbine": "Example Platform 2",
+    "material": "Silver",
+    "currency": "USD",
+    "drawing_image": "image_coming_soon.png",
+    "price_list_date": "2026-01-01",
+    "gerken_locked_eur_kg": 1500.0,
+    "gerken_locked_usd_kg": 1725.0,
+    "price_breaks_usd": [
+      {
+        "qty": 12,
+        "j_slope": 0.1801,
+        "k_intercept": 0.1948,
+        "list_price": 271.03
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.2408,
+        "k_intercept": 0.2191,
+        "list_price": 249.35
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.2833,
+        "k_intercept": 0.3505,
+        "list_price": 229.4
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.3236,
+        "k_intercept": 0.1564,
+        "list_price": 211.05
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.1178,
+        "k_intercept": 0.1802,
+        "list_price": 194.16
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.2622,
+        "k_intercept": 0.1583,
+        "list_price": 178.63
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.3827,
+        "k_intercept": 0.1168,
+        "list_price": 164.34
+      }
+    ],
+    "price_breaks_eur": [
+      {
+        "qty": 12,
+        "j_slope": 0.2016,
+        "k_intercept": 0.2463,
+        "list_price": 241.17
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.2484,
+        "k_intercept": 0.1412,
+        "list_price": 221.88
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.2024,
+        "k_intercept": 0.2245,
+        "list_price": 204.13
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.2202,
+        "k_intercept": 0.1192,
+        "list_price": 187.8
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.1939,
+        "k_intercept": 0.3123,
+        "list_price": 172.77
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.1354,
+        "k_intercept": 0.2415,
+        "list_price": 158.95
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.165,
+        "k_intercept": 0.2683,
+        "list_price": 146.23
+      }
+    ],
+    "status": "Prototype",
+    "aftermarket_ref": "AMCEB2337",
+    "carbex": {
+      "carbex_pn": "EXCEB2337",
+      "vestas_ref": "OEM-834572",
+      "bgb_part": "CEB2337",
+      "q2_eur": 202.45,
+      "q3_eur": 257.51
+    },
+    "j_slope_ref": 0.1488,
+    "units_from_gerken_50kg": null
+  },
+  {
+    "bgb_ref": "HNE3020",
+    "gerken_ref": "EX4458284",
+    "option": "Example Option",
+    "grade": "Grade C",
+    "description": "Illustrative brush component — example HNE3020",
+    "oem_ref": "OEM-525967",
+    "turbine": "Example Platform 1",
+    "material": "Silver",
+    "currency": "USD",
+    "drawing_image": "image_coming_soon.png",
+    "price_list_date": "2026-01-01",
+    "gerken_locked_eur_kg": 1500.0,
+    "gerken_locked_usd_kg": 1725.0,
+    "price_breaks_usd": [
+      {
+        "qty": 12,
+        "j_slope": 0.1141,
+        "k_intercept": 0.2891,
+        "list_price": 240.47
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.1525,
+        "k_intercept": 0.3757,
+        "list_price": 221.23
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.3468,
+        "k_intercept": 0.2988,
+        "list_price": 203.53
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.1831,
+        "k_intercept": 0.1494,
+        "list_price": 187.25
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.169,
+        "k_intercept": 0.3615,
+        "list_price": 172.27
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.2828,
+        "k_intercept": 0.1372,
+        "list_price": 158.49
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.1641,
+        "k_intercept": 0.2244,
+        "list_price": 145.81
+      }
+    ],
+    "price_breaks_eur": [
+      {
+        "qty": 12,
+        "j_slope": 0.3639,
+        "k_intercept": 0.2752,
+        "list_price": 255.75
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.2156,
+        "k_intercept": 0.2402,
+        "list_price": 235.29
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.1468,
+        "k_intercept": 0.1579,
+        "list_price": 216.47
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.1252,
+        "k_intercept": 0.1602,
+        "list_price": 199.15
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.1192,
+        "k_intercept": 0.3044,
+        "list_price": 183.22
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.3881,
+        "k_intercept": 0.1385,
+        "list_price": 168.56
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.2632,
+        "k_intercept": 0.1659,
+        "list_price": 155.08
+      }
+    ],
+    "status": "Prototype",
+    "aftermarket_ref": "AMHNE3020",
+    "carbex": {
+      "carbex_pn": "EXHNE3020",
+      "vestas_ref": "OEM-332567",
+      "bgb_part": "HNE3020",
+      "q2_eur": 123.66,
+      "q3_eur": 89.89
+    },
+    "j_slope_ref": 0.2071,
+    "units_from_gerken_50kg": null
+  },
+  {
+    "bgb_ref": "TOE4918",
+    "gerken_ref": "EX0785030",
+    "option": "Example Option",
+    "grade": "Grade B",
+    "description": "Illustrative brush component — example TOE4918",
+    "oem_ref": "OEM-196679",
+    "turbine": "Example Platform 2",
+    "material": "Silver",
+    "currency": "USD",
+    "drawing_image": "image_coming_soon.png",
+    "price_list_date": "2026-01-01",
+    "gerken_locked_eur_kg": 1500.0,
+    "gerken_locked_usd_kg": 1725.0,
+    "price_breaks_usd": [
+      {
+        "qty": 12,
+        "j_slope": 0.1168,
+        "k_intercept": 0.3223,
+        "list_price": 188.47
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.1088,
+        "k_intercept": 0.2598,
+        "list_price": 173.39
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.1498,
+        "k_intercept": 0.3301,
+        "list_price": 159.52
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.1459,
+        "k_intercept": 0.3959,
+        "list_price": 146.76
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.3862,
+        "k_intercept": 0.3755,
+        "list_price": 135.02
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.1552,
+        "k_intercept": 0.3318,
+        "list_price": 124.22
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.1895,
+        "k_intercept": 0.2688,
+        "list_price": 114.28
+      }
+    ],
+    "price_breaks_eur": [
+      {
+        "qty": 12,
+        "j_slope": 0.3462,
+        "k_intercept": 0.1874,
+        "list_price": 147.26
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.3797,
+        "k_intercept": 0.1754,
+        "list_price": 135.48
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.1933,
+        "k_intercept": 0.114,
+        "list_price": 124.64
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.1754,
+        "k_intercept": 0.1258,
+        "list_price": 114.67
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.217,
+        "k_intercept": 0.271,
+        "list_price": 105.5
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.3668,
+        "k_intercept": 0.1618,
+        "list_price": 97.06
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.3881,
+        "k_intercept": 0.1406,
+        "list_price": 89.29
+      }
+    ],
+    "status": "In development",
+    "aftermarket_ref": "AMTOE4918",
+    "carbex": {
+      "carbex_pn": "EXTOE4918",
+      "vestas_ref": "OEM-666656",
+      "bgb_part": "TOE4918",
+      "q2_eur": 70.47,
+      "q3_eur": 45.18
+    },
+    "j_slope_ref": 0.3977,
+    "units_from_gerken_50kg": null
+  },
+  {
+    "bgb_ref": "LMV3569",
+    "gerken_ref": "EX2647110",
+    "option": "Example Option",
+    "grade": "Grade A",
+    "description": "Illustrative brush component — example LMV3569",
+    "oem_ref": "OEM-796387",
+    "turbine": "Example Platform 4",
+    "material": "Silver",
+    "currency": "USD",
+    "drawing_image": "image_coming_soon.png",
+    "price_list_date": "2026-01-01",
+    "gerken_locked_eur_kg": 1500.0,
+    "gerken_locked_usd_kg": 1725.0,
+    "price_breaks_usd": [
+      {
+        "qty": 12,
+        "j_slope": 0.1839,
+        "k_intercept": 0.3581,
+        "list_price": 106.01
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.3406,
+        "k_intercept": 0.2842,
+        "list_price": 97.53
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.1613,
+        "k_intercept": 0.1329,
+        "list_price": 89.73
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.1493,
+        "k_intercept": 0.2269,
+        "list_price": 82.55
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.3255,
+        "k_intercept": 0.1306,
+        "list_price": 75.94
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.1218,
+        "k_intercept": 0.1818,
+        "list_price": 69.87
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.2,
+        "k_intercept": 0.284,
+        "list_price": 64.28
+      }
+    ],
+    "price_breaks_eur": [
+      {
+        "qty": 12,
+        "j_slope": 0.2933,
+        "k_intercept": 0.2358,
+        "list_price": 83.91
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.1877,
+        "k_intercept": 0.1244,
+        "list_price": 77.2
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.2113,
+        "k_intercept": 0.3363,
+        "list_price": 71.02
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.1787,
+        "k_intercept": 0.1167,
+        "list_price": 65.34
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.2595,
+        "k_intercept": 0.3903,
+        "list_price": 60.11
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.2436,
+        "k_intercept": 0.214,
+        "list_price": 55.3
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.1995,
+        "k_intercept": 0.2353,
+        "list_price": 50.88
+      }
+    ],
+    "status": "Prototype",
+    "aftermarket_ref": "AMLMV3569",
+    "carbex": {
+      "carbex_pn": "EXLMV3569",
+      "vestas_ref": "OEM-523434",
+      "bgb_part": "LMV3569",
+      "q2_eur": 141.32,
+      "q3_eur": 291.52
+    },
+    "j_slope_ref": 0.3319,
+    "units_from_gerken_50kg": null
+  },
+  {
+    "bgb_ref": "IVS6430",
+    "gerken_ref": "EX6905018",
+    "option": "Example Option",
+    "grade": "Grade B",
+    "description": "Illustrative brush component — example IVS6430",
+    "oem_ref": "OEM-594035",
+    "turbine": "Example Platform 4",
+    "material": "Silver",
+    "currency": "USD",
+    "drawing_image": "image_coming_soon.png",
+    "price_list_date": "2026-01-01",
+    "gerken_locked_eur_kg": 1500.0,
+    "gerken_locked_usd_kg": 1725.0,
+    "price_breaks_usd": [
+      {
+        "qty": 12,
+        "j_slope": 0.387,
+        "k_intercept": 0.1169,
+        "list_price": 343.66
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.3666,
+        "k_intercept": 0.11,
+        "list_price": 316.17
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.135,
+        "k_intercept": 0.1753,
+        "list_price": 290.87
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.3803,
+        "k_intercept": 0.2816,
+        "list_price": 267.6
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.1057,
+        "k_intercept": 0.3523,
+        "list_price": 246.2
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.1286,
+        "k_intercept": 0.1367,
+        "list_price": 226.5
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.1064,
+        "k_intercept": 0.3779,
+        "list_price": 208.38
+      }
+    ],
+    "price_breaks_eur": [
+      {
+        "qty": 12,
+        "j_slope": 0.2161,
+        "k_intercept": 0.3732,
+        "list_price": 294.82
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.1553,
+        "k_intercept": 0.3633,
+        "list_price": 271.23
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.1846,
+        "k_intercept": 0.2193,
+        "list_price": 249.54
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.1144,
+        "k_intercept": 0.2799,
+        "list_price": 229.57
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.1147,
+        "k_intercept": 0.1815,
+        "list_price": 211.21
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.365,
+        "k_intercept": 0.1898,
+        "list_price": 194.31
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.1281,
+        "k_intercept": 0.2802,
+        "list_price": 178.77
+      }
+    ],
+    "status": "Prototype",
+    "aftermarket_ref": "AMIVS6430",
+    "carbex": {
+      "carbex_pn": "EXIVS6430",
+      "vestas_ref": "OEM-994416",
+      "bgb_part": "IVS6430",
+      "q2_eur": 134.36,
+      "q3_eur": 237.63
+    },
+    "j_slope_ref": 0.3701,
+    "units_from_gerken_50kg": null
+  },
+  {
+    "bgb_ref": "DBT2108",
+    "gerken_ref": "EX2100619",
+    "option": "Example Option",
+    "grade": "Grade C",
+    "description": "Illustrative brush component — example DBT2108",
+    "oem_ref": "OEM-081072",
+    "turbine": "Example Platform 1",
+    "material": "Silver",
+    "currency": "USD",
+    "drawing_image": "image_coming_soon.png",
+    "price_list_date": "2026-01-01",
+    "gerken_locked_eur_kg": 1500.0,
+    "gerken_locked_usd_kg": 1725.0,
+    "price_breaks_usd": [
+      {
+        "qty": 12,
+        "j_slope": 0.1807,
+        "k_intercept": 0.1749,
+        "list_price": 203.54
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.3525,
+        "k_intercept": 0.3858,
+        "list_price": 187.26
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.2413,
+        "k_intercept": 0.2505,
+        "list_price": 172.28
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.2096,
+        "k_intercept": 0.262,
+        "list_price": 158.49
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.2628,
+        "k_intercept": 0.1584,
+        "list_price": 145.81
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.136,
+        "k_intercept": 0.1773,
+        "list_price": 134.15
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.2614,
+        "k_intercept": 0.3728,
+        "list_price": 123.42
+      }
+    ],
+    "price_breaks_eur": [
+      {
+        "qty": 12,
+        "j_slope": 0.3009,
+        "k_intercept": 0.3554,
+        "list_price": 123.48
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.1936,
+        "k_intercept": 0.2408,
+        "list_price": 113.6
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.3325,
+        "k_intercept": 0.2887,
+        "list_price": 104.51
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.3985,
+        "k_intercept": 0.1971,
+        "list_price": 96.15
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.3116,
+        "k_intercept": 0.3002,
+        "list_price": 88.46
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.1246,
+        "k_intercept": 0.3429,
+        "list_price": 81.38
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.1234,
+        "k_intercept": 0.2369,
+        "list_price": 74.87
+      }
+    ],
+    "status": "Sellable",
+    "aftermarket_ref": "AMDBT2108",
+    "carbex": {
+      "carbex_pn": "EXDBT2108",
+      "vestas_ref": "OEM-710778",
+      "bgb_part": "DBT2108",
+      "q2_eur": 202.03,
+      "q3_eur": 145.4
+    },
+    "j_slope_ref": 0.3877,
+    "units_from_gerken_50kg": null
+  },
+  {
+    "bgb_ref": "WRH2241",
+    "gerken_ref": "EX7067492",
+    "option": "Example Option",
+    "grade": "Grade B",
+    "description": "Illustrative brush component — example WRH2241",
+    "oem_ref": "OEM-970068",
+    "turbine": "Example Platform 2",
+    "material": "Silver",
+    "currency": "USD",
+    "drawing_image": "image_coming_soon.png",
+    "price_list_date": "2026-01-01",
+    "gerken_locked_eur_kg": 1500.0,
+    "gerken_locked_usd_kg": 1725.0,
+    "price_breaks_usd": [
+      {
+        "qty": 12,
+        "j_slope": 0.3203,
+        "k_intercept": 0.2499,
+        "list_price": 306.05
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.1083,
+        "k_intercept": 0.1236,
+        "list_price": 281.57
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.2314,
+        "k_intercept": 0.1485,
+        "list_price": 259.04
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.1336,
+        "k_intercept": 0.1455,
+        "list_price": 238.32
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.1164,
+        "k_intercept": 0.3748,
+        "list_price": 219.25
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.339,
+        "k_intercept": 0.2974,
+        "list_price": 201.71
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.101,
+        "k_intercept": 0.3494,
+        "list_price": 185.57
+      }
+    ],
+    "price_breaks_eur": [
+      {
+        "qty": 12,
+        "j_slope": 0.3955,
+        "k_intercept": 0.3554,
+        "list_price": 279.25
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.2007,
+        "k_intercept": 0.1432,
+        "list_price": 256.91
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.1943,
+        "k_intercept": 0.1619,
+        "list_price": 236.36
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.3358,
+        "k_intercept": 0.3184,
+        "list_price": 217.45
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.1172,
+        "k_intercept": 0.2619,
+        "list_price": 200.05
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.2547,
+        "k_intercept": 0.3246,
+        "list_price": 184.05
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.3082,
+        "k_intercept": 0.1436,
+        "list_price": 169.32
+      }
+    ],
+    "status": "Sellable",
+    "aftermarket_ref": "AMWRH2241",
+    "carbex": {
+      "carbex_pn": "EXWRH2241",
+      "vestas_ref": "OEM-037184",
+      "bgb_part": "WRH2241",
+      "q2_eur": 66.93,
+      "q3_eur": 171.22
+    },
+    "j_slope_ref": 0.1089,
+    "units_from_gerken_50kg": null
+  },
+  {
+    "bgb_ref": "NAG0300",
+    "gerken_ref": "EX0354617",
+    "option": "Example Option",
+    "grade": "Grade C",
+    "description": "Illustrative brush component — example NAG0300",
+    "oem_ref": "OEM-366437",
+    "turbine": "Example Platform 2",
+    "material": "Silver",
+    "currency": "USD",
+    "drawing_image": "image_coming_soon.png",
+    "price_list_date": "2026-01-01",
+    "gerken_locked_eur_kg": 1500.0,
+    "gerken_locked_usd_kg": 1725.0,
+    "price_breaks_usd": [
+      {
+        "qty": 12,
+        "j_slope": 0.1445,
+        "k_intercept": 0.2977,
+        "list_price": 248.95
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.1174,
+        "k_intercept": 0.1393,
+        "list_price": 229.03
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.238,
+        "k_intercept": 0.2967,
+        "list_price": 210.71
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.1546,
+        "k_intercept": 0.1088,
+        "list_price": 193.85
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.1464,
+        "k_intercept": 0.3002,
+        "list_price": 178.35
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.2643,
+        "k_intercept": 0.2432,
+        "list_price": 164.08
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.1243,
+        "k_intercept": 0.3004,
+        "list_price": 150.95
+      }
+    ],
+    "price_breaks_eur": [
+      {
+        "qty": 12,
+        "j_slope": 0.2929,
+        "k_intercept": 0.1872,
+        "list_price": 267.56
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.3899,
+        "k_intercept": 0.2905,
+        "list_price": 246.16
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.3987,
+        "k_intercept": 0.1819,
+        "list_price": 226.46
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.111,
+        "k_intercept": 0.2216,
+        "list_price": 208.35
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.3162,
+        "k_intercept": 0.1439,
+        "list_price": 191.68
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.3269,
+        "k_intercept": 0.2289,
+        "list_price": 176.34
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.3047,
+        "k_intercept": 0.3023,
+        "list_price": 162.24
+      }
+    ],
+    "status": "In development",
+    "aftermarket_ref": "AMNAG0300",
+    "carbex": {
+      "carbex_pn": "EXNAG0300",
+      "vestas_ref": "OEM-975209",
+      "bgb_part": "NAG0300",
+      "q2_eur": 189.35,
+      "q3_eur": 223.97
+    },
+    "j_slope_ref": 0.1511,
+    "units_from_gerken_50kg": null
+  },
+  {
+    "bgb_ref": "HGP5767",
+    "gerken_ref": "EX7836986",
+    "option": "Example Option",
+    "grade": "Grade C",
+    "description": "Illustrative brush component — example HGP5767",
+    "oem_ref": "OEM-348366",
+    "turbine": "Example Platform 1",
+    "material": "Silver",
+    "currency": "USD",
+    "drawing_image": "image_coming_soon.png",
+    "price_list_date": "2026-01-01",
+    "gerken_locked_eur_kg": 1500.0,
+    "gerken_locked_usd_kg": 1725.0,
+    "price_breaks_usd": [
+      {
+        "qty": 12,
+        "j_slope": 0.1704,
+        "k_intercept": 0.3243,
+        "list_price": 238.0
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.3839,
+        "k_intercept": 0.3057,
+        "list_price": 218.96
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.1391,
+        "k_intercept": 0.179,
+        "list_price": 201.44
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.251,
+        "k_intercept": 0.1496,
+        "list_price": 185.33
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.1139,
+        "k_intercept": 0.2983,
+        "list_price": 170.5
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.3705,
+        "k_intercept": 0.1353,
+        "list_price": 156.86
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.3502,
+        "k_intercept": 0.2434,
+        "list_price": 144.31
+      }
+    ],
+    "price_breaks_eur": [
+      {
+        "qty": 12,
+        "j_slope": 0.3009,
+        "k_intercept": 0.125,
+        "list_price": 233.02
+      },
+      {
+        "qty": 24,
+        "j_slope": 0.2971,
+        "k_intercept": 0.3435,
+        "list_price": 214.38
+      },
+      {
+        "qty": 50,
+        "j_slope": 0.1106,
+        "k_intercept": 0.3423,
+        "list_price": 197.23
+      },
+      {
+        "qty": 100,
+        "j_slope": 0.2413,
+        "k_intercept": 0.203,
+        "list_price": 181.45
+      },
+      {
+        "qty": 500,
+        "j_slope": 0.1357,
+        "k_intercept": 0.1986,
+        "list_price": 166.93
+      },
+      {
+        "qty": 1000,
+        "j_slope": 0.1972,
+        "k_intercept": 0.1909,
+        "list_price": 153.58
+      },
+      {
+        "qty": 5000,
+        "j_slope": 0.2068,
+        "k_intercept": 0.3183,
+        "list_price": 141.29
+      }
+    ],
+    "status": "In development",
+    "aftermarket_ref": "AMHGP5767",
+    "carbex": {
+      "carbex_pn": "EXHGP5767",
+      "vestas_ref": "OEM-882024",
+      "bgb_part": "HGP5767",
+      "q2_eur": 301.13,
+      "q3_eur": 242.22
+    },
+    "j_slope_ref": 0.2449,
+    "units_from_gerken_50kg": null
+  }
+]

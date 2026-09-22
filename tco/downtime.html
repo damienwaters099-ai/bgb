@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Downtime Cost Calculator</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; background: #f0f2f5; min-height: 100vh; color: #1a1a2e; font-size: 14px; }
+header { background: #7c2d12; padding: 0.875rem 2rem; display: flex; align-items: center; gap: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.25); }
+header .logo { color: #fff; font-size: 1rem; font-weight: 600; }
+header .logo span { color: #fed7aa; font-size: 0.75rem; display: block; font-weight: 400; }
+header .crumb { color: #fed7aa; font-size: 0.82rem; margin-left: 8px; }
+header .nav { margin-left: auto; display: flex; gap: 6px; }
+header .nav a { color: #fed7aa; text-decoration: none; border: 1px solid #9a3f1c; border-radius: 6px; padding: 5px 14px; font-size: 0.8rem; }
+header .nav a:hover { background: #92340f; color: #fff; }
+.container { max-width: 1080px; margin: 0 auto; padding: 2rem 1.5rem; }
+.disclaimer {
+  display:flex; gap:10px; align-items:flex-start; background: #fff; border: 1.5px solid #fdba74; border-left: 4px solid #ea580c;
+  border-radius: 10px; padding: 12px 14px; margin-bottom: 20px; font-size: 13px; color: #7c2d12;
+}
+.disclaimer strong { color: #431407; }
+.prefill-note { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px; padding: 10px 14px; margin-bottom: 18px; font-size: 0.82rem; color: #1e3a5f; display: none; }
+.grid2 { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 20px; align-items: start; }
+@media (max-width: 900px) { .grid2 { grid-template-columns: 1fr; } }
+.card { background: #fff; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); margin-bottom: 1.25rem; overflow: hidden; }
+.card-header { padding: 1rem 1.5rem; border-bottom: 1px solid #e5e7eb; }
+.card-header h2 { font-size: 0.95rem; font-weight: 600; color: #7c2d12; }
+.card-body { padding: 1.25rem 1.5rem; }
+.field-section { margin-bottom: 16px; }
+.field-section .section-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: #6b7280; margin-bottom: 8px; display: block; }
+.field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.field { display: flex; flex-direction: column; gap: 4px; }
+.field label { font-size: 12.5px; color: #1a1a1a; font-weight: 600; }
+.field .hint { font-size: 10.5px; color: #9ca3af; }
+.field.full { grid-column: 1 / -1; }
+select, input[type=number], input[type=text] {
+  font: inherit; font-size: 14px; padding: 7px 9px; border-radius: 7px; border: 1.5px solid #d1d5db; background: #fafafa; color: #1a1a1a; width: 100%;
+}
+select:focus, input:focus { outline: 2px solid #ea580c; outline-offset: 1px; border-color: #ea580c; }
+.source-tag { font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; padding: 1px 6px; border-radius: 4px; margin-left: 6px; }
+.source-tag.sourced { background: #dcfce7; color: #166534; }
+.source-tag.placeholder { background: #fef3c7; color: #92400e; }
+.results-card { background: #fff; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); padding: 1.5rem; position: sticky; top: 1.5rem; }
+.results-card h2 { font-size: 0.95rem; font-weight: 700; color: #7c2d12; margin-bottom: 4px; }
+.total-figure { font-size: 2.1rem; font-weight: 800; color: #431407; margin: 10px 0 2px; }
+.total-sub { font-size: 0.78rem; color: #6b7280; margin-bottom: 16px; }
+.bar-stack { display: flex; height: 34px; border-radius: 8px; overflow: hidden; margin-bottom: 14px; }
+.bar-seg { display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: #fff; font-weight: 700; overflow: hidden; white-space: nowrap; }
+.legend-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid #f3f4f6; font-size: 0.83rem; }
+.legend-row:last-child { border-bottom: none; }
+.legend-key { display: flex; align-items: center; gap: 8px; color: #374151; }
+.legend-swatch { width: 11px; height: 11px; border-radius: 3px; flex-shrink: 0; }
+.legend-val { font-weight: 700; color: #1a1a1a; }
+.per-hour { margin-top: 14px; padding-top: 14px; border-top: 1px solid #e5e7eb; font-size: 0.82rem; color: #6b7280; display: flex; justify-content: space-between; }
+.per-hour strong { color: #431407; }
+.sources-note { margin-top: 16px; padding-top: 14px; border-top: 1px solid #e5e7eb; font-size: 0.72rem; color: #9ca3af; line-height: 1.5; }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">BGB Group <span>bgbinnovation.com</span></div>
+  <div class="crumb">Home / TCO / Downtime cost calculator</div>
+  <nav class="nav">
+    <a href="/tco">&larr; TCO hub</a>
+    <a href="/">Home</a>
+  </nav>
+</header>
+
+<div class="container">
+  <div class="disclaimer">
+    <span>⚠️</span>
+    <div><strong>First-pass model — needs sign-off before it reaches a customer.</strong> Every rate below is either sourced from public industry data (tagged <span class="source-tag sourced">SOURCED</span>) or a placeholder order-of-magnitude figure (tagged <span class="source-tag placeholder">PLACEHOLDER</span>) pending your actual contract rates. This is the human-in-the-loop gate: Finance/Engineering validate the rates before this number is quoted.</div>
+  </div>
+
+  <div class="prefill-note" id="prefillNote"></div>
+
+  <div class="grid2">
+    <div>
+      <div class="card">
+        <div class="card-header"><h2>Event &amp; site</h2></div>
+        <div class="card-body">
+          <div class="field-section">
+            <div class="field-grid">
+              <div class="field">
+                <label>Country / farm</label>
+                <input type="text" id="country" placeholder="e.g. United Kingdom" />
+              </div>
+              <div class="field">
+                <label>Location</label>
+                <select id="location">
+                  <option value="onshore">Onshore</option>
+                  <option value="offshore">Offshore</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Event type</label>
+                <select id="eventType">
+                  <option value="planned">Planned (scheduled service)</option>
+                  <option value="unplanned">Unplanned (fault / failure)</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Technician arrangement</label>
+                <select id="techArrangement">
+                  <option value="inhouse">In-house</option>
+                  <option value="subcontracted">Subcontracted</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Turbines affected</label>
+                <input type="number" id="turbinesAffected" value="1" min="1" />
+              </div>
+              <div class="field">
+                <label>Rated capacity per turbine (kW)</label>
+                <input type="number" id="ratedCapacity" value="3000" min="0" step="50" />
+              </div>
+              <div class="field full">
+                <label>Downtime duration (hours)</label>
+                <input type="number" id="downtimeHours" value="24" min="0" step="1" />
+                <span class="hint">Time the affected turbine(s) are offline — from fault/stop to back in service.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><h2>Lost generation <span class="source-tag placeholder">PLACEHOLDER</span></h2></div>
+        <div class="card-body">
+          <div class="field-grid">
+            <div class="field">
+              <label>Capacity factor (%)</label>
+              <input type="number" id="capacityFactor" value="35" min="0" max="100" step="1" />
+              <span class="hint">Typical: ~30% onshore, ~40-45% offshore — enter the farm's actual factor if known.</span>
+            </div>
+            <div class="field">
+              <label>Electricity price (£/MWh)</label>
+              <input type="number" id="elecPrice" value="75" min="0" step="1" />
+              <span class="hint">Use your PPA strike price or the relevant wholesale/curtailment reference rate.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><h2>Labour</h2></div>
+        <div class="card-body">
+          <div class="field-grid">
+            <div class="field">
+              <label>Technicians required</label>
+              <input type="number" id="numTechs" value="2" min="1" />
+            </div>
+            <div class="field">
+              <label>Labour rate (£/technician/day) <span class="source-tag placeholder">PLACEHOLDER</span></label>
+              <input type="number" id="labourRate" value="220" min="0" step="10" />
+              <span class="hint" id="labourHint">In-house onshore default ≈ £220/day, based on £40-50k/yr experienced technician salary (Scotland, 2026) ÷ ~220 working days. Adjust to your actual on-costs.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" id="accessCard">
+        <div class="card-header"><h2>Access / mobilisation <span class="source-tag sourced">SOURCED — see notes</span></h2></div>
+        <div class="card-body">
+          <div class="field-grid">
+            <div class="field" id="vesselTypeField">
+              <label>Vessel type (offshore only)</label>
+              <select id="vesselType">
+                <option value="ctv">CTV — routine/planned access</option>
+                <option value="jackup">Jack-up / heavy-lift — major component or unplanned</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Access / vessel day rate (£/day)</label>
+              <input type="number" id="accessRate" value="2500" min="0" step="50" />
+              <span class="hint" id="accessHint"></span>
+            </div>
+            <div class="field">
+              <label>Access/mobilisation days</label>
+              <input type="number" id="accessDays" value="1" min="0" step="0.5" />
+            </div>
+            <div class="field">
+              <label>Unplanned mobilisation premium (%) <span class="source-tag placeholder">PLACEHOLDER</span></label>
+              <input type="number" id="unplannedPremium" value="30" min="0" step="5" />
+              <span class="hint">Applied automatically when event type = Unplanned — emergency callout / vessel availability premium.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="results-card">
+      <h2>Estimated downtime cost</h2>
+      <div class="total-figure" id="totalFigure">£0</div>
+      <div class="total-sub" id="totalSub">for this event</div>
+
+      <div class="bar-stack" id="barStack"></div>
+
+      <div id="legendRows"></div>
+
+      <div class="per-hour">
+        <span>Cost per downtime hour</span>
+        <strong id="perHourVal">£0/hr</strong>
+      </div>
+
+      <div class="sources-note">
+        <strong>Sourced figures:</strong> CTV charter day rate £2,000&ndash;£3,250 and jack-up spot-market charter £95,300&ndash;£287,400/day, per Kolios et al., "Optimum CTV fleet selection" and "Vessel charter rate estimation for offshore wind O&amp;M activities" (University of Strathclyde) — vessels run ~73% of total offshore O&amp;M cost per the same study. Offshore lifetime O&amp;M cost benchmark £40&ndash;60/MWh (southern North Sea, industry commentary). Onshore technician salary £40k&ndash;50k/yr experienced (Scotland, 2026, PlanItPlus). Everything else here is a placeholder default — replace with your actual contracts before this number leaves the building.
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const COLORS = { generation: '#eb6834', labour: '#2a78d6', access: '#7c2d12', penalty: '#6b7280' };
+
+function updateDefaultsForLocation() {
+  const loc = document.getElementById('location').value;
+  const vesselField = document.getElementById('vesselTypeField');
+  const accessRate = document.getElementById('accessRate');
+  const accessHint = document.getElementById('accessHint');
+  const labourRate = document.getElementById('labourRate');
+  const labourHint = document.getElementById('labourHint');
+  const techArrangement = document.getElementById('techArrangement').value;
+
+  if (loc === 'offshore') {
+    vesselField.style.display = '';
+    onVesselTypeChange();
+    labourRate.value = techArrangement === 'subcontracted' ? 640 : 340;
+    labourHint.textContent = 'Offshore default carries a certification/allowance uplift over onshore (placeholder multiplier — not independently sourced). Adjust to your actual offshore contract rates.';
+  } else {
+    vesselField.style.display = 'none';
+    accessRate.value = 300;
+    accessHint.textContent = 'Onshore access/plant hire (crane, road access) — placeholder, not sourced. Typically minor relative to offshore vessel cost.';
+    labourRate.value = techArrangement === 'subcontracted' ? 380 : 220;
+    labourHint.textContent = 'In-house onshore default ≈ £220/day, based on £40-50k/yr experienced technician salary (Scotland, 2026) ÷ ~220 working days. Subcontracted default is a placeholder markup. Adjust to your actual on-costs.';
+  }
+  calc();
+}
+
+function onVesselTypeChange() {
+  const vType = document.getElementById('vesselType').value;
+  const accessRate = document.getElementById('accessRate');
+  const accessHint = document.getElementById('accessHint');
+  if (vType === 'ctv') {
+    accessRate.value = 2500;
+    accessHint.innerHTML = '<strong>Sourced:</strong> CTV charter £2,000&ndash;£3,250/day (Strathclyde CTV fleet study). Default is the midpoint.';
+  } else {
+    accessRate.value = 120000;
+    accessHint.innerHTML = '<strong>Sourced:</strong> jack-up spot-market charter £95,300&ndash;£287,400/day (Strathclyde vessel charter-rate study). Default is the low end of spot rates — your negotiated O&amp;M contract rate is very likely lower than spot.';
+  }
+}
+
+function calc() {
+  const turbines = parseFloat(document.getElementById('turbinesAffected').value) || 0;
+  const capacityKw = parseFloat(document.getElementById('ratedCapacity').value) || 0;
+  const hours = parseFloat(document.getElementById('downtimeHours').value) || 0;
+  const capFactor = (parseFloat(document.getElementById('capacityFactor').value) || 0) / 100;
+  const elecPrice = parseFloat(document.getElementById('elecPrice').value) || 0;
+  const numTechs = parseFloat(document.getElementById('numTechs').value) || 0;
+  const labourRate = parseFloat(document.getElementById('labourRate').value) || 0;
+  const accessRate = parseFloat(document.getElementById('accessRate').value) || 0;
+  const accessDays = parseFloat(document.getElementById('accessDays').value) || 0;
+  const unplannedPremium = (parseFloat(document.getElementById('unplannedPremium').value) || 0) / 100;
+  const isUnplanned = document.getElementById('eventType').value === 'unplanned';
+
+  // Lost generation value: MWh lost x price
+  const mwhLost = (turbines * capacityKw * capFactor * hours) / 1000;
+  const generationCost = mwhLost * elecPrice;
+
+  // Labour: technicians x day-rate, hours converted to days (min 1 day per callout)
+  const labourDays = Math.max(hours / 24, hours > 0 ? 0.25 : 0);
+  const labourCost = numTechs * labourRate * labourDays;
+
+  // Access/mobilisation: vessel or plant, with unplanned premium
+  let accessCost = accessRate * accessDays;
+  if (isUnplanned) accessCost *= (1 + unplannedPremium);
+
+  const total = generationCost + labourCost + accessCost;
+
+  document.getElementById('totalFigure').textContent = '£' + Math.round(total).toLocaleString();
+  document.getElementById('totalSub').textContent = `for this ${hours}-hour, ${turbines}-turbine event`;
+
+  const segs = [
+    { key: 'generation', label: 'Lost generation', val: generationCost },
+    { key: 'labour', label: 'Labour', val: labourCost },
+    { key: 'access', label: document.getElementById('location').value === 'offshore' ? 'Vessel / mobilisation' : 'Access / plant', val: accessCost },
+  ];
+
+  const barStack = document.getElementById('barStack');
+  barStack.innerHTML = segs.filter(s => s.val > 0).map(s => {
+    const pct = total > 0 ? (s.val / total) * 100 : 0;
+    return `<div class="bar-seg" style="width:${pct}%;background:${COLORS[s.key]}">${pct > 12 ? Math.round(pct) + '%' : ''}</div>`;
+  }).join('');
+
+  document.getElementById('legendRows').innerHTML = segs.map(s => `
+    <div class="legend-row">
+      <div class="legend-key"><span class="legend-swatch" style="background:${COLORS[s.key]}"></span>${s.label}</div>
+      <div class="legend-val">£${Math.round(s.val).toLocaleString()}</div>
+    </div>`).join('');
+
+  document.getElementById('perHourVal').textContent = hours > 0 ? '£' + Math.round(total / hours).toLocaleString() + '/hr' : '£0/hr';
+}
+
+document.querySelectorAll('input, select').forEach(el => el.addEventListener('input', calc));
+document.getElementById('location').addEventListener('change', updateDefaultsForLocation);
+document.getElementById('techArrangement').addEventListener('change', updateDefaultsForLocation);
+document.getElementById('vesselType').addEventListener('change', onVesselTypeChange);
+
+// Prefill from Wind Farm lookup "Use →" button
+(function () {
+  const params = new URLSearchParams(window.location.search);
+  const notes = [];
+  if (params.get('country')) { document.getElementById('country').value = params.get('country'); notes.push('country'); }
+  if (params.get('offshore') === 'Yes') { document.getElementById('location').value = 'offshore'; notes.push('offshore/onshore'); }
+  else if (params.get('offshore') === 'No') { document.getElementById('location').value = 'onshore'; }
+  if (params.get('capacity_kw') && params.get('turbines')) {
+    const perTurbine = parseFloat(params.get('capacity_kw')) / parseFloat(params.get('turbines'));
+    if (perTurbine > 0) { document.getElementById('ratedCapacity').value = Math.round(perTurbine); notes.push('rated capacity/turbine'); }
+  }
+  if (params.get('farm_name')) {
+    document.getElementById('prefillNote').style.display = 'block';
+    document.getElementById('prefillNote').textContent = `Pre-filled from Wind Farm lookup: ${params.get('farm_name')}. Review before relying on these figures — the master file doesn't include capacity factor or electricity price.`;
+  }
+  updateDefaultsForLocation();
+})();
+</script>
+</body>
+</html>

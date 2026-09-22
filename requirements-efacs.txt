@@ -1,0 +1,5 @@
+# Only needed on whichever server runs LiveEFACSClient's SQL Server connection
+# (the droplet with VPN access, not Render — Render's build environment can't
+# compile pyodbc without unixODBC installed, and can't run the VPN anyway).
+# Install with: pip install -r requirements.txt -r requirements-efacs.txt
+pyodbc==5.1.0

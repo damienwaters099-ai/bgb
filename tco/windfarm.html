@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wind Farm Lookup</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; background: #f0f2f5; min-height: 100vh; color: #1a1a2e; font-size: 14px; }
+header { background: #0b5d0b; padding: 0.875rem 2rem; display: flex; align-items: center; gap: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.25); }
+header .logo { color: #fff; font-size: 1rem; font-weight: 600; }
+header .logo span { color: #b6e3b6; font-size: 0.75rem; display: block; font-weight: 400; }
+header .crumb { color: #b6e3b6; font-size: 0.82rem; margin-left: 8px; }
+header .nav { margin-left: auto; display: flex; gap: 6px; }
+header .nav a { color: #b6e3b6; text-decoration: none; border: 1px solid #1c7a1c; border-radius: 6px; padding: 5px 14px; font-size: 0.8rem; }
+header .nav a:hover { background: #146814; color: #fff; }
+.container { max-width: 1080px; margin: 0 auto; padding: 2rem 1.5rem; }
+.card { background: #fff; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); margin-bottom: 1.25rem; overflow: hidden; }
+.card-header { padding: 1rem 1.5rem; border-bottom: 1px solid #e5e7eb; }
+.card-header h2 { font-size: 0.95rem; font-weight: 600; color: #0b5d0b; }
+.card-body { padding: 1.25rem 1.5rem; }
+.search-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.search-row input, .search-row select { padding: 8px 10px; border: 1.5px solid #d1d5db; border-radius: 7px; font-size: 0.875rem; outline: none; font-family: inherit; }
+.search-row input#q { flex: 2; min-width: 220px; }
+.search-row select { flex: 1; min-width: 140px; }
+.search-row input:focus, .search-row select:focus { border-color: #0b5d0b; }
+.btn { height: 38px; padding: 0 1.1rem; border-radius: 7px; border: none; font-size: 0.875rem; font-weight: 500; cursor: pointer; background: #0b5d0b; color: #fff; }
+.btn:hover { background: #094d09; }
+.btn-secondary { background: #f3f4f6; color: #374151; border: 1px solid #d1d5db; }
+.result-count { font-size: 0.8rem; color: #6b7280; margin: 10px 0; }
+table.results { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+table.results th { background: #eef7ee; color: #0b5d0b; padding: 8px 10px; text-align: left; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; border-bottom: 1px solid #d1d5db; white-space: nowrap; }
+table.results td { padding: 8px 10px; border-bottom: 0.5px solid #e5e7eb; vertical-align: top; }
+table.results tr:hover td { background: #f9fafb; }
+.tag { display: inline-block; padding: 2px 9px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; }
+.tag-offshore { background: #dbeafe; color: #1d4ed8; }
+.tag-onshore { background: #dcfce7; color: #166534; }
+.use-btn { font-size: 0.72rem; padding: 3px 9px; height: auto; border-radius: 5px; margin-right: 4px; }
+.view-btn { font-size: 0.72rem; padding: 3px 9px; height: auto; border-radius: 5px; }
+.empty-state { text-align: center; padding: 2.5rem 1rem; color: #9ca3af; font-size: 0.875rem; }
+.note { font-size: 0.78rem; color: #6b7280; margin-top: 10px; }
+.table-scroll { overflow: auto; max-height: 62vh; border: 1px solid #e5e7eb; border-radius: 8px; }
+.table-scroll table.results th { position: sticky; top: 0; z-index: 1; }
+table.results td, table.results th { white-space: nowrap; }
+.filters-toggle { background: none; border: none; color: #0b5d0b; font-size: 0.8rem; font-weight: 600; cursor: pointer; padding: 4px 0; margin-top: 8px; }
+.more-filters { display: none; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+.more-filters.open { display: flex; }
+.more-filters input, .more-filters select { padding: 8px 10px; border: 1.5px solid #d1d5db; border-radius: 7px; font-size: 0.875rem; outline: none; font-family: inherit; flex: 1; min-width: 160px; }
+.more-filters input:focus { border-color: #0b5d0b; }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">BGB Group <span>bgbinnovation.com</span></div>
+  <div class="crumb">Home / TCO / Wind farm lookup</div>
+  <nav class="nav">
+    <a href="/tco">&larr; TCO hub</a>
+    <a href="/">Home</a>
+  </nav>
+</header>
+
+<div class="container">
+  <div class="card">
+    <div class="card-header"><h2>Wind farm lookup</h2></div>
+    <div class="card-body">
+      <div class="search-row">
+        <input type="text" id="q" placeholder="Farm name, city, operator, owner, developer, manufacturer or model…" autocomplete="off" />
+        <input type="text" id="country" list="countryList" placeholder="All countries" autocomplete="off" />
+        <datalist id="countryList"></datalist>
+        <select id="offshore">
+          <option value="">Onshore &amp; offshore</option>
+          <option value="Yes">Offshore only</option>
+          <option value="No">Onshore only</option>
+        </select>
+        <button class="btn" onclick="search()">Search</button>
+      </div>
+      <button class="filters-toggle" onclick="toggleFilters()" id="filtersToggle">+ Filter by manufacturer, model, owner or operator</button>
+      <div class="more-filters" id="moreFilters">
+        <input type="text" id="f-manufacturer" list="manufacturerList" placeholder="Manufacturer (e.g. Vestas)" autocomplete="off" />
+        <datalist id="manufacturerList"></datalist>
+        <input type="text" id="f-model" placeholder="Turbine model (e.g. V90)" autocomplete="off" />
+        <input type="text" id="f-owner" placeholder="Owner" autocomplete="off" />
+        <input type="text" id="f-operator" placeholder="Operator" autocomplete="off" />
+      </div>
+      <div class="result-count" id="resultCount"></div>
+      <div id="results"></div>
+      <p class="note">Source: Windfarms World Master, 43,013 records across 132 countries. Fields shown as provided in the master file — cross-check before quoting on any figure marked "#ND" (not disclosed) in the underlying data.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+async function loadCountries() {
+  try {
+    const resp = await fetch('/tco/windfarm-countries');
+    const countries = await resp.json();
+    document.getElementById('countryList').innerHTML = countries.map(c => `<option value="${c}">`).join('');
+  } catch(e) {}
+}
+loadCountries();
+
+async function loadManufacturers() {
+  try {
+    const resp = await fetch('/tco/windfarm-manufacturers');
+    const list = await resp.json();
+    document.getElementById('manufacturerList').innerHTML = list.map(m => `<option value="${m}">`).join('');
+  } catch(e) {}
+}
+loadManufacturers();
+
+function toggleFilters() {
+  const el = document.getElementById('moreFilters');
+  const open = el.classList.toggle('open');
+  document.getElementById('filtersToggle').textContent = (open ? '− Hide' : '+ Filter by') + ' manufacturer, model, owner or operator';
+}
+
+async function search() {
+  const q = document.getElementById('q').value.trim();
+  const country = document.getElementById('country').value.trim();
+  const offshore = document.getElementById('offshore').value;
+  const manufacturer = document.getElementById('f-manufacturer').value.trim();
+  const model = document.getElementById('f-model').value.trim();
+  const owner = document.getElementById('f-owner').value.trim();
+  const operator = document.getElementById('f-operator').value.trim();
+  const params = new URLSearchParams();
+  if (q) params.set('q', q);
+  if (country) params.set('country', country);
+  if (offshore) params.set('offshore', offshore);
+  if (manufacturer) params.set('manufacturer', manufacturer);
+  if (model) params.set('model', model);
+  if (owner) params.set('owner', owner);
+  if (operator) params.set('operator', operator);
+
+  const resultsEl = document.getElementById('results');
+  const countEl = document.getElementById('resultCount');
+  resultsEl.innerHTML = '<div class="empty-state">Searching…</div>';
+
+  try {
+    const resp = await fetch('/tco/windfarm-search?' + params.toString());
+    const data = await resp.json();
+    if (!data.results.length) {
+      resultsEl.innerHTML = '<div class="empty-state">No matches. Try a broader search or clear filters.</div>';
+      countEl.textContent = '';
+      return;
+    }
+    const total = data.total !== undefined ? data.total : data.results.length;
+    countEl.textContent = `${total.toLocaleString()} match${total===1?'':'es'}${data.truncated ? ' — showing first ' + data.results.length + '. Narrow your search (country, manufacturer, model, owner or operator) to see the rest.' : ''}`;
+    resultsEl.innerHTML = `<div class="table-scroll"><table class="results">
+      <thead><tr>
+        <th>Farm</th><th>Country / Area</th><th>Type</th><th>Turbines</th><th>Total power</th>
+        <th>Manufacturer / model</th><th>Operator</th><th>Owner</th><th>Status</th><th></th>
+      </tr></thead>
+      <tbody>${data.results.map(r => `
+        <tr>
+          <td><strong>${r.name || '—'}</strong>${r.name2 ? '<br><span style="color:#9ca3af">' + r.name2 + '</span>' : ''}</td>
+          <td>${r.country || '—'}${r.area ? '<br><span style="color:#9ca3af">' + r.area + (r.city ? ', ' + r.city : '') + '</span>' : ''}</td>
+          <td><span class="tag ${r.offshore === 'Yes' ? 'tag-offshore' : 'tag-onshore'}">${r.offshore === 'Yes' ? 'Offshore' : 'Onshore'}</span></td>
+          <td>${r.num_turbines || '—'}</td>
+          <td>${r.total_power_kw ? (parseFloat(r.total_power_kw).toLocaleString()) + ' kW' : '—'}</td>
+          <td>${[r.manufacturer, r.turbine_model].filter(Boolean).join(' / ') || '—'}</td>
+          <td>${r.operator || '—'}</td>
+          <td>${r.owner || '—'}</td>
+          <td>${r.status || '—'}</td>
+          <td style="white-space:nowrap">
+            <button class="btn use-btn" onclick='useInDowntime(${JSON.stringify(r).replace(/'/g, "&apos;")})'>Use &rarr;</button>
+            <button class="btn btn-secondary view-btn" onclick='viewFarm(${JSON.stringify(r).replace(/'/g, "&apos;")})'>View</button>
+          </td>
+        </tr>`).join('')}
+      </tbody>
+    </table></div>`;
+  } catch(e) {
+    resultsEl.innerHTML = '<div class="empty-state">Search failed — try again.</div>';
+  }
+}
+
+function useInDowntime(r) {
+  const params = new URLSearchParams();
+  if (r.country) params.set('country', r.country);
+  params.set('offshore', r.offshore === 'Yes' ? 'Yes' : 'No');
+  if (r.num_turbines) params.set('turbines', r.num_turbines);
+  if (r.total_power_kw) params.set('capacity_kw', r.total_power_kw);
+  if (r.name) params.set('farm_name', r.name);
+  window.location.href = '/tco/downtime?' + params.toString();
+}
+
+function viewFarm(r) {
+  const params = new URLSearchParams();
+  if (r.country) params.set('country', r.country);
+  if (r.name) params.set('name', r.name);
+  if (r.area) params.set('area', r.area);
+  // Carry the current search state along so "back to search results" can restore it.
+  const currentSearch = window.location.search.replace(/^\?/, '');
+  if (currentSearch) params.set('back', currentSearch);
+  window.location.href = '/tco/windfarm-view-page?' + params.toString();
+}
+
+document.getElementById('q').addEventListener('keydown', e => { if (e.key === 'Enter') search(); });
+document.getElementById('country').addEventListener('keydown', e => { if (e.key === 'Enter') search(); });
+
+// Restore a previous search when arriving back from a farm detail page (or a shared link).
+(function restoreFromQuery() {
+  const params = new URLSearchParams(window.location.search);
+  if (![...params.keys()].length) return;
+  if (params.get('q')) document.getElementById('q').value = params.get('q');
+  if (params.get('country')) document.getElementById('country').value = params.get('country');
+  if (params.get('offshore')) document.getElementById('offshore').value = params.get('offshore');
+  if (params.get('manufacturer')) document.getElementById('f-manufacturer').value = params.get('manufacturer');
+  if (params.get('model')) document.getElementById('f-model').value = params.get('model');
+  if (params.get('owner')) document.getElementById('f-owner').value = params.get('owner');
+  if (params.get('operator')) document.getElementById('f-operator').value = params.get('operator');
+  if (params.get('manufacturer') || params.get('model') || params.get('owner') || params.get('operator')) {
+    document.getElementById('moreFilters').classList.add('open');
+    document.getElementById('filtersToggle').textContent = '− Hide manufacturer, model, owner or operator filters';
+  }
+  search();
+})();
+</script>
+</body>
+</html>

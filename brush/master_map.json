@@ -1,0 +1,706 @@
+{
+  "NAL0048": {
+    "oem_refs": [
+      "OEM-045019"
+    ],
+    "aftermarket_ref": "AMNAL0048",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM C",
+    "turbine_type": "Example Platform 1",
+    "brush_type": "Example Brush Type 1",
+    "material": "Example composite material (copper-type)"
+  },
+  "DFQ9539": {
+    "oem_refs": [
+      "OEM-796888"
+    ],
+    "aftermarket_ref": "AMDFQ9539",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM B",
+    "turbine_type": "Example Platform 3",
+    "brush_type": "Example Brush Type 2",
+    "material": "Example composite material (copper-type)"
+  },
+  "BWH1138": {
+    "oem_refs": [
+      "OEM-062625"
+    ],
+    "aftermarket_ref": "AMBWH1138",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM C",
+    "turbine_type": "Example Platform 1",
+    "brush_type": "Example Brush Type 1",
+    "material": "Example composite material (copper-type)"
+  },
+  "EPQ3500": {
+    "oem_refs": [
+      "OEM-962549"
+    ],
+    "aftermarket_ref": "AMEPQ3500",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM A",
+    "turbine_type": "Example Platform 2",
+    "brush_type": "Example Brush Type 2",
+    "material": "Example composite material (copper-type)"
+  },
+  "FRL3542": {
+    "oem_refs": [
+      "OEM-236159"
+    ],
+    "aftermarket_ref": "AMFRL3542",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM C",
+    "turbine_type": "Example Platform 2",
+    "brush_type": "Example Brush Type 2",
+    "material": "Example composite material (copper-type)"
+  },
+  "USG5587": {
+    "oem_refs": [
+      "OEM-524511"
+    ],
+    "aftermarket_ref": "AMUSG5587",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM A",
+    "turbine_type": "Example Platform 2",
+    "brush_type": "Example Brush Type 1",
+    "material": "Example composite material (copper-type)"
+  },
+  "HZD4714": {
+    "oem_refs": [
+      "OEM-124220"
+    ],
+    "aftermarket_ref": "AMHZD4714",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM B",
+    "turbine_type": "Example Platform 1",
+    "brush_type": "Example Brush Type 2",
+    "material": "Example composite material (copper-type)"
+  },
+  "BRT5836": {
+    "oem_refs": [
+      "OEM-586562"
+    ],
+    "aftermarket_ref": "AMBRT5836",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM A",
+    "turbine_type": "Example Platform 3",
+    "brush_type": "Example Brush Type 1",
+    "material": "Example composite material (copper-type)"
+  },
+  "PPL8946": {
+    "oem_refs": [
+      "OEM-745643"
+    ],
+    "aftermarket_ref": "AMPPL8946",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM C",
+    "turbine_type": "Example Platform 3",
+    "brush_type": "Example Brush Type 3",
+    "material": "Example composite material (copper-type)"
+  },
+  "BSQ9823": {
+    "oem_refs": [
+      "OEM-225350"
+    ],
+    "aftermarket_ref": "AMBSQ9823",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM C",
+    "turbine_type": "Example Platform 4",
+    "brush_type": "Example Brush Type 3",
+    "material": "Example composite material (copper-type)"
+  },
+  "RAM1107": {
+    "oem_refs": [
+      "OEM-382542"
+    ],
+    "aftermarket_ref": "AMRAM1107",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM A",
+    "turbine_type": "Example Platform 2",
+    "brush_type": "Example Brush Type 2",
+    "material": "Example composite material (copper-type)"
+  },
+  "DGK8045": {
+    "oem_refs": [
+      "OEM-927108"
+    ],
+    "aftermarket_ref": "AMDGK8045",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM C",
+    "turbine_type": "Example Platform 3",
+    "brush_type": "Example Brush Type 3",
+    "material": "Example composite material (copper-type)"
+  },
+  "WVW2438": {
+    "oem_refs": [
+      "OEM-403471"
+    ],
+    "aftermarket_ref": "AMWVW2438",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM B",
+    "turbine_type": "Example Platform 3",
+    "brush_type": "Example Brush Type 1",
+    "material": "Example composite material (copper-type)"
+  },
+  "YDE2245": {
+    "oem_refs": [
+      "OEM-297133"
+    ],
+    "aftermarket_ref": "AMYDE2245",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM A",
+    "turbine_type": "Example Platform 2",
+    "brush_type": "Example Brush Type 3",
+    "material": "Example composite material (copper-type)"
+  },
+  "GAK3596": {
+    "oem_refs": [
+      "OEM-668857"
+    ],
+    "aftermarket_ref": "AMGAK3596",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM A",
+    "turbine_type": "Example Platform 4",
+    "brush_type": "Example Brush Type 3",
+    "material": "Example composite material (copper-type)"
+  },
+  "NQR0878": {
+    "oem_refs": [
+      "OEM-774779"
+    ],
+    "aftermarket_ref": "AMNQR0878",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM B",
+    "turbine_type": "Example Platform 2",
+    "brush_type": "Example Brush Type 1",
+    "material": "Example composite material (copper-type)"
+  },
+  "UKK1600": {
+    "oem_refs": [
+      "OEM-180754"
+    ],
+    "aftermarket_ref": "AMUKK1600",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM A",
+    "turbine_type": "Example Platform 1",
+    "brush_type": "Example Brush Type 2",
+    "material": "Example composite material (copper-type)"
+  },
+  "FEI0011": {
+    "oem_refs": [
+      "OEM-954786"
+    ],
+    "aftermarket_ref": "AMFEI0011",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM C",
+    "turbine_type": "Example Platform 2",
+    "brush_type": "Example Brush Type 3",
+    "material": "Example composite material (copper-type)"
+  },
+  "JAW6123": {
+    "oem_refs": [
+      "OEM-344723"
+    ],
+    "aftermarket_ref": "AMJAW6123",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM A",
+    "turbine_type": "Example Platform 3",
+    "brush_type": "Example Brush Type 3",
+    "material": "Example composite material (copper-type)"
+  },
+  "JDW9440": {
+    "oem_refs": [
+      "OEM-533784"
+    ],
+    "aftermarket_ref": "AMJDW9440",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM B",
+    "turbine_type": "Example Platform 1",
+    "brush_type": "Example Brush Type 1",
+    "material": "Example composite material (copper-type)"
+  },
+  "CIG8109": {
+    "oem_refs": [
+      "OEM-413155"
+    ],
+    "aftermarket_ref": "AMCIG8109",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM C",
+    "turbine_type": "Example Platform 1",
+    "brush_type": "Example Brush Type 1",
+    "material": "Example composite material (copper-type)"
+  },
+  "NDO0598": {
+    "oem_refs": [
+      "OEM-093889"
+    ],
+    "aftermarket_ref": "AMNDO0598",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM B",
+    "turbine_type": "Example Platform 1",
+    "brush_type": "Example Brush Type 1",
+    "material": "Example composite material (copper-type)"
+  },
+  "SGJ1757": {
+    "oem_refs": [
+      "OEM-249005"
+    ],
+    "aftermarket_ref": "AMSGJ1757",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM A",
+    "turbine_type": "Example Platform 2",
+    "brush_type": "Example Brush Type 1",
+    "material": "Example composite material (copper-type)"
+  },
+  "JOD0965": {
+    "oem_refs": [
+      "OEM-497595"
+    ],
+    "aftermarket_ref": "AMJOD0965",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM A",
+    "turbine_type": "Example Platform 3",
+    "brush_type": "Example Brush Type 3",
+    "material": "Example composite material (copper-type)"
+  },
+  "IFV9888": {
+    "oem_refs": [
+      "OEM-563353"
+    ],
+    "aftermarket_ref": "AMIFV9888",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM C",
+    "turbine_type": "Example Platform 3",
+    "brush_type": "Example Brush Type 3",
+    "material": "Example composite material (copper-type)"
+  },
+  "TFN3002": {
+    "oem_refs": [
+      "OEM-965034"
+    ],
+    "aftermarket_ref": "AMTFN3002",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM C",
+    "turbine_type": "Example Platform 1",
+    "brush_type": "Example Brush Type 3",
+    "material": "Example composite material (copper-type)"
+  },
+  "GSY4999": {
+    "oem_refs": [
+      "OEM-558944"
+    ],
+    "aftermarket_ref": "AMGSY4999",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM B",
+    "turbine_type": "Example Platform 1",
+    "brush_type": "Example Brush Type 1",
+    "material": "Example composite material (copper-type)"
+  },
+  "JFF1269": {
+    "oem_refs": [
+      "OEM-693581"
+    ],
+    "aftermarket_ref": "AMJFF1269",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM C",
+    "turbine_type": "Example Platform 1",
+    "brush_type": "Example Brush Type 3",
+    "material": "Example composite material (copper-type)"
+  },
+  "VMQ7069": {
+    "oem_refs": [
+      "OEM-398518"
+    ],
+    "aftermarket_ref": "AMVMQ7069",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM C",
+    "turbine_type": "Example Platform 2",
+    "brush_type": "Example Brush Type 3",
+    "material": "Example composite material (copper-type)"
+  },
+  "UTM1738": {
+    "oem_refs": [
+      "OEM-689841"
+    ],
+    "aftermarket_ref": "AMUTM1738",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM A",
+    "turbine_type": "Example Platform 1",
+    "brush_type": "Example Brush Type 3",
+    "material": "Example composite material (copper-type)"
+  },
+  "ZKK9711": {
+    "oem_refs": [
+      "OEM-255116"
+    ],
+    "aftermarket_ref": "AMZKK9711",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM A",
+    "turbine_type": "Example Platform 2",
+    "brush_type": "Example Brush Type 3",
+    "material": "Example composite material (copper-type)"
+  },
+  "DXU1896": {
+    "oem_refs": [
+      "OEM-639604"
+    ],
+    "aftermarket_ref": "AMDXU1896",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM A",
+    "turbine_type": "Example Platform 1",
+    "brush_type": "Example Brush Type 1",
+    "material": "Example composite material (copper-type)"
+  },
+  "YLW8222": {
+    "oem_refs": [
+      "OEM-736038"
+    ],
+    "aftermarket_ref": "AMYLW8222",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM B",
+    "turbine_type": "Example Platform 4",
+    "brush_type": "Example Brush Type 1",
+    "material": "Example composite material (silver-type)"
+  },
+  "GPG4193": {
+    "oem_refs": [
+      "OEM-561452"
+    ],
+    "aftermarket_ref": "AMGPG4193",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM C",
+    "turbine_type": "Example Platform 1",
+    "brush_type": "Example Brush Type 2",
+    "material": "Example composite material (silver-type)"
+  },
+  "LPX4955": {
+    "oem_refs": [
+      "OEM-659541"
+    ],
+    "aftermarket_ref": "AMLPX4955",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM A",
+    "turbine_type": "Example Platform 4",
+    "brush_type": "Example Brush Type 3",
+    "material": "Example composite material (silver-type)"
+  },
+  "NAL1071": {
+    "oem_refs": [
+      "OEM-171115"
+    ],
+    "aftermarket_ref": "AMNAL1071",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM A",
+    "turbine_type": "Example Platform 4",
+    "brush_type": "Example Brush Type 3",
+    "material": "Example composite material (silver-type)"
+  },
+  "MSO3557": {
+    "oem_refs": [
+      "OEM-868007"
+    ],
+    "aftermarket_ref": "AMMSO3557",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM A",
+    "turbine_type": "Example Platform 4",
+    "brush_type": "Example Brush Type 3",
+    "material": "Example composite material (silver-type)"
+  },
+  "COG2755": {
+    "oem_refs": [
+      "OEM-373120"
+    ],
+    "aftermarket_ref": "AMCOG2755",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM A",
+    "turbine_type": "Example Platform 2",
+    "brush_type": "Example Brush Type 2",
+    "material": "Example composite material (silver-type)"
+  },
+  "TXL6556": {
+    "oem_refs": [
+      "OEM-953430"
+    ],
+    "aftermarket_ref": "AMTXL6556",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM B",
+    "turbine_type": "Example Platform 4",
+    "brush_type": "Example Brush Type 1",
+    "material": "Example composite material (silver-type)"
+  },
+  "LNM9689": {
+    "oem_refs": [
+      "OEM-859462"
+    ],
+    "aftermarket_ref": "AMLNM9689",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM C",
+    "turbine_type": "Example Platform 2",
+    "brush_type": "Example Brush Type 3",
+    "material": "Example composite material (silver-type)"
+  },
+  "GOY8114": {
+    "oem_refs": [
+      "OEM-098388"
+    ],
+    "aftermarket_ref": "AMGOY8114",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM B",
+    "turbine_type": "Example Platform 3",
+    "brush_type": "Example Brush Type 2",
+    "material": "Example composite material (silver-type)"
+  },
+  "BGB6781": {
+    "oem_refs": [
+      "OEM-369492"
+    ],
+    "aftermarket_ref": "AMBGB6781",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM C",
+    "turbine_type": "Example Platform 3",
+    "brush_type": "Example Brush Type 2",
+    "material": "Example composite material (silver-type)"
+  },
+  "SRD8929": {
+    "oem_refs": [
+      "OEM-372384"
+    ],
+    "aftermarket_ref": "AMSRD8929",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM C",
+    "turbine_type": "Example Platform 3",
+    "brush_type": "Example Brush Type 1",
+    "material": "Example composite material (silver-type)"
+  },
+  "KMZ8145": {
+    "oem_refs": [
+      "OEM-721319"
+    ],
+    "aftermarket_ref": "AMKMZ8145",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM C",
+    "turbine_type": "Example Platform 4",
+    "brush_type": "Example Brush Type 1",
+    "material": "Example composite material (silver-type)"
+  },
+  "SCB6409": {
+    "oem_refs": [
+      "OEM-251534"
+    ],
+    "aftermarket_ref": "AMSCB6409",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM B",
+    "turbine_type": "Example Platform 1",
+    "brush_type": "Example Brush Type 3",
+    "material": "Example composite material (silver-type)"
+  },
+  "QUC8084": {
+    "oem_refs": [
+      "OEM-018321"
+    ],
+    "aftermarket_ref": "AMQUC8084",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM A",
+    "turbine_type": "Example Platform 4",
+    "brush_type": "Example Brush Type 1",
+    "material": "Example composite material (silver-type)"
+  },
+  "IOY2152": {
+    "oem_refs": [
+      "OEM-220631"
+    ],
+    "aftermarket_ref": "AMIOY2152",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM C",
+    "turbine_type": "Example Platform 4",
+    "brush_type": "Example Brush Type 1",
+    "material": "Example composite material (silver-type)"
+  },
+  "CEB2337": {
+    "oem_refs": [
+      "OEM-702814"
+    ],
+    "aftermarket_ref": "AMCEB2337",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM A",
+    "turbine_type": "Example Platform 2",
+    "brush_type": "Example Brush Type 2",
+    "material": "Example composite material (silver-type)"
+  },
+  "HNE3020": {
+    "oem_refs": [
+      "OEM-881373"
+    ],
+    "aftermarket_ref": "AMHNE3020",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM A",
+    "turbine_type": "Example Platform 1",
+    "brush_type": "Example Brush Type 1",
+    "material": "Example composite material (silver-type)"
+  },
+  "IFI7054": {
+    "oem_refs": [
+      "OEM-929524"
+    ],
+    "aftermarket_ref": "AMIFI7054",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM A",
+    "turbine_type": "Example Platform 3",
+    "brush_type": "Example Brush Type 1",
+    "material": "Example composite material (silver-type)"
+  },
+  "AIQ5097": {
+    "oem_refs": [
+      "OEM-172853"
+    ],
+    "aftermarket_ref": "AMAIQ5097",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM B",
+    "turbine_type": "Example Platform 2",
+    "brush_type": "Example Brush Type 2",
+    "material": "Example composite material (silver-type)"
+  },
+  "ZCG0721": {
+    "oem_refs": [
+      "OEM-262815"
+    ],
+    "aftermarket_ref": "AMZCG0721",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM A",
+    "turbine_type": "Example Platform 1",
+    "brush_type": "Example Brush Type 1",
+    "material": "Example composite material (silver-type)"
+  },
+  "KXV2195": {
+    "oem_refs": [
+      "OEM-527365"
+    ],
+    "aftermarket_ref": "AMKXV2195",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM C",
+    "turbine_type": "Example Platform 2",
+    "brush_type": "Example Brush Type 2",
+    "material": "Example composite material (silver-type)"
+  },
+  "TOE4918": {
+    "oem_refs": [
+      "OEM-330183"
+    ],
+    "aftermarket_ref": "AMTOE4918",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM C",
+    "turbine_type": "Example Platform 2",
+    "brush_type": "Example Brush Type 3",
+    "material": "Example composite material (silver-type)"
+  },
+  "LMV3569": {
+    "oem_refs": [
+      "OEM-615352"
+    ],
+    "aftermarket_ref": "AMLMV3569",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM B",
+    "turbine_type": "Example Platform 4",
+    "brush_type": "Example Brush Type 3",
+    "material": "Example composite material (silver-type)"
+  },
+  "IVS6430": {
+    "oem_refs": [
+      "OEM-032172"
+    ],
+    "aftermarket_ref": "AMIVS6430",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM B",
+    "turbine_type": "Example Platform 4",
+    "brush_type": "Example Brush Type 2",
+    "material": "Example composite material (silver-type)"
+  },
+  "DBT2108": {
+    "oem_refs": [
+      "OEM-497881"
+    ],
+    "aftermarket_ref": "AMDBT2108",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM A",
+    "turbine_type": "Example Platform 1",
+    "brush_type": "Example Brush Type 1",
+    "material": "Example composite material (silver-type)"
+  },
+  "WRH2241": {
+    "oem_refs": [
+      "OEM-206634"
+    ],
+    "aftermarket_ref": "AMWRH2241",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM C",
+    "turbine_type": "Example Platform 2",
+    "brush_type": "Example Brush Type 2",
+    "material": "Example composite material (silver-type)"
+  },
+  "LGZ9529": {
+    "oem_refs": [
+      "OEM-662836"
+    ],
+    "aftermarket_ref": "AMLGZ9529",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM B",
+    "turbine_type": "Example Platform 3",
+    "brush_type": "Example Brush Type 1",
+    "material": "Example composite material (silver-type)"
+  },
+  "IJA3452": {
+    "oem_refs": [
+      "OEM-119770"
+    ],
+    "aftermarket_ref": "AMIJA3452",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM B",
+    "turbine_type": "Example Platform 2",
+    "brush_type": "Example Brush Type 3",
+    "material": "Example composite material (silver-type)"
+  },
+  "NAG0300": {
+    "oem_refs": [
+      "OEM-011330"
+    ],
+    "aftermarket_ref": "AMNAG0300",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM B",
+    "turbine_type": "Example Platform 2",
+    "brush_type": "Example Brush Type 1",
+    "material": "Example composite material (silver-type)"
+  },
+  "HGP5767": {
+    "oem_refs": [
+      "OEM-361857"
+    ],
+    "aftermarket_ref": "AMHGP5767",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM C",
+    "turbine_type": "Example Platform 1",
+    "brush_type": "Example Brush Type 2",
+    "material": "Example composite material (silver-type)"
+  },
+  "WKI9176": {
+    "oem_refs": [
+      "OEM-246308"
+    ],
+    "aftermarket_ref": "AMWKI9176",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM B",
+    "turbine_type": "Example Platform 4",
+    "brush_type": "Example Brush Type 3",
+    "material": "Example composite material (silver-type)"
+  },
+  "BVX6781": {
+    "oem_refs": [
+      "OEM-720860"
+    ],
+    "aftermarket_ref": "AMBVX6781",
+    "hybrid_ref": "",
+    "turbine_oem": "Example OEM C",
+    "turbine_type": "Example Platform 2",
+    "brush_type": "Example Brush Type 1",
+    "material": "Example composite material (copper-type)"
+  }
+}

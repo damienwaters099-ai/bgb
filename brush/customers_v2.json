@@ -1,0 +1,232 @@
+[
+  {
+    "trader_id": "EX0001",
+    "name": "Northfield Wind Services Ltd",
+    "bgb_entity": "BGB Engineering Ltd"
+  },
+  {
+    "trader_id": "EX0002",
+    "name": "Clearwater Rotor Works GmbH",
+    "bgb_entity": "BGB Technology Inc"
+  },
+  {
+    "trader_id": "EX0003",
+    "name": "Summit Asset Management Inc",
+    "bgb_entity": "BGB Engineering Ltd"
+  },
+  {
+    "trader_id": "EX0004",
+    "name": "Ashgrove Engineering A/S",
+    "bgb_entity": "BGB Technology Inc"
+  },
+  {
+    "trader_id": "EX0005",
+    "name": "Redstone Wind Services SA",
+    "bgb_entity": "BGB Engineering Ltd"
+  },
+  {
+    "trader_id": "EX0006",
+    "name": "Blue Harbor Rotor Works BV",
+    "bgb_entity": "BGB Technology Inc"
+  },
+  {
+    "trader_id": "EX0007",
+    "name": "Greenridge Asset Management OY",
+    "bgb_entity": "BGB Engineering Ltd"
+  },
+  {
+    "trader_id": "EX0008",
+    "name": "Silverline Engineering",
+    "bgb_entity": "BGB Technology Inc"
+  },
+  {
+    "trader_id": "EX0009",
+    "name": "Ironbark Wind Services Ltd",
+    "bgb_entity": "BGB Engineering Ltd"
+  },
+  {
+    "trader_id": "EX0010",
+    "name": "Westport Rotor Works GmbH",
+    "bgb_entity": "BGB Technology Inc"
+  },
+  {
+    "trader_id": "EX0011",
+    "name": "Highland Asset Management Inc",
+    "bgb_entity": "BGB Engineering Ltd"
+  },
+  {
+    "trader_id": "EX0012",
+    "name": "Coastal Engineering A/S",
+    "bgb_entity": "BGB Technology Inc"
+  },
+  {
+    "trader_id": "EX0013",
+    "name": "Meridian Wind Services SA",
+    "bgb_entity": "BGB Engineering Ltd"
+  },
+  {
+    "trader_id": "EX0014",
+    "name": "Amberley Rotor Works BV",
+    "bgb_entity": "BGB Technology Inc"
+  },
+  {
+    "trader_id": "EX0015",
+    "name": "Foxwell Asset Management OY",
+    "bgb_entity": "BGB Engineering Ltd"
+  },
+  {
+    "trader_id": "EX0016",
+    "name": "Kestrel Engineering",
+    "bgb_entity": "BGB Technology Inc"
+  },
+  {
+    "trader_id": "EX0017",
+    "name": "Larkspur Wind Services Ltd",
+    "bgb_entity": "BGB Engineering Ltd"
+  },
+  {
+    "trader_id": "EX0018",
+    "name": "Thornbury Rotor Works GmbH",
+    "bgb_entity": "BGB Technology Inc"
+  },
+  {
+    "trader_id": "EX0019",
+    "name": "Windmere Asset Management Inc",
+    "bgb_entity": "BGB Engineering Ltd"
+  },
+  {
+    "trader_id": "EX0020",
+    "name": "Oakfield Engineering A/S",
+    "bgb_entity": "BGB Technology Inc"
+  },
+  {
+    "trader_id": "EX0021",
+    "name": "Brightwater Wind Services SA",
+    "bgb_entity": "BGB Engineering Ltd"
+  },
+  {
+    "trader_id": "EX0022",
+    "name": "Cinder Rotor Works BV",
+    "bgb_entity": "BGB Technology Inc"
+  },
+  {
+    "trader_id": "EX0023",
+    "name": "Vale Asset Management OY",
+    "bgb_entity": "BGB Engineering Ltd"
+  },
+  {
+    "trader_id": "EX0024",
+    "name": "Marsh Point Engineering",
+    "bgb_entity": "BGB Technology Inc"
+  },
+  {
+    "trader_id": "EX0025",
+    "name": "Sterling Wind Services Ltd",
+    "bgb_entity": "BGB Engineering Ltd"
+  },
+  {
+    "trader_id": "EX0026",
+    "name": "Halden Rotor Works GmbH",
+    "bgb_entity": "BGB Technology Inc"
+  },
+  {
+    "trader_id": "EX0027",
+    "name": "Rockholt Asset Management Inc",
+    "bgb_entity": "BGB Engineering Ltd"
+  },
+  {
+    "trader_id": "EX0028",
+    "name": "Fenwick Engineering A/S",
+    "bgb_entity": "BGB Technology Inc"
+  },
+  {
+    "trader_id": "EX0029",
+    "name": "Grayson Wind Services SA",
+    "bgb_entity": "BGB Engineering Ltd"
+  },
+  {
+    "trader_id": "EX0030",
+    "name": "Elmsworth Rotor Works BV",
+    "bgb_entity": "BGB Technology Inc"
+  },
+  {
+    "trader_id": "EX0031",
+    "name": "Cobalt Asset Management OY",
+    "bgb_entity": "BGB Engineering Ltd"
+  },
+  {
+    "trader_id": "EX0032",
+    "name": "Driftwood Engineering",
+    "bgb_entity": "BGB Technology Inc"
+  },
+  {
+    "trader_id": "EX0033",
+    "name": "Hollow Creek Wind Services Ltd",
+    "bgb_entity": "BGB Engineering Ltd"
+  },
+  {
+    "trader_id": "EX0034",
+    "name": "Pinehurst Rotor Works GmbH",
+    "bgb_entity": "BGB Technology Inc"
+  },
+  {
+    "trader_id": "EX0035",
+    "name": "Solstice Asset Management Inc",
+    "bgb_entity": "BGB Engineering Ltd"
+  },
+  {
+    "trader_id": "EX0036",
+    "name": "Beckton Engineering A/S",
+    "bgb_entity": "BGB Technology Inc"
+  },
+  {
+    "trader_id": "EX0037",
+    "name": "Cranmore Wind Services SA",
+    "bgb_entity": "BGB Engineering Ltd"
+  },
+  {
+    "trader_id": "EX0038",
+    "name": "Dunraven Rotor Works BV",
+    "bgb_entity": "BGB Technology Inc"
+  },
+  {
+    "trader_id": "EX0039",
+    "name": "Everly Asset Management OY",
+    "bgb_entity": "BGB Engineering Ltd"
+  },
+  {
+    "trader_id": "EX0040",
+    "name": "Falkirk Bay Engineering",
+    "bgb_entity": "BGB Technology Inc"
+  },
+  {
+    "trader_id": "EX0041",
+    "name": "Northfield Wind Services Ltd",
+    "bgb_entity": "BGB Engineering Ltd"
+  },
+  {
+    "trader_id": "EX0042",
+    "name": "Clearwater Rotor Works GmbH",
+    "bgb_entity": "BGB Technology Inc"
+  },
+  {
+    "trader_id": "EX0043",
+    "name": "Summit Asset Management Inc",
+    "bgb_entity": "BGB Engineering Ltd"
+  },
+  {
+    "trader_id": "EX0044",
+    "name": "Ashgrove Engineering A/S",
+    "bgb_entity": "BGB Technology Inc"
+  },
+  {
+    "trader_id": "EX0045",
+    "name": "Redstone Wind Services SA",
+    "bgb_entity": "BGB Engineering Ltd"
+  },
+  {
+    "trader_id": "EX0046",
+    "name": "Blue Harbor Rotor Works BV",
+    "bgb_entity": "BGB Technology Inc"
+  }
+]

@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BGB Opportunity Tool</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; background: #f0f2f5; min-height: 100vh; color: #1a1a2e; font-size: 14px; }
+header { background: #1F3864; padding: 0.875rem 2rem; display: flex; align-items: center; gap: 1rem; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.25); }
+header .logo { color: #fff; font-size: 1rem; font-weight: 600; }
+header .logo span { color: #8ba3c7; font-size: 0.75rem; display: block; font-weight: 400; }
+header .vr { width: 1px; height: 30px; background: #3a5480; }
+header .tool-title { color: #a8c4e8; font-size: 0.82rem; }
+header .nav { margin-left: auto; display: flex; gap: 6px; }
+header .nav button { background: transparent; border: 1px solid #3a5480; color: #a8c4e8; border-radius: 6px; padding: 5px 14px; font-size: 0.8rem; cursor: pointer; transition: all 0.15s; }
+header .nav button:hover, header .nav button.active { background: #2a4a7f; color: #fff; border-color: #4a6a9f; }
+.page { display: none; }
+.page.active { display: block; }
+.container { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; }
+.card { background: #fff; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); margin-bottom: 1.25rem; overflow: hidden; }
+.card-header { padding: 1rem 1.5rem; border-bottom: 1px solid #e5e7eb; display: flex; align-items: center; gap: 10px; }
+.card-header h2 { font-size: 0.95rem; font-weight: 600; color: #1F3864; }
+.step-num { width: 24px; height: 24px; border-radius: 50%; background: #1F3864; color: #fff; font-size: 0.75rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.card-body { padding: 1.25rem 1.5rem; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-grid .full { grid-column: 1 / -1; }
+.field label { display: block; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #6b7280; margin-bottom: 5px; }
+.field label .req { color: #dc2626; margin-left: 2px; }
+.field input[type=text], .field select, .field textarea { width: 100%; padding: 8px 10px; border: 1.5px solid #d1d5db; border-radius: 7px; font-size: 0.875rem; color: #1a1a2e; background: #fff; outline: none; transition: border-color 0.15s; font-family: inherit; }
+.field input:focus, .field select:focus, .field textarea:focus { border-color: #1F3864; }
+.field textarea { resize: vertical; min-height: 72px; }
+.btn { height: 38px; padding: 0 1.25rem; border-radius: 7px; border: none; font-size: 0.875rem; font-weight: 500; cursor: pointer; transition: all 0.15s; display: inline-flex; align-items: center; gap: 6px; }
+.btn-primary { background: #1F3864; color: #fff; }
+.btn-primary:hover { background: #162a4e; }
+.btn-primary:disabled { background: #9ca3af; cursor: not-allowed; }
+.btn-secondary { background: #f3f4f6; color: #374151; border: 1px solid #d1d5db; }
+.btn-secondary:hover { background: #e5e7eb; }
+.spinner { width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.35); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; display: none; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.badge { padding: 3px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; white-space: nowrap; }
+.badge-High { background: #c6efce; color: #276221; }
+.badge-Medium { background: #ffeb9c; color: #7d5a00; }
+.badge-Low { background: #ffd7d7; color: #9c0006; }
+.badge-Drain { background: #e5e7eb; color: #374151; }
+.badge-Hot { background: #dc2626; color: #fff; }
+.badge-Warm { background: #f97316; color: #fff; }
+.badge-Cool { background: #3b82f6; color: #fff; }
+.badge-Cold { background: #6b7280; color: #fff; }
+.flag-pill { padding: 2px 10px; border-radius: 20px; font-size: 0.72rem; font-weight: 600; background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+.product-pill { padding: 2px 10px; border-radius: 20px; font-size: 0.75rem; background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+.score-bar-wrap { margin: 0.75rem 0; background: #f3f4f6; border-radius: 8px; height: 10px; overflow: hidden; }
+.score-bar { height: 100%; border-radius: 8px; transition: width 0.6s ease; }
+.score-bar.Hot { background: #dc2626; }
+.score-bar.Warm { background: #f97316; }
+.score-bar.Cool { background: #3b82f6; }
+.score-bar.Cold { background: #9ca3af; }
+.result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+.result-box { background: #f9fafb; border-radius: 8px; padding: 0.875rem 1rem; }
+.result-box h4 { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #9ca3af; margin-bottom: 8px; }
+.result-box ul { padding-left: 1rem; }
+.result-box li { font-size: 0.85rem; color: #374151; margin-bottom: 4px; line-height: 1.4; }
+.action-box { background: #f0f7ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 1rem 1.25rem; margin-top: 1rem; grid-column: 1 / -1; }
+.action-box .action-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #3b82f6; margin-bottom: 6px; }
+.action-box .action-text { font-size: 0.9rem; color: #1e3a5f; font-weight: 500; }
+.action-box .routing { margin-top: 8px; font-size: 0.82rem; color: #6b7280; }
+.routing strong { color: #1F3864; }
+.warning-box { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 0.75rem 1rem; margin-top: 1rem; grid-column: 1 / -1; display: flex; gap: 10px; align-items: flex-start; }
+.warning-box p { font-size: 0.85rem; color: #991b1b; line-height: 1.4; }
+.qual-result { display: none; }
+.log-table { width: 100%; border-collapse: collapse; }
+.log-table th { background: #1F3864; color: #fff; padding: 9px 12px; font-size: 0.75rem; font-weight: 600; text-align: left; white-space: nowrap; }
+.log-table td { padding: 10px 12px; font-size: 0.82rem; border-bottom: 1px solid #f3f4f6; vertical-align: top; color: #374151; }
+.log-table tr:hover td { background: #f9fafb; cursor: pointer; }
+.log-table tr.flag-row td { background: #fef9f9; }
+.empty-state { text-align: center; padding: 3rem 1rem; color: #9ca3af; font-size: 0.875rem; }
+.overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.45); display: none; z-index: 200; align-items: flex-start; justify-content: flex-end; }
+.overlay.open { display: flex; }
+.drawer { background: #fff; width: 480px; max-width: 95vw; height: 100vh; overflow-y: auto; box-shadow: -4px 0 24px rgba(0,0,0,0.15); padding: 1.5rem; animation: slideIn 0.2s ease; }
+@keyframes slideIn { from { transform: translateX(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+.drawer-close { background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #6b7280; padding: 2px; }
+.drawer-close:hover { color: #1a1a2e; }
+.dl { display: grid; grid-template-columns: 120px 1fr; gap: 6px 12px; margin-top: 1rem; }
+.dl dt { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: #9ca3af; padding-top: 2px; }
+.dl dd { font-size: 0.85rem; color: #374151; line-height: 1.4; }
+.section-divider { border: none; border-top: 1px solid #e5e7eb; margin: 1rem 0; }
+.status-msg { font-size: 0.82rem; color: #6b7280; min-height: 18px; margin-top: 0.5rem; }
+.status-msg.error { color: #dc2626; }
+@media (max-width: 640px) { .form-grid { grid-template-columns: 1fr; } .result-grid { grid-template-columns: 1fr; } .drawer { width: 100vw; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">BGB Group <span>bgbinnovation.com</span></div>
+  <div class="vr"></div>
+  <div class="tool-title">Opportunity &amp; Customer Check</div>
+  <nav class="nav">
+    <a href="/opportunities" style="color:#a8c4e8;text-decoration:none;border:1px solid #3a5480;border-radius:6px;padding:5px 14px;font-size:0.8rem;margin-right:4px">&larr; Opportunities</a>
+    <a href="/" style="color:#a8c4e8;text-decoration:none;border:1px solid #3a5480;border-radius:6px;padding:5px 14px;font-size:0.8rem;margin-right:4px">Home</a>
+    <button class="active" onclick="showPage('new',this)">New enquiry</button>
+    <button onclick="showPage('log',this)">Team log</button>
+  </nav>
+</header>
+
+<div id="page-new" class="page active">
+<div class="container">
+
+  <div class="card">
+    <div class="card-header"><div class="step-num">1</div><h2>Company lookup</h2></div>
+    <div class="card-body">
+      <div class="form-grid">
+        <div class="field full">
+          <label>Company name <span class="req">*</span></label>
+          <div style="display:flex;gap:8px">
+            <input type="text" id="companyInput" placeholder="e.g. Leonardo, Thales, GKN Aerospace…" />
+            <button class="btn btn-primary" id="lookupBtn" onclick="lookupCompany()">
+              Look up <span class="spinner" id="lookupSpinner"></span>
+            </button>
+          </div>
+          <div class="status-msg" id="lookupStatus"></div>
+        </div>
+      </div>
+      <div id="companyResult" style="display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid #e5e7eb">
+        <div style="display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap">
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+              <div style="font-size:1rem;font-weight:600;color:#1F3864" id="cr-name"></div>
+              <span class="badge" id="cr-gp-badge"></span>
+              <span id="cr-competitor-flag" class="flag-pill" style="display:none">⚠ Competitor</span>
+              <span id="cr-distributor-flag" class="flag-pill" style="display:none">Distributor</span>
+            </div>
+            <div style="font-size:0.8rem;color:#6b7280;margin-top:2px" id="cr-sector"></div>
+            <div style="font-size:0.85rem;color:#374151;margin-top:6px;line-height:1.5" id="cr-desc"></div>
+            <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px" id="cr-products"></div>
+          </div>
+        </div>
+        <div id="cr-redflag" style="display:none;margin-top:10px;padding:8px 12px;background:#fef2f2;border:1px solid #fecaca;border-radius:7px;font-size:0.82rem;color:#991b1b"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="enquiryCard" style="opacity:0.4;pointer-events:none">
+    <div class="card-header"><div class="step-num">2</div><h2>Enquiry details</h2></div>
+    <div class="card-body">
+      <div class="form-grid">
+        <div class="field">
+          <label>Product <span class="req">*</span></label>
+          <select id="f-product">
+            <option value="">— select —</option>
+            <option>Slip ring</option>
+            <option>FORJ (Fibre Optic Rotary Joint)</option>
+            <option>Carbon brush holders / brush gear</option>
+            <option>Rotary union</option>
+            <option>Lightning protection system</option>
+            <option>Multiple products</option>
+            <option>Unknown / TBC</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Enquiry type <span class="req">*</span></label>
+          <select id="f-enquiry-type">
+            <option value="">— select —</option>
+            <option>New custom design</option>
+            <option>Replacement / like-for-like</option>
+            <option>Repair / refurbishment</option>
+            <option>Moving from current supplier</option>
+            <option>Approved Vendor List (AVL) addition</option>
+            <option>Prototype / feasibility</option>
+            <option>Spares / consumables</option>
+            <option>General pricing / budgetary</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Market / application <span class="req">*</span></label>
+          <select id="f-market">
+            <option value="">— select —</option>
+            <option>Aerospace — manned aircraft</option>
+            <option>Aerospace — UAV / drone</option>
+            <option>Aerospace — satellite / space</option>
+            <option>Defence — radar / EW</option>
+            <option>Defence — land vehicle</option>
+            <option>Defence — naval</option>
+            <option>Wind energy — onshore</option>
+            <option>Wind energy — offshore</option>
+            <option>Marine — commercial vessel</option>
+            <option>Marine — subsea / ROV</option>
+            <option>Medical / scientific</option>
+            <option>Industrial automation</option>
+            <option>Water / utilities</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Technical requirement clarity</label>
+          <select id="f-tech-clarity">
+            <option value="">— select —</option>
+            <option>Full spec provided</option>
+            <option>Partial spec — some gaps</option>
+            <option>Verbal description only</option>
+            <option>Vague / exploratory</option>
+          </select>
+        </div>
+        <div class="field full">
+          <label>Requirement description</label>
+          <textarea id="f-req-desc" placeholder="Application, key parameters, any constraints mentioned…"></textarea>
+        </div>
+        <div class="field">
+          <label>Annual volume estimate</label>
+          <select id="f-volume">
+            <option value="">— unknown —</option>
+            <option>1–5 units (prototype / one-off)</option>
+            <option>6–25 units</option>
+            <option>26–100 units</option>
+            <option>100–500 units</option>
+            <option>500+ units</option>
+            <option>Consumables / repeat orders</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Timeline</label>
+          <select id="f-timeline">
+            <option value="">— unknown —</option>
+            <option>Urgent — needed within 4 weeks</option>
+            <option>Short — 1–3 months</option>
+            <option>Medium — 3–12 months</option>
+            <option>Long — 12+ months / programme</option>
+            <option>No timeline stated</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Budget confirmed?</label>
+          <select id="f-budget">
+            <option value="">— unknown —</option>
+            <option>Yes — budget confirmed</option>
+            <option>Budgetary enquiry only</option>
+            <option>No budget stated</option>
+            <option>Funded programme</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Decision maker involved?</label>
+          <select id="f-dm">
+            <option value="">— unknown —</option>
+            <option>Yes — speaking with decision maker</option>
+            <option>Influencer / engineer — not DM</option>
+            <option>Procurement only</option>
+            <option>Unknown</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Prior BGB contact?</label>
+          <select id="f-prior">
+            <option value="">— unknown —</option>
+            <option>Existing customer</option>
+            <option>Previous enquiry — no order</option>
+            <option>Met at exhibition / event</option>
+            <option>No prior contact</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>How did they find us?</label>
+          <select id="f-source">
+            <option value="">— unknown —</option>
+            <option>Referral from existing customer</option>
+            <option>Website / organic search</option>
+            <option>Exhibition / trade show</option>
+            <option>LinkedIn / social</option>
+            <option>Cold approach by BGB</option>
+            <option>Distributor referral</option>
+            <option>Not stated</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Price sensitivity signals</label>
+          <select id="f-price">
+            <option value="">— none noted —</option>
+            <option>Asked for lowest price immediately</option>
+            <option>Mentioned competitor pricing</option>
+            <option>Requesting multiple quotes only</option>
+            <option>Seems price-driven</option>
+            <option>Price not mentioned — spec-focused</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Competitor mentioned?</label>
+          <select id="f-competitor">
+            <option value="">— none —</option>
+            <option>Morgan Advanced Materials</option>
+            <option>Mersen</option>
+            <option>Jinpat</option>
+            <option>Schleifring</option>
+            <option>Other named competitor</option>
+            <option>Current supplier not named</option>
+          </select>
+        </div>
+        <div class="field full">
+          <label>Additional notes</label>
+          <textarea id="f-notes" placeholder="Tone of conversation, specific contacts, red flags, opportunities…"></textarea>
+        </div>
+      </div>
+      <div style="margin-top:1.25rem;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <button class="btn btn-primary" id="qualifyBtn" onclick="qualify()">
+          Score this opportunity <span class="spinner" id="qualifySpinner"></span>
+        </button>
+        <button class="btn btn-secondary" onclick="goToLog()">Log this opportunity</button>
+        <button class="btn btn-secondary" onclick="resetForm()">Start over</button>
+        <div class="status-msg" id="qualifyStatus" style="margin:0"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card qual-result" id="qualResult">
+    <div class="card-header"><div class="step-num">3</div><h2>Qualification result</h2></div>
+    <div class="card-body">
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <div style="font-size:2rem;font-weight:700;color:#1F3864" id="qr-score"></div>
+        <div>
+          <span class="badge" id="qr-band-badge" style="font-size:0.85rem;padding:4px 16px"></span>
+          <div style="font-size:0.75rem;color:#9ca3af;margin-top:3px">opportunity score / 100</div>
+        </div>
+        <div id="qr-flags" style="display:flex;gap:6px;flex-wrap:wrap;margin-left:auto"></div>
+      </div>
+      <div class="score-bar-wrap"><div class="score-bar" id="qr-bar"></div></div>
+      <div class="result-grid">
+        <div class="result-box"><h4>Positives</h4><ul id="qr-positives"></ul></div>
+        <div class="result-box"><h4>Risks</h4><ul id="qr-risks"></ul></div>
+        <div class="action-box">
+          <div class="action-label">Recommended next action</div>
+          <div class="action-text" id="qr-action"></div>
+          <div class="routing">Route to: <strong id="qr-routing"></strong> — <span id="qr-routing-reason"></span></div>
+        </div>
+        <div class="warning-box" id="qr-warning" style="display:none">
+          <div style="color:#dc2626;font-size:1.1rem;flex-shrink:0">⚠</div>
+          <p id="qr-warning-text"></p>
+        </div>
+      </div>
+      <div style="margin-top:1.25rem;padding-top:1rem;border-top:1px solid #e5e7eb;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <div style="font-size:0.8rem;color:#6b7280">Logged to team log</div>
+        <div style="width:6px;height:6px;border-radius:50%;background:#22c55e"></div>
+        <div style="font-size:0.8rem;color:#22c55e;font-weight:500" id="qr-log-confirm"></div>
+        <button class="btn btn-secondary" style="margin-left:auto" onclick="resetForm()">New enquiry</button>
+        <button class="btn btn-primary" onclick="goToLog()">Log opportunity</button>
+        <button class="btn btn-secondary" onclick="showPage('log',document.querySelectorAll('.nav button')[1])">View team log</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<div id="page-log" class="page">
+<div class="container">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:10px">
+    <div>
+      <h1 style="font-size:1.1rem;font-weight:600;color:#1F3864">Team opportunity log</h1>
+      <p style="font-size:0.8rem;color:#6b7280;margin-top:2px">All enquiries scored this session. Click any row for detail.</p>
+    </div>
+    <div style="display:flex;gap:8px">
+      <input type="text" id="logSearch" placeholder="Search company, product, market…" oninput="filterLog()" style="height:36px;padding:0 10px;border:1.5px solid #d1d5db;border-radius:7px;font-size:0.875rem;width:220px;outline:none" />
+      <button class="btn btn-secondary" onclick="loadLog()">↻ Refresh</button>
+    </div>
+  </div>
+  <div class="card" style="overflow:auto">
+    <table class="log-table">
+      <thead><tr>
+        <th>Date / time</th><th>Company</th><th>Sector</th>
+        <th>Product</th><th>Type</th><th>Score</th><th>Routing</th><th>By</th>
+      </tr></thead>
+      <tbody id="logBody"><tr><td colspan="8" class="empty-state">No enquiries logged yet this session.</td></tr></tbody>
+    </table>
+  </div>
+</div>
+</div>
+
+<div class="overlay" id="overlay" onclick="closeDrawer(event)">
+  <div class="drawer">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.25rem">
+      <div>
+        <div style="font-size:1rem;font-weight:600;color:#1F3864" id="d-company"></div>
+        <div style="font-size:0.8rem;color:#6b7280;margin-top:2px" id="d-timestamp"></div>
+      </div>
+      <button class="drawer-close" onclick="closeDrawer()">✕</button>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap" id="d-badges"></div>
+    <dl class="dl" id="d-details"></dl>
+    <hr class="section-divider">
+    <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#9ca3af;margin-bottom:8px">Qualification</div>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+      <div style="font-size:1.75rem;font-weight:700;color:#1F3864" id="d-score"></div>
+      <span class="badge" id="d-band"></span>
+    </div>
+    <div class="score-bar-wrap"><div class="score-bar" id="d-bar"></div></div>
+    <div style="margin-top:1rem">
+      <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#9ca3af;margin-bottom:6px">Recommended action</div>
+      <div style="font-size:0.875rem;color:#1e3a5f;font-weight:500;line-height:1.5" id="d-action"></div>
+      <div style="font-size:0.82rem;color:#6b7280;margin-top:4px">Route to: <strong style="color:#1F3864" id="d-routing"></strong></div>
+    </div>
+    <div style="margin-top:1rem;display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div>
+        <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;color:#9ca3af;margin-bottom:5px">Positives</div>
+        <ul style="padding-left:1rem" id="d-positives"></ul>
+      </div>
+      <div>
+        <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;color:#9ca3af;margin-bottom:5px">Risks</div>
+        <ul style="padding-left:1rem" id="d-risks"></ul>
+      </div>
+    </div>
+    <div id="d-notes-wrap" style="margin-top:1rem;display:none">
+      <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;color:#9ca3af;margin-bottom:5px">Notes</div>
+      <div style="font-size:0.85rem;color:#374151;line-height:1.5" id="d-notes"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+let companyData = null;
+
+function goToLog() {
+  const name = (document.getElementById('companyInput').value || '').trim();
+  const params = new URLSearchParams();
+  if (name) params.set('customer', name);
+  window.location.href = '/opportunities/new' + (params.toString() ? '?' + params.toString() : '');
+}
+let allLogEntries = [];
+
+function showPage(name, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  if (btn) btn.classList.add('active');
+  if (name === 'log') loadLog();
+}
+
+async function lookupCompany() {
+  const name = document.getElementById('companyInput').value.trim();
+  if (!name) return;
+  const btn = document.getElementById('lookupBtn');
+  const spinner = document.getElementById('lookupSpinner');
+  const status = document.getElementById('lookupStatus');
+  btn.disabled = true; spinner.style.display = 'inline-block';
+  status.textContent = 'Searching…'; status.className = 'status-msg';
+  try {
+    const resp = await fetch('/opportunities/research-company', {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({company: name})
+    });
+    if (!resp.ok) throw new Error((await resp.json()).detail);
+    companyData = await resp.json();
+    renderCompanyResult(companyData);
+    document.getElementById('enquiryCard').style.opacity = '1';
+    document.getElementById('enquiryCard').style.pointerEvents = 'auto';
+    status.textContent = '';
+  } catch(e) {
+    status.textContent = '⚠ ' + e.message; status.className = 'status-msg error';
+  } finally { btn.disabled = false; spinner.style.display = 'none'; }
+}
+
+function renderCompanyResult(d) {
+  document.getElementById('cr-name').textContent = d.company;
+  document.getElementById('cr-sector').textContent = d.sector;
+  document.getElementById('cr-desc').textContent = d.description;
+  const gpb = document.getElementById('cr-gp-badge');
+  gpb.textContent = d.growth_potential + ' potential'; gpb.className = 'badge badge-' + d.growth_potential;
+  document.getElementById('cr-competitor-flag').style.display = d.is_competitor ? 'inline' : 'none';
+  document.getElementById('cr-distributor-flag').style.display = d.is_distributor ? 'inline' : 'none';
+  document.getElementById('cr-products').innerHTML = (d.bgb_products||[]).map(p => `<span class="product-pill">${p}</span>`).join('');
+  const rf = document.getElementById('cr-redflag');
+  if (d.red_flags) { rf.textContent = '⚠ ' + d.red_flags; rf.style.display = 'block'; }
+  else rf.style.display = 'none';
+  document.getElementById('companyResult').style.display = 'block';
+}
+
+async function qualify() {
+  if (!companyData) return;
+  const btn = document.getElementById('qualifyBtn');
+  const spinner = document.getElementById('qualifySpinner');
+  const status = document.getElementById('qualifyStatus');
+  btn.disabled = true; spinner.style.display = 'inline-block';
+  status.textContent = 'Scoring…'; status.className = 'status-msg';
+  const payload = {
+    company_name: companyData.company, sector: companyData.sector,
+    growth_potential: companyData.growth_potential, is_competitor: companyData.is_competitor,
+    is_distributor: companyData.is_distributor,
+    product: v('f-product'), enquiry_type: v('f-enquiry-type'), market: v('f-market'),
+    tech_clarity: v('f-tech-clarity'), requirement_desc: v('f-req-desc'),
+    annual_volume: v('f-volume'), timeline: v('f-timeline'), budget_confirmed: v('f-budget'),
+    decision_maker: v('f-dm'), prior_contact: v('f-prior'), source: v('f-source'),
+    price_signals: v('f-price'), competitor_mentioned: v('f-competitor'), notes: v('f-notes'),
+  };
+  try {
+    const resp = await fetch('/opportunities/qualify', {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(payload)
+    });
+    if (!resp.ok) throw new Error((await resp.json()).detail);
+    const data = await resp.json();
+    renderQualResult(data.qualification, data.log_entry);
+    status.textContent = '';
+  } catch(e) {
+    status.textContent = '⚠ ' + e.message; status.className = 'status-msg error';
+  } finally { btn.disabled = false; spinner.style.display = 'none'; }
+}
+
+function v(id) { const el = document.getElementById(id); return el ? el.value : ''; }
+
+function renderQualResult(q, entry) {
+  document.getElementById('qr-score').textContent = q.score;
+  const band = q.band;
+  const bb = document.getElementById('qr-band-badge');
+  bb.textContent = band; bb.className = 'badge badge-' + band;
+  const bar = document.getElementById('qr-bar');
+  bar.style.width = q.score + '%'; bar.className = 'score-bar ' + band;
+  document.getElementById('qr-positives').innerHTML = (q.key_positives||[]).map(p=>`<li>${p}</li>`).join('');
+  document.getElementById('qr-risks').innerHTML = (q.key_risks||[]).map(r=>`<li>${r}</li>`).join('');
+  document.getElementById('qr-action').textContent = q.recommended_action;
+  document.getElementById('qr-routing').textContent = q.routing;
+  document.getElementById('qr-routing-reason').textContent = q.routing_reason;
+  const flags = document.getElementById('qr-flags');
+  flags.innerHTML = '';
+  if (q.price_fishing_suspected) flags.innerHTML += '<span class="flag-pill">⚠ Price fishing suspected</span>';
+  if (q.competitor_intel_suspected) flags.innerHTML += '<span class="flag-pill">⚠ Competitor intel suspected</span>';
+  const warn = document.getElementById('qr-warning');
+  const warnings = [];
+  if (q.price_fishing_suspected) warnings.push('Price fishing suspected — be cautious about what technical detail you share.');
+  if (q.competitor_intel_suspected) warnings.push('Competitor intelligence gathering suspected. Do not share proprietary specs.');
+  if (warnings.length) { document.getElementById('qr-warning-text').textContent = warnings.join(' '); warn.style.display = 'flex'; }
+  else warn.style.display = 'none';
+  document.getElementById('qr-log-confirm').textContent = 'Entry #' + entry.id + ' logged';
+  const qr = document.getElementById('qualResult');
+  qr.style.display = 'block';
+  qr.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+async function loadLog() {
+  try {
+    const resp = await fetch('/opportunities/log');
+    if (!resp.ok) return;
+    allLogEntries = await resp.json();
+    renderLog(allLogEntries);
+  } catch(e) {}
+}
+
+function filterLog() {
+  const q = document.getElementById('logSearch').value.toLowerCase();
+  renderLog(allLogEntries.filter(e =>
+    (e.company_name||'').toLowerCase().includes(q) ||
+    (e.product||'').toLowerCase().includes(q) ||
+    (e.market||'').toLowerCase().includes(q) ||
+    (e.sector||'').toLowerCase().includes(q)
+  ));
+}
+
+function renderLog(entries) {
+  const tbody = document.getElementById('logBody');
+  if (!entries.length) {
+    tbody.innerHTML = '<tr><td colspan="8" class="empty-state">No enquiries logged yet this session.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = entries.map(e => {
+    const isFlag = e.price_fishing_suspected || e.competitor_intel_suspected;
+    const band = e.band || 'Cold';
+    return `<tr class="${isFlag?'flag-row':''}" onclick="openDrawer('${e.id}')">
+      <td style="white-space:nowrap;color:#6b7280">${e.timestamp}</td>
+      <td style="font-weight:500;color:#1F3864">${e.company_name}</td>
+      <td style="color:#6b7280">${e.sector||'—'}</td>
+      <td>${e.product||'—'}</td>
+      <td style="color:#6b7280">${e.enquiry_type||'—'}</td>
+      <td><div style="display:flex;align-items:center;gap:6px"><span style="font-weight:700;color:#1F3864">${e.score}</span><span class="badge badge-${band}" style="font-size:0.7rem;padding:2px 8px">${band}</span></div></td>
+      <td style="font-weight:500">${e.routing||'—'}</td>
+      <td style="color:#6b7280">${e.logged_by||'—'}</td>
+    </tr>`;
+  }).join('');
+}
+
+function openDrawer(id) {
+  const e = allLogEntries.find(x => x.id === id);
+  if (!e) return;
+  document.getElementById('d-company').textContent = e.company_name;
+  document.getElementById('d-timestamp').textContent = e.timestamp + (e.logged_by ? ' · ' + e.logged_by : '');
+  const band = e.band || 'Cold';
+  document.getElementById('d-badges').innerHTML =
+    `<span class="badge badge-${band}">${band}</span>` +
+    (e.price_fishing_suspected ? '<span class="flag-pill">⚠ Price fishing</span>' : '') +
+    (e.competitor_intel_suspected ? '<span class="flag-pill">⚠ Competitor intel</span>' : '');
+  const details = [['Product',e.product],['Type',e.enquiry_type],['Market',e.market],
+    ['Volume',e.annual_volume],['Timeline',e.timeline],['Sector',e.sector]].filter(([,v])=>v);
+  document.getElementById('d-details').innerHTML = details.map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('');
+  document.getElementById('d-score').textContent = e.score;
+  const db = document.getElementById('d-band'); db.textContent = band; db.className = 'badge badge-' + band;
+  const dbar = document.getElementById('d-bar'); dbar.style.width = e.score + '%'; dbar.className = 'score-bar ' + band;
+  document.getElementById('d-action').textContent = e.recommended_action || '—';
+  document.getElementById('d-routing').textContent = e.routing || '—';
+  document.getElementById('d-positives').innerHTML = (e.key_positives||[]).map(p=>`<li style="font-size:0.82rem;color:#374151;margin-bottom:3px">${p}</li>`).join('');
+  document.getElementById('d-risks').innerHTML = (e.key_risks||[]).map(r=>`<li style="font-size:0.82rem;color:#374151;margin-bottom:3px">${r}</li>`).join('');
+  const nw = document.getElementById('d-notes-wrap');
+  if (e.notes) { document.getElementById('d-notes').textContent = e.notes; nw.style.display = 'block'; }
+  else nw.style.display = 'none';
+  document.getElementById('overlay').classList.add('open');
+}
+
+function closeDrawer(e) {
+  if (!e || e.target === document.getElementById('overlay'))
+    document.getElementById('overlay').classList.remove('open');
+}
+
+function resetForm() {
+  companyData = null;
+  document.getElementById('companyInput').value = '';
+  document.getElementById('companyResult').style.display = 'none';
+  document.getElementById('enquiryCard').style.opacity = '0.4';
+  document.getElementById('enquiryCard').style.pointerEvents = 'none';
+  document.getElementById('qualResult').style.display = 'none';
+  document.getElementById('lookupStatus').textContent = '';
+  ['f-product','f-enquiry-type','f-market','f-tech-clarity','f-volume',
+   'f-timeline','f-budget','f-dm','f-prior','f-source','f-price','f-competitor']
+    .forEach(id => { const el = document.getElementById(id); if(el) el.value = ''; });
+  document.getElementById('f-req-desc').value = '';
+  document.getElementById('f-notes').value = '';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+document.getElementById('companyInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') lookupCompany();
+});
+</script>
+</body>
+</html>

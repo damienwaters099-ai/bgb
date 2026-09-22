@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BGB Brushes Enquiry Tracker</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; background: #f0f2f5; min-height: 100vh; color: #1a1a2e; font-size: 14px; }
+header { background: #0f3d2e; padding: 0.875rem 2rem; display: flex; align-items: center; gap: 1rem; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.25); }
+header .logo { color: #fff; font-size: 1rem; font-weight: 600; }
+header .logo span { color: #8fc2ac; font-size: 0.75rem; display: block; font-weight: 400; }
+header .vr { width: 1px; height: 30px; background: #1f5a45; }
+header .tool-title { color: #a8d8c4; font-size: 0.82rem; }
+header .nav { margin-left: auto; display: flex; gap: 6px; }
+header .nav button { background: transparent; border: 1px solid #1f5a45; color: #a8d8c4; border-radius: 6px; padding: 5px 14px; font-size: 0.8rem; cursor: pointer; transition: all 0.15s; }
+header .nav button:hover, header .nav button.active { background: #15543f; color: #fff; border-color: #2a7a5e; }
+.page { display: none; }
+.page.active { display: block; }
+.container { max-width: 1000px; margin: 0 auto; padding: 2rem 1.5rem; }
+.card { background: #fff; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); margin-bottom: 1.25rem; overflow: hidden; }
+.card.parts-card { overflow: visible; }
+.card.parts-card .card-header { border-radius: 12px 12px 0 0; }
+.card-header { padding: 1rem 1.5rem; border-bottom: 1px solid #e5e7eb; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.card-header h2 { font-size: 0.95rem; font-weight: 600; color: #0f3d2e; }
+.step-num { width: 24px; height: 24px; border-radius: 50%; background: #0f3d2e; color: #fff; font-size: 0.75rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.hdr-left { display: flex; align-items: center; gap: 10px; }
+.card-body { padding: 1.25rem 1.5rem; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-grid .full { grid-column: 1 / -1; }
+.field label { display: block; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #6b7280; margin-bottom: 5px; }
+.field input[type=text], .field input[type=number], .field input[type=date], .field select, .field textarea {
+  width: 100%; padding: 8px 10px; border: 1.5px solid #d1d5db; border-radius: 7px;
+  font-size: 0.875rem; color: #1a1a2e; background: #fff; outline: none; transition: border-color 0.15s; font-family: inherit;
+}
+.field input:focus, .field select:focus, .field textarea:focus { border-color: #0f3d2e; }
+.field textarea { resize: vertical; min-height: 60px; }
+.btn { height: 36px; padding: 0 1.1rem; border-radius: 7px; border: none; font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.15s; display: inline-flex; align-items: center; gap: 6px; }
+.btn-primary { background: #0f3d2e; color: #fff; }
+.btn-primary:hover { background: #0c2f23; }
+.btn-primary:disabled { background: #9ca3af; cursor: not-allowed; }
+.btn-secondary { background: #f3f4f6; color: #374151; border: 1px solid #d1d5db; }
+.btn-secondary:hover { background: #e5e7eb; }
+.spinner { width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.35); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; display: none; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.tag { display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+.tag-green { background: #c6efce; color: #276221; }
+.tag-amber { background: #ffeb9c; color: #7d5a00; }
+.tag-gray { background: #e5e7eb; color: #374151; }
+.tag-red { background: #fecaca; color: #991b1b; }
+.status-badge { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 0.72rem; font-weight: 600; margin-left: 8px; }
+.lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 500; display: none; align-items: center; justify-content: center; cursor: zoom-out; }
+.lightbox.open { display: flex; }
+.lightbox img { max-width: 90vw; max-height: 90vh; border-radius: 8px; box-shadow: 0 8px 40px rgba(0,0,0,0.5); }
+.lightbox-close { position: absolute; top: 20px; right: 24px; color: #fff; font-size: 2rem; cursor: pointer; line-height: 1; opacity: 0.8; }
+.lightbox-close:hover { opacity: 1; }
+.lightbox-label { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); color: #fff; font-size: 0.85rem; opacity: 0.7; }
+.status-sellable { background: #c6efce; color: #276221; }
+.status-prototype { background: #ffeb9c; color: #7d5a00; }
+.status-development { background: #fecaca; color: #991b1b; }
+.status-unknown { background: #e5e7eb; color: #374151; }
+.inline-note { font-size: 0.78rem; color: #6b7280; margin-top: 6px; }
+.existing-tag-row { display: flex; align-items: center; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+.line-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+.line-table th { background: #f0f5f2; color: #0f3d2e; padding: 7px 10px; text-align: left; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; border-bottom: 1px solid #d1d5db; }
+.line-table td { padding: 8px 10px; font-size: 0.85rem; border-bottom: 0.5px solid #e5e7eb; color: #1a1a2e; vertical-align: middle; }
+.line-table tr:last-child td { border-bottom: none; }
+.part-pill { padding: 2px 9px; border-radius: 5px; font-size: 0.72rem; font-weight: 600; background: #e1f5ee; color: #085041; white-space: nowrap; }
+.part-pill-warn { padding: 2px 9px; border-radius: 5px; font-size: 0.72rem; font-weight: 600; background: #fef2f2; color: #991b1b; white-space: nowrap; }
+.qty-input { width: 64px; height: 28px; border: 1.5px solid #d1d5db; border-radius: 5px; text-align: center; font-size: 0.85rem; outline: none; }
+.qty-input:focus { border-color: #0f3d2e; }
+.search-row { display: flex; gap: 8px; position: relative; width: 100%; }
+.search-row input { flex: 1; min-width: 0; padding: 8px 10px; border: 1.5px solid #d1d5db; border-radius: 7px; font-size: 0.875rem; color: #1a1a2e; background: #fff; outline: none; transition: border-color 0.15s; font-family: inherit; }
+.search-row input:focus { border-color: #0f3d2e; }
+.search-dropdown { position: absolute; top: 38px; left: 0; right: 0; background: #fff; border: 1px solid #d1d5db; border-radius: 8px; box-shadow: 0 6px 18px rgba(0,0,0,0.12); z-index: 50; overflow: hidden; max-height: 320px; overflow-y: auto; margin-top: 2px; }
+.search-result-row { padding: 9px 12px; border-bottom: 0.5px solid #e5e7eb; font-size: 0.85rem; cursor: pointer; }
+.search-result-row:hover { background: #f0f5f2; }
+.search-result-row:last-child { border-bottom: none; }
+.sr-part { font-weight: 600; color: #0f3d2e; }
+.sr-desc { color: #6b7280; font-size: 0.78rem; margin-top: 2px; }
+.sr-meta { display: flex; gap: 5px; margin-top: 4px; flex-wrap: wrap; }
+.meta-pill { background: #f0f5f2; color: #0f6e56; padding: 1px 7px; border-radius: 4px; font-size: 0.7rem; }
+.meta-pill-priced { background: #e1f5ee; color: #085041; padding: 1px 7px; border-radius: 4px; font-size: 0.7rem; font-weight: 600; }
+.delete-cell { color: #9ca3af; cursor: pointer; text-align: center; }
+.delete-cell:hover { color: #dc2626; }
+.score-section { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+.score-big { font-size: 2rem; font-weight: 700; color: #0f3d2e; }
+.score-bar-wrap { background: #f3f4f6; border-radius: 8px; height: 10px; margin-bottom: 1rem; overflow: hidden; }
+.score-bar { height: 100%; border-radius: 8px; transition: width 0.5s ease; }
+.score-bar.Hot { background: #dc2626; }
+.score-bar.Warm { background: #f97316; }
+.score-bar.Cool { background: #3b82f6; }
+.score-bar.Cold { background: #9ca3af; }
+.badge { padding: 3px 14px; border-radius: 20px; font-size: 0.82rem; font-weight: 600; }
+.badge-Hot { background: #dc2626; color: #fff; }
+.badge-Warm { background: #f97316; color: #fff; }
+.badge-Cool { background: #3b82f6; color: #fff; }
+.badge-Cold { background: #9ca3af; color: #fff; }
+.result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+.result-box { background: #f9fafb; border-radius: 8px; padding: 0.875rem 1rem; }
+.result-box h4 { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #9ca3af; margin-bottom: 8px; }
+.result-box li { font-size: 0.85rem; color: #374151; margin-bottom: 4px; line-height: 1.4; margin-left: 14px; }
+.action-box { background: #f0f7f3; border: 1px solid #c0e0d2; border-radius: 8px; padding: 1rem 1.1rem; margin-top: 4px; grid-column: 1 / -1; }
+.action-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #0f6e56; margin-bottom: 6px; }
+.action-text { font-size: 0.9rem; color: #085041; font-weight: 500; }
+.routing-text { font-size: 0.82rem; color: #6b7280; margin-top: 8px; line-height: 1.5; }
+.log-controls { display: flex; gap: 10px; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; }
+.log-controls input { flex: 1; min-width: 200px; height: 36px; padding: 0 10px; border: 1.5px solid #d1d5db; border-radius: 7px; font-size: 0.875rem; outline: none; }
+.log-table { width: 100%; border-collapse: collapse; }
+.log-table th { background: #0f3d2e; color: #fff; padding: 9px 12px; font-size: 0.75rem; font-weight: 600; text-align: left; white-space: nowrap; }
+.log-table td { padding: 10px 12px; font-size: 0.82rem; border-bottom: 0.5px solid #f3f4f6; vertical-align: top; color: #374151; }
+.log-table tr:hover td { background: #f9fafb; cursor: pointer; }
+.existing-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; margin-right: 5px; }
+.dot-green { background: #22c55e; }
+.dot-amber { background: #f59e0b; }
+.empty-state { text-align: center; padding: 3rem 1rem; color: #9ca3af; font-size: 0.875rem; }
+.status-msg { font-size: 0.82rem; color: #6b7280; min-height: 18px; margin-top: 0.5rem; }
+.status-msg.error { color: #dc2626; }
+.silver-tool-result { margin-top: 1.25rem; background: #f0f7f3; border: 1px solid #c0e0d2; border-radius: 10px; padding: 1.25rem; display: grid; grid-template-columns: 160px 1fr; gap: 1.25rem; }
+.silver-tool-result img { width: 100%; border-radius: 8px; border: 1px solid #d1d5db; background: #fff; }
+.st-row { display: grid; grid-template-columns: 130px 1fr; gap: 4px; font-size: 0.85rem; margin-bottom: 6px; }
+.st-label { color: #6b7280; font-weight: 500; }
+.st-val { color: #1a1a2e; }
+.price-calc-box { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #d1d5db; }
+.price-calc-row { display: flex; gap: 10px; align-items: flex-end; flex-wrap: wrap; }
+.price-result { margin-top: 0.875rem; background: #fff; border: 1px solid #c0e0d2; border-radius: 8px; padding: 0.875rem 1rem; }
+.price-big { font-size: 1.5rem; font-weight: 700; color: #0f3d2e; }
+.silver-rate-banner { background: #fef9e7; border: 1px solid #f5d97a; border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 1.25rem; display: flex; gap: 10px; align-items: flex-start; font-size: 0.82rem; color: #7d5a00; }
+.overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.45); display: none; z-index: 200; align-items: flex-start; justify-content: flex-end; }
+.overlay.open { display: flex; }
+.drawer { background: #fff; width: 480px; max-width: 95vw; height: 100vh; overflow-y: auto; box-shadow: -4px 0 24px rgba(0,0,0,0.15); padding: 1.5rem; }
+.drawer-close { background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #6b7280; }
+.dl { display: grid; grid-template-columns: 130px 1fr; gap: 6px 12px; margin-top: 1rem; }
+.dl dt { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; color: #9ca3af; padding-top: 2px; }
+.dl dd { font-size: 0.85rem; color: #374151; line-height: 1.4; }
+.section-divider { border: none; border-top: 1px solid #e5e7eb; margin: 1rem 0; }
+@media (max-width: 640px) { .form-grid, .result-grid { grid-template-columns: 1fr; } .silver-tool-result { grid-template-columns: 1fr; } .drawer { width: 100vw; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">BGB <span>bgbinnovation.com</span></div>
+  <div class="vr"></div>
+  <div class="tool-title">BGB Brushes Enquiry Tracker</div>
+  <nav class="nav">
+    <a href="/" style="color:#a8d8c4;text-decoration:none;border:1px solid #1f5a45;border-radius:6px;padding:5px 14px;font-size:0.8rem;margin-right:4px">&larr; Home</a>
+    <button class="active" onclick="showPage('new',this)">New enquiry</button>
+    <button onclick="showPage('pipeline',this)">Pipeline</button>
+    <button onclick="showPage('search',this); document.getElementById('standaloneSearchInput').value=''; document.getElementById('standaloneResults').innerHTML=''; window._lastSearchResults=[]; document.getElementById('inStockFilter').checked=false; document.getElementById('stockFilterCount').textContent='';">Brush search</button>
+  </nav>
+</header>
+
+<!-- ============ NEW ENQUIRY ============ -->
+<div id="page-new" class="page active">
+<div class="container">
+
+  <div class="card">
+    <div class="card-header"><div class="hdr-left"><div class="step-num">1</div><h2>Customer & enquiry details</h2></div></div>
+    <div class="card-body">
+      <div class="form-grid">
+        <div class="field">
+          <label>Sales rep</label>
+          <select id="f-sales-rep">
+            <option value="">— loading —</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Date enquiry received</label>
+          <input type="date" id="f-date-received" />
+        </div>
+        <div class="field full">
+          <label>Customer name</label>
+          <div style="position:relative">
+            <input type="text" id="f-customer-name" placeholder="Start typing a customer name…" autocomplete="off" />
+            <div id="customer-suggest-dropdown"></div>
+          </div>
+          <div class="existing-tag-row" id="customer-tag-row" style="display:none"></div>
+        </div>
+        <div class="field">
+          <label>Customer type</label>
+          <select id="f-customer-type">
+            <option value="">— select —</option>
+            <option>OEM</option>
+            <option>Operator</option>
+            <option>Distributor</option>
+            <option>Unknown</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Wind farm ownership</label>
+          <input type="text" id="f-ownership" placeholder="e.g. Owns and operates 14 sites" />
+        </div>
+      </div>
+      <div class="inline-note" id="enrichment-note" style="display:none"></div>
+    </div>
+  </div>
+
+  <div class="card parts-card">
+    <div class="card-header"><div class="hdr-left"><div class="step-num">2</div><h2>Parts requested</h2></div></div>
+    <div class="card-body">
+      <div class="search-row">
+        <input type="text" id="f-part-search" placeholder="Type a part number or description…" autocomplete="off" />
+        <button class="btn btn-secondary" onclick="addTypedPartToGrid()">Add to grid</button>
+      </div>
+      <div id="part-search-dropdown"></div>
+
+      <table class="line-table">
+        <thead><tr><th>Part / type</th><th>BGB ref</th><th style="width:80px">Qty</th><th>Status</th><th></th><th></th></tr></thead>
+        <tbody id="lines-tbody">
+          <tr><td colspan="5" style="text-align:center;color:#9ca3af;padding:1.5rem">No parts added yet</td></tr>
+        </tbody>
+      </table>
+      <div class="inline-note">Type any part number or description above and click Add to grid — matched parts pull details automatically from the catalogue, unmatched parts are still logged and flagged for sourcing review.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="hdr-left"><div class="step-num">3</div><h2>Volume & commercial signals</h2></div></div>
+    <div class="card-body">
+      <div class="form-grid">
+        <div class="field">
+          <label>Current supplier</label>
+          <select id="f-current-supplier" onchange="toggleOtherSupplier()">
+            <option value="">— select —</option>
+            <option>Carbex</option>
+            <option>Shunk</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field" id="other-supplier-field" style="display:none">
+          <label>Specify supplier</label>
+          <input type="text" id="f-current-supplier-other" placeholder="Supplier name" />
+        </div>
+        <div class="field">
+          <label>Timeline</label>
+          <select id="f-timeline">
+            <option value="">— select —</option>
+            <option>Trial order within 2 months</option>
+            <option>Short — 1–3 months</option>
+            <option>Medium — 3–12 months</option>
+            <option>Long — 12+ months / fleet rollout</option>
+            <option>No timeline stated</option>
+          </select>
+        </div>
+        <div class="field full">
+          <label>Notes</label>
+          <textarea id="f-notes" placeholder="Anything else relevant — engagement level, test data discussed, decision process…"></textarea>
+        </div>
+      </div>
+      <div style="margin-top:1.25rem;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <button class="btn btn-primary" id="scoreBtn" onclick="scoreEnquiry()">
+          Score this enquiry <span class="spinner" id="scoreSpinner"></span>
+        </button>
+        <button class="btn btn-secondary" onclick="resetForm()">Clear form</button>
+        <div class="status-msg" id="scoreStatus" style="margin:0"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="resultCard" style="display:none">
+    <div class="card-header"><div class="hdr-left"><div class="step-num">4</div><h2>Conversion likelihood</h2></div></div>
+    <div class="card-body">
+      <div class="score-section">
+        <div class="score-big" id="qr-score"></div>
+        <div>
+          <span class="badge" id="qr-band"></span>
+          <div style="font-size:0.75rem;color:#9ca3af;margin-top:3px">likelihood to convert / 100</div>
+        </div>
+        <div style="margin-left:auto;text-align:right" id="qr-pipeline-value-wrap"></div>
+      </div>
+      <div class="score-bar-wrap"><div class="score-bar" id="qr-bar"></div></div>
+      <div class="result-grid">
+        <div class="result-box"><h4>Positives</h4><ul id="qr-positives"></ul></div>
+        <div class="result-box"><h4>Risks</h4><ul id="qr-risks"></ul></div>
+        <div class="action-box">
+          <div class="action-label">Recommended next action</div>
+          <div class="action-text" id="qr-action"></div>
+          <div class="routing-text" id="qr-routing"></div>
+        </div>
+      </div>
+      <div style="margin-top:1.25rem;padding-top:1rem;border-top:1px solid #e5e7eb;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+        <div style="font-size:0.8rem;color:#6b7280">Logged to pipeline</div>
+        <div style="width:6px;height:6px;border-radius:50%;background:#22c55e"></div>
+        <div style="font-size:0.8rem;color:#16a34a;font-weight:500" id="qr-log-confirm"></div>
+        <button class="btn btn-secondary" style="margin-left:auto" onclick="resetForm()">New enquiry</button>
+        <button class="btn btn-primary" onclick="showPage('pipeline',document.querySelectorAll('.nav button')[1])">View pipeline</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ============ PIPELINE ============ -->
+<div id="page-pipeline" class="page">
+<div class="container">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:10px">
+    <div>
+      <h1 style="font-size:1.1rem;font-weight:600;color:#0f3d2e">Enquiry pipeline</h1>
+      <p style="font-size:0.8rem;color:#6b7280;margin-top:2px">All BGB Brushes enquiries this session.</p>
+    </div>
+    <div style="display:flex;gap:8px">
+      <input type="text" id="logSearch" placeholder="Search customer, part…" oninput="filterLog()" style="height:36px;padding:0 10px;border:1.5px solid #d1d5db;border-radius:7px;font-size:0.875rem;width:220px;outline:none" />
+      <button class="btn btn-secondary" onclick="loadLog()">↻ Refresh</button>
+      <button class="btn btn-primary" onclick="exportCsv()">Export EFACS CSV</button>
+    </div>
+  </div>
+  <div class="card" style="overflow:auto">
+    <table class="log-table">
+      <thead><tr>
+        <th>Received</th><th>Customer</th><th>Existing</th><th>Sales rep</th>
+        <th>Parts</th><th>Score</th><th>Pipeline value</th><th>Routing</th>
+      </tr></thead>
+      <tbody id="logBody"><tr><td colspan="7" class="empty-state">No enquiries logged yet this session.</td></tr></tbody>
+    </table>
+  </div>
+</div>
+</div>
+
+<!-- ============ BRUSH SEARCH ============ -->
+<div id="page-search" class="page">
+<div class="container">
+  <div class="card">
+    <div class="card-header"><h2>Brush part lookup</h2></div>
+    <div class="card-body">
+      <div id="silverRateBanner"></div>
+      <div class="search-row">
+        <input type="text" id="standaloneSearchInput" placeholder="Type a BGB part number, OEM reference, or description…" autocomplete="off" />
+        <button class="btn btn-primary" onclick="standaloneSearch()">Search</button>
+      </div>
+      <div style="margin-top:8px;display:flex;align-items:center;gap:8px">
+        <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:0.82rem;color:#374151;user-select:none">
+          <input type="checkbox" id="inStockFilter" onchange="applyStockFilter()" style="width:15px;height:15px;accent-color:#0f3d2e;cursor:pointer" />
+          Show in stock only
+        </label>
+        <span id="stockFilterCount" style="font-size:0.78rem;color:#9ca3af"></span>
+      </div>
+      <div id="standaloneResults"></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="overlay" id="overlay" onclick="closeDrawer(event)">
+  <div class="drawer">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.25rem">
+      <div>
+        <div style="font-size:1rem;font-weight:600;color:#0f3d2e" id="d-company"></div>
+        <div style="font-size:0.8rem;color:#6b7280;margin-top:2px" id="d-timestamp"></div>
+      </div>
+      <button class="drawer-close" onclick="closeDrawer()">✕</button>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap" id="d-badges"></div>
+    <dl class="dl" id="d-details"></dl>
+    <hr class="section-divider">
+    <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;color:#9ca3af;margin-bottom:8px">Parts requested</div>
+    <table style="width:100%;font-size:0.82rem" id="d-lines"></table>
+    <hr class="section-divider">
+    <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;color:#9ca3af;margin-bottom:6px">Qualification</div>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+      <div style="font-size:1.5rem;font-weight:700;color:#0f3d2e" id="d-score"></div>
+      <span class="badge" id="d-band"></span>
+    </div>
+    <div style="margin-top:0.5rem"><strong>Action:</strong> <span id="d-action"></span></div>
+    <div style="margin-top:4px;color:#6b7280;font-size:0.82rem" id="d-routing"></div>
+    <div id="d-notes-wrap" style="margin-top:1rem;display:none">
+      <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;color:#9ca3af;margin-bottom:5px">Notes</div>
+      <div style="font-size:0.85rem;color:#374151" id="d-notes"></div>
+    </div>
+  </div>
+</div>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close" onclick="closeLightbox()">✕</span>
+  <img id="lightbox-img" src="" alt="" />
+  <div class="lightbox-label" id="lightbox-label"></div>
+</div>
+
+<script>
+let customerEnrichment = null;
+let enquiryLines = [];
+let allLogEntries = [];
+let pendingPartSearch = null;
+
+// ===== Load sales reps on startup =====
+async function loadSalesReps() {
+  try {
+    const resp = await fetch('/brush/sales-reps', { credentials: 'include' });
+    const reps = await resp.json();
+    const sel = document.getElementById('f-sales-rep');
+    sel.innerHTML = '<option value="">— select —</option>' +
+      reps.map(r => `<option value="${r.name}">${r.name}</option>`).join('');
+  } catch(e) {}
+}
+loadSalesReps();
+
+function showPage(name, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  if (btn) btn.classList.add('active');
+  if (name === 'pipeline') loadLog();
+  if (name === 'search') loadSilverBanner();
+}
+
+// ===== Customer lookup =====
+let custDebounce;
+document.getElementById('f-customer-name').addEventListener('input', e => {
+  clearTimeout(custDebounce);
+  const val = e.target.value.trim();
+  if (val.length < 2) {
+    document.getElementById('customer-tag-row').style.display = 'none';
+    document.getElementById('enrichment-note').style.display = 'none';
+    return;
+  }
+  custDebounce = setTimeout(() => lookupCustomer(val), 350);
+});
+
+async function lookupCustomer(name) {
+  try {
+    const resp = await fetch('/brush/customer-lookup?name=' + encodeURIComponent(name), { credentials: 'include' });
+    const data = await resp.json();
+    const tagRow = document.getElementById('customer-tag-row');
+    tagRow.style.display = 'flex';
+
+    if (data.is_existing) {
+      tagRow.innerHTML = `<span class="tag tag-green">✓ Existing customer</span><span class="inline-note">Trader ID ${data.trader_id} · ${data.bgb_entity}</span>`;
+    } else {
+      tagRow.innerHTML = `<span class="tag tag-amber">New / unverified customer</span><span class="inline-note">Will log under Trader ID ${data.trader_id} (PRO005) — customer name kept as typed in Customer Order Reference</span>`;
+    }
+
+    // autocomplete suggestions
+    const dd = document.getElementById('customer-suggest-dropdown');
+    if (!data.is_existing && data.suggestions && data.suggestions.length) {
+      dd.innerHTML = '<div class="search-dropdown">' + data.suggestions.map(s =>
+        `<div class="search-result-row" onclick="selectCustomerSuggestion('${s.replace(/'/g, "\\'")}')">${s}</div>`
+      ).join('') + '</div>';
+    } else {
+      dd.innerHTML = '';
+    }
+
+    const note = document.getElementById('enrichment-note');
+    if (data.enrichment) {
+      document.getElementById('f-customer-type').value = data.enrichment.type || '';
+      document.getElementById('f-ownership').value = data.enrichment.ownership || '';
+      note.style.display = 'block';
+      note.textContent = `Type and ownership auto-filled from a previous entry (saved by ${data.enrichment.updated_by} on ${data.enrichment.updated_at}).`;
+    } else {
+      note.style.display = 'none';
+    }
+    window._currentCustomerExisting = data.is_existing;
+    window._currentTraderId = data.trader_id;
+    window._currentBgbEntity = data.bgb_entity;
+  } catch(e) {}
+}
+
+function selectCustomerSuggestion(name) {
+  document.getElementById('f-customer-name').value = name;
+  document.getElementById('customer-suggest-dropdown').innerHTML = '';
+  lookupCustomer(name);
+}
+
+// Save enrichment when type/ownership changed manually
+['f-customer-type', 'f-ownership'].forEach(id => {
+  document.getElementById(id).addEventListener('change', saveEnrichmentIfReady);
+});
+
+async function saveEnrichmentIfReady() {
+  const name = document.getElementById('f-customer-name').value.trim();
+  const type = document.getElementById('f-customer-type').value;
+  const ownership = document.getElementById('f-ownership').value.trim();
+  if (!name || (!type && !ownership)) return;
+  try {
+    await fetch('/brush/customer-enrichment', {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ name, type, ownership })
+    });
+  } catch(e) {}
+}
+
+// ===== Part search / grid =====
+let partDebounce;
+document.getElementById('f-part-search').addEventListener('input', e => {
+  clearTimeout(partDebounce);
+  const q = e.target.value.trim();
+  if (q.length < 2) { document.getElementById('part-search-dropdown').innerHTML = ''; return; }
+  partDebounce = setTimeout(() => searchPartsDropdown(q), 300);
+});
+
+async function searchPartsDropdown(q) {
+  try {
+    const resp = await fetch('/brush/brush-search?q=' + encodeURIComponent(q), { credentials: 'include' });
+    const data = await resp.json();
+    const dd = document.getElementById('part-search-dropdown');
+    if (!data.results.length) { dd.innerHTML = ''; return; }
+    dd.innerHTML = '<div class="search-dropdown">' + data.results.map((r, i) => `
+      <div class="search-result-row" onclick='selectSearchResult(${i})'>
+        ${r.cross_reference_note ? `<div style="background:#fef9e7;color:#7d5a00;padding:4px 8px;border-radius:5px;font-size:0.72rem;margin-bottom:5px">${r.cross_reference_note}</div>` : ''}
+        <div class="sr-part">${r.part_no || '(no part no.)'} — ${r.description || ''}</div>
+        <div class="sr-desc">${[r.oem, r.turbine_type, r.grade ? 'Grade ' + r.grade : '', r.oe_ref ? 'OE ref ' + r.oe_ref : ''].filter(Boolean).join(' · ')}</div>
+        <div class="sr-meta">
+          ${r.oem ? `<span class="meta-pill">${r.oem}</span>` : ''}
+          ${r.has_pricing ? '<span class="meta-pill-priced">Live pricing available</span>' : '<span class="meta-pill">In catalogue</span>'}
+          ${r.status && r.status !== 'Sellable' ? `<span class="status-badge ${statusClass(r.status)}">${r.status}</span>` : ''}
+        </div>
+      </div>`).join('') + '</div>';
+    window._searchResults = data.results;
+  } catch(e) {}
+}
+
+function selectSearchResult(i) {
+  const r = (window._searchResults || [])[i];
+  if (!r) return;
+  const alreadyAdded = enquiryLines.some(l => (l.part_no || '').toUpperCase() === (r.part_no || '').toUpperCase());
+  if (!alreadyAdded) {
+    addLineToGrid({
+      part_no: r.part_no, description: r.description,
+      matched_part_no: r.part_no, qty: 1, status: 'matched',
+      _catalogueData: r
+    });
+  }
+  document.getElementById('f-part-search').value = '';
+  document.getElementById('part-search-dropdown').innerHTML = '';
+  window._searchResults = [];
+}
+
+async function addTypedPartToGrid() {
+  const val = document.getElementById('f-part-search').value.trim();
+  if (!val) return;
+
+  // Check existing results first (already loaded by debounce)
+  const existingResults = window._searchResults || [];
+  const exactFromCache = existingResults.find(r => (r.part_no || '').toUpperCase() === val.toUpperCase());
+  if (exactFromCache) {
+    selectSearchResult(existingResults.indexOf(exactFromCache));
+    return;
+  }
+
+  // No cached results or debounce hasn't fired yet — hit the API directly
+  try {
+    const resp = await fetch('/brush/brush-search?q=' + encodeURIComponent(val), { credentials: 'include' });
+    const data = await resp.json();
+    const freshResults = data.results || [];
+    const exact = freshResults.find(r => (r.part_no || '').toUpperCase() === val.toUpperCase());
+    if (exact) {
+      // guard: don't add duplicate
+      const alreadyAdded = enquiryLines.some(l => (l.part_no || '').toUpperCase() === val.toUpperCase());
+      if (!alreadyAdded) {
+        addLineToGrid({
+          part_no: exact.part_no, description: exact.description,
+          matched_part_no: exact.part_no, qty: 1, status: 'matched',
+          _catalogueData: exact
+        });
+      }
+      document.getElementById('f-part-search').value = '';
+      document.getElementById('part-search-dropdown').innerHTML = '';
+      window._searchResults = [];
+      return;
+    }
+  } catch(e) {}
+
+  // Genuinely not in catalogue
+  const alreadyAdded = enquiryLines.some(l => (l.part_no || '').toUpperCase() === val.toUpperCase());
+  if (!alreadyAdded) {
+    addLineToGrid({ part_no: val, description: 'Typed in — not matched to catalogue', matched_part_no: null, qty: 1, status: 'unmatched' });
+  }
+  document.getElementById('f-part-search').value = '';
+  document.getElementById('part-search-dropdown').innerHTML = '';
+  window._searchResults = [];
+}
+
+function addLineToGrid(line) {
+  enquiryLines.push(line);
+  renderLinesGrid();
+}
+
+function removeLine(idx) {
+  enquiryLines.splice(idx, 1);
+  renderLinesGrid();
+}
+
+function updateLineQty(idx, val) {
+  enquiryLines[idx].qty = parseInt(val) || 0;
+}
+
+function renderLinesGrid() {
+  const tbody = document.getElementById('lines-tbody');
+  if (!enquiryLines.length) {
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:#9ca3af;padding:1.5rem">No parts added yet</td></tr>';
+    return;
+  }
+  tbody.innerHTML = enquiryLines.map((l, i) => `
+    <tr>
+      <td><span class="${l.status === 'matched' ? 'part-pill' : 'part-pill-warn'}">Brush</span> ${l.description}</td>
+      <td style="color:#6b7280">${l.part_no}</td>
+      <td><input type="number" class="qty-input" value="${l.qty}" min="1" onchange="updateLineQty(${i}, this.value)" /></td>
+      <td>${l.status === 'matched' ? '<span class="part-pill">In catalogue</span>' : '<span class="part-pill-warn">Not in catalogue</span>'}</td>
+      <td>${l.status === 'matched' ? `<button class="btn btn-secondary" style="height:26px;padding:0 8px;font-size:0.72rem" onclick="togglePartPanel(${i})">View part</button>` : ''}</td>
+      <td class="delete-cell" onclick="removeLine(${i})">✕</td>
+    </tr>
+    <tr id="part-panel-${i}" style="display:none">
+      <td colspan="6" style="padding:0">
+        <div id="part-panel-body-${i}" style="background:#f0f7f3;border-top:1px solid #c0e0d2;padding:1rem 1.25rem"></div>
+      </td>
+    </tr>`).join('');
+}
+
+function togglePartPanel(idx) {
+  const row = document.getElementById('part-panel-' + idx);
+  const body = document.getElementById('part-panel-body-' + idx);
+  const isOpen = row.style.display !== 'none';
+  // close all other open panels first
+  document.querySelectorAll('[id^="part-panel-"]').forEach(el => {
+    if (!el.id.includes('body')) el.style.display = 'none';
+  });
+  if (isOpen) return;
+  row.style.display = 'table-row';
+  const l = enquiryLines[idx];
+  if (l._catalogueData) {
+    renderPartPanel(body, l._catalogueData, l.qty);
+  } else {
+    body.innerHTML = '<span style="color:#9ca3af;font-size:0.82rem">Loading…</span>';
+    fetch('/brush/brush-search?q=' + encodeURIComponent(l.part_no))
+      .then(r => r.json())
+      .then(data => {
+        const match = (data.results || []).find(r => (r.part_no || '').toUpperCase() === l.part_no.toUpperCase());
+        if (match) {
+          l._catalogueData = match;
+          renderPartPanel(body, match, l.qty);
+        } else {
+          body.innerHTML = '<span style="color:#9ca3af;font-size:0.82rem">No catalogue data found.</span>';
+        }
+      }).catch(() => { body.innerHTML = '<span style="color:#dc2626;font-size:0.82rem">Failed to load part data.</span>'; });
+  }
+}
+
+function renderPartPanel(container, r, qty) {
+  const symbol = '$';
+  const statusCls = r.status === 'Sellable' ? 'tag-green' : r.status === 'Prototype' ? 'tag-amber' : 'tag-gray';
+  container.innerHTML = `
+    <div style="display:grid;grid-template-columns:${r.drawing_url ? '120px 1fr' : '1fr'};gap:1rem;align-items:start">
+      ${r.drawing_url ? `<img src="${r.drawing_url}" data-part="${r.part_no}" style="width:100%;border-radius:6px;border:1px solid #d1d5db;cursor:zoom-in" alt="drawing" onclick="openLightbox(this)" />` : ''}
+      <div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap">
+          <span style="font-weight:600;color:#0f3d2e;font-size:0.9rem">${r.part_no}</span>
+          ${r.status ? `<span class="tag ${statusCls}" style="font-size:0.7rem">${r.status}</span>` : ''}
+          ${r.aftermarket_ref ? `<span style="font-size:0.75rem;color:#6b7280">Aftermarket: <strong>${r.aftermarket_ref}</strong></span>` : ''}
+        </div>
+        <div style="display:grid;grid-template-columns:110px 1fr;gap:3px 10px;font-size:0.82rem">
+          <span style="color:#9ca3af">Description</span><span>${r.description || '—'}</span>
+          ${r.oem ? `<span style="color:#9ca3af">OEM</span><span>${r.oem}</span>` : ''}
+          ${r.turbine_type ? `<span style="color:#9ca3af">Turbine</span><span>${r.turbine_type}</span>` : ''}
+          ${r.grade ? `<span style="color:#9ca3af">Grade</span><span>${r.grade}</span>` : ''}
+          ${r.oe_ref ? `<span style="color:#9ca3af">OE ref</span><span>${r.oe_ref}</span>` : ''}
+          ${r.material ? `<span style="color:#9ca3af">Material</span><span>${r.material}</span>` : ''}
+        </div>
+        ${r.has_pricing && r.price_breaks_usd ? (() => {
+          const breaks = r.price_breaks_usd;
+          const sorted = [...breaks].sort((a,b) => a.qty - b.qty);
+          // find price for current qty
+          let unitPrice = null;
+          const exact = sorted.find(b => b.qty === qty);
+          if (exact) unitPrice = exact.list_price;
+          else if (qty < sorted[0].qty) unitPrice = sorted[0].list_price;
+          else if (qty > sorted[sorted.length-1].qty) unitPrice = sorted[sorted.length-1].list_price;
+          else {
+            const lower = [...sorted].reverse().find(b => b.qty <= qty);
+            const upper = sorted.find(b => b.qty >= qty);
+            if (lower && upper && lower.qty !== upper.qty) {
+              const frac = (qty - lower.qty) / (upper.qty - lower.qty);
+              unitPrice = lower.list_price + frac * (upper.list_price - lower.list_price);
+            }
+          }
+          const total = unitPrice ? (unitPrice * qty).toFixed(2) : null;
+          return `<div style="margin-top:10px;padding-top:10px;border-top:1px solid #c0e0d2">
+            <span style="font-size:0.7rem;font-weight:700;text-transform:uppercase;color:#0f6e56">Indicative cost for qty ${qty}</span>
+            ${unitPrice ? `<div style="font-size:1.1rem;font-weight:700;color:#0f3d2e;margin-top:2px">${symbol}${parseFloat(total).toLocaleString()} <span style="font-size:0.78rem;font-weight:400;color:#6b7280">(${symbol}${unitPrice.toFixed(2)}/unit)</span></div>` : ''}
+            <div style="font-size:0.7rem;color:#9ca3af;margin-top:2px">Live silver rate $1,900.11/kg · indicative only</div>
+          </div>`;
+        })() : ''}
+        ${r.status && r.status !== 'Sellable' ? `<div style="font-size:0.78rem;color:#991b1b;margin-top:6px">⚠ ${r.status} — confirm availability before quoting</div>` : ''}
+      </div>
+    </div>`;
+}
+
+function toggleOtherSupplier() {
+  const val = document.getElementById('f-current-supplier').value;
+  document.getElementById('other-supplier-field').style.display = val === 'Other' ? 'block' : 'none';
+}
+
+// ===== Scoring =====
+async function scoreEnquiry() {
+  const customerName = document.getElementById('f-customer-name').value.trim();
+  if (!customerName) {
+    document.getElementById('scoreStatus').textContent = 'Enter a customer name first';
+    document.getElementById('scoreStatus').className = 'status-msg error';
+    return;
+  }
+  if (!enquiryLines.length) {
+    document.getElementById('scoreStatus').textContent = 'Add at least one part to the grid';
+    document.getElementById('scoreStatus').className = 'status-msg error';
+    return;
+  }
+
+  const btn = document.getElementById('scoreBtn');
+  const spinner = document.getElementById('scoreSpinner');
+  btn.disabled = true; spinner.style.display = 'inline-block';
+  document.getElementById('scoreStatus').textContent = 'Scoring…'; document.getElementById('scoreStatus').className = 'status-msg';
+
+  let supplier = document.getElementById('f-current-supplier').value;
+  if (supplier === 'Other') supplier = document.getElementById('f-current-supplier-other').value.trim();
+
+  const payload = {
+    sales_rep: document.getElementById('f-sales-rep').value,
+    customer_name: customerName,
+    is_existing_customer: !!window._currentCustomerExisting,
+    customer_type: document.getElementById('f-customer-type').value,
+    wind_farm_ownership: document.getElementById('f-ownership').value.trim(),
+    lines: enquiryLines,
+    current_supplier: supplier,
+    timeline: document.getElementById('f-timeline').value,
+    notes: document.getElementById('f-notes').value.trim(),
+  };
+
+  try {
+    const resp = await fetch('/submit-enquiry', {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(payload)
+    });
+    if (!resp.ok) throw new Error((await resp.json()).detail);
+    const data = await resp.json();
+    renderResult(data.entry);
+    document.getElementById('scoreStatus').textContent = '';
+  } catch(e) {
+    document.getElementById('scoreStatus').textContent = '⚠ ' + e.message;
+    document.getElementById('scoreStatus').className = 'status-msg error';
+  } finally {
+    btn.disabled = false; spinner.style.display = 'none';
+  }
+}
+
+function renderResult(entry) {
+  document.getElementById('qr-score').textContent = entry.score;
+  const band = entry.band;
+  const badge = document.getElementById('qr-band');
+  badge.textContent = band; badge.className = 'badge badge-' + band;
+  const bar = document.getElementById('qr-bar');
+  bar.style.width = entry.score + '%'; bar.className = 'score-bar ' + band;
+  document.getElementById('qr-positives').innerHTML = (entry.key_positives||[]).map(p=>`<li>${p}</li>`).join('') || '<li>None identified</li>';
+  document.getElementById('qr-risks').innerHTML = (entry.key_risks||[]).map(r=>`<li>${r}</li>`).join('') || '<li>None identified</li>';
+  document.getElementById('qr-action').textContent = entry.routing_reason;
+  document.getElementById('qr-routing').textContent = `Routing: ${entry.routing}`;
+  document.getElementById('qr-log-confirm').textContent = 'Entry #' + entry.id + ' logged';
+  const pv = document.getElementById('qr-pipeline-value-wrap');
+  if (entry.pipeline_value_usd > 0) {
+    pv.innerHTML = `<div style="font-size:1.3rem;font-weight:700;color:#0f3d2e">$${entry.pipeline_value_usd.toLocaleString()}</div><div style="font-size:0.7rem;color:#9ca3af">pipeline value (+10%)</div>`;
+  } else {
+    pv.innerHTML = '';
+  }
+  document.getElementById('resultCard').style.display = 'block';
+  document.getElementById('resultCard').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function resetForm() {
+  enquiryLines = [];
+  customerEnrichment = null;
+  window._currentCustomerExisting = false;
+  document.getElementById('f-customer-name').value = '';
+  document.getElementById('f-sales-rep').value = '';
+  document.getElementById('f-date-received').value = '';
+  document.getElementById('f-customer-type').value = '';
+  document.getElementById('f-ownership').value = '';
+  document.getElementById('customer-tag-row').style.display = 'none';
+  document.getElementById('enrichment-note').style.display = 'none';
+  document.getElementById('f-current-supplier').value = '';
+  document.getElementById('f-current-supplier-other').value = '';
+  document.getElementById('other-supplier-field').style.display = 'none';
+  document.getElementById('f-timeline').value = '';
+  document.getElementById('f-notes').value = '';
+  renderLinesGrid();
+  document.getElementById('resultCard').style.display = 'none';
+  document.getElementById('scoreStatus').textContent = '';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// ===== Pipeline =====
+async function loadLog() {
+  try {
+    const resp = await fetch('/brush/log', { credentials: 'include' });
+    allLogEntries = await resp.json();
+    renderLog(allLogEntries);
+  } catch(e) {}
+}
+
+function filterLog() {
+  const q = document.getElementById('logSearch').value.toLowerCase();
+  renderLog(allLogEntries.filter(e =>
+    (e.customer_name||'').toLowerCase().includes(q) ||
+    (e.lines||[]).some(l => (l.part_no||'').toLowerCase().includes(q))
+  ));
+}
+
+function renderLog(entries) {
+  const tbody = document.getElementById('logBody');
+  if (!entries.length) {
+    tbody.innerHTML = '<tr><td colspan="7" class="empty-state">No enquiries logged yet this session.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = entries.map(e => `
+    <tr onclick="openDrawer('${e.id}')">
+      <td style="white-space:nowrap;color:#6b7280">${e.timestamp}</td>
+      <td style="font-weight:500;color:#0f3d2e">${e.customer_name}</td>
+      <td>${e.is_existing_customer ? '<span class="existing-dot dot-green"></span>Yes' : '<span class="existing-dot dot-amber"></span>No'}</td>
+      <td style="color:#6b7280">${e.sales_rep || '—'}</td>
+      <td style="color:#6b7280">${(e.lines||[]).length} line${(e.lines||[]).length===1?'':'s'}</td>
+      <td><span style="font-weight:700;color:#0f3d2e">${e.score}</span> <span class="badge" style="font-size:0.7rem;padding:2px 8px" class="badge-${e.band}">${e.band}</span></td>
+      <td style="font-weight:600;color:#0f3d2e">${e.pipeline_value_usd > 0 ? '$' + e.pipeline_value_usd.toLocaleString() : '—'}</td>
+      <td style="font-weight:500;font-size:0.78rem">${e.routing}</td>
+    </tr>`).join('');
+}
+
+function openDrawer(id) {
+  const e = allLogEntries.find(x => x.id === id);
+  if (!e) return;
+  document.getElementById('d-company').textContent = e.customer_name;
+  document.getElementById('d-timestamp').textContent = e.timestamp + (e.sales_rep ? ' · ' + e.sales_rep : '');
+  document.getElementById('d-badges').innerHTML = `<span class="badge badge-${e.band}">${e.band}</span>` +
+    (e.is_existing_customer ? '<span class="tag tag-green">Existing</span>' : '<span class="tag tag-amber">New</span>');
+  const details = [['Customer type', e.customer_type], ['Ownership', e.wind_farm_ownership],
+    ['Supplier', e.current_supplier], ['Timeline', e.timeline], ['Total qty', e.total_qty]].filter(([,v])=>v);
+  document.getElementById('d-details').innerHTML = details.map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('');
+  document.getElementById('d-lines').innerHTML = (e.lines||[]).map(l =>
+    `<tr><td style="padding:4px 0">${l.part_no}</td><td style="padding:4px 0;color:#6b7280">${l.description}</td><td style="padding:4px 0;text-align:right">${l.qty}</td></tr>`).join('');
+  document.getElementById('d-score').textContent = e.score;
+  const db = document.getElementById('d-band'); db.textContent = e.band; db.className = 'badge badge-' + e.band;
+  document.getElementById('d-action').textContent = e.routing_reason;
+  document.getElementById('d-routing').textContent = 'Routing: ' + e.routing;
+  const nw = document.getElementById('d-notes-wrap');
+  if (e.notes) { document.getElementById('d-notes').textContent = e.notes; nw.style.display = 'block'; } else nw.style.display = 'none';
+  document.getElementById('overlay').classList.add('open');
+}
+
+function closeDrawer(e) {
+  if (!e || e.target === document.getElementById('overlay')) document.getElementById('overlay').classList.remove('open');
+}
+
+function exportCsv() {
+  window.open('/brush/export-efacs-csv', '_blank');
+}
+
+// ===== Brush search page =====
+async function loadSilverBanner() {
+  try {
+    const resp = await fetch('/brush/silver-rate', { credentials: 'include' });
+    const meta = await resp.json();
+    window._silverMeta = meta;
+    const ageText = meta.age_hours < 9999
+      ? (meta.age_hours < 1 ? 'just fetched' : `${meta.age_hours}h ago`)
+      : 'pending fetch';
+    const staleWarn = meta.stale ? `<span style="color:#991b1b;font-weight:600"> ⚠ Market rate over 24h old</span>` : '';
+    const overrideNote = meta.is_manual_override ? `<span style="color:#276221;font-weight:600"> 🔒 Market rate manually locked</span>` : '';
+    document.getElementById('silverRateBanner').innerHTML = `
+      <div class="silver-rate-banner">
+        <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div>
+            <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;color:#7d5a00;margin-bottom:2px">Gerken quoted rate</div>
+            <div style="font-size:1rem;font-weight:700;color:#0f3d2e">€${meta.gerken_locked_eur_kg?.toLocaleString()}/kg</div>
+            <div style="font-size:0.72rem;color:#7d5a00">Price list ${meta.price_list_date} Rev ${meta.price_list_revision} · ${meta.gerken_stock_kg > 0 ? meta.gerken_stock_kg + 'kg silver stock committed' : 'No dedicated stock — priced fresh per order'}</div>
+          </div>
+          <div>
+            <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;color:#7d5a00;margin-bottom:2px">Live market rate (for comparison)</div>
+            <div style="font-size:1rem;font-weight:700;color:${meta.stale && !meta.is_manual_override ? '#9ca3af' : '#374151'}">${meta.stale && !meta.is_manual_override ? 'Not yet entered' : '€' + meta.market_rate_eur_kg?.toLocaleString() + '/kg'}</div>
+            <div style="font-size:0.72rem;color:#7d5a00">${meta.is_manual_override ? overrideNote : (meta.stale ? '<span style="color:#991b1b;font-weight:600">⚠ No live rate available — enter manually below</span>' : `${meta.market_source} · ${ageText}`)}</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:6px;align-items:center;flex-shrink:0;margin-left:12px">
+          ${meta.is_manual_override
+            ? `<button class="btn btn-secondary" style="height:28px;font-size:0.75rem" onclick="clearRateOverride()">Clear override</button>`
+            : `<button class="btn btn-secondary" style="height:28px;font-size:0.75rem" onclick="toggleRateOverride()">Lock market rate</button>`}
+        </div>
+      </div>
+      <div id="rateOverrideForm" style="display:${meta.stale && !meta.is_manual_override ? 'block' : 'none'};margin-top:8px;padding:10px 12px;background:#f0f7f3;border:1px solid #c0e0d2;border-radius:8px">
+        <div style="font-size:0.78rem;font-weight:600;color:#0f3d2e;margin-bottom:6px">Lock LBMA fix rate for quoting period (overrides live fetch)</div>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+          <span style="font-size:0.875rem">€/kg</span>
+          <input type="number" id="manualRateInput" placeholder="e.g. 1820.00" value="${meta.gerken_locked_eur_kg || ''}" step="0.01" style="width:130px;height:30px;padding:0 8px;border:1.5px solid #d1d5db;border-radius:5px;font-size:0.875rem" oninput="this.style.borderColor='#0f3d2e'" />
+          <button class="btn btn-primary" style="height:30px;font-size:0.78rem" onclick="setRateOverride()">Lock</button>
+          <button class="btn btn-secondary" style="height:30px;font-size:0.78rem" onclick="toggleRateOverride()">Cancel</button>
+        </div>
+        <div style="font-size:0.78rem;color:#6b7280;margin-top:5px">
+          Check today's rate at <a href="https://www.bullionbypost.eu/silver-price/silver-price-per-kilo/" target="_blank" style="color:#0f3d2e;font-weight:600">bullionbypost.eu/silver-price/silver-price-per-kilo</a> (Gerken's reference). Enter the EUR/kg figure shown. Applies to all users until cleared.
+        </div>
+      </div>`;
+  } catch(e) {
+    document.getElementById('silverRateBanner').innerHTML = `<div class="silver-rate-banner">Unable to load silver rate data.</div>`;
+  }
+}
+
+function toggleRateOverride() {
+  const form = document.getElementById('rateOverrideForm');
+  if (form) form.style.display = form.style.display === 'none' ? 'block' : 'none';
+}
+
+async function setRateOverride() {
+  const inputEl = document.getElementById('manualRateInput');
+  const val = parseFloat(inputEl?.value);
+  if (!val || val <= 0) {
+    alert('Please enter a valid EUR/kg rate in the field first (e.g. 1820.00)');
+    inputEl?.focus();
+    return;
+  }
+  const meta = window._silverMeta || {};
+  const fx = meta.fx || 1.14;
+  const btn = event.target;
+  btn.textContent = 'Saving…';
+  btn.disabled = true;
+  try {
+    const resp = await fetch('/brush/silver-rate/override', {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      credentials: 'include',
+      body: JSON.stringify({ rate_usd_kg: val * fx })
+    });
+    if (!resp.ok) throw new Error('Server error');
+    await loadSilverBanner();
+  } catch(e) {
+    alert('Failed to save rate — try again');
+    btn.textContent = 'Lock';
+    btn.disabled = false;
+  }
+}
+
+async function clearRateOverride() {
+  await fetch('/brush/silver-rate/clear-override', { method: 'POST', credentials: 'include' });
+  loadSilverBanner();
+}
+
+function openLightbox(img) {
+  const url = typeof img === 'string' ? img : img.src;
+  const partNo = typeof img === 'string' ? '' : (img.dataset.part || img.alt || '');
+  document.getElementById('lightbox-img').src = url;
+  document.getElementById('lightbox-label').textContent = partNo;
+  document.getElementById('lightbox').classList.add('open');
+  document.addEventListener('keydown', _lightboxEsc);
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.getElementById('lightbox-img').src = '';
+  document.removeEventListener('keydown', _lightboxEsc);
+}
+
+function _lightboxEsc(e) { if (e.key === 'Escape') closeLightbox(); }
+
+function drillDown(partNoOrEl) {
+  const partNo = typeof partNoOrEl === 'string' ? partNoOrEl : partNoOrEl.dataset?.part || partNoOrEl;
+  document.getElementById('standaloneSearchInput').value = partNo;
+  standaloneSearch();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function renderStockBadge(stock) {
+  if (!stock || stock.free_stock === null) return '';
+  const qty = stock.free_stock;
+  const onOrder = stock.on_order || 0;
+  const refreshed = stock.last_refreshed ? stock.last_refreshed.substring(0, 10) : '';
+  const orderedDate = stock.last_order_date || '';
+  const refreshNote = refreshed ? ` · as of ${refreshed}` : '';
+
+  let stockHtml = '';
+  if (qty > 0) {
+    stockHtml = `<span class="tag tag-green" style="font-size:0.75rem">${qty} units</span><span style="font-size:0.7rem;color:#9ca3af;margin-left:6px">${refreshNote}</span>`;
+  } else {
+    stockHtml = `<span class="tag tag-amber" style="font-size:0.75rem">0 in stock</span><span style="font-size:0.7rem;color:#9ca3af;margin-left:6px">${refreshNote}</span>`;
+  }
+
+  let onOrderHtml = '';
+  if (onOrder > 0) {
+    const dateNote = orderedDate ? ` (ordered ${orderedDate})` : '';
+    onOrderHtml = `<div class="st-row"><div class="st-label">On order</div><div class="st-val"><span class="tag tag-gray" style="font-size:0.75rem">${onOrder} units${dateNote}</span></div></div>`;
+  }
+
+  return `<div class="st-row"><div class="st-label">Free stock</div><div class="st-val">${stockHtml}</div></div>${onOrderHtml}`;
+}
+
+function statusClass(status) {
+  if (status === 'Sellable') return 'status-sellable';
+  if (status === 'Prototype') return 'status-prototype';
+  if (status === 'In development') return 'status-development';
+  return 'status-unknown';
+}
+
+async function standaloneSearch() {
+  const q = document.getElementById('standaloneSearchInput').value.trim();
+  if (!q) return;
+  const resp = await fetch('/brush/brush-search?q=' + encodeURIComponent(q), { credentials: 'include' });
+  const data = await resp.json();
+  const container = document.getElementById('standaloneResults');
+
+  // Cache results by part number for calcPrice Carbex FYI lookup
+  window._searchResultsByPart = window._searchResultsByPart || {};
+  (data.results || []).forEach(r => {
+    if (r.part_no) window._searchResultsByPart[r.part_no.toUpperCase()] = r;
+  });
+
+  // Store raw results for filter
+  window._lastSearchResults = data.results || [];
+  applyStockFilter();
+}
+
+function applyStockFilter() {
+  const results = window._lastSearchResults || [];
+  const inStockOnly = document.getElementById('inStockFilter')?.checked;
+  const filtered = inStockOnly
+    ? results.filter(r => r.stock && r.stock.free_stock > 0)
+    : results;
+
+  const countEl = document.getElementById('stockFilterCount');
+  if (inStockOnly && results.length > 0) {
+    countEl.textContent = `${filtered.length} of ${results.length} parts in stock`;
+  } else {
+    countEl.textContent = '';
+  }
+
+  renderSearchResults(filtered);
+}
+
+function renderSearchResults(results) {
+  const container = document.getElementById('standaloneResults');
+  if (!results.length) {
+    container.innerHTML = '<p class="inline-note" style="margin-top:1rem">No matches found.</p>';
+    return;
+  }
+  container.innerHTML = results.map((r, i) => {
+    if (r.has_pricing && r.is_copper) {
+      return `
+        <div class="silver-tool-result">
+          ${r.drawing_url ? `<img src="${r.drawing_url}" alt="${r.part_no} drawing" data-part="${r.part_no}" style="cursor:zoom-in" onclick="openLightbox(this)" />` : '<div></div>'}
+          <div>
+            <div class="st-row"><div class="st-label">BGB part no.</div><div class="st-val" style="font-weight:600;color:#0f3d2e"><a href="#" onclick="drillDown(this.dataset.part); return false;" data-part="${r.part_no}" style="color:#0f3d2e;text-decoration:underline;text-decoration-style:dotted;cursor:pointer">${r.part_no}</a><span class="status-badge ${statusClass(r.status)}">${r.status || 'Unknown'}</span></div></div>
+            <div class="st-row"><div class="st-label">Description</div><div class="st-val">${r.description}</div></div>
+            ${r.brush_type ? `<div class="st-row"><div class="st-label">Brush type</div><div class="st-val">${r.brush_type}</div></div>` : ''}
+            ${r.turbine_oem ? `<div class="st-row"><div class="st-label">Turbine OEM</div><div class="st-val">${r.turbine_oem}</div></div>` : ''}
+            ${r.turbine_type ? `<div class="st-row"><div class="st-label">Turbine type</div><div class="st-val">${r.turbine_type}</div></div>` : ''}
+            ${r.grade ? `<div class="st-row"><div class="st-label">Grade</div><div class="st-val">${r.grade}</div></div>` : ''}
+            ${(r.oem_refs && r.oem_refs.length) ? `<div class="st-row"><div class="st-label">OEM ref.</div><div class="st-val">${r.oem_refs.join(', ')}</div></div>` : (r.oe_ref ? `<div class="st-row"><div class="st-label">OEM ref.</div><div class="st-val">${r.oe_ref}</div></div>` : '')}
+            ${r.aftermarket_ref ? `<div class="st-row"><div class="st-label">Aftermarket no.</div><div class="st-val">${r.aftermarket_ref}</div></div>` : ''}
+            <div class="st-row"><div class="st-label">Material</div><div class="st-val">${r.material || 'Copper Graphite'}</div></div>
+            ${renderStockBadge(r.stock)}
+            ${r.status && r.status !== 'Sellable' ? `<div class="inline-note" style="color:#991b1b;margin-top:6px">⚠ This part is marked '${r.status}' — not yet released for general sale. Confirm availability before quoting.</div>` : ''}
+
+            <div class="price-calc-box">
+              <div class="price-calc-row">
+                <div class="field" style="margin:0">
+                  <label>Quantity</label>
+                  <input type="number" id="qty-${i}" value="1" min="1" style="width:80px" />
+                </div>
+                <button class="btn btn-primary" onclick="calcCopperPrice('${r.part_no}', ${i})">Calculate cost</button>
+              </div>
+              <div id="price-result-${i}"></div>
+            </div>
+          </div>
+        </div>`;
+    } else if (r.has_pricing) {
+      return `
+        <div class="silver-tool-result">
+          ${r.drawing_url ? `<img src="${r.drawing_url}" alt="${r.part_no} drawing" data-part="${r.part_no}" style="cursor:zoom-in" onclick="openLightbox(this)" />` : '<div></div>'}
+          <div>
+            <div class="st-row"><div class="st-label">BGB part no.</div><div class="st-val" style="font-weight:600;color:#0f3d2e"><a href="#" onclick="drillDown(this.dataset.part); return false;" data-part="${r.part_no}" style="color:#0f3d2e;text-decoration:underline;text-decoration-style:dotted;cursor:pointer">${r.part_no}</a><span class="status-badge ${statusClass(r.status)}">${r.status || 'Unknown'}</span></div></div>
+            <div class="st-row"><div class="st-label">Description</div><div class="st-val">${r.description}</div></div>
+            ${r.brush_type ? `<div class="st-row"><div class="st-label">Brush type</div><div class="st-val">${r.brush_type}</div></div>` : ''}
+            ${(r.turbine_oem || r.oem) ? `<div class="st-row"><div class="st-label">Turbine OEM</div><div class="st-val">${r.turbine_oem || r.oem}</div></div>` : ''}
+            ${r.turbine_type ? `<div class="st-row"><div class="st-label">Turbine type</div><div class="st-val">${r.turbine_type}</div></div>` : ''}
+            ${r.grade ? `<div class="st-row"><div class="st-label">Grade</div><div class="st-val">${r.grade}</div></div>` : ''}
+            ${(r.oem_refs && r.oem_refs.length) ? `<div class="st-row"><div class="st-label">OEM ref.</div><div class="st-val">${r.oem_refs.join(', ')}</div></div>` : (r.oe_ref ? `<div class="st-row"><div class="st-label">OEM ref.</div><div class="st-val">${r.oe_ref}</div></div>` : '')}
+            ${r.aftermarket_ref ? `<div class="st-row"><div class="st-label">Aftermarket no.</div><div class="st-val">${r.aftermarket_ref}</div></div>` : ''}
+            <div class="st-row"><div class="st-label">Material</div><div class="st-val">${r.material}</div></div>
+            ${renderStockBadge(r.stock)}
+            ${r.status !== 'Sellable' ? `<div class="inline-note" style="color:#991b1b;margin-top:6px">⚠ This part is marked '${r.status}' — not yet released for general sale. Confirm availability before quoting.</div>` : ''}
+
+            <div class="price-calc-box">
+              <div class="price-calc-row">
+                <div class="field" style="margin:0">
+                  <label>Quantity</label>
+                  <input type="number" id="qty-${i}" value="1" min="1" style="width:80px" />
+                </div>
+                <div class="field" style="margin:0">
+                  <label>Currency</label>
+                  <select id="ccy-${i}" style="width:90px"><option value="EUR">EUR</option><option value="USD">USD</option></select>
+                </div>
+                <button class="btn btn-primary" onclick="calcPrice('${r.part_no}', ${i})">Calculate cost</button>
+              </div>
+              <div id="price-result-${i}"></div>
+            </div>
+          </div>
+        </div>`;
+    } else {
+      return `
+        <div class="silver-tool-result" style="grid-template-columns:1fr">
+          <div>
+            <div class="st-row"><div class="st-label">BGB part no.</div><div class="st-val" style="font-weight:600;color:#0f3d2e">${r.part_no ? `<a href="#" onclick="drillDown(this.dataset.part); return false;" data-part="${r.part_no}" style="color:#0f3d2e;text-decoration:underline;text-decoration-style:dotted;cursor:pointer">${r.part_no}</a>` : '—'}${r.status ? `<span class="status-badge ${statusClass(r.status)}">${r.status}</span>` : ''}</div></div>
+            <div class="st-row"><div class="st-label">Description</div><div class="st-val">${r.description || '—'}</div></div>
+            ${r.brush_type ? `<div class="st-row"><div class="st-label">Brush type</div><div class="st-val">${r.brush_type}</div></div>` : ''}
+            ${r.turbine_oem ? `<div class="st-row"><div class="st-label">Turbine OEM</div><div class="st-val">${r.turbine_oem}</div></div>` : (r.oem ? `<div class="st-row"><div class="st-label">Turbine OEM</div><div class="st-val">${r.oem}</div></div>` : '')}
+            ${r.turbine_type ? `<div class="st-row"><div class="st-label">Turbine type</div><div class="st-val">${r.turbine_type}</div></div>` : ''}
+            ${(r.oem_refs && r.oem_refs.length) ? `<div class="st-row"><div class="st-label">OEM ref.</div><div class="st-val">${r.oem_refs.join(', ')}</div></div>` : (r.oe_ref ? `<div class="st-row"><div class="st-label">OEM ref.</div><div class="st-val">${r.oe_ref}</div></div>` : '')}
+            ${r.aftermarket_ref ? `<div class="st-row"><div class="st-label">Aftermarket no.</div><div class="st-val">${r.aftermarket_ref}</div></div>` : ''}
+            ${r.material ? `<div class="st-row"><div class="st-label">Material</div><div class="st-val">${r.material}</div></div>` : ''}
+            ${renderStockBadge(r.stock)}
+            ${r.status && r.status !== 'Sellable' ? `<div class="inline-note" style="color:#991b1b;margin-top:6px">⚠ This part is marked '${r.status}' — not yet released for general sale. Confirm availability before quoting.</div>` : ''}
+            <div class="inline-note" style="margin-top:8px">No live pricing available for this part — check EFACS or request a manual quote.</div>
+          </div>
+        </div>`;
+    }
+  }).join('');
+}
+
+async function calcCopperPrice(partNo, idx) {
+  const qty = parseInt(document.getElementById('qty-' + idx).value) || 1;
+  try {
+    const resp = await fetch(`/brush/copper-cost?part_no=${encodeURIComponent(partNo)}&qty=${qty}`, { credentials: 'include' });
+    if (!resp.ok) throw new Error((await resp.json()).detail);
+    const data = await resp.json();
+
+    // Also fetch FX rates for selling price calculator
+    let fx = { EUR_USD: 1.14, EUR_GBP: 0.86, fx_source: 'Rates not yet fetched' };
+    try {
+      const fxResp = await fetch('/brush/fx-rates', { credentials: 'include' });
+      if (fxResp.ok) fx = await fxResp.json();
+    } catch(e) {}
+
+    const fxLine = `<div style="font-size:0.68rem;color:#9ca3af;margin-top:6px">FX: USD/EUR ${(1/fx.EUR_USD).toFixed(4)} · GBP/EUR ${(1/fx.EUR_GBP).toFixed(4)} · ${fx.fx_source}</div>`;
+
+    document.getElementById('price-result-' + idx).innerHTML = `
+      <div style="margin-top:10px;display:flex;gap:8px;align-items:flex-end;flex-wrap:wrap;margin-bottom:8px">
+        <div class="field" style="margin:0">
+          <label>Margin %</label>
+          <input type="number" id="margin-${idx}" value="30" min="0" max="999" step="0.5" style="width:72px"
+            oninput="recalcCopperSell(${idx})" />
+        </div>
+        <div class="field" style="margin:0">
+          <label>Sell currency</label>
+          <select id="sell-ccy-${idx}" style="width:76px" onchange="recalcCopperSell(${idx})">
+            <option value="EUR">EUR</option>
+            <option value="USD">USD</option>
+            <option value="GBP">GBP</option>
+          </select>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div style="background:#f0f7f3;border:1px solid #c0e0d2;border-radius:8px;padding:10px 12px">
+          <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;color:#0f6e56;margin-bottom:4px">Cost (EUR fixed)</div>
+          <div style="font-size:1.2rem;font-weight:700;color:#0f3d2e">€${data.total_price.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}</div>
+          <div style="font-size:0.75rem;color:#6b7280">€${data.unit_price}/unit · ${data.pricing_basis}</div>
+          <div style="font-size:0.7rem;color:#6b7280;margin-top:2px">${data.note}</div>
+        </div>
+        <div style="background:#f7f3ff;border:1px solid #ddd6fe;border-radius:8px;padding:10px 12px">
+          <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;color:#6d28d9;margin-bottom:4px">Selling price</div>
+          <div id="sell-total-copper-${idx}" style="font-size:1.2rem;font-weight:700;color:#5b21b6">—</div>
+          <div id="sell-unit-copper-${idx}" style="font-size:0.75rem;color:#6b7280">—</div>
+          <div id="sell-note-copper-${idx}" style="font-size:0.7rem;color:#9ca3af;margin-top:2px"></div>
+        </div>
+      </div>
+      ${fxLine}`;
+
+    window._costData = window._costData || {};
+    window._costData[idx] = {
+      copperUnitEur: data.unit_price,
+      qty,
+      fx,
+      isCopperCalc: true
+    };
+    recalcCopperSell(idx);
+
+  } catch(e) {
+    document.getElementById('price-result-' + idx).innerHTML = `<div class="inline-note" style="color:#dc2626;margin-top:8px">⚠ ${e.message}</div>`;
+  }
+}
+
+function recalcCopperSell(idx) {
+  const data = window._costData?.[idx];
+  if (!data || !data.isCopperCalc) return;
+  const marginPct = parseFloat(document.getElementById('margin-' + idx)?.value) || 0;
+  const sellCcy = document.getElementById('sell-ccy-' + idx)?.value || 'EUR';
+  const { copperUnitEur, qty, fx } = data;
+  const sym = sellCcy === 'USD' ? '$' : sellCcy === 'GBP' ? '£' : '€';
+
+  let sellUnit;
+  let fxNote = '';
+  if (sellCcy === 'EUR') { sellUnit = copperUnitEur; fxNote = 'No FX conversion'; }
+  else if (sellCcy === 'USD') { sellUnit = copperUnitEur * fx.EUR_USD; fxNote = `USD/EUR ${(1/fx.EUR_USD).toFixed(4)}`; }
+  else { sellUnit = copperUnitEur * fx.EUR_GBP; fxNote = `GBP/EUR ${(1/fx.EUR_GBP).toFixed(4)}`; }
+
+  const marginFrac = Math.min(Math.max(marginPct, 0), 99) / 100;
+  const sellWithMargin = sellUnit / (1 - marginFrac);
+  const sellTotal = sellWithMargin * qty;
+
+  const tEl = document.getElementById('sell-total-copper-' + idx);
+  const uEl = document.getElementById('sell-unit-copper-' + idx);
+  const nEl = document.getElementById('sell-note-copper-' + idx);
+  if (tEl) {
+    tEl.textContent = `${sym}${sellTotal.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}`;
+    uEl.textContent = `${sym}${sellWithMargin.toFixed(2)}/unit`;
+    nEl.textContent = `${marginPct}% margin · ${fxNote}`;
+  }
+}
+
+async function calcPrice(partNo, idx) {
+  const qty = parseInt(document.getElementById('qty-' + idx).value) || 1;
+  const ccy = document.getElementById('ccy-' + idx)?.value || 'EUR';
+  const resultEl = document.getElementById('price-result-' + idx);
+  resultEl.innerHTML = '<div class="inline-note" style="margin-top:8px">Calculating…</div>';
+  try {
+    const resp = await fetch(`/brush/silver-cost?part_no=${encodeURIComponent(partNo)}&qty=${qty}&currency=${ccy}`, { credentials: 'include' });
+    if (!resp.ok) throw new Error((await resp.json()).detail);
+    const d = await resp.json();
+    const sym = ccy === 'USD' ? '$' : '€';
+    const g = d.pricing.gerken_locked;
+    const m = d.pricing.market_rate;
+    const fx = d.fx || { EUR_USD: 1.14, EUR_GBP: 0.86, fx_source: 'Rates not yet fetched' };
+    const staleWarn = m.stale ? ' <span style="color:#991b1b">⚠ rate over 24h old</span>' : '';
+
+    const carbexHtml = window._searchResultsByPart?.[partNo]?.carbex
+      ? renderCarbexFYI(window._searchResultsByPart[partNo].carbex, qty)
+      : '';
+
+    const fxLine = `<div style="font-size:0.68rem;color:#9ca3af;margin-top:6px">FX: USD/EUR ${(1/fx.EUR_USD).toFixed(4)} · GBP/EUR ${(1/fx.EUR_GBP).toFixed(4)} · ${fx.fx_source}</div>`;
+
+    resultEl.innerHTML = `
+      <div style="margin-top:10px;display:flex;gap:8px;align-items:flex-end;flex-wrap:wrap;margin-bottom:8px">
+        <div class="field" style="margin:0">
+          <label>Margin %</label>
+          <input type="number" id="margin-${idx}" value="30" min="0" max="999" step="0.5" style="width:72px" oninput="recalcSell(${idx})" />
+        </div>
+        <div class="field" style="margin:0">
+          <label>Sell currency</label>
+          <select id="sell-ccy-${idx}" style="width:76px" onchange="recalcSell(${idx})">
+            <option value="EUR">EUR</option>
+            <option value="USD">USD</option>
+            <option value="GBP">GBP</option>
+          </select>
+        </div>
+        <div style="font-size:0.72rem;color:#9ca3af;padding-bottom:6px">← adjust before calculating</div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div style="background:#f0f7f3;border:1px solid #c0e0d2;border-radius:8px;padding:10px 12px">
+          <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;color:#0f6e56;margin-bottom:4px">Cost — with Gerken stock</div>
+          <div style="font-size:1.2rem;font-weight:700;color:#0f3d2e">${sym}${g.total?.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}</div>
+          <div style="font-size:0.75rem;color:#6b7280">${sym}${g.unit_price?.toFixed(2)}/unit · €${g.rate_eur_kg}/kg locked</div>
+          <div style="font-size:0.7rem;color:#6b7280;margin-top:2px">${g.note}</div>
+        </div>
+        <div style="background:#f7f3ff;border:1px solid #ddd6fe;border-radius:8px;padding:10px 12px">
+          <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;color:#6d28d9;margin-bottom:4px">Sell price — with Gerken stock</div>
+          <div id="sell-total-gerken-${idx}" style="font-size:1.2rem;font-weight:700;color:#5b21b6">—</div>
+          <div id="sell-unit-gerken-${idx}" style="font-size:0.75rem;color:#6b7280">—</div>
+          <div id="sell-note-gerken-${idx}" style="font-size:0.7rem;color:#9ca3af;margin-top:2px"></div>
+        </div>
+        <div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:10px 12px">
+          <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;color:#6b7280;margin-bottom:4px">Cost — once stock depleted${staleWarn}</div>
+          <div style="font-size:1.2rem;font-weight:700;color:#374151">${sym}${m.total?.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}</div>
+          <div style="font-size:0.75rem;color:#6b7280">${sym}${m.unit_price?.toFixed(2)}/unit · €${m.rate_eur_kg}/kg market</div>
+          <div style="font-size:0.7rem;color:#6b7280;margin-top:2px">${m.source}</div>
+        </div>
+        <div style="background:#faf5ff;border:1px solid #ddd6fe;border-radius:8px;padding:10px 12px">
+          <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;color:#6d28d9;margin-bottom:4px">Sell price — once stock depleted</div>
+          <div id="sell-total-market-${idx}" style="font-size:1.2rem;font-weight:700;color:#5b21b6">—</div>
+          <div id="sell-unit-market-${idx}" style="font-size:0.75rem;color:#6b7280">—</div>
+          <div id="sell-note-market-${idx}" style="font-size:0.7rem;color:#9ca3af;margin-top:2px"></div>
+        </div>
+      </div>
+      ${fxLine}
+      <div style="font-size:0.7rem;color:#9ca3af;margin-top:4px">${m.note}</div>
+      ${carbexHtml}`;
+
+    window._costData = window._costData || {};
+    window._costData[idx] = { g, m, fx, qty, ccy };
+    recalcSell(idx);
+
+  } catch(e) {
+    resultEl.innerHTML = `<div class="inline-note" style="color:#dc2626;margin-top:8px">⚠ ${e.message}</div>`;
+  }
+}
+
+function recalcSell(idx) {
+  const data = window._costData?.[idx];
+  if (!data) return;
+  const marginPct = parseFloat(document.getElementById('margin-' + idx)?.value) || 0;
+  const sellCcy = document.getElementById('sell-ccy-' + idx)?.value || 'EUR';
+  const { g, m, fx, qty } = data;
+  const sym = sellCcy === 'USD' ? '$' : sellCcy === 'GBP' ? '£' : '€';
+
+  function toSellCcy(unitPriceEur) {
+    if (sellCcy === 'EUR') return unitPriceEur;
+    if (sellCcy === 'USD') return unitPriceEur * fx.EUR_USD;
+    return unitPriceEur * fx.EUR_GBP;
+  }
+
+  function costToEur(unitPrice, costCcy) {
+    return costCcy === 'USD' ? unitPrice / fx.EUR_USD : unitPrice;
+  }
+
+  let fxNote = '';
+  if (sellCcy === 'EUR') fxNote = 'No FX conversion';
+  else if (sellCcy === 'USD') fxNote = `USD/EUR ${(1/fx.EUR_USD).toFixed(4)}`;
+  else fxNote = `GBP/EUR ${(1/fx.EUR_GBP).toFixed(4)}`;
+
+  const marginFrac = Math.min(Math.max(marginPct, 0), 99) / 100;
+
+  // Gerken selling price
+  const gCostEur = costToEur(g.unit_price, data.ccy);
+  const gSellUnit = toSellCcy(gCostEur) / (1 - marginFrac);
+  const gSellTotal = gSellUnit * qty;
+
+  const gTotalEl = document.getElementById('sell-total-gerken-' + idx);
+  const gUnitEl = document.getElementById('sell-unit-gerken-' + idx);
+  const gNoteEl = document.getElementById('sell-note-gerken-' + idx);
+  if (gTotalEl) {
+    gTotalEl.textContent = `${sym}${gSellTotal.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}`;
+    gUnitEl.textContent = `${sym}${gSellUnit.toFixed(2)}/unit`;
+    gNoteEl.textContent = `${marginPct}% margin · ${fxNote}`;
+  }
+
+  // Market selling price
+  const mCostEur = costToEur(m.unit_price, data.ccy);
+  const mSellUnit = toSellCcy(mCostEur) / (1 - marginFrac);
+  const mSellTotal = mSellUnit * qty;
+
+  const mTotalEl = document.getElementById('sell-total-market-' + idx);
+  const mUnitEl = document.getElementById('sell-unit-market-' + idx);
+  const mNoteEl = document.getElementById('sell-note-market-' + idx);
+  if (mTotalEl) {
+    mTotalEl.textContent = `${sym}${mSellTotal.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}`;
+    mUnitEl.textContent = `${sym}${mSellUnit.toFixed(2)}/unit`;
+    mNoteEl.textContent = `${marginPct}% margin · ${fxNote}`;
+  }
+}
+
+function renderCarbexFYI(carbex, qty) {
+  if (!carbex) return '';
+  const afEst = carbex.q3_eur ? (carbex.q3_eur * 1.25).toFixed(2) : null;
+  return `
+    <div style="margin-top:10px;background:#fef9e7;border:1px solid #f5d97a;border-radius:8px;padding:10px 12px">
+      <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;color:#7d5a00;margin-bottom:4px">ⓘ Carbex Vestas price — for reference only</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:0.82rem">
+        <div><span style="color:#9ca3af">Carbex part:</span> <strong>${carbex.carbex_pn}</strong></div>
+        <div><span style="color:#9ca3af">Vestas OEM ref:</span> ${carbex.vestas_ref || '—'}</div>
+        <div><span style="color:#9ca3af">Q3 2026 (OEM, current):</span> <strong>€${carbex.q3_eur?.toFixed(2)}/unit</strong></div>
+        <div><span style="color:#9ca3af">Q2 2026 (OEM, prior):</span> €${carbex.q2_eur?.toFixed(2)}/unit</div>
+        ${afEst ? `<div style="grid-column:1/-1"><span style="color:#9ca3af">AF est. (+25%, based on Q3):</span> ~€${afEst}/unit</div>` : ''}
+      </div>
+      <div style="font-size:0.68rem;color:#9ca3af;margin-top:5px">Source: Carbex published price list Q2/Q3 2026. These are Carbex's prices to Vestas — not BGB prices. Aftermarket (AF) pricing is typically ~25% above OEM Vestas price.</div>
+    </div>`;
+}
+
+document.getElementById('standaloneSearchInput')?.addEventListener('keydown', e => {
+  if (e.key === 'Enter') standaloneSearch();
+});
+document.getElementById('f-part-search').addEventListener('keydown', e => {
+  if (e.key === 'Enter') { e.preventDefault(); addTypedPartToGrid(); }
+});
+
+renderLinesGrid();
+
+// Deep-link support from the BGB Brush hub screen: /brush/tool?tab=search or ?tab=new
+(function () {
+  const params = new URLSearchParams(window.location.search);
+  const tab = params.get('tab');
+  if (tab === 'search') {
+    document.addEventListener('DOMContentLoaded', () => {
+      showPage('search', document.querySelectorAll('.nav button')[2]);
+    });
+  } else if (tab === 'pipeline') {
+    document.addEventListener('DOMContentLoaded', () => {
+      showPage('pipeline', document.querySelectorAll('.nav button')[1]);
+    });
+  }
+})();
+</script>
+</body>
+</html>

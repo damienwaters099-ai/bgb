@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BGB CRM</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; background: #f0f2f5; min-height: 100vh; color: #1a1a2e; }
+header { background: #14213d; padding: 1rem 2rem; display: flex; align-items: center; gap: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.25); }
+header .logo { color: #fff; font-size: 1.05rem; font-weight: 700; }
+header .logo span { color: #9fb3d1; font-size: 0.75rem; display: block; font-weight: 400; margin-top: 2px; }
+.container { max-width: 1080px; margin: 0 auto; padding: 3rem 1.5rem; }
+.container h1 { font-size: 1.3rem; font-weight: 700; color: #14213d; margin-bottom: 4px; }
+.container .sub { font-size: 0.9rem; color: #6b7280; margin-bottom: 2.25rem; }
+.tiles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+@media (max-width: 720px) { .tiles { grid-template-columns: 1fr; } }
+.tile {
+  background: #fff; border-radius: 16px; padding: 1.75rem 1.75rem 1.5rem; box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  border: 1.5px solid #e5e7eb; text-decoration: none; color: inherit; display: block; position: relative;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease; overflow: hidden;
+}
+.tile:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,0.10); border-color: #c7d2e0; }
+.tile .bar { position: absolute; top: 0; left: 0; right: 0; height: 6px; }
+.tile .icon { font-size: 1.9rem; margin-bottom: 0.75rem; display: block; }
+.tile h2 { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
+.tile p { font-size: 0.85rem; color: #6b7280; line-height: 1.5; }
+.tile .go { margin-top: 14px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; }
+.tile.opportunities .bar { background: #1F3864; } .tile.opportunities .go { color: #1F3864; }
+.tile.brush .bar { background: #0f3d2e; } .tile.brush .go { color: #0f3d2e; }
+.tile.tco .bar { background: #2a78d6; } .tile.tco .go { color: #2a78d6; }
+.tile.product .bar { background: #7d5a00; } .tile.product .go { color: #7d5a00; }
+.tile.product { opacity: 0.85; }
+.ext-badge { position: absolute; top: 14px; right: 16px; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: #9ca3af; background: #f3f4f6; padding: 3px 8px; border-radius: 5px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">BGB Group <span>bgbinnovation.com &middot; internal CRM</span></div>
+</header>
+
+<div class="container">
+  <h1>BGB CRM</h1>
+  <p class="sub">Choose a tool.</p>
+
+  <div class="tiles">
+    <a class="tile opportunities" href="/opportunities">
+      <div class="bar"></div>
+      <span class="icon">📋</span>
+      <h2>Opportunities</h2>
+      <p>Look up a company, score the opportunity, and log it to the team pipeline.</p>
+      <div class="go">Open &rarr;</div>
+    </a>
+
+    <a class="tile brush" href="/brush">
+      <div class="bar"></div>
+      <span class="icon">🔧</span>
+      <h2>BGB Brush</h2>
+      <p>Search the brush catalogue with live silver pricing, or log a new brush enquiry.</p>
+      <div class="go">Open &rarr;</div>
+    </a>
+
+    <a class="tile tco" href="/tco">
+      <div class="bar"></div>
+      <span class="icon">📊</span>
+      <h2>Total Cost of Ownership Calculator</h2>
+      <p>Downtime cost, wind farm lookup, and BGB vs. competitor cost-of-ownership comparison.</p>
+      <div class="go">Open &rarr;</div>
+    </a>
+
+    <a class="tile product" href="https://bgbapp.netlify.app/" target="_blank" rel="noopener">
+      <div class="ext-badge">External</div>
+      <div class="bar"></div>
+      <span class="icon">🔗</span>
+      <h2>Product Application</h2>
+      <p>Wind turbine parts lookup &amp; product categorisation app. Opens in a new tab.</p>
+      <div class="go">Open &rarr;</div>
+    </a>
+  </div>
+</div>
+
+</body>
+</html>
