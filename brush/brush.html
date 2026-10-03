@@ -7,14 +7,15 @@
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; background: #f0f2f5; min-height: 100vh; color: #1a1a2e; font-size: 14px; }
-header { background: #0f3d2e; padding: 0.875rem 2rem; display: flex; align-items: center; gap: 1rem; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.25); }
+header { background: #4f5d41; padding: 0.875rem 2rem; display: flex; align-items: center; gap: 1rem; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.25); }
+header img { height: 32px; width: auto; }
 header .logo { color: #fff; font-size: 1rem; font-weight: 600; }
-header .logo span { color: #8fc2ac; font-size: 0.75rem; display: block; font-weight: 400; }
-header .vr { width: 1px; height: 30px; background: #1f5a45; }
-header .tool-title { color: #a8d8c4; font-size: 0.82rem; }
+header .logo span { color: #c3cdb6; font-size: 0.75rem; display: block; font-weight: 400; }
+header .vr { width: 1px; height: 30px; background: #697a56; }
+header .tool-title { color: #c3cdb6; font-size: 0.82rem; }
 header .nav { margin-left: auto; display: flex; gap: 6px; }
-header .nav button { background: transparent; border: 1px solid #1f5a45; color: #a8d8c4; border-radius: 6px; padding: 5px 14px; font-size: 0.8rem; cursor: pointer; transition: all 0.15s; }
-header .nav button:hover, header .nav button.active { background: #15543f; color: #fff; border-color: #2a7a5e; }
+header .nav button { background: transparent; border: 1px solid #697a56; color: #c3cdb6; border-radius: 6px; padding: 5px 14px; font-size: 0.8rem; cursor: pointer; transition: all 0.15s; }
+header .nav button:hover, header .nav button.active { background: #3e4a33; color: #fff; border-color: #8a9a7c; }
 .page { display: none; }
 .page.active { display: block; }
 .container { max-width: 1000px; margin: 0 auto; padding: 2rem 1.5rem; }
@@ -22,8 +23,8 @@ header .nav button:hover, header .nav button.active { background: #15543f; color
 .card.parts-card { overflow: visible; }
 .card.parts-card .card-header { border-radius: 12px 12px 0 0; }
 .card-header { padding: 1rem 1.5rem; border-bottom: 1px solid #e5e7eb; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-.card-header h2 { font-size: 0.95rem; font-weight: 600; color: #0f3d2e; }
-.step-num { width: 24px; height: 24px; border-radius: 50%; background: #0f3d2e; color: #fff; font-size: 0.75rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.card-header h2 { font-size: 0.95rem; font-weight: 600; color: #4f5d41; }
+.step-num { width: 24px; height: 24px; border-radius: 50%; background: #4f5d41; color: #fff; font-size: 0.75rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .hdr-left { display: flex; align-items: center; gap: 10px; }
 .card-body { padding: 1.25rem 1.5rem; }
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
@@ -33,11 +34,11 @@ header .nav button:hover, header .nav button.active { background: #15543f; color
   width: 100%; padding: 8px 10px; border: 1.5px solid #d1d5db; border-radius: 7px;
   font-size: 0.875rem; color: #1a1a2e; background: #fff; outline: none; transition: border-color 0.15s; font-family: inherit;
 }
-.field input:focus, .field select:focus, .field textarea:focus { border-color: #0f3d2e; }
+.field input:focus, .field select:focus, .field textarea:focus { border-color: #4f5d41; }
 .field textarea { resize: vertical; min-height: 60px; }
 .btn { height: 36px; padding: 0 1.1rem; border-radius: 7px; border: none; font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.15s; display: inline-flex; align-items: center; gap: 6px; }
-.btn-primary { background: #0f3d2e; color: #fff; }
-.btn-primary:hover { background: #0c2f23; }
+.btn-primary { background: #e2672e; color: #fff; }
+.btn-primary:hover { background: #c14f1d; }
 .btn-primary:disabled { background: #9ca3af; cursor: not-allowed; }
 .btn-secondary { background: #f3f4f6; color: #374151; border: 1px solid #d1d5db; }
 .btn-secondary:hover { background: #e5e7eb; }
@@ -62,29 +63,29 @@ header .nav button:hover, header .nav button.active { background: #15543f; color
 .inline-note { font-size: 0.78rem; color: #6b7280; margin-top: 6px; }
 .existing-tag-row { display: flex; align-items: center; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
 .line-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-.line-table th { background: #f0f5f2; color: #0f3d2e; padding: 7px 10px; text-align: left; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; border-bottom: 1px solid #d1d5db; }
+.line-table th { background: #eef0ea; color: #4f5d41; padding: 7px 10px; text-align: left; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; border-bottom: 1px solid #d1d5db; }
 .line-table td { padding: 8px 10px; font-size: 0.85rem; border-bottom: 0.5px solid #e5e7eb; color: #1a1a2e; vertical-align: middle; }
 .line-table tr:last-child td { border-bottom: none; }
-.part-pill { padding: 2px 9px; border-radius: 5px; font-size: 0.72rem; font-weight: 600; background: #e1f5ee; color: #085041; white-space: nowrap; }
+.part-pill { padding: 2px 9px; border-radius: 5px; font-size: 0.72rem; font-weight: 600; background: #e6ebdf; color: #3e4a33; white-space: nowrap; }
 .part-pill-warn { padding: 2px 9px; border-radius: 5px; font-size: 0.72rem; font-weight: 600; background: #fef2f2; color: #991b1b; white-space: nowrap; }
 .qty-input { width: 64px; height: 28px; border: 1.5px solid #d1d5db; border-radius: 5px; text-align: center; font-size: 0.85rem; outline: none; }
-.qty-input:focus { border-color: #0f3d2e; }
+.qty-input:focus { border-color: #4f5d41; }
 .search-row { display: flex; gap: 8px; position: relative; width: 100%; }
 .search-row input { flex: 1; min-width: 0; padding: 8px 10px; border: 1.5px solid #d1d5db; border-radius: 7px; font-size: 0.875rem; color: #1a1a2e; background: #fff; outline: none; transition: border-color 0.15s; font-family: inherit; }
-.search-row input:focus { border-color: #0f3d2e; }
+.search-row input:focus { border-color: #4f5d41; }
 .search-dropdown { position: absolute; top: 38px; left: 0; right: 0; background: #fff; border: 1px solid #d1d5db; border-radius: 8px; box-shadow: 0 6px 18px rgba(0,0,0,0.12); z-index: 50; overflow: hidden; max-height: 320px; overflow-y: auto; margin-top: 2px; }
 .search-result-row { padding: 9px 12px; border-bottom: 0.5px solid #e5e7eb; font-size: 0.85rem; cursor: pointer; }
-.search-result-row:hover { background: #f0f5f2; }
+.search-result-row:hover { background: #eef0ea; }
 .search-result-row:last-child { border-bottom: none; }
-.sr-part { font-weight: 600; color: #0f3d2e; }
+.sr-part { font-weight: 600; color: #4f5d41; }
 .sr-desc { color: #6b7280; font-size: 0.78rem; margin-top: 2px; }
 .sr-meta { display: flex; gap: 5px; margin-top: 4px; flex-wrap: wrap; }
-.meta-pill { background: #f0f5f2; color: #0f6e56; padding: 1px 7px; border-radius: 4px; font-size: 0.7rem; }
-.meta-pill-priced { background: #e1f5ee; color: #085041; padding: 1px 7px; border-radius: 4px; font-size: 0.7rem; font-weight: 600; }
+.meta-pill { background: #eef0ea; color: #566b4a; padding: 1px 7px; border-radius: 4px; font-size: 0.7rem; }
+.meta-pill-priced { background: #e6ebdf; color: #3e4a33; padding: 1px 7px; border-radius: 4px; font-size: 0.7rem; font-weight: 600; }
 .delete-cell { color: #9ca3af; cursor: pointer; text-align: center; }
 .delete-cell:hover { color: #dc2626; }
 .score-section { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
-.score-big { font-size: 2rem; font-weight: 700; color: #0f3d2e; }
+.score-big { font-size: 2rem; font-weight: 700; color: #4f5d41; }
 .score-bar-wrap { background: #f3f4f6; border-radius: 8px; height: 10px; margin-bottom: 1rem; overflow: hidden; }
 .score-bar { height: 100%; border-radius: 8px; transition: width 0.5s ease; }
 .score-bar.Hot { background: #dc2626; }
@@ -100,14 +101,14 @@ header .nav button:hover, header .nav button.active { background: #15543f; color
 .result-box { background: #f9fafb; border-radius: 8px; padding: 0.875rem 1rem; }
 .result-box h4 { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #9ca3af; margin-bottom: 8px; }
 .result-box li { font-size: 0.85rem; color: #374151; margin-bottom: 4px; line-height: 1.4; margin-left: 14px; }
-.action-box { background: #f0f7f3; border: 1px solid #c0e0d2; border-radius: 8px; padding: 1rem 1.1rem; margin-top: 4px; grid-column: 1 / -1; }
-.action-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #0f6e56; margin-bottom: 6px; }
-.action-text { font-size: 0.9rem; color: #085041; font-weight: 500; }
+.action-box { background: #eef0ea; border: 1px solid #c3cdb6; border-radius: 8px; padding: 1rem 1.1rem; margin-top: 4px; grid-column: 1 / -1; }
+.action-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #566b4a; margin-bottom: 6px; }
+.action-text { font-size: 0.9rem; color: #3e4a33; font-weight: 500; }
 .routing-text { font-size: 0.82rem; color: #6b7280; margin-top: 8px; line-height: 1.5; }
 .log-controls { display: flex; gap: 10px; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; }
 .log-controls input { flex: 1; min-width: 200px; height: 36px; padding: 0 10px; border: 1.5px solid #d1d5db; border-radius: 7px; font-size: 0.875rem; outline: none; }
 .log-table { width: 100%; border-collapse: collapse; }
-.log-table th { background: #0f3d2e; color: #fff; padding: 9px 12px; font-size: 0.75rem; font-weight: 600; text-align: left; white-space: nowrap; }
+.log-table th { background: #4f5d41; color: #fff; padding: 9px 12px; font-size: 0.75rem; font-weight: 600; text-align: left; white-space: nowrap; }
 .log-table td { padding: 10px 12px; font-size: 0.82rem; border-bottom: 0.5px solid #f3f4f6; vertical-align: top; color: #374151; }
 .log-table tr:hover td { background: #f9fafb; cursor: pointer; }
 .existing-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; margin-right: 5px; }
@@ -116,15 +117,15 @@ header .nav button:hover, header .nav button.active { background: #15543f; color
 .empty-state { text-align: center; padding: 3rem 1rem; color: #9ca3af; font-size: 0.875rem; }
 .status-msg { font-size: 0.82rem; color: #6b7280; min-height: 18px; margin-top: 0.5rem; }
 .status-msg.error { color: #dc2626; }
-.silver-tool-result { margin-top: 1.25rem; background: #f0f7f3; border: 1px solid #c0e0d2; border-radius: 10px; padding: 1.25rem; display: grid; grid-template-columns: 160px 1fr; gap: 1.25rem; }
+.silver-tool-result { margin-top: 1.25rem; background: #eef0ea; border: 1px solid #c3cdb6; border-radius: 10px; padding: 1.25rem; display: grid; grid-template-columns: 160px 1fr; gap: 1.25rem; }
 .silver-tool-result img { width: 100%; border-radius: 8px; border: 1px solid #d1d5db; background: #fff; }
 .st-row { display: grid; grid-template-columns: 130px 1fr; gap: 4px; font-size: 0.85rem; margin-bottom: 6px; }
 .st-label { color: #6b7280; font-weight: 500; }
 .st-val { color: #1a1a2e; }
 .price-calc-box { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #d1d5db; }
 .price-calc-row { display: flex; gap: 10px; align-items: flex-end; flex-wrap: wrap; }
-.price-result { margin-top: 0.875rem; background: #fff; border: 1px solid #c0e0d2; border-radius: 8px; padding: 0.875rem 1rem; }
-.price-big { font-size: 1.5rem; font-weight: 700; color: #0f3d2e; }
+.price-result { margin-top: 0.875rem; background: #fff; border: 1px solid #c3cdb6; border-radius: 8px; padding: 0.875rem 1rem; }
+.price-big { font-size: 1.5rem; font-weight: 700; color: #4f5d41; }
 .silver-rate-banner { background: #fef9e7; border: 1px solid #f5d97a; border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 1.25rem; display: flex; gap: 10px; align-items: flex-start; font-size: 0.82rem; color: #7d5a00; }
 .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.45); display: none; z-index: 200; align-items: flex-start; justify-content: flex-end; }
 .overlay.open { display: flex; }
@@ -140,11 +141,12 @@ header .nav button:hover, header .nav button.active { background: #15543f; color
 <body>
 
 <header>
+  <img src="/static/bgb-logo.png" alt="BGB">
   <div class="logo">BGB <span>bgbinnovation.com</span></div>
   <div class="vr"></div>
   <div class="tool-title">BGB Brushes Enquiry Tracker</div>
   <nav class="nav">
-    <a href="/" style="color:#a8d8c4;text-decoration:none;border:1px solid #1f5a45;border-radius:6px;padding:5px 14px;font-size:0.8rem;margin-right:4px">&larr; Home</a>
+    <a href="/" style="color:#c3cdb6;text-decoration:none;border:1px solid #697a56;border-radius:6px;padding:5px 14px;font-size:0.8rem;margin-right:4px">&larr; Home</a>
     <button class="active" onclick="showPage('new',this)">New enquiry</button>
     <button onclick="showPage('pipeline',this)">Pipeline</button>
     <button onclick="showPage('search',this); document.getElementById('standaloneSearchInput').value=''; document.getElementById('standaloneResults').innerHTML=''; window._lastSearchResults=[]; document.getElementById('inStockFilter').checked=false; document.getElementById('stockFilterCount').textContent='';">Brush search</button>
@@ -297,7 +299,7 @@ header .nav button:hover, header .nav button.active { background: #15543f; color
 <div class="container">
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:10px">
     <div>
-      <h1 style="font-size:1.1rem;font-weight:600;color:#0f3d2e">Enquiry pipeline</h1>
+      <h1 style="font-size:1.1rem;font-weight:600;color:#4f5d41">Enquiry pipeline</h1>
       <p style="font-size:0.8rem;color:#6b7280;margin-top:2px">All BGB Brushes enquiries this session.</p>
     </div>
     <div style="display:flex;gap:8px">
@@ -331,7 +333,7 @@ header .nav button:hover, header .nav button.active { background: #15543f; color
       </div>
       <div style="margin-top:8px;display:flex;align-items:center;gap:8px">
         <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:0.82rem;color:#374151;user-select:none">
-          <input type="checkbox" id="inStockFilter" onchange="applyStockFilter()" style="width:15px;height:15px;accent-color:#0f3d2e;cursor:pointer" />
+          <input type="checkbox" id="inStockFilter" onchange="applyStockFilter()" style="width:15px;height:15px;accent-color:#4f5d41;cursor:pointer" />
           Show in stock only
         </label>
         <span id="stockFilterCount" style="font-size:0.78rem;color:#9ca3af"></span>
@@ -346,7 +348,7 @@ header .nav button:hover, header .nav button.active { background: #15543f; color
   <div class="drawer">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.25rem">
       <div>
-        <div style="font-size:1rem;font-weight:600;color:#0f3d2e" id="d-company"></div>
+        <div style="font-size:1rem;font-weight:600;color:#4f5d41" id="d-company"></div>
         <div style="font-size:0.8rem;color:#6b7280;margin-top:2px" id="d-timestamp"></div>
       </div>
       <button class="drawer-close" onclick="closeDrawer()">✕</button>
@@ -359,7 +361,7 @@ header .nav button:hover, header .nav button.active { background: #15543f; color
     <hr class="section-divider">
     <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;color:#9ca3af;margin-bottom:6px">Qualification</div>
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-      <div style="font-size:1.5rem;font-weight:700;color:#0f3d2e" id="d-score"></div>
+      <div style="font-size:1.5rem;font-weight:700;color:#4f5d41" id="d-score"></div>
       <span class="badge" id="d-band"></span>
     </div>
     <div style="margin-top:0.5rem"><strong>Action:</strong> <span id="d-action"></span></div>
@@ -601,7 +603,7 @@ function renderLinesGrid() {
     </tr>
     <tr id="part-panel-${i}" style="display:none">
       <td colspan="6" style="padding:0">
-        <div id="part-panel-body-${i}" style="background:#f0f7f3;border-top:1px solid #c0e0d2;padding:1rem 1.25rem"></div>
+        <div id="part-panel-body-${i}" style="background:#eef0ea;border-top:1px solid #c3cdb6;padding:1rem 1.25rem"></div>
       </td>
     </tr>`).join('');
 }
@@ -643,7 +645,7 @@ function renderPartPanel(container, r, qty) {
       ${r.drawing_url ? `<img src="${r.drawing_url}" data-part="${r.part_no}" style="width:100%;border-radius:6px;border:1px solid #d1d5db;cursor:zoom-in" alt="drawing" onclick="openLightbox(this)" />` : ''}
       <div>
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap">
-          <span style="font-weight:600;color:#0f3d2e;font-size:0.9rem">${r.part_no}</span>
+          <span style="font-weight:600;color:#4f5d41;font-size:0.9rem">${r.part_no}</span>
           ${r.status ? `<span class="tag ${statusCls}" style="font-size:0.7rem">${r.status}</span>` : ''}
           ${r.aftermarket_ref ? `<span style="font-size:0.75rem;color:#6b7280">Aftermarket: <strong>${r.aftermarket_ref}</strong></span>` : ''}
         </div>
@@ -673,9 +675,9 @@ function renderPartPanel(container, r, qty) {
             }
           }
           const total = unitPrice ? (unitPrice * qty).toFixed(2) : null;
-          return `<div style="margin-top:10px;padding-top:10px;border-top:1px solid #c0e0d2">
-            <span style="font-size:0.7rem;font-weight:700;text-transform:uppercase;color:#0f6e56">Indicative cost for qty ${qty}</span>
-            ${unitPrice ? `<div style="font-size:1.1rem;font-weight:700;color:#0f3d2e;margin-top:2px">${symbol}${parseFloat(total).toLocaleString()} <span style="font-size:0.78rem;font-weight:400;color:#6b7280">(${symbol}${unitPrice.toFixed(2)}/unit)</span></div>` : ''}
+          return `<div style="margin-top:10px;padding-top:10px;border-top:1px solid #c3cdb6">
+            <span style="font-size:0.7rem;font-weight:700;text-transform:uppercase;color:#566b4a">Indicative cost for qty ${qty}</span>
+            ${unitPrice ? `<div style="font-size:1.1rem;font-weight:700;color:#4f5d41;margin-top:2px">${symbol}${parseFloat(total).toLocaleString()} <span style="font-size:0.78rem;font-weight:400;color:#6b7280">(${symbol}${unitPrice.toFixed(2)}/unit)</span></div>` : ''}
             <div style="font-size:0.7rem;color:#9ca3af;margin-top:2px">Live silver rate $1,900.11/kg · indicative only</div>
           </div>`;
         })() : ''}
@@ -754,7 +756,7 @@ function renderResult(entry) {
   document.getElementById('qr-log-confirm').textContent = 'Entry #' + entry.id + ' logged';
   const pv = document.getElementById('qr-pipeline-value-wrap');
   if (entry.pipeline_value_usd > 0) {
-    pv.innerHTML = `<div style="font-size:1.3rem;font-weight:700;color:#0f3d2e">$${entry.pipeline_value_usd.toLocaleString()}</div><div style="font-size:0.7rem;color:#9ca3af">pipeline value (+10%)</div>`;
+    pv.innerHTML = `<div style="font-size:1.3rem;font-weight:700;color:#4f5d41">$${entry.pipeline_value_usd.toLocaleString()}</div><div style="font-size:0.7rem;color:#9ca3af">pipeline value (+10%)</div>`;
   } else {
     pv.innerHTML = '';
   }
@@ -810,12 +812,12 @@ function renderLog(entries) {
   tbody.innerHTML = entries.map(e => `
     <tr onclick="openDrawer('${e.id}')">
       <td style="white-space:nowrap;color:#6b7280">${e.timestamp}</td>
-      <td style="font-weight:500;color:#0f3d2e">${e.customer_name}</td>
+      <td style="font-weight:500;color:#4f5d41">${e.customer_name}</td>
       <td>${e.is_existing_customer ? '<span class="existing-dot dot-green"></span>Yes' : '<span class="existing-dot dot-amber"></span>No'}</td>
       <td style="color:#6b7280">${e.sales_rep || '—'}</td>
       <td style="color:#6b7280">${(e.lines||[]).length} line${(e.lines||[]).length===1?'':'s'}</td>
-      <td><span style="font-weight:700;color:#0f3d2e">${e.score}</span> <span class="badge" style="font-size:0.7rem;padding:2px 8px" class="badge-${e.band}">${e.band}</span></td>
-      <td style="font-weight:600;color:#0f3d2e">${e.pipeline_value_usd > 0 ? '$' + e.pipeline_value_usd.toLocaleString() : '—'}</td>
+      <td><span style="font-weight:700;color:#4f5d41">${e.score}</span> <span class="badge" style="font-size:0.7rem;padding:2px 8px" class="badge-${e.band}">${e.band}</span></td>
+      <td style="font-weight:600;color:#4f5d41">${e.pipeline_value_usd > 0 ? '$' + e.pipeline_value_usd.toLocaleString() : '—'}</td>
       <td style="font-weight:500;font-size:0.78rem">${e.routing}</td>
     </tr>`).join('');
 }
@@ -865,7 +867,7 @@ async function loadSilverBanner() {
         <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:8px">
           <div>
             <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;color:#7d5a00;margin-bottom:2px">Gerken quoted rate</div>
-            <div style="font-size:1rem;font-weight:700;color:#0f3d2e">€${meta.gerken_locked_eur_kg?.toLocaleString()}/kg</div>
+            <div style="font-size:1rem;font-weight:700;color:#4f5d41">€${meta.gerken_locked_eur_kg?.toLocaleString()}/kg</div>
             <div style="font-size:0.72rem;color:#7d5a00">Price list ${meta.price_list_date} Rev ${meta.price_list_revision} · ${meta.gerken_stock_kg > 0 ? meta.gerken_stock_kg + 'kg silver stock committed' : 'No dedicated stock — priced fresh per order'}</div>
           </div>
           <div>
@@ -880,16 +882,16 @@ async function loadSilverBanner() {
             : `<button class="btn btn-secondary" style="height:28px;font-size:0.75rem" onclick="toggleRateOverride()">Lock market rate</button>`}
         </div>
       </div>
-      <div id="rateOverrideForm" style="display:${meta.stale && !meta.is_manual_override ? 'block' : 'none'};margin-top:8px;padding:10px 12px;background:#f0f7f3;border:1px solid #c0e0d2;border-radius:8px">
-        <div style="font-size:0.78rem;font-weight:600;color:#0f3d2e;margin-bottom:6px">Lock LBMA fix rate for quoting period (overrides live fetch)</div>
+      <div id="rateOverrideForm" style="display:${meta.stale && !meta.is_manual_override ? 'block' : 'none'};margin-top:8px;padding:10px 12px;background:#eef0ea;border:1px solid #c3cdb6;border-radius:8px">
+        <div style="font-size:0.78rem;font-weight:600;color:#4f5d41;margin-bottom:6px">Lock LBMA fix rate for quoting period (overrides live fetch)</div>
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
           <span style="font-size:0.875rem">€/kg</span>
-          <input type="number" id="manualRateInput" placeholder="e.g. 1820.00" value="${meta.gerken_locked_eur_kg || ''}" step="0.01" style="width:130px;height:30px;padding:0 8px;border:1.5px solid #d1d5db;border-radius:5px;font-size:0.875rem" oninput="this.style.borderColor='#0f3d2e'" />
+          <input type="number" id="manualRateInput" placeholder="e.g. 1820.00" value="${meta.gerken_locked_eur_kg || ''}" step="0.01" style="width:130px;height:30px;padding:0 8px;border:1.5px solid #d1d5db;border-radius:5px;font-size:0.875rem" oninput="this.style.borderColor='#4f5d41'" />
           <button class="btn btn-primary" style="height:30px;font-size:0.78rem" onclick="setRateOverride()">Lock</button>
           <button class="btn btn-secondary" style="height:30px;font-size:0.78rem" onclick="toggleRateOverride()">Cancel</button>
         </div>
         <div style="font-size:0.78rem;color:#6b7280;margin-top:5px">
-          Check today's rate at <a href="https://www.bullionbypost.eu/silver-price/silver-price-per-kilo/" target="_blank" style="color:#0f3d2e;font-weight:600">bullionbypost.eu/silver-price/silver-price-per-kilo</a> (Gerken's reference). Enter the EUR/kg figure shown. Applies to all users until cleared.
+          Check today's rate at <a href="https://www.bullionbypost.eu/silver-price/silver-price-per-kilo/" target="_blank" style="color:#4f5d41;font-weight:600">bullionbypost.eu/silver-price/silver-price-per-kilo</a> (Gerken's reference). Enter the EUR/kg figure shown. Applies to all users until cleared.
         </div>
       </div>`;
   } catch(e) {
@@ -1037,7 +1039,7 @@ function renderSearchResults(results) {
         <div class="silver-tool-result">
           ${r.drawing_url ? `<img src="${r.drawing_url}" alt="${r.part_no} drawing" data-part="${r.part_no}" style="cursor:zoom-in" onclick="openLightbox(this)" />` : '<div></div>'}
           <div>
-            <div class="st-row"><div class="st-label">BGB part no.</div><div class="st-val" style="font-weight:600;color:#0f3d2e"><a href="#" onclick="drillDown(this.dataset.part); return false;" data-part="${r.part_no}" style="color:#0f3d2e;text-decoration:underline;text-decoration-style:dotted;cursor:pointer">${r.part_no}</a><span class="status-badge ${statusClass(r.status)}">${r.status || 'Unknown'}</span></div></div>
+            <div class="st-row"><div class="st-label">BGB part no.</div><div class="st-val" style="font-weight:600;color:#4f5d41"><a href="#" onclick="drillDown(this.dataset.part); return false;" data-part="${r.part_no}" style="color:#4f5d41;text-decoration:underline;text-decoration-style:dotted;cursor:pointer">${r.part_no}</a><span class="status-badge ${statusClass(r.status)}">${r.status || 'Unknown'}</span></div></div>
             <div class="st-row"><div class="st-label">Description</div><div class="st-val">${r.description}</div></div>
             ${r.brush_type ? `<div class="st-row"><div class="st-label">Brush type</div><div class="st-val">${r.brush_type}</div></div>` : ''}
             ${r.turbine_oem ? `<div class="st-row"><div class="st-label">Turbine OEM</div><div class="st-val">${r.turbine_oem}</div></div>` : ''}
@@ -1066,7 +1068,7 @@ function renderSearchResults(results) {
         <div class="silver-tool-result">
           ${r.drawing_url ? `<img src="${r.drawing_url}" alt="${r.part_no} drawing" data-part="${r.part_no}" style="cursor:zoom-in" onclick="openLightbox(this)" />` : '<div></div>'}
           <div>
-            <div class="st-row"><div class="st-label">BGB part no.</div><div class="st-val" style="font-weight:600;color:#0f3d2e"><a href="#" onclick="drillDown(this.dataset.part); return false;" data-part="${r.part_no}" style="color:#0f3d2e;text-decoration:underline;text-decoration-style:dotted;cursor:pointer">${r.part_no}</a><span class="status-badge ${statusClass(r.status)}">${r.status || 'Unknown'}</span></div></div>
+            <div class="st-row"><div class="st-label">BGB part no.</div><div class="st-val" style="font-weight:600;color:#4f5d41"><a href="#" onclick="drillDown(this.dataset.part); return false;" data-part="${r.part_no}" style="color:#4f5d41;text-decoration:underline;text-decoration-style:dotted;cursor:pointer">${r.part_no}</a><span class="status-badge ${statusClass(r.status)}">${r.status || 'Unknown'}</span></div></div>
             <div class="st-row"><div class="st-label">Description</div><div class="st-val">${r.description}</div></div>
             ${r.brush_type ? `<div class="st-row"><div class="st-label">Brush type</div><div class="st-val">${r.brush_type}</div></div>` : ''}
             ${(r.turbine_oem || r.oem) ? `<div class="st-row"><div class="st-label">Turbine OEM</div><div class="st-val">${r.turbine_oem || r.oem}</div></div>` : ''}
@@ -1098,7 +1100,7 @@ function renderSearchResults(results) {
       return `
         <div class="silver-tool-result" style="grid-template-columns:1fr">
           <div>
-            <div class="st-row"><div class="st-label">BGB part no.</div><div class="st-val" style="font-weight:600;color:#0f3d2e">${r.part_no ? `<a href="#" onclick="drillDown(this.dataset.part); return false;" data-part="${r.part_no}" style="color:#0f3d2e;text-decoration:underline;text-decoration-style:dotted;cursor:pointer">${r.part_no}</a>` : '—'}${r.status ? `<span class="status-badge ${statusClass(r.status)}">${r.status}</span>` : ''}</div></div>
+            <div class="st-row"><div class="st-label">BGB part no.</div><div class="st-val" style="font-weight:600;color:#4f5d41">${r.part_no ? `<a href="#" onclick="drillDown(this.dataset.part); return false;" data-part="${r.part_no}" style="color:#4f5d41;text-decoration:underline;text-decoration-style:dotted;cursor:pointer">${r.part_no}</a>` : '—'}${r.status ? `<span class="status-badge ${statusClass(r.status)}">${r.status}</span>` : ''}</div></div>
             <div class="st-row"><div class="st-label">Description</div><div class="st-val">${r.description || '—'}</div></div>
             ${r.brush_type ? `<div class="st-row"><div class="st-label">Brush type</div><div class="st-val">${r.brush_type}</div></div>` : ''}
             ${r.turbine_oem ? `<div class="st-row"><div class="st-label">Turbine OEM</div><div class="st-val">${r.turbine_oem}</div></div>` : (r.oem ? `<div class="st-row"><div class="st-label">Turbine OEM</div><div class="st-val">${r.oem}</div></div>` : '')}
@@ -1148,9 +1150,9 @@ async function calcCopperPrice(partNo, idx) {
         </div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-        <div style="background:#f0f7f3;border:1px solid #c0e0d2;border-radius:8px;padding:10px 12px">
-          <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;color:#0f6e56;margin-bottom:4px">Cost (EUR fixed)</div>
-          <div style="font-size:1.2rem;font-weight:700;color:#0f3d2e">€${data.total_price.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}</div>
+        <div style="background:#eef0ea;border:1px solid #c3cdb6;border-radius:8px;padding:10px 12px">
+          <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;color:#566b4a;margin-bottom:4px">Cost (EUR fixed)</div>
+          <div style="font-size:1.2rem;font-weight:700;color:#4f5d41">€${data.total_price.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}</div>
           <div style="font-size:0.75rem;color:#6b7280">€${data.unit_price}/unit · ${data.pricing_basis}</div>
           <div style="font-size:0.7rem;color:#6b7280;margin-top:2px">${data.note}</div>
         </div>
@@ -1244,9 +1246,9 @@ async function calcPrice(partNo, idx) {
       </div>
 
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-        <div style="background:#f0f7f3;border:1px solid #c0e0d2;border-radius:8px;padding:10px 12px">
-          <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;color:#0f6e56;margin-bottom:4px">Cost — with Gerken stock</div>
-          <div style="font-size:1.2rem;font-weight:700;color:#0f3d2e">${sym}${g.total?.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}</div>
+        <div style="background:#eef0ea;border:1px solid #c3cdb6;border-radius:8px;padding:10px 12px">
+          <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;color:#566b4a;margin-bottom:4px">Cost — with Gerken stock</div>
+          <div style="font-size:1.2rem;font-weight:700;color:#4f5d41">${sym}${g.total?.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}</div>
           <div style="font-size:0.75rem;color:#6b7280">${sym}${g.unit_price?.toFixed(2)}/unit · €${g.rate_eur_kg}/kg locked</div>
           <div style="font-size:0.7rem;color:#6b7280;margin-top:2px">${g.note}</div>
         </div>

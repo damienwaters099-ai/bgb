@@ -7,31 +7,31 @@
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; background: #f0f2f5; min-height: 100vh; color: #1a1a2e; font-size: 14px; }
-header { background: #1F3864; padding: 0.875rem 2rem; display: flex; align-items: center; gap: 1rem; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.25); }
+header { background: #14213d; padding: 0.875rem 2rem; display: flex; align-items: center; gap: 1rem; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.25); }
 header .logo { color: #fff; font-size: 1rem; font-weight: 600; }
 header .logo span { color: #8ba3c7; font-size: 0.75rem; display: block; font-weight: 400; }
-header .vr { width: 1px; height: 30px; background: #3a5480; }
-header .tool-title { color: #a8c4e8; font-size: 0.82rem; }
+header .vr { width: 1px; height: 30px; background: #2c3f66; }
+header .tool-title { color: #93acc8; font-size: 0.82rem; }
 header .nav { margin-left: auto; display: flex; gap: 6px; }
-header .nav button { background: transparent; border: 1px solid #3a5480; color: #a8c4e8; border-radius: 6px; padding: 5px 14px; font-size: 0.8rem; cursor: pointer; transition: all 0.15s; }
-header .nav button:hover, header .nav button.active { background: #2a4a7f; color: #fff; border-color: #4a6a9f; }
+header .nav button { background: transparent; border: 1px solid #2c3f66; color: #93acc8; border-radius: 6px; padding: 5px 14px; font-size: 0.8rem; cursor: pointer; transition: all 0.15s; }
+header .nav button:hover, header .nav button.active { background: #1c2f54; color: #fff; border-color: #3e5570; }
 .page { display: none; }
 .page.active { display: block; }
 .container { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; }
 .card { background: #fff; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); margin-bottom: 1.25rem; overflow: hidden; }
 .card-header { padding: 1rem 1.5rem; border-bottom: 1px solid #e5e7eb; display: flex; align-items: center; gap: 10px; }
-.card-header h2 { font-size: 0.95rem; font-weight: 600; color: #1F3864; }
-.step-num { width: 24px; height: 24px; border-radius: 50%; background: #1F3864; color: #fff; font-size: 0.75rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.card-header h2 { font-size: 0.95rem; font-weight: 600; color: #14213d; }
+.step-num { width: 24px; height: 24px; border-radius: 50%; background: #14213d; color: #fff; font-size: 0.75rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .card-body { padding: 1.25rem 1.5rem; }
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 .form-grid .full { grid-column: 1 / -1; }
 .field label { display: block; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #6b7280; margin-bottom: 5px; }
 .field label .req { color: #dc2626; margin-left: 2px; }
 .field input[type=text], .field select, .field textarea { width: 100%; padding: 8px 10px; border: 1.5px solid #d1d5db; border-radius: 7px; font-size: 0.875rem; color: #1a1a2e; background: #fff; outline: none; transition: border-color 0.15s; font-family: inherit; }
-.field input:focus, .field select:focus, .field textarea:focus { border-color: #1F3864; }
+.field input:focus, .field select:focus, .field textarea:focus { border-color: #14213d; }
 .field textarea { resize: vertical; min-height: 72px; }
 .btn { height: 38px; padding: 0 1.25rem; border-radius: 7px; border: none; font-size: 0.875rem; font-weight: 500; cursor: pointer; transition: all 0.15s; display: inline-flex; align-items: center; gap: 6px; }
-.btn-primary { background: #1F3864; color: #fff; }
+.btn-primary { background: #e2672e; color: #fff; }
 .btn-primary:hover { background: #162a4e; }
 .btn-primary:disabled { background: #9ca3af; cursor: not-allowed; }
 .btn-secondary { background: #f3f4f6; color: #374151; border: 1px solid #d1d5db; }
@@ -64,12 +64,12 @@ header .nav button:hover, header .nav button.active { background: #2a4a7f; color
 .action-box .action-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #3b82f6; margin-bottom: 6px; }
 .action-box .action-text { font-size: 0.9rem; color: #1e3a5f; font-weight: 500; }
 .action-box .routing { margin-top: 8px; font-size: 0.82rem; color: #6b7280; }
-.routing strong { color: #1F3864; }
+.routing strong { color: #14213d; }
 .warning-box { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 0.75rem 1rem; margin-top: 1rem; grid-column: 1 / -1; display: flex; gap: 10px; align-items: flex-start; }
 .warning-box p { font-size: 0.85rem; color: #991b1b; line-height: 1.4; }
 .qual-result { display: none; }
 .log-table { width: 100%; border-collapse: collapse; }
-.log-table th { background: #1F3864; color: #fff; padding: 9px 12px; font-size: 0.75rem; font-weight: 600; text-align: left; white-space: nowrap; }
+.log-table th { background: #14213d; color: #fff; padding: 9px 12px; font-size: 0.75rem; font-weight: 600; text-align: left; white-space: nowrap; }
 .log-table td { padding: 10px 12px; font-size: 0.82rem; border-bottom: 1px solid #f3f4f6; vertical-align: top; color: #374151; }
 .log-table tr:hover td { background: #f9fafb; cursor: pointer; }
 .log-table tr.flag-row td { background: #fef9f9; }
@@ -92,12 +92,13 @@ header .nav button:hover, header .nav button.active { background: #2a4a7f; color
 <body>
 
 <header>
+  <img src="/static/bgb-logo.png" alt="BGB" style="height:32px;width:auto">
   <div class="logo">BGB Group <span>bgbinnovation.com</span></div>
   <div class="vr"></div>
   <div class="tool-title">Opportunity &amp; Customer Check</div>
   <nav class="nav">
-    <a href="/opportunities" style="color:#a8c4e8;text-decoration:none;border:1px solid #3a5480;border-radius:6px;padding:5px 14px;font-size:0.8rem;margin-right:4px">&larr; Opportunities</a>
-    <a href="/" style="color:#a8c4e8;text-decoration:none;border:1px solid #3a5480;border-radius:6px;padding:5px 14px;font-size:0.8rem;margin-right:4px">Home</a>
+    <a href="/opportunities" style="color:#93acc8;text-decoration:none;border:1px solid #2c3f66;border-radius:6px;padding:5px 14px;font-size:0.8rem;margin-right:4px">&larr; Opportunities</a>
+    <a href="/" style="color:#93acc8;text-decoration:none;border:1px solid #2c3f66;border-radius:6px;padding:5px 14px;font-size:0.8rem;margin-right:4px">Home</a>
     <button class="active" onclick="showPage('new',this)">New enquiry</button>
     <button onclick="showPage('log',this)">Team log</button>
   </nav>
@@ -125,7 +126,7 @@ header .nav button:hover, header .nav button.active { background: #2a4a7f; color
         <div style="display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap">
           <div style="flex:1">
             <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-              <div style="font-size:1rem;font-weight:600;color:#1F3864" id="cr-name"></div>
+              <div style="font-size:1rem;font-weight:600;color:#14213d" id="cr-name"></div>
               <span class="badge" id="cr-gp-badge"></span>
               <span id="cr-competitor-flag" class="flag-pill" style="display:none">⚠ Competitor</span>
               <span id="cr-distributor-flag" class="flag-pill" style="display:none">Distributor</span>
@@ -314,7 +315,7 @@ header .nav button:hover, header .nav button.active { background: #2a4a7f; color
     <div class="card-header"><div class="step-num">3</div><h2>Qualification result</h2></div>
     <div class="card-body">
       <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-        <div style="font-size:2rem;font-weight:700;color:#1F3864" id="qr-score"></div>
+        <div style="font-size:2rem;font-weight:700;color:#14213d" id="qr-score"></div>
         <div>
           <span class="badge" id="qr-band-badge" style="font-size:0.85rem;padding:4px 16px"></span>
           <div style="font-size:0.75rem;color:#9ca3af;margin-top:3px">opportunity score / 100</div>
@@ -353,7 +354,7 @@ header .nav button:hover, header .nav button.active { background: #2a4a7f; color
 <div class="container">
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:10px">
     <div>
-      <h1 style="font-size:1.1rem;font-weight:600;color:#1F3864">Team opportunity log</h1>
+      <h1 style="font-size:1.1rem;font-weight:600;color:#14213d">Team opportunity log</h1>
       <p style="font-size:0.8rem;color:#6b7280;margin-top:2px">All enquiries scored this session. Click any row for detail.</p>
     </div>
     <div style="display:flex;gap:8px">
@@ -377,7 +378,7 @@ header .nav button:hover, header .nav button.active { background: #2a4a7f; color
   <div class="drawer">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.25rem">
       <div>
-        <div style="font-size:1rem;font-weight:600;color:#1F3864" id="d-company"></div>
+        <div style="font-size:1rem;font-weight:600;color:#14213d" id="d-company"></div>
         <div style="font-size:0.8rem;color:#6b7280;margin-top:2px" id="d-timestamp"></div>
       </div>
       <button class="drawer-close" onclick="closeDrawer()">✕</button>
@@ -387,14 +388,14 @@ header .nav button:hover, header .nav button.active { background: #2a4a7f; color
     <hr class="section-divider">
     <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#9ca3af;margin-bottom:8px">Qualification</div>
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-      <div style="font-size:1.75rem;font-weight:700;color:#1F3864" id="d-score"></div>
+      <div style="font-size:1.75rem;font-weight:700;color:#14213d" id="d-score"></div>
       <span class="badge" id="d-band"></span>
     </div>
     <div class="score-bar-wrap"><div class="score-bar" id="d-bar"></div></div>
     <div style="margin-top:1rem">
       <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#9ca3af;margin-bottom:6px">Recommended action</div>
       <div style="font-size:0.875rem;color:#1e3a5f;font-weight:500;line-height:1.5" id="d-action"></div>
-      <div style="font-size:0.82rem;color:#6b7280;margin-top:4px">Route to: <strong style="color:#1F3864" id="d-routing"></strong></div>
+      <div style="font-size:0.82rem;color:#6b7280;margin-top:4px">Route to: <strong style="color:#14213d" id="d-routing"></strong></div>
     </div>
     <div style="margin-top:1rem;display:grid;grid-template-columns:1fr 1fr;gap:10px">
       <div>
@@ -562,11 +563,11 @@ function renderLog(entries) {
     const band = e.band || 'Cold';
     return `<tr class="${isFlag?'flag-row':''}" onclick="openDrawer('${e.id}')">
       <td style="white-space:nowrap;color:#6b7280">${e.timestamp}</td>
-      <td style="font-weight:500;color:#1F3864">${e.company_name}</td>
+      <td style="font-weight:500;color:#14213d">${e.company_name}</td>
       <td style="color:#6b7280">${e.sector||'—'}</td>
       <td>${e.product||'—'}</td>
       <td style="color:#6b7280">${e.enquiry_type||'—'}</td>
-      <td><div style="display:flex;align-items:center;gap:6px"><span style="font-weight:700;color:#1F3864">${e.score}</span><span class="badge badge-${band}" style="font-size:0.7rem;padding:2px 8px">${band}</span></div></td>
+      <td><div style="display:flex;align-items:center;gap:6px"><span style="font-weight:700;color:#14213d">${e.score}</span><span class="badge badge-${band}" style="font-size:0.7rem;padding:2px 8px">${band}</span></div></td>
       <td style="font-weight:500">${e.routing||'—'}</td>
       <td style="color:#6b7280">${e.logged_by||'—'}</td>
     </tr>`;

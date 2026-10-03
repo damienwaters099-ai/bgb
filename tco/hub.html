@@ -7,12 +7,12 @@
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; background: #f9f9f7; min-height: 100vh; color: #0b0b0b; }
-header { background: #14213d; padding: 0.875rem 2rem; display: flex; align-items: center; gap: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.25); }
+header { background: #3e5770; padding: 0.875rem 2rem; display: flex; align-items: center; gap: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.25); }
 header .logo { color: #fff; font-size: 1rem; font-weight: 600; }
-header .logo span { color: #9fb3d1; font-size: 0.75rem; display: block; font-weight: 400; }
-header .crumb { color: #b9c6dc; font-size: 0.82rem; margin-left: 8px; }
-header a.home { margin-left: auto; color: #b9c6dc; text-decoration: none; border: 1px solid #2a3d63; border-radius: 6px; padding: 5px 14px; font-size: 0.8rem; }
-header a.home:hover { background: #1c3155; color: #fff; }
+header .logo span { color: #c3d2de; font-size: 0.75rem; display: block; font-weight: 400; }
+header .crumb { color: #c3d2de; font-size: 0.82rem; margin-left: 8px; }
+header a.home { margin-left: auto; color: #c3d2de; text-decoration: none; border: 1px solid #567288; border-radius: 6px; padding: 5px 14px; font-size: 0.8rem; }
+header a.home:hover { background: #314559; color: #fff; }
 .container { max-width: 980px; margin: 0 auto; padding: 3rem 1.5rem; }
 .container h1 { font-size: 1.2rem; font-weight: 700; margin-bottom: 4px; }
 .container .sub { font-size: 0.88rem; color: #52514e; margin-bottom: 2rem; }
@@ -27,13 +27,14 @@ header a.home:hover { background: #1c3155; color: #fff; }
 .tile .icon { font-size: 1.6rem; margin-bottom: 0.6rem; display: block; }
 .tile h2 { font-size: 0.98rem; font-weight: 700; margin-bottom: 5px; }
 .tile p { font-size: 0.8rem; color: #52514e; line-height: 1.5; }
-.tile.downtime { --accent: #eb6834; }
-.tile.windfarm { --accent: #0ca30c; }
-.tile.ownership { --accent: #2a78d6; }
+.tile.downtime { --accent: #e2672e; }
+.tile.windfarm { --accent: #4f5d41; }
+.tile.ownership { --accent: #3e5770; }
 </style>
 </head>
 <body>
 <header>
+  <img src="/static/bgb-logo.png" alt="BGB" style="height:34px;width:auto">
   <div class="logo">BGB Group <span>bgbinnovation.com</span></div>
   <div class="crumb">Home / Total Cost of Ownership Calculator</div>
   <a class="home" href="/">Home</a>

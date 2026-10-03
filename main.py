@@ -91,15 +91,16 @@ async def admin_users_page(username: str = Depends(verify_admin)):
 <style>
 * {{box-sizing:border-box;margin:0;padding:0}}
 body {{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:#f0f2f5;min-height:100vh;font-size:14px}}
-header {{background:#0f3d2e;padding:0.875rem 2rem;color:#fff;display:flex;align-items:center;gap:1rem}}
+header {{background:#14213d;padding:0.875rem 2rem;color:#fff;display:flex;align-items:center;gap:1rem}}
+header img {{height:32px;width:auto}}
 header h1 {{font-size:1rem;font-weight:600}}
 .container {{max-width:700px;margin:2rem auto;padding:0 1.5rem}}
 .card {{background:#fff;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,0.08);overflow:hidden;margin-bottom:1.5rem}}
 .card-header {{padding:1rem 1.5rem;border-bottom:1px solid #e5e7eb}}
-.card-header h2 {{font-size:0.95rem;font-weight:600;color:#0f3d2e}}
+.card-header h2 {{font-size:0.95rem;font-weight:600;color:#14213d}}
 .card-body {{padding:1.25rem 1.5rem}}
 table {{width:100%;border-collapse:collapse}}
-th {{background:#f0f5f2;color:#0f3d2e;padding:8px 12px;text-align:left;font-size:0.75rem;font-weight:700;text-transform:uppercase;border-bottom:1px solid #d1d5db}}
+th {{background:#eef1f6;color:#14213d;padding:8px 12px;text-align:left;font-size:0.75rem;font-weight:700;text-transform:uppercase;border-bottom:1px solid #d1d5db}}
 td {{padding:7px 12px;border-bottom:0.5px solid #f3f4f6}}
 input, select {{padding:6px 8px;border:1.5px solid #d1d5db;border-radius:5px;font-size:0.85rem}}
 .msg {{padding:10px 14px;border-radius:7px;font-size:0.82rem;margin-bottom:1rem;display:none}}
@@ -108,7 +109,7 @@ input, select {{padding:6px 8px;border:1.5px solid #d1d5db;border-radius:5px;fon
 </style>
 </head>
 <body>
-<header><h1>BGB CRM — User Access</h1></header>
+<header><img src="/static/bgb-logo.png" alt="BGB"><h1>BGB CRM — User Access</h1></header>
 <div class="container">
   <div class="msg" id="msg"></div>
   <div class="card">
@@ -124,10 +125,10 @@ input, select {{padding:6px 8px;border:1.5px solid #d1d5db;border-radius:5px;fon
       <input id="new-username" placeholder="Username" />
       <input id="new-password" placeholder="Password" type="password" />
       <select id="new-role"><option value="user">user</option><option value="admin">admin</option></select>
-      <button onclick="addUser()" style="background:#0f3d2e;color:#fff;border:none;padding:6px 16px;border-radius:5px;cursor:pointer;font-size:0.85rem">Save</button>
+      <button onclick="addUser()" style="background:#e2672e;color:#fff;border:none;padding:6px 16px;border-radius:5px;cursor:pointer;font-size:0.85rem">Save</button>
     </div>
   </div>
-  <a href="/" style="color:#0f3d2e;font-size:0.85rem">← Back to home</a>
+  <a href="/" style="color:#14213d;font-size:0.85rem">← Back to home</a>
 </div>
 <script>
 function showMsg(text, ok) {{
@@ -859,7 +860,7 @@ async def admin_page(username: str = Depends(verify_admin)):
           <td><input type="date" value="{order_date}" style="padding:4px 6px;border:1.5px solid #d1d5db;border-radius:5px;font-size:0.85rem" id="date-{part}" /></td>
           <td style="color:#9ca3af;font-size:0.75rem">{refreshed_short}</td>
           <td>
-            <button onclick="savePart('{part}')" style="background:#0f3d2e;color:#fff;border:none;padding:4px 12px;border-radius:5px;cursor:pointer;font-size:0.82rem">Save</button>
+            <button onclick="savePart('{part}')" style="background:#e2672e;color:#fff;border:none;padding:4px 12px;border-radius:5px;cursor:pointer;font-size:0.82rem">Save</button>
             {clear_btn}
           </td>
         </tr>"""
@@ -870,31 +871,32 @@ async def admin_page(username: str = Depends(verify_admin)):
 <style>
 * {{box-sizing:border-box;margin:0;padding:0}}
 body {{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:#f0f2f5;min-height:100vh;font-size:14px}}
-header {{background:#0f3d2e;padding:0.875rem 2rem;color:#fff;display:flex;align-items:center;gap:1rem;position:sticky;top:0;z-index:10}}
+header {{background:#4f5d41;padding:0.875rem 2rem;color:#fff;display:flex;align-items:center;gap:1rem;position:sticky;top:0;z-index:10}}
 header h1 {{font-size:1rem;font-weight:600}}
 header span {{color:#8fc2ac;font-size:0.8rem}}
 .container {{max-width:1000px;margin:2rem auto;padding:0 1.5rem}}
 .card {{background:#fff;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,0.08);overflow:hidden}}
 .card-header {{padding:1rem 1.5rem;border-bottom:1px solid #e5e7eb;display:flex;align-items:center;justify-content:space-between}}
-.card-header h2 {{font-size:0.95rem;font-weight:600;color:#0f3d2e}}
+.card-header h2 {{font-size:0.95rem;font-weight:600;color:#4f5d41}}
 .card-body {{padding:1.25rem 1.5rem}}
 table {{width:100%;border-collapse:collapse}}
-th {{background:#f0f5f2;color:#0f3d2e;padding:8px 12px;text-align:left;font-size:0.75rem;font-weight:700;text-transform:uppercase;border-bottom:1px solid #d1d5db}}
+th {{background:#eef0ea;color:#4f5d41;padding:8px 12px;text-align:left;font-size:0.75rem;font-weight:700;text-transform:uppercase;border-bottom:1px solid #d1d5db}}
 td {{padding:7px 12px;border-bottom:0.5px solid #f3f4f6;vertical-align:middle}}
 tr:hover td {{background:#fafafa}}
 .msg {{padding:10px 14px;border-radius:7px;font-size:0.82rem;margin-bottom:1rem;display:none}}
 .msg.ok {{background:#dcfce7;color:#166534}}
 .msg.err {{background:#fee2e2;color:#991b1b}}
-input:focus {{outline:none;border-color:#0f3d2e!important}}
+input:focus {{outline:none;border-color:#4f5d41!important}}
 .note {{font-size:0.78rem;color:#6b7280;margin-bottom:1rem}}
 </style>
 </head>
 <body>
 <header>
+  <img src="/static/bgb-logo.png" alt="BGB" style="height:32px;width:auto">
   <div><h1>BGB Brushes — Stock Admin</h1><span>Manual stock overrides · logged in as {username}</span></div>
   <div style="margin-left:auto;display:flex;gap:10px;align-items:center">
-    <a href="/brush/admin/stock-map/download" style="background:#0f3d2e;color:#fff;padding:5px 12px;border-radius:6px;font-size:0.78rem;text-decoration:none">⬇ Download stock_map.json</a>
-    <a href="/brush" style="color:#8fc2ac;font-size:0.8rem">← Back to tool</a>
+    <a href="/brush/admin/stock-map/download" style="background:#e2672e;color:#fff;padding:5px 12px;border-radius:6px;font-size:0.78rem;text-decoration:none">⬇ Download stock_map.json</a>
+    <a href="/brush" style="color:#c3cdb6;font-size:0.8rem">← Back to tool</a>
   </div>
 </header>
 <div class="container">

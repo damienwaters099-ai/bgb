@@ -7,17 +7,17 @@
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; background: #f0f2f5; min-height: 100vh; color: #1a1a2e; font-size: 14px; }
-header { background: #7c2d12; padding: 0.875rem 2rem; display: flex; align-items: center; gap: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.25); }
+header { background: #3e5770; padding: 0.875rem 2rem; display: flex; align-items: center; gap: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.25); }
 header .logo { color: #fff; font-size: 1rem; font-weight: 600; }
-header .logo span { color: #fed7aa; font-size: 0.75rem; display: block; font-weight: 400; }
-header .crumb { color: #fed7aa; font-size: 0.82rem; margin-left: 8px; }
+header .logo span { color: #c3d2de; font-size: 0.75rem; display: block; font-weight: 400; }
+header .crumb { color: #c3d2de; font-size: 0.82rem; margin-left: 8px; }
 header .nav { margin-left: auto; display: flex; gap: 6px; }
-header .nav a { color: #fed7aa; text-decoration: none; border: 1px solid #9a3f1c; border-radius: 6px; padding: 5px 14px; font-size: 0.8rem; }
-header .nav a:hover { background: #92340f; color: #fff; }
+header .nav a { color: #c3d2de; text-decoration: none; border: 1px solid #567288; border-radius: 6px; padding: 5px 14px; font-size: 0.8rem; }
+header .nav a:hover { background: #314559; color: #fff; }
 .container { max-width: 1080px; margin: 0 auto; padding: 2rem 1.5rem; }
 .disclaimer {
   display:flex; gap:10px; align-items:flex-start; background: #fff; border: 1.5px solid #fdba74; border-left: 4px solid #ea580c;
-  border-radius: 10px; padding: 12px 14px; margin-bottom: 20px; font-size: 13px; color: #7c2d12;
+  border-radius: 10px; padding: 12px 14px; margin-bottom: 20px; font-size: 13px; color: #3e5770;
 }
 .disclaimer strong { color: #431407; }
 .prefill-note { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px; padding: 10px 14px; margin-bottom: 18px; font-size: 0.82rem; color: #1e3a5f; display: none; }
@@ -25,7 +25,7 @@ header .nav a:hover { background: #92340f; color: #fff; }
 @media (max-width: 900px) { .grid2 { grid-template-columns: 1fr; } }
 .card { background: #fff; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); margin-bottom: 1.25rem; overflow: hidden; }
 .card-header { padding: 1rem 1.5rem; border-bottom: 1px solid #e5e7eb; }
-.card-header h2 { font-size: 0.95rem; font-weight: 600; color: #7c2d12; }
+.card-header h2 { font-size: 0.95rem; font-weight: 600; color: #3e5770; }
 .card-body { padding: 1.25rem 1.5rem; }
 .field-section { margin-bottom: 16px; }
 .field-section .section-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: #6b7280; margin-bottom: 8px; display: block; }
@@ -42,7 +42,7 @@ select:focus, input:focus { outline: 2px solid #ea580c; outline-offset: 1px; bor
 .source-tag.sourced { background: #dcfce7; color: #166534; }
 .source-tag.placeholder { background: #fef3c7; color: #92400e; }
 .results-card { background: #fff; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); padding: 1.5rem; position: sticky; top: 1.5rem; }
-.results-card h2 { font-size: 0.95rem; font-weight: 700; color: #7c2d12; margin-bottom: 4px; }
+.results-card h2 { font-size: 0.95rem; font-weight: 700; color: #3e5770; margin-bottom: 4px; }
 .total-figure { font-size: 2.1rem; font-weight: 800; color: #431407; margin: 10px 0 2px; }
 .total-sub { font-size: 0.78rem; color: #6b7280; margin-bottom: 16px; }
 .bar-stack { display: flex; height: 34px; border-radius: 8px; overflow: hidden; margin-bottom: 14px; }
@@ -59,6 +59,7 @@ select:focus, input:focus { outline: 2px solid #ea580c; outline-offset: 1px; bor
 </head>
 <body>
 <header>
+  <img src="/static/bgb-logo.png" alt="BGB" style="height:32px;width:auto">
   <div class="logo">BGB Group <span>bgbinnovation.com</span></div>
   <div class="crumb">Home / TCO / Downtime cost calculator</div>
   <nav class="nav">
@@ -212,7 +213,7 @@ select:focus, input:focus { outline: 2px solid #ea580c; outline-offset: 1px; bor
 </div>
 
 <script>
-const COLORS = { generation: '#eb6834', labour: '#2a78d6', access: '#7c2d12', penalty: '#6b7280' };
+const COLORS = { generation: '#eb6834', labour: '#2a78d6', access: '#3e5770', penalty: '#6b7280' };
 
 function updateDefaultsForLocation() {
   const loc = document.getElementById('location').value;
