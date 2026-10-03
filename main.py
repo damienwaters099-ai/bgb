@@ -22,6 +22,7 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent
 app = FastAPI(title="BGB CRM")
 security = HTTPBasic()
+app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static_assets")), name="static")
 
 # ---- ERP integration point -------------------------------------------
 # See erp_integration.py. ERP_MODE=mock (default) reads today's JSON
@@ -52,7 +53,7 @@ def verify_admin(credentials: HTTPBasicCredentials = Depends(security)):
 
 
 def read_html(*parts) -> str:
-    with open(BASE_DIR.joinpath(*parts), "r") as f:
+    with open(BASE_DIR.joinpath(*parts), "r", encoding="utf-8") as f:
         return f.read()
 
 
