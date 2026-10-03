@@ -3,3 +3,4 @@ __pycache__/
 .env
 .DS_Store
 efacs_outbox/
+data/users.json

@@ -29,28 +29,23 @@ security = HTTPBasic()
 from erp_integration import get_erp_client
 from persistence import load_records, save_records
 from efacs_export import export_opportunity, export_enquiry
+import auth_store
 erp = get_erp_client()
 
-APP_USERNAME = os.getenv("APP_USERNAME", "bgb")
-APP_PASSWORD = os.getenv("APP_PASSWORD", "bgb2026")
-ADMIN_USERNAME = os.getenv("ADMIN_USERNAME", "admin")
-ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "bgbadmin2026")
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
 
 
 def verify_password(credentials: HTTPBasicCredentials = Depends(security)):
-    ok_user = secrets.compare_digest(credentials.username, APP_USERNAME)
-    ok_pass = secrets.compare_digest(credentials.password, APP_PASSWORD)
-    if not (ok_user and ok_pass):
+    role = auth_store.verify_user(credentials.username, credentials.password)
+    if role is None:
         raise HTTPException(status_code=401, detail="Incorrect credentials",
                              headers={"WWW-Authenticate": "Basic"})
     return credentials.username
 
 
 def verify_admin(credentials: HTTPBasicCredentials = Depends(security)):
-    ok_user = secrets.compare_digest(credentials.username, ADMIN_USERNAME)
-    ok_pass = secrets.compare_digest(credentials.password, ADMIN_PASSWORD)
-    if not (ok_user and ok_pass):
+    role = auth_store.verify_user(credentials.username, credentials.password)
+    if role != "admin":
         raise HTTPException(status_code=401, detail="Admin credentials required",
                              headers={"WWW-Authenticate": "Basic"})
     return credentials.username
@@ -68,6 +63,116 @@ def read_html(*parts) -> str:
 @app.get("/", response_class=HTMLResponse)
 async def home(username: str = Depends(verify_password)):
     return read_html("home.html")
+
+
+# =====================================================================
+# ADMIN — user management (two-tier login: "user" / "admin" roles)
+# =====================================================================
+
+@app.get("/admin/users", response_class=HTMLResponse)
+async def admin_users_page(username: str = Depends(verify_admin)):
+    rows = ""
+    for u in auth_store.list_users():
+        is_self = u["username"] == username
+        delete_btn = "" if is_self else (
+            f'<button onclick="removeUser(\'{u["username"]}\')" '
+            'style="background:#fee2e2;color:#991b1b;border:none;padding:4px 10px;border-radius:5px;cursor:pointer;font-size:0.82rem">Remove</button>'
+        )
+        rows += f"""<tr>
+          <td style="font-weight:500">{u['username']}{' (you)' if is_self else ''}</td>
+          <td>{u['role']}</td>
+          <td>{delete_btn}</td>
+        </tr>"""
+
+    return HTMLResponse(f"""<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BGB CRM — User Access</title>
+<style>
+* {{box-sizing:border-box;margin:0;padding:0}}
+body {{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:#f0f2f5;min-height:100vh;font-size:14px}}
+header {{background:#0f3d2e;padding:0.875rem 2rem;color:#fff;display:flex;align-items:center;gap:1rem}}
+header h1 {{font-size:1rem;font-weight:600}}
+.container {{max-width:700px;margin:2rem auto;padding:0 1.5rem}}
+.card {{background:#fff;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,0.08);overflow:hidden;margin-bottom:1.5rem}}
+.card-header {{padding:1rem 1.5rem;border-bottom:1px solid #e5e7eb}}
+.card-header h2 {{font-size:0.95rem;font-weight:600;color:#0f3d2e}}
+.card-body {{padding:1.25rem 1.5rem}}
+table {{width:100%;border-collapse:collapse}}
+th {{background:#f0f5f2;color:#0f3d2e;padding:8px 12px;text-align:left;font-size:0.75rem;font-weight:700;text-transform:uppercase;border-bottom:1px solid #d1d5db}}
+td {{padding:7px 12px;border-bottom:0.5px solid #f3f4f6}}
+input, select {{padding:6px 8px;border:1.5px solid #d1d5db;border-radius:5px;font-size:0.85rem}}
+.msg {{padding:10px 14px;border-radius:7px;font-size:0.82rem;margin-bottom:1rem;display:none}}
+.msg.ok {{background:#dcfce7;color:#166534}}
+.msg.err {{background:#fee2e2;color:#991b1b}}
+</style>
+</head>
+<body>
+<header><h1>BGB CRM — User Access</h1></header>
+<div class="container">
+  <div class="msg" id="msg"></div>
+  <div class="card">
+    <div class="card-header"><h2>Current users</h2></div>
+    <div class="card-body">
+      <table><thead><tr><th>Username</th><th>Role</th><th></th></tr></thead>
+      <tbody id="rows">{rows}</tbody></table>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header"><h2>Add / update a user</h2></div>
+    <div class="card-body" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+      <input id="new-username" placeholder="Username" />
+      <input id="new-password" placeholder="Password" type="password" />
+      <select id="new-role"><option value="user">user</option><option value="admin">admin</option></select>
+      <button onclick="addUser()" style="background:#0f3d2e;color:#fff;border:none;padding:6px 16px;border-radius:5px;cursor:pointer;font-size:0.85rem">Save</button>
+    </div>
+  </div>
+  <a href="/" style="color:#0f3d2e;font-size:0.85rem">← Back to home</a>
+</div>
+<script>
+function showMsg(text, ok) {{
+  const m = document.getElementById('msg');
+  m.textContent = text; m.className = 'msg ' + (ok ? 'ok' : 'err'); m.style.display = 'block';
+}}
+async function addUser() {{
+  const username = document.getElementById('new-username').value.trim();
+  const password = document.getElementById('new-password').value;
+  const role = document.getElementById('new-role').value;
+  if (!username || !password) {{ showMsg('Username and password are required', false); return; }}
+  const resp = await fetch('/admin/users', {{method: 'POST', headers: {{'Content-Type': 'application/json'}}, body: JSON.stringify({{username, password, role}})}});
+  if (resp.ok) {{ showMsg('Saved — reloading…', true); setTimeout(() => location.reload(), 600); }}
+  else {{ showMsg('Failed to save user', false); }}
+}}
+async function removeUser(u) {{
+  if (!confirm('Remove ' + u + '?')) return;
+  const resp = await fetch('/admin/users/' + encodeURIComponent(u), {{method: 'DELETE'}});
+  if (resp.ok) {{ showMsg('Removed — reloading…', true); setTimeout(() => location.reload(), 600); }}
+  else {{ showMsg('Failed to remove user', false); }}
+}}
+</script>
+</body></html>""")
+
+
+@app.post("/admin/users")
+async def admin_add_user(request: Request, username: str = Depends(verify_admin)):
+    body = await request.json()
+    new_username = (body.get("username") or "").strip()
+    new_password = body.get("password") or ""
+    role = body.get("role") or "user"
+    if not new_username or not new_password:
+        raise HTTPException(status_code=400, detail="Username and password are required")
+    if role not in ("user", "admin"):
+        raise HTTPException(status_code=400, detail="Role must be 'user' or 'admin'")
+    auth_store.add_user(new_username, new_password, role)
+    return JSONResponse({"ok": True})
+
+
+@app.delete("/admin/users/{target_username}")
+async def admin_remove_user(target_username: str, username: str = Depends(verify_admin)):
+    if target_username == username:
+        raise HTTPException(status_code=400, detail="Can't remove your own account while logged in as it")
+    if not auth_store.delete_user(target_username):
+        raise HTTPException(status_code=404, detail="User not found")
+    return JSONResponse({"ok": True})
 
 
 # =====================================================================
