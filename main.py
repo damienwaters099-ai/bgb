@@ -72,6 +72,11 @@ async def home(username: str = Depends(verify_password)):
 
 @app.get("/admin/users", response_class=HTMLResponse)
 async def admin_users_page(username: str = Depends(verify_admin)):
+    if auth_store.AUTH_MODE == "ad":
+        return HTMLResponse(
+            "<p style='font-family:sans-serif;padding:2rem'>Logins are managed in Active Directory now — "
+            "add/remove people and set admin rights there (see AD_ADMIN_GROUP) instead of here. "
+            "<a href='/'>Back to home</a></p>", status_code=404)
     rows = ""
     for u in auth_store.list_users():
         is_self = u["username"] == username
@@ -156,6 +161,8 @@ async function removeUser(u) {{
 
 @app.post("/admin/users")
 async def admin_add_user(request: Request, username: str = Depends(verify_admin)):
+    if auth_store.AUTH_MODE == "ad":
+        raise HTTPException(status_code=404, detail="Logins are managed in Active Directory now")
     body = await request.json()
     new_username = (body.get("username") or "").strip()
     new_password = body.get("password") or ""
@@ -170,6 +177,8 @@ async def admin_add_user(request: Request, username: str = Depends(verify_admin)
 
 @app.delete("/admin/users/{target_username}")
 async def admin_remove_user(target_username: str, username: str = Depends(verify_admin)):
+    if auth_store.AUTH_MODE == "ad":
+        raise HTTPException(status_code=404, detail="Logins are managed in Active Directory now")
     if target_username == username:
         raise HTTPException(status_code=400, detail="Can't remove your own account while logged in as it")
     if not auth_store.delete_user(target_username):
