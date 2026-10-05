@@ -1,0 +1,4 @@
+# Only needed if AUTH_MODE=ad (Windows AD login) is turned on — not needed
+# for the default local-login mode, and not needed on Render.
+# Install with: pip install -r requirements.txt -r requirements-ad.txt
+ldap3==2.9.1

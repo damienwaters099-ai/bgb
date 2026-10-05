@@ -22,6 +22,21 @@ If users.json doesn't exist yet, it's seeded from the old env vars
 (APP_USERNAME/APP_PASSWORD as a "user" account, ADMIN_USERNAME/ADMIN_PASSWORD
 as an "admin" account) so nothing breaks on first deploy after this change.
 From then on, manage people through /admin/users instead of env vars.
+
+WINDOWS AD LOGIN (optional, off by default)
+----------------------------------------------
+Set AUTH_MODE=ad to check username/password against BGB's Active Directory
+instead of the local users.json store — lets people log in with their normal
+Windows/domain account instead of a separate app password.
+
+STILL NEEDED FROM BGB'S IT (Sam) BEFORE THIS CAN BE TURNED ON:
+  1. AD_SERVER      — domain controller address, e.g. "ldap://dc01.bgb.local"
+  2. AD_DOMAIN      — NetBIOS domain name, e.g. "BGB" (used as BGB\\username)
+  3. AD_ADMIN_GROUP — (optional) AD group name whose members get the "admin"
+                       role here (e.g. stock overrides, user management).
+                       Everyone else who can log in gets "user".
+Needs the `ldap3` package (see requirements-ad.txt — not needed on Render,
+only on whatever server actually has network access to the domain controller).
 """
 
 from __future__ import annotations
@@ -35,6 +50,11 @@ from pathlib import Path
 from typing import Literal
 
 Role = Literal["user", "admin"]
+
+AUTH_MODE = os.getenv("AUTH_MODE", "local").strip().lower()
+AD_SERVER = os.getenv("AD_SERVER", "")
+AD_DOMAIN = os.getenv("AD_DOMAIN", "")
+AD_ADMIN_GROUP = os.getenv("AD_ADMIN_GROUP", "")
 
 DATA_DIR = Path(os.getenv("APP_DATA_DIR", Path(__file__).resolve().parent / "data"))
 DATA_DIR.mkdir(parents=True, exist_ok=True)
@@ -78,6 +98,8 @@ def _make_user_record(username: str, password: str, role: Role) -> dict:
 
 def verify_user(username: str, password: str) -> Role | None:
     """Returns the user's role if the username/password match, else None."""
+    if AUTH_MODE == "ad":
+        return _verify_user_ad(username, password)
     for record in _load_users():
         if secrets.compare_digest(record["username"], username):
             candidate_hash = _hash_password(password, record["salt"])
@@ -85,6 +107,37 @@ def verify_user(username: str, password: str) -> Role | None:
                 return record["role"]
             return None
     return None
+
+
+def _verify_user_ad(username: str, password: str) -> Role | None:
+    """AUTH_MODE=ad path — binds to the domain controller as this user to
+    check their password, then checks AD_ADMIN_GROUP membership for role.
+    Needs AD_SERVER / AD_DOMAIN set (see module docstring)."""
+    import ldap3  # imported lazily so the app still runs with AUTH_MODE=local
+    if not AD_SERVER or not AD_DOMAIN:
+        raise RuntimeError(
+            "AUTH_MODE=ad but AD_SERVER / AD_DOMAIN are not set as environment variables."
+        )
+    user_principal = f"{AD_DOMAIN}\\{username}"
+    server = ldap3.Server(AD_SERVER)
+    try:
+        conn = ldap3.Connection(server, user=user_principal, password=password, auto_bind=True)
+    except ldap3.core.exceptions.LDAPBindError:
+        return None  # wrong username/password
+
+    role: Role = "user"
+    if AD_ADMIN_GROUP:
+        conn.search(
+            search_base=conn.server.info.other.get("defaultNamingContext", [""])[0] if conn.server.info else "",
+            search_filter=f"(sAMAccountName={username})",
+            attributes=["memberOf"],
+        )
+        if conn.entries:
+            groups = [str(g) for g in conn.entries[0].memberOf.values] if hasattr(conn.entries[0], "memberOf") else []
+            if any(AD_ADMIN_GROUP.lower() in g.lower() for g in groups):
+                role = "admin"
+    conn.unbind()
+    return role
 
 
 def list_users() -> list[dict]:
